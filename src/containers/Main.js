@@ -7,6 +7,7 @@ import Conferences from "./conferences/conferences";
 import ContactInfo from "./contact/ContactInfo";
 import ScrollToTop from "./scroll/ScrollToTop";
 import Feeds from "../components/feeds/Feeds";
+import Footer from "../components/footer/Footer";
 
 const Main = () => {
   return (
@@ -19,6 +20,7 @@ const Main = () => {
       <Feeds />
       <ContactInfo />
       <ScrollToTop />
+      <Footer />
     </div>
   );
 };

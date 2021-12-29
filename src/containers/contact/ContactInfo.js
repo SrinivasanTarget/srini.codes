@@ -18,7 +18,7 @@ export default function ContactInfo() {
             </span>
           </h1>
           <span className="text-cyan-100 text-xl inline-flex pl-4">
-            Open Source Contributor
+            Thoughtworker | Open Source Contributor
             <Player
               autoplay
               loop
