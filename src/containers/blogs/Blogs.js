@@ -9,7 +9,7 @@ blogs.forEach((blog) => {
       <div className="p-2 text-center md:text-left space-y-4 tracking-wide">
         <a href={blog.source} target="_blank" rel="noreferrer">
           <blockquote>
-            <p className="text-xl p-3 font-lora">{blog.title}</p>
+            <p className="text-xl p-3 font-lora mb-1">{blog.title}</p>
           </blockquote>
           <div className="inline-flex text-center align-middle">
             <Player
@@ -43,7 +43,9 @@ export default function Blogs() {
       <p className="text-indigo-100 text-2xl decoration-2 pl-3 pb-3">
         I love to write blogs to share my knowledge with wider community.
       </p>
-      <div className="grid grid-cols-4 gap-3 p-3">{blogList}</div>
+      <div className="flex flex-col md:grid grid-cols-4 gap-3 p-3">
+        {blogList}
+      </div>
     </div>
   );
 }

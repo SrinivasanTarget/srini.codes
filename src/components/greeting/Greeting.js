@@ -4,7 +4,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 export default function Greeting() {
   return (
     <div className="md:container md:mx-auto px-4 py-20">
-      <div className="grid grid-flow-col">
+      <div className="flex flex-col md:grid grid-flow-col">
         <div>
           <div className="text-gray-100 font-lora pl-4">
             <h1 className="text-6xl content-center font-lora">
@@ -64,7 +64,6 @@ export default function Greeting() {
             autoplay
             loop
             src="https://assets2.lottiefiles.com/packages/lf20_bp5lntrf.json"
-            style={{ height: "450px", width: "450px" }}
           />
         </div>
       </div>
