@@ -48,7 +48,7 @@ const Header = () => {
             </div>
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex-shrink-0 flex items-center">
-                <span className="block lg:hidden h-8 w-auto font-sign text-gray-50 text-sm">
+                <span className="block lg:hidden h-8 w-auto font-sign text-gray-50 text-lg">
                   &lt; Srinivasan Sekar /&gt;
                 </span>
                 <span className="hidden lg:block h-8 w-auto font-sign text-gray-50 text-3xl">
