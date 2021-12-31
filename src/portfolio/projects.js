@@ -49,8 +49,7 @@ const projects = [
   },
   {
     title: "React Testing Library",
-    description:
-      "Appium plugin designed to perform gestures using W3C Actions.",
+    description: "Light-weight solution for testing React components.",
     source: "https://github.com/testing-library/react-testing-library",
     imgSource: "ReactTestingLibrary.png",
   },
