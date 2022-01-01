@@ -18,7 +18,7 @@ export default function Projects() {
         {projects.map((project, i) => (
           <figure
             key={i}
-            className="drop-shadow-2xl text-yellow-50 md:flex bg-gray-100 rounded-xl p-8 md:p-0 dark:bg-gray-800 hover:bg-gradient-to-r from-gray-500"
+            className="drop-shadow-2xl text-yellow-50 md:flex rounded-xl p-8 md:p-0 bg-gray-800 hover:bg-gradient-to-r from-gray-500"
           >
             <div className="md:shrink-0">
               <img
