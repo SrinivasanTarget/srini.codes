@@ -59,12 +59,8 @@ export default function Greeting() {
             </button>
           </div>
         </div>
-        <div>
-          <Player
-            autoplay
-            loop
-            src="https://assets2.lottiefiles.com/packages/lf20_bp5lntrf.json"
-          />
+        <div className="inline-flex">
+          <img src={require("../../assets/images/figma.png")} />
         </div>
       </div>
     </div>
