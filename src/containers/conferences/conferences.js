@@ -8,10 +8,9 @@ export default function Conferences() {
         <span className="inline-flex ">
           Conferences
           <img
-            height="40px"
-            width="40px"
+            className="w-12 h-12"
             src="https://superscene.pro/images/modal/trophy.png"
-            alt=""
+            alt="trophy"
           />
         </span>
       </h1>

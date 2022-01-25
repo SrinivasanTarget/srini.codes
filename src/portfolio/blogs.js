@@ -60,6 +60,11 @@ const blogs = [
     tags: "Mobile, Appium 2.0, Automation",
     source: "https://applitools.com/blog/appium-vs-espresso-vs-xcui/",
   },
+  {
+    title: "What's New in Appium Java Client 8.0.0",
+    tags: "Mobile, Appium 2.0, Automation",
+    source: "https://applitools.com/blog/whats-new-appium-java-client-8/",
+  },
 ];
 
 export { blogs };

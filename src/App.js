@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="bg-gray-600">
+    <div className="bg-gradient-to-tr from-gray-700 via-gray-900 to-black">
       <Main />
     </div>
   );

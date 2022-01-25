@@ -18,7 +18,7 @@ export default function Projects() {
         {projects.map((project, i) => (
           <figure
             key={i}
-            className="drop-shadow-2xl text-yellow-50 md:flex rounded-xl p-8 md:p-0 bg-gray-800 hover:bg-gradient-to-r from-gray-500"
+            className="shadow shadow-blue-800/40 md:shadow-indigo-500/40 text-yellow-50 md:flex rounded-xl p-8 md:p-0 bg-gray-800 hover:bg-gradient-to-r from-gray-700 via-gray-900 to-black"
           >
             <div className="md:shrink-0">
               <img
@@ -29,11 +29,9 @@ export default function Projects() {
             </div>
             <div className="p-2 text-center md:text-left space-y-4 tracking-wide">
               <a href={project.source} target="_blank" rel="noreferrer">
-                <blockquote>
-                  <p className="text-xl font-lora">{project.description}</p>
-                </blockquote>
+                <p className="text-lg font-lora">{project.description}</p>
                 <figcaption>
-                  <div className="text-gray-300 pb-3 pt-2 text-sm">
+                  <div className="text-blue-300 pb-3 pt-2 text-sm">
                     {project.title}
                   </div>
                 </figcaption>

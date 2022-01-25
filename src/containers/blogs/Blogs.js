@@ -9,8 +9,7 @@ export default function Blogs() {
         <span className="inline-flex">
           Blogs
           <img
-            height="40px"
-            width="40px"
+            className="w-12 h-12"
             src="https://superscene.pro/images/modal/money-bag.png"
             alt="moneyBag"
           />

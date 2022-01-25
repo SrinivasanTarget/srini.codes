@@ -8,7 +8,7 @@ export default function Feeds() {
         <span className="inline-flex">
           Feeds {""}
           <img
-            className="w-16 h-16"
+            className="w-12 h-12"
             src="https://superscene.pro/images/modal/snowman.png"
             alt="feeds"
           />

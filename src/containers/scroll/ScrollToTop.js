@@ -27,7 +27,7 @@ export default function ScrollToTop() {
 
   return (
     <div className="relative">
-      <div className="absolute shadow-lg bottom-0 right-0">
+      <div className="absolute shadow-lg bg-slate-800 bottom-0 right-0">
         {isVisible && (
           <div onClick={scrollToTop}>
             <Player

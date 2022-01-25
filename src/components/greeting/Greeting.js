@@ -19,8 +19,8 @@ export default function Greeting() {
               </span>
             </h1>
             <p className="inline-flex text-3xl">
-              A passionate Quality Analyst 🚀 having experience of testing Web
-              and Mobile applications.
+              A passionate Quality Analyst 🚀 having experience of testing
+              Microservices, Web and Mobile applications.
             </p>
           </div>
           <div className="p-3 inline-flex">
@@ -50,13 +50,14 @@ export default function Greeting() {
             </a>
           </div>
           <div className="p-4">
-            <button
-              onClick={() => "#contacts"}
-              type="button"
-              className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded-full"
-            >
-              Contact Me
-            </button>
+            <a href="#contacts">
+              <button
+                type="button"
+                className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded-full"
+              >
+                Contact Me
+              </button>
+            </a>
           </div>
         </div>
         <div className="inline-flex">
