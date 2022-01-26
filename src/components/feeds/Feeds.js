@@ -3,23 +3,37 @@ import { TwitterTimelineEmbed } from "react-twitter-embed";
 
 export default function Feeds() {
   return (
-    <div className="md:container md:mx-auto" id="feeds">
-      <h1 className="text-indigo-100 text-5xl decoration-4 p-4">
-        <span className="inline-flex">
-          Feeds {""}
-          <img
-            className="w-12 h-12"
-            src="https://superscene.pro/images/modal/snowman.png"
-            alt="feeds"
+    <div className="relative mx-10vw" id="feeds">
+      <div className="relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6 mx-auto max-w-7xl">
+        <div className="col-span-full flex flex-col space-y-10 lg:flex-row lg:items-end lg:justify-between lg:space-y-0">
+          <h1 className="text-indigo-100 text-5xl decoration-4 p-4">
+            <span className="inline-flex">
+              Feeds {""}
+              <img
+                className="pl-2 w-12 h-12"
+                src="https://superscene.pro/images/modal/snowman.png"
+                alt="feeds"
+              />
+            </span>
+          </h1>
+        </div>
+      </div>
+      <div className="relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6 mx-auto max-w-7xl mb-24 lg:mb-64">
+        <div className="col-span-full lg:col-span-9 lg:col-start-10 p-3">
+          <div className="mb-12 lg:mb-0">
+            <img
+              src={require("../../assets/images/he_sitting_with_notebook.png")}
+              className="h-auto w-full object-contain max-h-75vh"
+            />
+          </div>
+        </div>
+        <div className="col-span-full lg:col-span-9 lg:col-start-1 lg:row-start-1 p-3">
+          <TwitterTimelineEmbed
+            sourceType="profile"
+            screenName="srinivasanskr"
+            options={{ height: 600 }}
           />
-        </span>
-      </h1>
-      <div className="pl-5 bg">
-        <TwitterTimelineEmbed
-          sourceType="profile"
-          screenName="srinivasanskr"
-          options={{ height: 400 }}
-        />
+        </div>
       </div>
     </div>
   );
