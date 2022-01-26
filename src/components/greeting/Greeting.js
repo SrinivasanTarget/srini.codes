@@ -26,8 +26,8 @@ export default function Greeting() {
                 </span>
               </h2>
               <p className="leading-tight text-3xl md:text-4xl pt-4">
-                A passionate Quality Analyst 🚀 having experience of testing
-                Microservices, Web and Mobile applications.
+                A passionate quality analyst 🚀 with experience of testing
+                microservices, web and mobile applications.
               </p>
             </div>
             <div className="inline-flex pt-9 items-center">
