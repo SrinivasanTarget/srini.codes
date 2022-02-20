@@ -1,4 +1,3 @@
-import React from "react";
 import { projects } from "../../portfolio/projects";
 
 export default function Projects() {
@@ -10,7 +9,7 @@ export default function Projects() {
             <span className="inline-flex">
               Open Source
               <img
-                className="pl-2 w-12 h-12"
+                className="pl-2 w-11 h-11"
                 src="https://superscene.pro/images/modal/red-heart.png"
                 alt="red heart"
               />
@@ -24,18 +23,18 @@ export default function Projects() {
             key={i}
             className="col-span-4 mb-10 shadow shadow-blue-800/40 md:shadow-indigo-500/40 text-yellow-50 rounded-xl p-8 bg-gray-800 hover:bg-gradient-to-r from-gray-700 via-gray-900 to-black"
           >
-            <img
-              className="rounded-full h-24 md:w-24 p-2 mx-auto"
-              src={require(`../../assets/images/${project.imgSource}`)}
-              alt={project.title}
-            />
             <a href={project.source} target="_blank" rel="noreferrer">
-              <p className="text-lg font-lora">{project.description}</p>
-              <figcaption>
-                <div className="text-blue-300 pb-3 pt-2 text-sm">
-                  {project.title}
-                </div>
-              </figcaption>
+              <img
+                className="rounded-full h-24 md:w-24 p-2 mx-auto"
+                src={require(`../../assets/images/${project.imgSource}`)}
+                alt={project.title}
+              />
+              <div className="pb-3 pt-2 text-center leading-tight text-lg font-inter text-white">
+                {project.title}
+              </div>
+              <p className="text-lg text-gray-400 font-lora">
+                {project.description}
+              </p>
             </a>
           </div>
         ))}
