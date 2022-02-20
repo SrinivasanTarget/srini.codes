@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3945a27a.css",
+    "main.js": "/static/js/main.6d68f387.js",
+    "static/js/787.1cf1a581.chunk.js": "/static/js/787.1cf1a581.chunk.js",
+    "static/media/he_sitting_with_notebook.png": "/static/media/he_sitting_with_notebook.a3e3cae89a293996b0b7.png",
+    "static/media/figma.png": "/static/media/figma.7b1fbc139cda03016327.png",
+    "static/media/ATD.png": "/static/media/ATD.7cba30ad5aff7563d6d3.png",
+    "static/media/SrinivasanSekar.jpg": "/static/media/SrinivasanSekar.81211c746eb166b46ba2.jpg",
+    "static/media/appium.png": "/static/media/appium.ad6a3b1bbb8e73308512.png",
+    "static/media/agileIndia2021.jpeg": "/static/media/agileIndia2021.7911f95bf002fbbd783f.jpeg",
+    "index.html": "/index.html",
+    "main.3945a27a.css.map": "/static/css/main.3945a27a.css.map",
+    "main.6d68f387.js.map": "/static/js/main.6d68f387.js.map",
+    "787.1cf1a581.chunk.js.map": "/static/js/787.1cf1a581.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3945a27a.css",
+    "static/js/main.6d68f387.js"
+  ]
+}
