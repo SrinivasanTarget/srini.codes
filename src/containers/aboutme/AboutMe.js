@@ -8,19 +8,19 @@ export default function AboutMe() {
               <div className="text-2xl md:text-2xl font-sign">
                 Srinivasan Sekar
               </div>
-              <p className="max-w-md text-2xl mt-6 text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200">
+              <p className="max-w-md text-2xl mt-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
                 Thoughtworker
               </p>
-              <p className="max-w-md text-2xl text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200">
+              <p className="max-w-md text-2xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
                 Open Source Contributor
               </p>
-              <p className="max-w-md text-2xl text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200">
+              <p className="max-w-md text-2xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
                 Conference Speaker
               </p>
-              <p className="max-w-md text-2xl text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200">
+              <p className="max-w-md text-2xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
                 Blogger
               </p>
-              <p className="max-w-md text-2xl text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200">
+              <p className="max-w-md text-2xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
                 Mentor
               </p>
             </div>

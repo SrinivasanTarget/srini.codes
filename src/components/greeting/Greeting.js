@@ -28,8 +28,8 @@ export default function Greeting() {
                 Helping people build & ship high quality software 🚀
               </p>
             </div>
-            <div className="inline-flex pt-9 items-center">
-              <a href="https://github.com/SrinivasanTarget" className="pr-5">
+            <div className="flex justify-start pt-3">
+              <a href="https://github.com/SrinivasanTarget" className="pr-2">
                 <Player
                   autoplay
                   loop
@@ -37,7 +37,7 @@ export default function Greeting() {
                   style={{ height: "50px", width: "50px" }}
                 />
               </a>
-              <a href="https://twitter.com/srinivasanskr" className="pr-5">
+              <a href="https://twitter.com/srinivasanskr" className="pr-2">
                 <Player
                   autoplay
                   loop
@@ -45,7 +45,7 @@ export default function Greeting() {
                   style={{ height: "50px", width: "50px" }}
                 />
               </a>
-              <a href="mailto:srinivasan.sekar1990@gmail.com" className="pr-5">
+              <a href="mailto:srinivasan.sekar1990@gmail.com" className="pr-2">
                 <Player
                   autoplay
                   loop
@@ -64,18 +64,7 @@ export default function Greeting() {
                   style={{ height: "50px", width: "50px" }}
                 />
               </a>
-              <a href="#aboutme">
-                <button
-                  type="button"
-                  className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded-full btn-md"
-                >
-                  About Me
-                </button>
-              </a>
             </div>
-          </div>
-          <div className="mt-14 flex flex-col space-y-4">
-            <div className="mr-auto gap-4 inline-flex"></div>
           </div>
         </div>
       </div>

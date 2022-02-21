@@ -4,7 +4,7 @@ import Header from "../components/header/Header";
 import Projects from "./projects/Projects";
 import Blogs from "./blogs/Blogs";
 import Conferences from "./conferences/conferences";
-import ContactInfo from "./aboutme/AboutMe";
+import AboutMe from "./aboutme/AboutMe";
 import ScrollToTop from "./scroll/ScrollToTop";
 import Feeds from "../components/feeds/Feeds";
 import Footer from "../components/footer/Footer";
@@ -18,7 +18,7 @@ const Main = () => {
       <Blogs />
       <Conferences />
       <Feeds />
-      <ContactInfo />
+      <AboutMe />
       <ScrollToTop />
       <Footer />
     </div>
