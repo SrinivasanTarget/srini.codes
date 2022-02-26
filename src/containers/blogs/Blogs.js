@@ -28,7 +28,7 @@ export default function Blogs() {
         {blogs.map((blog, i) => (
           <div
             key={i}
-            className="col-span-4 mb-10 shadow shadow-blue-800/40 md:shadow-indigo-500/40 text-yellow-50 rounded-xl p-8 bg-gray-800 hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+            className="col-span-4 mb-10 shadow-2xl shadow-blue-800/40 md:shadow-indigo-500/40 text-yellow-50 rounded-xl p-8 bg-gray-800 hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
           >
             <a href={blog.source} target="_blank" rel="noreferrer">
               <blockquote>

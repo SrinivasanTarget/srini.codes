@@ -28,7 +28,7 @@ export default function Conferences() {
         {conferences.map((conference, i) =>
           conference.reverse ? (
             <div key={i} className="flex flex-row-reverse md:contents">
-              <div className="shadow shadow-blue-800/40 md:shadow-indigo-500/40 text-yellow-50 bg-gray-800 hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto">
+              <div className="shadow-2xl shadow-blue-800/40 md:shadow-indigo-500/40 text-yellow-50 bg-gray-800 hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto">
                 <h3 className="font-semibold text-xl mb-1 font-lora">
                   {conference.title}
                 </h3>
@@ -56,7 +56,7 @@ export default function Conferences() {
                 </div>
                 <div className="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow"></div>
               </div>
-              <div className="shadow shadow-blue-800/40 md:shadow-indigo-500/40 text-yellow-50 bg-gray-800 hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 col-start-6 col-end-10 p-4 rounded-xl my-4 mr-auto">
+              <div className="shadow-2xl shadow-blue-800/40 md:shadow-indigo-500/40 text-yellow-50 bg-gray-800 hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 col-start-6 col-end-10 p-4 rounded-xl my-4 mr-auto">
                 <h3 className="font-semibold text-xl font-lora mb-1">
                   {conference.title}
                 </h3>
