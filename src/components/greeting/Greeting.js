@@ -13,8 +13,11 @@ export default function Greeting() {
         <div className="col-span-full pt-6 lg:col-start-1 lg:row-start-1 lg:flex lg:h-full lg:flex-col lg:col-span-7">
           <div className="flex flex-auto flex-col text-white p-5">
             <div>
-              <h1 className="leading-tight font-bold text-3xl md:text-5xl font-lora text-transparent bg-clip-text bg-gradient-to-r from-red-200 via-red-300 to-yellow-200">
-                {" I'm Srini "}
+              <h1 className="leading-tight font-bold text-3xl md:text-5xl font-lora">
+                {" I'm "}
+                <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-pink-500 relative inline-block">
+                  <span className="relative text-black">Srini</span>
+                </span>
                 <span className="inline-flex">
                   <Player
                     autoplay
