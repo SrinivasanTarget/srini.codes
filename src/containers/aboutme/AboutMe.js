@@ -27,14 +27,14 @@ export default function AboutMe() {
           </div>
           <div className="col-span-4 col-start-9 row-span-2 row-start-1 mt-0 hidden xl:block">
             <img
-              className="rounded-full shadow-2xl float-right scale-50 text-right"
+              className="max-h-50vh rounded-br-[25%] rounded-tl-[25%] rounded-bl-3xl rounded-tr-3xl"
               src={
                 new URL(
                   `../../assets/images/SrinivasanSekar.jpg`,
                   import.meta.url
                 ).href
               }
-              alt="srinivasan sekar"
+              alt="Srinivasan Sekar"
             />
           </div>
         </div>
