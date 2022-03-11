@@ -2,13 +2,14 @@ import { projects } from "../../portfolio/projects";
 
 export default function Projects() {
   return (
-    <div className="relative mx-10vw" id="opensource">
+    <div className="relative mx-10vw pb-16" id="opensource">
       <div className="relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6 mx-auto max-w-7xl">
         <div className="col-span-full flex flex-col space-y-10 lg:flex-row lg:items-end lg:justify-between lg:space-y-0">
           <h1 className="text-indigo-100 text-5xl decoration-4 p-4">
             <span className="inline-flex">
               Open Source
               <img
+                decoding="async"
                 className="pl-2 w-11 h-11"
                 src="https://superscene.pro/images/modal/red-heart.png"
                 alt="red heart"
@@ -25,6 +26,7 @@ export default function Projects() {
           >
             <a href={project.source} target="_blank" rel="noreferrer">
               <img
+                decoding="async"
                 className="rounded-full h-24 md:w-24 p-2 mx-auto"
                 src={require(`../../assets/images/${project.imgSource}`)}
                 alt={project.title}

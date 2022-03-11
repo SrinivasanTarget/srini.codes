@@ -30,7 +30,7 @@ export default function Greeting() {
                 </span>
               </h1>
               <p className="leading-tight text-3xl md:text-4xl pt-4 font-lora">
-                Helping people build & ship high quality software 🚀
+                Helping enterpises build & ship high quality software 🚀
               </p>
             </div>
             <div className="flex justify-start pt-3">

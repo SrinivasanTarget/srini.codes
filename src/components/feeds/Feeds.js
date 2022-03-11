@@ -10,6 +10,7 @@ export default function Feeds() {
             <span className="inline-flex">
               Feeds {""}
               <img
+                decoding="async"
                 className="pl-2 w-12 h-12"
                 src="https://superscene.pro/images/modal/snowman.png"
                 alt="feeds"
@@ -22,6 +23,7 @@ export default function Feeds() {
         <div className="col-span-full lg:col-span-9 lg:col-start-10 p-3">
           <div className="mb-12 lg:mb-0">
             <img
+              decoding="async"
               src={require("../../assets/images/he_sitting_with_notebook.png")}
               className="h-auto w-full object-contain max-h-75vh"
             />

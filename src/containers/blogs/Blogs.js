@@ -4,13 +4,14 @@ import { blogs } from "../../portfolio/blogs";
 
 export default function Blogs() {
   return (
-    <div className="relative mx-10vw" id="blogs">
-      <div className="relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6 mx-auto max-w-7xl">
+    <div className="relative mx-10vw pb-16" id="blogs">
+      <div className="relative grid grid-cols-4 gap-x-2 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-2 mx-auto max-w-7xl">
         <div className="col-span-full flex flex-col space-y-10 lg:flex-row lg:items-end lg:justify-between lg:space-y-0">
           <h1 className="text-indigo-100 text-5xl decoration-4 p-4">
             <span className="inline-flex">
               Blogs
               <img
+                decoding="async"
                 className="pl-2 w-12 h-12"
                 src="https://superscene.pro/images/modal/money-bag.png"
                 alt="moneyBag"
@@ -19,16 +20,16 @@ export default function Blogs() {
           </h1>
         </div>
       </div>
-      <div className="relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6 mx-auto max-w-7xl">
+      <div className="relative grid grid-cols-4 gap-x-2 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-2 mx-auto max-w-7xl">
         <p className="text-indigo-100 text-2xl decoration-2 pl-3 pb-3 col-span-full flex flex-col space-y-10 lg:flex-row lg:items-end lg:justify-between lg:space-y-0">
           I love to write blogs to share my knowledge with wider community.
         </p>
       </div>
-      <div className="relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6 mx-auto max-w-7xl p-3">
+      <div className="relative grid grid-cols-4 gap-x-5 md:grid-cols-8 lg:grid-cols-12 mx-auto max-w-7xl p-3">
         {blogs.map((blog, i) => (
           <div
             key={i}
-            className="col-span-4 mb-10 shadow-2xl shadow-blue-800/40 md:shadow-indigo-500/40 text-yellow-50 rounded-xl p-8 bg-gray-800 hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+            className="col-span-4 mb-5 shadow-2xl shadow-blue-800/40 md:shadow-indigo-500/40 text-yellow-50 rounded-xl p-8 bg-gray-800 hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
           >
             <a href={blog.source} target="_blank" rel="noreferrer">
               <blockquote>

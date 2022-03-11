@@ -27,9 +27,9 @@ export default function ScrollToTop() {
 
   return (
     <div className="relative">
-      <div className="absolute shadow-lg bg-slate-800 bottom-0 right-0">
+      <div className="absolute shadow-lg bg-slate-700 bottom-0 right-0 rounded-full">
         {isVisible && (
-          <div onClick={scrollToTop}>
+          <div onClick={scrollToTop} className="animate-bounce">
             <Player
               autoplay
               loop
