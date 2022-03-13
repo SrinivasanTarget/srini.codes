@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Player } from "@lottiefiles/react-lottie-player";
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,14 +28,21 @@ export default function ScrollToTop() {
     <div className="relative">
       <div className="absolute shadow-lg bg-slate-700 bottom-0 right-0 rounded-full">
         {isVisible && (
-          <div onClick={scrollToTop} className="animate-bounce">
-            <Player
-              autoplay
-              loop
-              src="https://assets3.lottiefiles.com/packages/lf20_2ylbszmp.json"
-              style={{ height: "90px", width: "90px" }}
-            />
-          </div>
+          <a onClick={scrollToTop}>
+            <svg
+              className="h-12 w-12 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"
+              />
+            </svg>
+          </a>
         )}
       </div>
     </div>

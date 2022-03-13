@@ -1,5 +1,4 @@
 import React from "react";
-import { Player } from "@lottiefiles/react-lottie-player";
 import { blogs } from "../../portfolio/blogs";
 
 export default function Blogs() {
@@ -36,15 +35,30 @@ export default function Blogs() {
                 <p className="text-xl p-3 font-lora mb-1">{blog.title}</p>
               </blockquote>
               <div className="inline-flex text-center align-middle">
-                <Player
-                  autoplay
-                  loop
-                  src="https://assets5.lottiefiles.com/packages/lf20_3oogeo8f.json"
-                  style={{ height: "40px", width: "40px" }}
-                />
-                <span className="self-center text-xs text-white">
-                  {blog.tags}
-                </span>
+                <a className="group relative inline-flex text-lg font-medium focus:outline-none opacity-100 disabled:opacity-50 transition">
+                  <div className="relative flex h-full w-full items-center justify-center whitespace-nowrap text-inverse">
+                    <span className="text-gray-400 font-lora pl-3">
+                      Read blog
+                    </span>
+                    <span>
+                      <svg
+                        className="transform rotate-[235deg] text-gray-400"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 32 32"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M15.101 5.5V23.1094L9.40108 17.4095L8.14807 18.6619L15.9862 26.5L23.852 18.6342L22.5996 17.3817L16.8725 23.1094V5.5H15.101Z"
+                          fill="currentColor"
+                        ></path>
+                      </svg>
+                    </span>
+                  </div>
+                </a>
               </div>
             </a>
           </div>

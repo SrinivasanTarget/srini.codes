@@ -26,6 +26,7 @@ export default function Feeds() {
               decoding="async"
               src={require("../../assets/images/he_sitting_with_notebook.png")}
               className="h-auto w-full object-contain max-h-75vh"
+              alt="he_sitting_with_notebook"
             />
           </div>
         </div>
