@@ -2,14 +2,14 @@ const projects = [
   {
     title: "Appium",
     description:
-      "Appium is an open-source, cross-platform test automation tool for native, hybrid, and mobile web and desktop apps.",
+      "cross-platform test automation tool for native, hybrid, and mobile web and desktop apps.",
     source: "https://github.com/appium/java-client",
     imgSource: "appium.png",
   },
   {
     title: "Selenium",
     description:
-      "Selenium is a browser automation tool that can be used to test web applications.",
+      "Browser automation tool that can be used to test web applications.",
     source: "https://github.com/SeleniumHQ/selenium",
     imgSource: "selenium.png",
   },

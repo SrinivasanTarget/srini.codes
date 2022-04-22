@@ -7,15 +7,7 @@ export default function Feeds() {
       <div className="relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6 mx-auto max-w-7xl">
         <div className="col-span-full flex flex-col space-y-10 lg:flex-row lg:items-end lg:justify-between lg:space-y-0">
           <h1 className="text-indigo-100 text-5xl decoration-4 p-4">
-            <span className="inline-flex">
-              Feeds {""}
-              <img
-                decoding="async"
-                className="pl-2 w-12 h-12"
-                src="https://superscene.pro/images/modal/snowman.png"
-                alt="feeds"
-              />
-            </span>
+            <span className="inline-flex">Feeds</span>
           </h1>
         </div>
       </div>

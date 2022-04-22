@@ -1,12 +1,37 @@
 import React from "react";
-import Main from "./containers/Main";
+import Home from "./screens/Home";
 import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Workshop from "./screens/Workshop";
+import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
+import AboutMe from "./containers/aboutme/AboutMe";
+import ScrollToTop from "./components/scroll/ScrollToTop";
+import OpenSource from "./screens/OpenSource";
+import BlogScreen from "./screens/BlogScreen";
+import Talks from "./screens/Talks";
+import Tweets from "./screens/Tweets";
+import About from "./screens/About";
 
 function App() {
   return (
-    <div className="bg-gradient-to-tr from-gray-700 via-gray-900 to-black">
-      <Main />
-    </div>
+    <BrowserRouter>
+      <div className="bg-gradient-to-tr from-gray-700 via-gray-900 to-black">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/opensource" element={<OpenSource />}></Route>
+          <Route path="/blogs" element={<BlogScreen />}></Route>
+          <Route path="/talks" element={<Talks />}></Route>
+          <Route path="/feeds" element={<Tweets />}></Route>
+          <Route path="/workshop" element={<Workshop />}></Route>
+          <Route path="/aboutme" element={<About />}></Route>
+        </Routes>
+        <AboutMe />
+        <ScrollToTop />
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
