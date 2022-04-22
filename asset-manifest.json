@@ -1,21 +1,30 @@
 {
   "files": {
-    "main.css": "/static/css/main.2c90f4f9.css",
-    "main.js": "/static/js/main.e92179ae.js",
+    "main.css": "/static/css/main.04be9884.css",
+    "main.js": "/static/js/main.f6403338.js",
     "static/js/787.1cf1a581.chunk.js": "/static/js/787.1cf1a581.chunk.js",
+    "static/media/mic.png": "/static/media/mic.d203511c9cb4d7be7af9.png",
+    "static/media/thumbsup.png": "/static/media/thumbsup.da3ab1751b81fb20dd94.png",
+    "static/media/puzzle.png": "/static/media/puzzle.e1d54c5f6d85c2bec462.png",
+    "static/media/rocket.png": "/static/media/rocket.70c7ad31dabf2abb5139.png",
+    "static/media/fitness.png": "/static/media/fitness.08858b876151a2a7d132.png",
+    "static/media/trophy.png": "/static/media/trophy.a1c12235d4056e06be23.png",
     "static/media/he_sitting_with_notebook.png": "/static/media/he_sitting_with_notebook.a3e3cae89a293996b0b7.png",
     "static/media/figma.png": "/static/media/figma.7b1fbc139cda03016327.png",
+    "static/media/blog.png": "/static/media/blog.e825af51850c222b1c52.png",
+    "static/media/smilie.png": "/static/media/smilie.0471a539ca80adbfd58b.png",
     "static/media/ATD.png": "/static/media/ATD.7cba30ad5aff7563d6d3.png",
+    "static/media/twitter.png": "/static/media/twitter.3e8c1ce0b2831e7c59ea.png",
     "static/media/SrinivasanSekar.jpg": "/static/media/SrinivasanSekar.81211c746eb166b46ba2.jpg",
     "static/media/appium.png": "/static/media/appium.ad6a3b1bbb8e73308512.png",
     "static/media/agileIndia2021.jpeg": "/static/media/agileIndia2021.7911f95bf002fbbd783f.jpeg",
     "index.html": "/index.html",
-    "main.2c90f4f9.css.map": "/static/css/main.2c90f4f9.css.map",
-    "main.e92179ae.js.map": "/static/js/main.e92179ae.js.map",
+    "main.04be9884.css.map": "/static/css/main.04be9884.css.map",
+    "main.f6403338.js.map": "/static/js/main.f6403338.js.map",
     "787.1cf1a581.chunk.js.map": "/static/js/787.1cf1a581.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2c90f4f9.css",
-    "static/js/main.e92179ae.js"
+    "static/css/main.04be9884.css",
+    "static/js/main.f6403338.js"
   ]
 }
