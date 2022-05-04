@@ -16,7 +16,9 @@ export default function Blogs() {
               Find the latest of my writing here
             </p>
           </div>
-          <NavigationArrow link={"/blogs"} context={"See all blogs"} />
+          <NavigationArrow
+            arrow={{ link: "/blogs", context: "See all blogs" }}
+          />
         </div>
       </div>
       <div className="relative grid grid-cols-4 gap-x-5 md:grid-cols-8 lg:grid-cols-12 mx-auto max-w-7xl p-3">

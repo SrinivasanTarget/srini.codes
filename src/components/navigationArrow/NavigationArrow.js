@@ -1,10 +1,12 @@
-export default function NavigationArrow({ link, context }) {
+export default function NavigationArrow({ arrow }) {
   return (
     <a
       className="text-primary inline-flex items-center text-left font-inter pl-2"
-      href={link}
+      href={arrow.link}
     >
-      <span className="mr-4 text-xl font-inter text-white">{context}</span>
+      <span className="mr-4 text-xl font-inter text-white">
+        {arrow.context}
+      </span>
       <div className="relative inline-flex h-14 w-14 flex-none items-center justify-center p-1">
         <div className="absolute text-gray-600 border-2 rounded-full hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
           <svg

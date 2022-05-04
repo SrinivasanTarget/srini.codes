@@ -14,7 +14,9 @@ export default function Projects() {
               I love contributing to Open Source Projects
             </p>
           </div>
-          <NavigationArrow link={"/opensource"} context={"See all projects"} />
+          <NavigationArrow
+            arrow={{ link: "/opensource", context: "See all projects" }}
+          />
         </div>
       </div>
       <div className="relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-4 mx-auto max-w-7xl p-3">

@@ -15,7 +15,9 @@ export default function Conferences() {
               I love sharing my knowledge in conferences
             </p>
           </div>
-          <NavigationArrow link={"/talks"} context={"See all conferences"} />
+          <NavigationArrow
+            arrow={{ link: "/talks", context: "See all conferences" }}
+          />
         </div>
       </div>
       <div className="relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6 mx-auto max-w-7xl mb-24 gap-5 lg:mb-64 p-3">
