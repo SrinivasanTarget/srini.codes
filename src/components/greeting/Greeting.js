@@ -24,6 +24,7 @@ export default function Greeting({
       <div className="col-span-full mb-12 lg:mb-0 flex items-center justify-center lg:col-span-9 lg:col-start-8 lg:-mt-24 lg:-mr-5vw lg:px-0">
         <img
           decoding="async"
+          fetchpriority="high"
           alt="work-from-book"
           src={url}
           className="h-auto w-full object-contain max-h-75vh"

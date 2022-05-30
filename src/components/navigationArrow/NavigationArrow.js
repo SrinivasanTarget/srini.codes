@@ -1,8 +1,10 @@
+import { NavLink } from "react-router-dom";
+
 export default function NavigationArrow({ arrow }) {
   return (
-    <a
+    <NavLink
       className="text-primary inline-flex items-center text-left font-inter pl-2"
-      href={arrow.link}
+      to={arrow.link}
     >
       <span className="mr-4 text-xl font-inter text-white">
         {arrow.context}
@@ -26,6 +28,6 @@ export default function NavigationArrow({ arrow }) {
           </svg>
         </div>
       </div>
-    </a>
+    </NavLink>
   );
 }

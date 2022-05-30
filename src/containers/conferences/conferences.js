@@ -16,7 +16,7 @@ export default function Conferences() {
             </p>
           </div>
           <NavigationArrow
-            arrow={{ link: "/talks", context: "See all conferences" }}
+            arrow={{ link: "talks", context: "See all conferences" }}
           />
         </div>
       </div>

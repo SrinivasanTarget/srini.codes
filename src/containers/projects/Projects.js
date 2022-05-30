@@ -15,7 +15,7 @@ export default function Projects() {
             </p>
           </div>
           <NavigationArrow
-            arrow={{ link: "/opensource", context: "See all projects" }}
+            arrow={{ link: "opensource", context: "See all projects" }}
           />
         </div>
       </div>

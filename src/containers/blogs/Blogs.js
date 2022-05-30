@@ -17,7 +17,7 @@ export default function Blogs() {
             </p>
           </div>
           <NavigationArrow
-            arrow={{ link: "/blogs", context: "See all blogs" }}
+            arrow={{ link: "blogs", context: "See all blogs" }}
           />
         </div>
       </div>

@@ -12,24 +12,27 @@ import BlogScreen from "./screens/BlogScreen";
 import Talks from "./screens/Talks";
 import Tweets from "./screens/Tweets";
 import About from "./screens/About";
+import ScrollUp from "./components/scroll/ScrollUp";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="bg-gradient-to-tr from-gray-700 via-gray-900 to-black">
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/opensource" element={<OpenSource />}></Route>
-          <Route path="/blogs" element={<BlogScreen />}></Route>
-          <Route path="/talks" element={<Talks />}></Route>
-          <Route path="/feeds" element={<Tweets />}></Route>
-          <Route path="/workshop" element={<Workshop />}></Route>
-          <Route path="/aboutme" element={<About />}></Route>
-        </Routes>
-        <AboutMe />
-        <ScrollToTop />
-        <Footer />
+        <ScrollUp>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/opensource" element={<OpenSource />}></Route>
+            <Route path="/blogs" element={<BlogScreen />}></Route>
+            <Route path="/talks" element={<Talks />}></Route>
+            <Route path="/feeds" element={<Tweets />}></Route>
+            <Route path="/workshop" element={<Workshop />}></Route>
+            <Route path="/aboutme" element={<About />}></Route>
+          </Routes>
+          <AboutMe />
+          <ScrollToTop />
+          <Footer />
+        </ScrollUp>
       </div>
     </BrowserRouter>
   );
