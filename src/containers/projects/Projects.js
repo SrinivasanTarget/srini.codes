@@ -24,7 +24,7 @@ export default function Projects() {
           return (
             <div key={i} className="col-span-full lg:col-span-6">
               <div className="relative h-full w-full pt-12">
-                <div className="relative block h-full w-full rounded-lg px-8 pb-10 pt-36 bg-gray-800 md:px-16 md:pb-20 hover:bg-gradient-to-r from-gray-700 via-gray-900 to-black">
+                <div className="relative block h-full w-full rounded-lg bg-gray-800 px-8 pb-10 pt-36 md:px-16 md:pb-20 hover:bg-gradient-to-r from-gray-700 via-gray-900 to-black">
                   <h3 className="leading-tight text-3xl md:text-4xl text-white">
                     {project.title}
                   </h3>
@@ -45,7 +45,7 @@ export default function Projects() {
                 <div className="absolute left-16 top-0">
                   <img
                     decoding="async"
-                    className="rounded-full h-32 w-auto object-contain"
+                    className="rounded-full h-28 w-auto object-contain pt-2"
                     alt="logo"
                     src={require(`../../assets/images/${project.imgSource}`)}
                   />
