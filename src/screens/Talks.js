@@ -6,7 +6,7 @@ export default function Talks() {
   return (
     <div className="relative mx-10vw pb-16">
       <Greeting
-        url={new URL("../assets/images/mic.png", import.meta.url).href}
+        url={new URL("../assets/images/mic.webp", import.meta.url).href}
         isName={false}
         description={"International Conference Speaker 🚀"}
         subdescription={

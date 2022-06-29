@@ -6,7 +6,7 @@ export default function BlogScreen() {
   return (
     <div className="relative mx-10vw pb-16">
       <Greeting
-        url={new URL("../assets/images/blog.png", import.meta.url).href}
+        url={new URL("../assets/images/blog.webp", import.meta.url).href}
         isName={false}
         description={
           "I love sharing my knowledge as blogs to wider community 🚀"

@@ -6,7 +6,7 @@ export default function OpenSource() {
   return (
     <div className="relative mx-10vw pb-16">
       <Greeting
-        url={new URL("../assets/images/rocket.png", import.meta.url).href}
+        url={new URL("../assets/images/rocket.webp", import.meta.url).href}
         isName={false}
         description={"Helping enterpises build & ship high quality software 🚀"}
         subdescription={""}

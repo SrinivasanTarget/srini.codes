@@ -6,7 +6,7 @@ export default function Workshop() {
   return (
     <div className="relative mx-10vw pb-16">
       <Greeting
-        url={new URL("../assets/images/thumbsup.png", import.meta.url).href}
+        url={new URL("../assets/images/thumbsup.webp", import.meta.url).href}
         isName={false}
         description={
           "I run Appium workshops regularly on Appium & Selenium Conferences 🚀"

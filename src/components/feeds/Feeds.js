@@ -16,7 +16,7 @@ export default function Feeds() {
           <div className="mb-12 lg:mb-0">
             <img
               decoding="async"
-              src={require("../../assets/images/he_sitting_with_notebook.png")}
+              src={require("../../assets/images/he_sitting_with_notebook.webp")}
               className="h-auto w-full object-contain max-h-75vh"
               alt="he_sitting_with_notebook"
             />

@@ -5,7 +5,7 @@ const About = () => {
   return (
     <div>
       <Greeting
-        url={new URL("../assets/images/smilie.png", import.meta.url).href}
+        url={new URL("../assets/images/smilie.webp", import.meta.url).href}
         isName={false}
         description={"Hi, I'm Srini"}
         subdescription={
