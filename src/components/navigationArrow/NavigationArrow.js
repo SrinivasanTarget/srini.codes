@@ -1,10 +1,13 @@
 import { NavLink } from "react-router-dom";
+import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
 
 export default function NavigationArrow({ arrow }) {
+  const gaEventTracker = useAnalyticsEventTracker("Navigation");
   return (
     <NavLink
       className="text-primary inline-flex items-center text-left font-inter pl-2"
       to={arrow.link}
+      onClick={() => gaEventTracker(`${arrow.context}"`)}
     >
       <span className="mr-4 text-xl font-inter text-white">
         {arrow.context}
