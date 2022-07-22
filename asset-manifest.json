@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "https://srini.codes/static/css/main.de44be66.css",
-    "main.js": "https://srini.codes/static/js/main.9b0e3c30.js",
+    "main.css": "https://srini.codes/static/css/main.1a2e4dd5.css",
+    "main.js": "https://srini.codes/static/js/main.b570c670.js",
     "static/js/787.1cf1a581.chunk.js": "https://srini.codes/static/js/787.1cf1a581.chunk.js",
     "static/media/thumbsup.webp": "https://srini.codes/static/media/thumbsup.9aa349fd7cfb7afdd5cb.webp",
     "static/media/trophy.webp": "https://srini.codes/static/media/trophy.4b35816d8cfeeb9ff3c0.webp",
@@ -22,12 +22,12 @@
     "static/media/webdriverio.webp": "https://srini.codes/static/media/webdriverio.a4c2543864635dd0bfae.webp",
     "static/media/ReactTestingLibrary.webp": "https://srini.codes/static/media/ReactTestingLibrary.536cafb0a9f3a4522fd4.webp",
     "index.html": "https://srini.codes/index.html",
-    "main.de44be66.css.map": "https://srini.codes/static/css/main.de44be66.css.map",
-    "main.9b0e3c30.js.map": "https://srini.codes/static/js/main.9b0e3c30.js.map",
+    "main.1a2e4dd5.css.map": "https://srini.codes/static/css/main.1a2e4dd5.css.map",
+    "main.b570c670.js.map": "https://srini.codes/static/js/main.b570c670.js.map",
     "787.1cf1a581.chunk.js.map": "https://srini.codes/static/js/787.1cf1a581.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.de44be66.css",
-    "static/js/main.9b0e3c30.js"
+    "static/css/main.1a2e4dd5.css",
+    "static/js/main.b570c670.js"
   ]
 }
