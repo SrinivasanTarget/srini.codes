@@ -26,7 +26,7 @@ export default function Conferences() {
             <div key={i} className="col-span-full lg:col-span-6">
               <div className="p-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-secondary text-primary flex h-full w-full flex-col justify-between rounded-xl text-white">
                 <div className="p-0.5 bg-gray-800 rounded-xl">
-                  <div className="p-16">
+                  <div className="lg:p-16 p-6">
                     <div className="-mr-4 mb-12 flex flex-wrap">
                       {conference.tags.map((tag, i) => {
                         return (
@@ -51,10 +51,10 @@ export default function Conferences() {
                     href={conference.url}
                   >
                     <span className="text-xl font-medium">
-                      <span className="hidden md:inline pl-16">
+                      <span className="hidden md:inline lg:pl-16 pl-6">
                         check this talk
                       </span>
-                      <span className="md:hidden pl-16">Read more</span>
+                      <span className="md:hidden lg:pl-16 pl-6">Read more</span>
                     </span>
                     <div className="relative inline-flex h-14 w-14 flex-none items-center justify-center p-1">
                       <div className="absolute text-gray-200">

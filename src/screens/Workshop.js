@@ -4,7 +4,7 @@ import { workshops } from "../portfolio/workshops";
 
 export default function Workshop() {
   return (
-    <div className="relative mx-10vw pb-16">
+    <div className="relative mx-10vw">
       <Greeting
         url={new URL("../assets/images/thumbsup.webp", import.meta.url).href}
         isName={false}
