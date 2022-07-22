@@ -5,7 +5,7 @@ export default function ProfileCard() {
         decoding="async"
         className="max-h-50vh rounded-br-[25%] rounded-tl-[25%] rounded-bl-3xl rounded-tr-3xl"
         src={
-          new URL(`../../assets/images/SrinivasanSekar.jpg`, import.meta.url)
+          new URL(`../../assets/images/SrinivasanSekar.webp`, import.meta.url)
             .href
         }
         alt="Srinivasan Sekar"
