@@ -7,7 +7,7 @@ const Header = () => {
   let activeClassName = `${inactiveClassName} bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500`;
   return (
     <header>
-      <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <div className="container mx-auto flex flex-wrap p-5 flex-col lg:flex-row items-center">
         <a
           className="flex title-font font-medium items-center text-white mb-4 md:mb-0"
           href="/"

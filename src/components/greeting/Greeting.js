@@ -27,10 +27,10 @@ export default function Greeting({
           fetchpriority="high"
           alt="work-from-book"
           src={url}
-          className="h-auto w-full object-contain max-h-75vh"
+          className="lg:h-auto lg:w-full h-80 w-96 object-contain"
         />
       </div>
-      <div className="col-span-full pt-6 lg:col-start-1 lg:row-start-1 lg:flex lg:h-full lg:flex-col lg:col-span-7">
+      <div className="col-span-full pt-6 lg:col-start-1 lg:row-start-1 lg:flex lg:h-full lg:flex-col lg:col-span-7 mb-32">
         <div className="flex flex-auto flex-col text-white p-5">
           <div className="mb-4">
             {name}
