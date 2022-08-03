@@ -16,7 +16,7 @@ const projects = [
   {
     title: "webdriverio",
     description:
-      "WebdriverIO is a test automation framework that allows you to run tests based on the Webdriver protocol and Appium automation technology.",
+      "WebdriverIO is a test automation framework that allows you to run tests based on the Webdriver protocol and Appium.",
     source: "https://github.com/webdriverio/webdriverio",
     imgSource: "webdriverio.webp",
   },
