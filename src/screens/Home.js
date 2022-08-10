@@ -11,7 +11,9 @@ export default function Home() {
       <Greeting
         url={new URL("../assets/images/figma.webp", import.meta.url).href}
         isName={true}
-        description={"Helping enterpises build & ship high quality software 🚀"}
+        description={
+          "Assist businesses in developing and shipping high-quality software. 🚀"
+        }
         subdescription={"Quality Analyst @ Thoughtworks"}
         isSocial={true}
       />

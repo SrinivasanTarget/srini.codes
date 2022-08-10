@@ -38,7 +38,7 @@ const projects = [
     title: "Appium Wait Plugin",
     description: "Appium plugin designed to wait for element to be present.",
     source: "https://github.com/AppiumTestDistribution/appium-wait-plugin",
-    imgSource: "ATD.webp",
+    imgSource: "AppiumWait2.webp",
   },
   {
     title: "Appium Gestures Plugin",
