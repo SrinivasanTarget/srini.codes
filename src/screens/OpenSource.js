@@ -9,7 +9,7 @@ export default function OpenSource() {
         url={new URL("../assets/images/rocket.webp", import.meta.url).href}
         isName={false}
         description={
-          "Assist businesses in developing and shipping high-quality software. 🚀"
+          "I assist businesses in developing and shipping high-quality software. 🚀"
         }
         subdescription={""}
         isSocial={true}
