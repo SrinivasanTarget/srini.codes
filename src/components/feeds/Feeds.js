@@ -15,6 +15,7 @@ export default function Feeds() {
         <div className="col-span-full lg:col-span-9 lg:col-start-10 p-3">
           <div className="mb-12 lg:mb-0">
             <img
+              loading="lazy"
               decoding="async"
               src={require("../../assets/images/he_sitting_with_notebook.webp")}
               className="h-auto w-full object-contain max-h-75vh"

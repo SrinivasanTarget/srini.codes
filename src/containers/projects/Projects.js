@@ -44,6 +44,7 @@ export default function Projects() {
                 </div>
                 <div className="absolute left-16 top-0">
                   <img
+                    loading="lazy"
                     decoding="async"
                     className="rounded-full h-28 w-auto object-contain pt-2"
                     alt="logo"
