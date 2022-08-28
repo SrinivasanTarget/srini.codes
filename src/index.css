@@ -1,5 +1,5 @@
 @import '@fontsource/lora/400-italic.css';
-@import '@fontsource/Inter/500.css';
+@import '@fontsource/Inter';
 @import '@fontsource/dancing-script/600.css';
 @tailwind base;
 @tailwind components;
