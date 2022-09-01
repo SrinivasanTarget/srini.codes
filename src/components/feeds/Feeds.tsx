@@ -1,5 +1,5 @@
 import React from 'react'
-import { TwitterTimelineEmbed } from 'react-twitter-embed'
+import { Timeline } from 'react-twitter-widgets'
 
 export default function Feeds() {
   return (
@@ -26,10 +26,9 @@ export default function Feeds() {
           </div>
         </div>
         <div className='col-span-full lg:col-span-9 lg:col-start-1 lg:row-start-1 p-3'>
-          <TwitterTimelineEmbed
-            sourceType='profile'
-            screenName='srinivasanskr'
-            options={{ height: 600 }}
+          <Timeline
+            dataSource={{ sourceType: 'profile', screenName: 'srinivasanskr' }}
+            options={{ theme: 'dark', width: '800', height: '600' }}
           />
         </div>
       </div>
