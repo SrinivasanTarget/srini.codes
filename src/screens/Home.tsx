@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div>
       <Greeting
-        url={'https://srini.codes/static/media/figma.cd9955de461aa7bb3c1c.webp'}
+        url={new URL('../assets/images/figma.webp', import.meta.url).href}
         isName={true}
         description={'I assist businesses in developing and shipping high-quality software. 🚀'}
         subdescription={'Quality Analyst @ Thoughtworks'}
