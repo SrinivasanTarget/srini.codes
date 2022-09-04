@@ -20,7 +20,7 @@ export default function Feeds() {
               src={
                 new URL(`../../assets/images/he_sitting_with_notebook.webp`, import.meta.url).href
               }
-              className='h-auto w-full object-contain max-h-75vh'
+              className='lg:h-auto lg:w-full h-80 w-96 object-contain'
               alt='he_sitting_with_notebook'
             />
           </div>
