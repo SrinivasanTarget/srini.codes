@@ -40,7 +40,7 @@ export default function Projects() {
                   <img
                     loading='lazy'
                     decoding='async'
-                    className='rounded-full h-28 w-auto object-contain pt-2'
+                    className='h-28 w-28 object-scale-down pt-2'
                     alt='logo'
                     src={new URL(`../../assets/images/${project.imgSource}`, import.meta.url).href}
                   />
