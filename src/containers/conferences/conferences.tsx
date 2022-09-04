@@ -43,6 +43,7 @@ export default function Conferences() {
                   <a
                     className='text-primary inline-flex items-center text-left font-lora focus:outline-none cursor-pointer transition'
                     href={conference.url}
+                    aria-label='Conference'
                   >
                     <span className='text-xl font-medium'>
                       <span className='hidden md:inline lg:pl-16 pl-6'>check this talk</span>
