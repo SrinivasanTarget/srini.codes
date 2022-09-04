@@ -16,7 +16,7 @@ export default function Conferences() {
           <NavigationArrow arrow={{ link: 'talks', context: 'See all conferences' }} />
         </div>
       </div>
-      <div className='relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6 mx-auto max-w-7xl mb-24 gap-5 lg:mb-64 p-3'>
+      <div className='relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6 mx-auto max-w-7xl gap-5 p-3'>
         {conferences.slice(0, 2).map((conference, i) => {
           return (
             <div key={i} className='col-span-full lg:col-span-6'>
