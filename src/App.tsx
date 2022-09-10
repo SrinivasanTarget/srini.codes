@@ -26,8 +26,8 @@ function App() {
     <BrowserRouter>
       <div className='bg-gradient-to-tr from-gray-700 via-gray-900 to-black'>
         <ScrollUp>
-          <Header />
           <Suspense fallback={<div>Loading...</div>}>
+            <Header />
             <Routes>
               <Route path='/' element={<Home />}></Route>
               <Route path='/opensource' element={<OpenSource />}></Route>
@@ -37,11 +37,10 @@ function App() {
               <Route path='/workshop' element={<Workshop />}></Route>
               <Route path='/aboutme' element={<About />}></Route>
             </Routes>
+            <AboutMe />
+            <ScrollToTop />
+            <Footer />
           </Suspense>
-
-          <AboutMe />
-          <ScrollToTop />
-          <Footer />
         </ScrollUp>
       </div>
     </BrowserRouter>
