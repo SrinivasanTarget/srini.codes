@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import Greeting from '../components/greeting/Greeting'
-import Projects from '../containers/projects/Projects'
-import Blogs from '../containers/blogs/Blogs'
-import Conferences from '../containers/conferences/conferences'
-import Feeds from '../components/feeds/Feeds'
+
+const Projects = lazy(() => import('../containers/projects/Projects'))
+const Blogs = lazy(() => import('../containers/blogs/Blogs'))
+const Conferences = lazy(() => import('../containers/conferences/conferences'))
+const Feeds = lazy(() => import('../components/feeds/Feeds'))
 
 export default function Home() {
   return (
     <div>
+      <Suspense fallback={<div>Loading...</div>}></Suspense>
       <Greeting
         url={new URL('../assets/images/figma.webp', import.meta.url).href}
         isName={true}

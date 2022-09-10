@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import Home from './screens/Home'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Workshop from './screens/Workshop'
@@ -27,15 +27,18 @@ function App() {
       <div className='bg-gradient-to-tr from-gray-700 via-gray-900 to-black'>
         <ScrollUp>
           <Header />
-          <Routes>
-            <Route path='/' element={<Home />}></Route>
-            <Route path='/opensource' element={<OpenSource />}></Route>
-            <Route path='/blogs' element={<BlogScreen />}></Route>
-            <Route path='/talks' element={<Talks />}></Route>
-            <Route path='/feeds' element={<Tweets />}></Route>
-            <Route path='/workshop' element={<Workshop />}></Route>
-            <Route path='/aboutme' element={<About />}></Route>
-          </Routes>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route path='/' element={<Home />}></Route>
+              <Route path='/opensource' element={<OpenSource />}></Route>
+              <Route path='/blogs' element={<BlogScreen />}></Route>
+              <Route path='/talks' element={<Talks />}></Route>
+              <Route path='/feeds' element={<Tweets />}></Route>
+              <Route path='/workshop' element={<Workshop />}></Route>
+              <Route path='/aboutme' element={<About />}></Route>
+            </Routes>
+          </Suspense>
+
           <AboutMe />
           <ScrollToTop />
           <Footer />
