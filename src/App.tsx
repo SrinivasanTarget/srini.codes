@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Home from './screens/Home'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Workshop from './screens/Workshop'
@@ -12,16 +12,8 @@ import Talks from './screens/Talks'
 import Tweets from './screens/Tweets'
 import About from './screens/About'
 import ScrollUp from './components/scroll/ScrollUp'
-import ReactGA from 'react-ga4'
-ReactGA.initialize('G-HD011R827H')
 
 function App() {
-  useEffect(() => {
-    ReactGA.send({
-      hitType: 'pageview',
-      page: window.location.pathname + window.location.search,
-    })
-  }, [])
   return (
     <BrowserRouter>
       <div className='bg-gradient-to-tr from-gray-700 via-gray-900 to-black'>
