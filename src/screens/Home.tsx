@@ -3,7 +3,7 @@ import Greeting from '../components/greeting/Greeting'
 import Projects from '../containers/projects/Projects'
 import Blogs from '../containers/blogs/Blogs'
 import Conferences from '../containers/conferences/conferences'
-import Feeds from '../components/feeds/Feeds'
+import Workshops from '../containers/workshops/Workshops'
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
       <Projects />
       <Blogs />
       <Conferences />
-      <Feeds />
+      <Workshops />
     </div>
   )
 }
