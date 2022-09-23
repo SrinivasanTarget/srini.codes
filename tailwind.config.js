@@ -2,15 +2,8 @@
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
     fontFamily: {
-      sans: ['ui-sans-serif', 'system-ui'],
-      serif: ['ui-serif', 'Georgia'],
-      mono: ['ui-monospace', 'SFMono-Regular'],
-      display: ['Oswald'],
-      body: ['"Open Sans"'],
-      sign: ['"Dancing Script"'],
-      roboto: ['"Roboto Mono"'],
+      sign: ['Dancing Script'],
       inter: ['Inter'],
       lora: ['Lora'],
     },

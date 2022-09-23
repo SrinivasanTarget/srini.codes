@@ -21,7 +21,7 @@ export default function Workshops() {
               Find the latest of my workshops here
             </p>
           </div>
-          <NavigationArrow arrow={{ link: 'workshops', context: 'See all workshops' }} />
+          <NavigationArrow arrow={{ link: 'workshop', context: 'See all workshops' }} />
         </div>
         <div className='col-span-full lg:col-span-6'>
           <img

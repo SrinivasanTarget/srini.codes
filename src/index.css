@@ -1,6 +1,15 @@
-@import '@fontsource/lora/400-italic.css';
-@import '@fontsource/dancing-script/600.css';
-@import '@fontsource/inter/500.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: 'Dancing Script';
+  src: url('./assets/fonts/dancing-script-all-600-normal.woff');
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/inter-all-500-normal.woff');
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('./assets/fonts/lora-all-400-italic.woff');
+}
