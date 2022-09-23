@@ -14,9 +14,6 @@
   },
   "dependencies": {
     "@builder.io/partytown": "^0.7.0",
-    "@fontsource/dancing-script": "^4.5.9",
-    "@fontsource/inter": "^4.5.12",
-    "@fontsource/lora": "^4.5.11",
     "eslint-config-react-app": "^7.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
