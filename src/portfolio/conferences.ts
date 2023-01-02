@@ -1,5 +1,46 @@
 const conferences = [
   {
+    title: 'AgileIndia 2022',
+    description: 'Speed Matters: Client Side Performance Improvement Tips & Tricks',
+    imageURL:
+      'https://2021.agileindia.org/wp-content/uploads/2021/06/agileindia2021-online-white-vector.png?x46041',
+    url: 'https://confengine.com/conferences/agile-india-2022/proposal/17003/speed-matters-client-side-performance-improvement-tips-amp-tricks',
+    reverse: true,
+    tags: ['UI', 'Performance', 'Testing'],
+  },
+  {
+    title: 'Lambdatest Webinar 2022',
+    description: 'Clean Coding Practices for Test Automation',
+    imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
+    url: 'https://www.lambdatest.com/webinar/clean-coding-practices-for-test-automation/',
+    reverse: false,
+    tags: ['Clean Code', 'Automation', 'Testing'],
+  },
+  {
+    title: 'VodQA Bangalore 2022',
+    description: 'Workshop - Build Appium 2.0 plugins',
+    imageURL: 'https://github.com/twqablore/vodqa/blob/gh-pages/src/assets/images/logo.png',
+    url: 'https://twqablore.github.io/vodqa/',
+    reverse: true,
+    tags: ['Mobile', 'Appium', 'Testing'],
+  },
+  {
+    title: 'Testμ 2022',
+    description: "Appium: Endgame & What's Next?",
+    imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
+    url: 'https://www.lambdatest.com/testuconf-2022/',
+    reverse: false,
+    tags: ['Mobile', 'Appium', 'Testing'],
+  },
+  {
+    title: 'SeleniumConf 2022',
+    description: 'Build your own Appium 2.0 Driver',
+    imageURL: 'https://seleniumconf.in/img/logo.svg',
+    url: 'https://confengine.com/conferences/selenium-conf-2022/',
+    reverse: true,
+    tags: ['Mobile', 'Appium', 'Testing'],
+  },
+  {
     title: 'Automation GuildConf 2022',
     description: 'Benefits and Best Practices: Testing Containers & k8s Manifests',
     imageURL:
