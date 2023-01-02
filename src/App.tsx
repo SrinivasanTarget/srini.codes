@@ -12,6 +12,7 @@ import Talks from './screens/Talks'
 import Tweets from './screens/Tweets'
 import About from './screens/About'
 import ScrollUp from './components/scroll/ScrollUp'
+import { Analytics } from '@vercel/analytics/react'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <ScrollToTop />
           <Footer />
         </ScrollUp>
+        <Analytics mode={'production'} />
       </div>
     </BrowserRouter>
   )
