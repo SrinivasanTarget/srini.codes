@@ -11,6 +11,7 @@ const About = () => {
         subdescription={
           "I'm an Open Source Contributor, international conference speaker, workshop instructor, and community organizer 🚀"
         }
+        showLogo={false}
         isSocial={true}
       />
     </div>

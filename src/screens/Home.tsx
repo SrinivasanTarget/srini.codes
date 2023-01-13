@@ -16,8 +16,9 @@ export default function Home() {
           ).href
         }
         isName={true}
-        description={'I assist businesses in developing and shipping high-quality software. 🚀'}
-        subdescription={'Quality Analyst @ Thoughtworks'}
+        description={'I assist businesses in developing and shipping high-quality software 🚀'}
+        subdescription={'Lead Consultant'}
+        showLogo={true}
         isSocial={true}
       />
       <Projects />

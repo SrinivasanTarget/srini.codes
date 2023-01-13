@@ -9,6 +9,7 @@ export default function Tweets() {
         isName={false}
         description={'I tweet my learnings on testing regularly 🚀'}
         subdescription={''}
+        showLogo={false}
         isSocial={true}
       />
       <Feeds />

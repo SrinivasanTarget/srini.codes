@@ -10,6 +10,7 @@ export default function Workshop() {
         isName={false}
         description={'I run Appium workshops regularly on Appium & Selenium Conferences 🚀'}
         subdescription={'Invest in yourself with a premium workshop'}
+        showLogo={false}
         isSocial={true}
       />
       <div className='relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6 mx-auto max-w-7xl p-3'>

@@ -10,6 +10,7 @@ export default function Talks() {
         isName={false}
         description={'International Conference Speaker 🚀'}
         subdescription={'I talk about testing mobile apps, web apps, microservices, and more'}
+        showLogo={false}
         isSocial={true}
       />
       <div className='relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-4 mx-auto max-w-7xl p-3'>

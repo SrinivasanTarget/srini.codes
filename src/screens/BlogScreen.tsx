@@ -10,6 +10,7 @@ export default function BlogScreen() {
         isName={false}
         description={'I love sharing my knowledge as blogs to wider community 🚀'}
         subdescription={'Learn about mobile testing, contract testing, and more'}
+        showLogo={false}
         isSocial={true}
       />
       <div className='relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6 mx-auto max-w-7xl'>

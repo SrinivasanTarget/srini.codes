@@ -5,24 +5,37 @@ export default function Greeting({
   isName,
   description,
   subdescription,
+  showLogo,
   isSocial,
 }: {
   url: string
   isName: boolean
   description: string
   subdescription: string
+  showLogo: boolean
   isSocial: boolean
 }) {
   const showSocial = isSocial ? <Social /> : <div></div>
-  let name
+  let name, logo
   if (isName) {
     name = (
       <h1 className='leading-tight text-3xl md:text-5xl font-lora'>
         {" I'm "}
-        <span className='before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-pink-500 relative inline-block'>
-          <span className='relative text-black dark:text-black'>Srini</span>
+        <span className='relative inline-block'>
+          <span className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent'>
+            Srini
+          </span>
         </span>
       </h1>
+    )
+  }
+  if (showLogo) {
+    logo = (
+      <img
+        alt='thoughtworks-logo'
+        src='https://images.ctfassets.net/57ehn7fu4651/5IZUfISCJ8X3Lfy4ZuWu5Y/f292629c086005f7fbba67ec4a65707a/thoughtworks.png?fl=progressive&h=100&w=400'
+        className='inline-block h-10 w-52 mt-2'
+      />
     )
   }
   return (
@@ -36,6 +49,7 @@ export default function Greeting({
             {name}
             <p className='text-3xl md:text-4xl pt-4 font-lora'>{description}</p>
             <p className='text-2xl pt-4 font-inter text-gray-400'>{subdescription}</p>
+            {logo}
           </div>
           {showSocial}
         </div>

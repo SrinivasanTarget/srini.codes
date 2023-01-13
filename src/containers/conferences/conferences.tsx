@@ -10,7 +10,7 @@ export default function Conferences() {
           <div className='space-y-2 lg:space-y-0  pl-2'>
             <h2 className='leading-tight text-3xl md:text-4xl text-white'>Conferences</h2>
             <p className='leading-tight text-3xl md:text-4xl text-gray-400'>
-              I love sharing my knowledge in conferences
+              I love sharing my knowledge through conferences
             </p>
           </div>
           <NavigationArrow arrow={{ link: 'talks', context: 'See all conferences' }} />
@@ -38,7 +38,9 @@ export default function Conferences() {
                     <span className='max-w-full text-lg text-secondary mb-10 pb-7 prose text-gray-400'>
                       {conference.title}
                     </span>
-                    <h3 className='text-2xl md:text-3xl mb-5 mt-5'>{conference.description}</h3>
+                    <h3 className='text-2xl md:text-3xl mb-5 mt-5 h-28'>
+                      {conference.description}
+                    </h3>
                   </div>
                   <a
                     className='text-primary inline-flex items-center text-left font-lora focus:outline-none cursor-pointer transition'

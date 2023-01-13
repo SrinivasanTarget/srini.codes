@@ -45,10 +45,11 @@ const projects = [
     imgSource: 'ATD.webp',
   },
   {
-    title: 'React Testing Library',
-    description: 'Light-weight solution for testing React components.',
-    source: 'https://github.com/testing-library/react-testing-library',
-    imgSource: 'ReactTestingLibrary.webp',
+    title: 'Angular Testing Library',
+    description:
+      'Simple and complete Angular testing utilities that encourage good testing practices.',
+    source: 'https://github.com/testing-library/angular-testing-library',
+    imgSource: 'AngularTestingLibrary.webp',
   },
 ]
 
