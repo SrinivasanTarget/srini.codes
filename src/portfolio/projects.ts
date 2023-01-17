@@ -30,7 +30,7 @@ const projects = [
     description:
       'Appium 2.0 plugin designed to manage and create driver sessions on available devices.',
     source: 'https://github.com/AppiumTestDistribution/appium-device-farm',
-    imgSource: 'ATD.webp',
+    imgSource: 'DeviceFarmLogo.jpeg',
   },
   {
     title: 'Appium Wait Plugin',
