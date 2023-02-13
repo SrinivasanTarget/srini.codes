@@ -13,7 +13,7 @@
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "dependencies": {
-    "@builder.io/partytown": "^0.7.0",
+    "@builder.io/partytown": "^0.7.5",
     "@vercel/analytics": "^0.1.8",
     "eslint-config-react-app": "^7.0.0",
     "react": "^18.2.0",
