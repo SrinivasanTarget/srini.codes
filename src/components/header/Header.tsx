@@ -13,7 +13,7 @@ const Header = () => {
         <div className='md:ml-auto flex flex-wrap items-center text-base justify-center'>
           <NavLink
             to='/'
-            className={({ isActive }) => (isActive ? inactiveClassName : activeClassName)}
+            className={({ isActive }) => (!isActive ? inactiveClassName : activeClassName)}
           >
             Home
           </NavLink>
