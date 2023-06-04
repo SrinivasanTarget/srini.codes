@@ -36,12 +36,6 @@ const Header = () => {
             Talks
           </NavLink>
           <NavLink
-            to='feeds'
-            className={({ isActive }) => (!isActive ? inactiveClassName : activeClassName)}
-          >
-            Feeds
-          </NavLink>
-          <NavLink
             to='workshop'
             className={({ isActive }) => (!isActive ? inactiveClassName : activeClassName)}
           >

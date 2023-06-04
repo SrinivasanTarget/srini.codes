@@ -25,7 +25,7 @@ function App() {
             <Route path='/opensource' element={<OpenSource />}></Route>
             <Route path='/blogs' element={<BlogScreen />}></Route>
             <Route path='/talks' element={<Talks />}></Route>
-            <Route path='/feeds' element={<Tweets />}></Route>
+            {/* <Route path='/feeds' element={<Tweets />}></Route> */}
             <Route path='/workshop' element={<Workshop />}></Route>
             <Route path='/aboutme' element={<About />}></Route>
           </Routes>
