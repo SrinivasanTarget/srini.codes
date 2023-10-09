@@ -1,5 +1,39 @@
 const conferences = [
   {
+    title: 'XConf Singapore 2023',
+    description: 'Path to a more equitable testing process: Addressing unconscious bias and ethics',
+    imageURL:
+      'https://www.thoughtworks.com/etc.clientlibs/thoughtworks/clientlibs/clientlib-site/resources/images/thoughtworks-logo.svg',
+    url: 'https://www.eventbrite.sg/e/xconf-singapore-2023-tickets-619509398287',
+    reverse: true,
+    tags: ['GenAI', 'Bias', 'Testing'],
+  },
+  {
+    title: 'SeleniumConf 2023',
+    description: 'Clean Code Practices for Test Automation: Part 2',
+    imageURL: 'https://seleniumconf.com/wp-content/uploads/2022/11/SeleniumConf-logo-white.svg',
+    url: 'https://seleniumconf.com/#advanced-appium-20',
+    reverse: true,
+    tags: ['Appium', 'Mobile', 'Testing'],
+  },
+  {
+    title: 'Lambdatest Webinar 2023',
+    description: 'Clean Code Practices for Test Automation: Part 2',
+    imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
+    url: 'https://www.lambdatest.com/webinar/clean-coding-practices-for-test-automation/',
+    reverse: true,
+    tags: ['Clean Code', 'Automation', 'Testing'],
+  },
+  {
+    title: 'VodQA Singapore 2023',
+    description: "Navigating mobile app testing challenges in today's tech landscape",
+    imageURL:
+      'https://www.thoughtworks.com/etc.clientlibs/thoughtworks/clientlibs/clientlib-site/resources/images/thoughtworks-logo.svg',
+    url: 'https://www.meetup.com/tech-talks-thoughtworks-singapore/events/292842778/',
+    reverse: false,
+    tags: ['Mobile', 'Challenges', 'Testing'],
+  },
+  {
     title: 'AgileIndia 2022',
     description: 'Speed Matters: Client Side Performance Improvement Tips & Tricks',
     imageURL:

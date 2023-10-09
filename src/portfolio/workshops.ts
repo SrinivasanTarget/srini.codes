@@ -1,5 +1,14 @@
 const workshops = [
   {
+    title: 'SeleniumConf Chicago 2023',
+    description: 'Advanced Appium 2.0',
+    subdescription:
+      "At this workshop, you'll learn about appium architecture, drivers and plugins, and  advanced concepts in Appium 2.0. The workshop will be based on the latest Appium's Java Client.",
+    imageURL: 'trophy.webp',
+    source: 'https://seleniumconf.com/#advanced-appium-20',
+    location: 'InPerson',
+  },
+  {
     title: 'AppiumConf 2021',
     description: 'Advanced Appium 2.0',
     subdescription:
