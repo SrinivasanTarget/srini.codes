@@ -8,15 +8,15 @@ const workshops = [
     source: 'https://seleniumconf.com/#advanced-appium-20',
     location: 'InPerson',
   },
-  {
-    title: 'AppiumConf 2021',
-    description: 'Advanced Appium 2.0',
-    subdescription:
-      "At this workshop, you'll learn about appium architecture, drivers and plugins, and  advanced concepts in Appium 2.0. The workshop will be based on the latest Appium's Java Client.",
-    imageURL: 'trophy.webp',
-    source: 'https://confengine.com/conferences/appium-conf-2021/proposal/15742/advanced-appium-20',
-    location: 'online',
-  },
+  // {
+  //   title: 'AppiumConf 2021',
+  //   description: 'Advanced Appium 2.0',
+  //   subdescription:
+  //     "At this workshop, you'll learn about appium architecture, drivers and plugins, and  advanced concepts in Appium 2.0. The workshop will be based on the latest Appium's Java Client.",
+  //   imageURL: 'trophy.webp',
+  //   source: 'https://confengine.com/conferences/appium-conf-2021/proposal/15742/advanced-appium-20',
+  //   location: 'online',
+  // },
   {
     title: 'AppiumConf 2021',
     description: 'Build your own Appium Drivers and Plugins',

@@ -13,7 +13,7 @@ const conferences = [
     description: 'Clean Code Practices for Test Automation: Part 2',
     imageURL: 'https://seleniumconf.com/wp-content/uploads/2022/11/SeleniumConf-logo-white.svg',
     url: 'https://seleniumconf.com/#advanced-appium-20',
-    reverse: true,
+    reverse: false,
     tags: ['Appium', 'Mobile', 'Testing'],
   },
   {
