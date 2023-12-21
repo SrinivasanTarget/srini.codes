@@ -1,10 +1,18 @@
 const conferences = [
   {
+    title: 'Testμ 2023',
+    description: 'Elevate your testing game: Building Appium 2.0 plugin Live',
+    imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
+    url: 'https://www.youtube.com/embed/b6yWXfLpazc?enablejsapi=1&autoplay=1',
+    reverse: false,
+    tags: ['Mobile', 'Appium', 'Testing'],
+  },
+  {
     title: 'XConf Singapore 2023',
     description: 'Path to a more equitable testing process: Addressing unconscious bias and ethics',
     imageURL:
       'https://www.thoughtworks.com/etc.clientlibs/thoughtworks/clientlibs/clientlib-site/resources/images/thoughtworks-logo.svg',
-    url: 'https://www.eventbrite.sg/e/xconf-singapore-2023-tickets-619509398287',
+    url: 'https://youtu.be/QMr30Za_-vM?si=qFe-S4E9g3qjdT-g',
     reverse: true,
     tags: ['GenAI', 'Bias', 'Testing'],
   },

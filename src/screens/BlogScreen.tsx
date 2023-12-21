@@ -25,6 +25,13 @@ export default function BlogScreen() {
           <BlogCard key={i} blog={{ source: blog.source, title: blog.title }} />
         ))}
       </div>
+      <div className='relative flex h-full w-full items-center justify-center whitespace-nowrap text-inverse space-x-3 px-8 py-4'>
+        <div className='text-white block px-3 py-2 rounded-md text-base font-inter bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
+          <a className='inline-flex ' href='https://blog.srini.codes/'>
+            check here for more blogs
+          </a>
+        </div>
+      </div>
     </div>
   )
 }
