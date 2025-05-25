@@ -1,53 +1,33 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 
 const Header = () => {
-  const inactiveClassName = 'text-white block px-3 py-2 rounded-md text-base font-inter'
-  const activeClassName = `${inactiveClassName} bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500`
+  const linkClassName = 'text-custom-gray-light hover:text-custom-highlight px-3 py-2 rounded-md text-base font-inter'
   return (
-    <header>
+    <header className='sticky top-0 z-50 w-full bg-custom-black'>
       <div className='container mx-auto flex flex-wrap p-5 flex-col lg:flex-row items-center'>
-        <a className='flex title-font font-medium items-center text-white mb-4 md:mb-0' href='/'>
+        <a className='flex title-font font-medium items-center text-custom-gray-light mb-4 md:mb-0' href='#'>
           <span className='ml-3 text-xl font-sign'>&lt; Srinivasan Sekar /&gt;</span>
         </a>
-        <div className='md:ml-auto flex flex-wrap items-center text-base justify-center'>
-          <NavLink
-            to='/'
-            className={({ isActive }) => (!isActive ? inactiveClassName : activeClassName)}
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to='opensource'
-            className={({ isActive }) => (!isActive ? inactiveClassName : activeClassName)}
-          >
-            Open Source
-          </NavLink>
-          <NavLink
-            to='blogs'
-            className={({ isActive }) => (!isActive ? inactiveClassName : activeClassName)}
-          >
+        <nav className='md:ml-auto flex flex-wrap items-center text-base justify-center'>
+          <a href='#about' className={linkClassName}>
+            About
+          </a>
+          <a href='#projects' className={linkClassName}>
+            Projects
+          </a>
+          <a href='#blogs' className={linkClassName}>
             Blogs
-          </NavLink>
-          <NavLink
-            to='talks'
-            className={({ isActive }) => (!isActive ? inactiveClassName : activeClassName)}
-          >
+          </a>
+          <a href='#talks' className={linkClassName}>
             Talks
-          </NavLink>
-          <NavLink
-            to='workshop'
-            className={({ isActive }) => (!isActive ? inactiveClassName : activeClassName)}
-          >
+          </a>
+          <a href='#workshops' className={linkClassName}>
             Workshops
-          </NavLink>
-          <NavLink
-            to='aboutme'
-            className={({ isActive }) => (!isActive ? inactiveClassName : activeClassName)}
-          >
-            About Me
-          </NavLink>
-        </div>
+          </a>
+          <a href='#contact' className={linkClassName}>
+            Contact
+          </a>
+        </nav>
       </div>
     </header>
   )

@@ -1,7 +1,7 @@
-import NavigationArrow from '../../components/navigationArrow/NavigationArrow'
+// NavigationArrow import removed
 import { workshops } from '../../portfolio/workshops'
 
-type workshop = {
+type WorkshopDetails = { // Renamed type for clarity
   imageURL: string
   description: string
   subdescription: string
@@ -10,44 +10,57 @@ type workshop = {
 }
 
 export default function Workshops() {
-  const workshop: workshop = workshops[0]
+  // This component currently displays only the first workshop.
+  // To display all workshops, a mapping function and likely the WorkshopCard component would be needed.
+  const workshop: WorkshopDetails | undefined = workshops[0]; 
+
+  if (!workshop) {
+    return (
+      <div className='container mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center' id='workshops'>
+        <h2 className='text-3xl md:text-4xl font-bold text-custom-highlight'>Workshops</h2>
+        <p className='text-lg md:text-xl text-custom-gray-medium mt-4'>No workshops available at the moment.</p>
+      </div>
+    );
+  }
+
   return (
-    <div className='relative mx-10vw pb-16' id='blogs'>
-      <div className='relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-4 mx-auto max-w-7xl'>
-        <div className='col-span-full flex flex-col space-y-10 lg:flex-row lg:items-end lg:justify-between lg:space-y-0 mb-16'>
-          <div className='space-y-2 lg:space-y-0  pl-2'>
-            <h2 className='leading-tight text-3xl md:text-4xl text-white'>Workshops</h2>
-            <p className='leading-tight text-3xl md:text-4xl text-gray-400'>
-              Find the latest of my workshops here
-            </p>
-          </div>
-          <NavigationArrow arrow={{ link: 'workshop', context: 'See all workshops' }} />
-        </div>
+    <div className='container mx-auto px-4 sm:px-6 lg:px-8' id='workshops'> {/* Updated id and container class */}
+      <div className='text-center mb-12 md:mb-16'> {/* Centered title */}
+        <h2 className='leading-tight text-3xl md:text-4xl font-bold text-custom-highlight'>Featured Workshop</h2>
+        <p className='leading-tight text-lg md:text-xl text-custom-gray-medium mt-2'>
+          Explore my latest workshop offering.
+        </p>
+        {/* NavigationArrow removed as "See all workshops" requires new state logic */}
+      </div>
+      {/* Custom layout for a single featured workshop */}
+      <div className='grid grid-cols-1 lg:grid-cols-12 gap-8 items-center'>
         <div className='col-span-full lg:col-span-6'>
           <img
-            className='h-22 w-auto flex-none object-contain'
+            className='w-full h-auto max-h-[400px] object-contain rounded-lg shadow-lg border-2 border-custom-gray-dark' // Responsive image styling
             src={new URL(`../../assets/images/${workshop.imageURL}`, import.meta.url).href}
             decoding='async'
             loading='lazy'
-            alt='workshop image'
+            alt={workshop.title || 'Workshop image'} // Use title for alt text
           />
         </div>
-        <div className='col-span-full block lg:hidden h-20 lg:h-24'></div>
-        <div className='col-span-full lg:col-span-5 lg:col-start-8 p-3'>
-          <h2 className='text-3xl font-medium md:text-3xl text-white mb-16 lg:mt-16'>
+        <div className='col-span-full lg:col-span-6 p-4 md:p-6'>
+          <h3 className='text-2xl md:text-3xl font-semibold text-custom-gray-light mb-6'> {/* Themed description */}
             {workshop.description}
-          </h2>
-          <p className='mt-4 max-w-sm h-52 leading-tight text-2xl md:text-2xl text-gray-400'>
+          </h3>
+          <p className='text-base md:text-lg text-custom-gray-medium mb-8 leading-relaxed'> {/* Themed subdescription */}
             {workshop.subdescription}
           </p>
           <a
-            className='mt-16 group relative rounded-2xl inline-flex text-lg font-inter bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'
+            className='group relative rounded-lg inline-flex text-lg font-inter 
+                       bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+                       hover:from-pink-500 hover:to-indigo-500 transition-all duration-300 ease-in-out
+                       transform hover:scale-105 px-8 py-3' // Adjusted padding and added hover effect
             href={workshop.source}
             target='_blank'
-            rel='noreferrer'
+            rel='noopener noreferrer' // Added rel for security
           >
-            <div className='relative flex h-full w-full items-center justify-center whitespace-nowrap text-inverse space-x-3 px-8 py-4'>
-              <span>Visit</span>
+            <div className='relative flex h-full w-full items-center justify-center whitespace-nowrap text-white space-x-2'>
+              <span>Visit Workshop</span>
             </div>
           </a>
         </div>

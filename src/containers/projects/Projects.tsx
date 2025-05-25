@@ -1,56 +1,42 @@
 import { projects } from '../../portfolio/projects'
-import NavigationArrow from '../../components/navigationArrow/NavigationArrow'
+import Project from '../../components/project/Project' // Import the Project component
+// NavigationArrow import might be needed if we add "See all projects" link back
+// import NavigationArrow from '../../components/navigationArrow/NavigationArrow' 
 
 export default function Projects() {
+  // Determine number of projects to show. For now, let's show up to 3 for a common layout.
+  // The original showed 2 in a custom layout, then implied more elsewhere.
+  // This section in Home.tsx is a preview.
+  const projectsToShow = projects.slice(0, 3);
+
   return (
-    <div className='relative mx-10vw pb-16' id='opensource'>
-      <div className='relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-4 mx-auto max-w-7xl'>
-        <div className='col-span-full flex flex-col space-y-10 lg:flex-row lg:items-end lg:justify-between lg:space-y-0 mb-16'>
-          <div className='space-y-2 lg:space-y-0  pl-2'>
-            <h2 className='leading-tight text-3xl md:text-4xl text-white'>Open Source</h2>
-            <p className='leading-tight text-3xl md:text-4xl text-gray-400'>
-              I love contributing to Open Source Projects
-            </p>
-          </div>
-          <NavigationArrow arrow={{ link: 'opensource', context: 'See all projects' }} />
+    // Changed id to 'projects' to match nav link. Original was 'opensource'.
+    // Simplified padding, relying on section padding in Home.tsx.
+    <div className='container mx-auto px-4 sm:px-6 lg:px-8' id='projects'> 
+      <div className='text-center mb-12 md:mb-16'>
+        <h2 className='text-3xl md:text-4xl font-bold text-custom-highlight'>Open Source Contributions</h2>
+        <p className='text-lg md:text-xl text-custom-gray-medium mt-2'>
+          I love contributing to Open Source Projects. Here are a few I'm passionate about:
+        </p>
+      </div>
+      {/* Grid for project cards */}
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10'>
+        {projectsToShow.map((project, i) => (
+          // The Project component itself has col-span-4, which is for a 4-col or 12-col base grid.
+          // Here, we are defining the grid spots for each Project card.
+          // So, Project component's outer div should ideally not have col-span.
+          // For now, this will work, but Project's outer div could be simplified.
+          <Project key={i} project={project} />
+        ))}
+      </div>
+      {/* 
+        If a "See all projects" link is desired later, NavigationArrow can be added here.
+        Example:
+        <div className='text-center mt-12'>
+          <NavigationArrow arrow={{ link: '#', context: 'See all my projects' }} /> 
         </div>
-      </div>
-      <div className='relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-4 mx-auto max-w-7xl p-3'>
-        {projects.slice(0, 2).map((project, i) => {
-          return (
-            <div key={i} className='col-span-full lg:col-span-6'>
-              <div className='relative h-full w-full pt-12'>
-                <div className='relative block h-full w-full rounded-lg bg-gray-800 px-8 pb-10 pt-36 md:px-16 md:pb-20 hover:bg-gradient-to-r from-gray-700 via-gray-900 to-black'>
-                  <h3 className='leading-tight text-3xl md:text-4xl text-white'>{project.title}</h3>
-                  <p className='mt-4 max-w-sm h-44 leading-tight text-3xl md:text-4xl text-gray-400'>
-                    {project.description}
-                  </p>
-                  <a
-                    className='mt-16 group relative rounded-2xl inline-flex text-lg font-inter bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'
-                    target='_blank'
-                    rel='noreferrer'
-                    href={project.source}
-                  >
-                    <div className='relative flex h-full w-full items-center justify-center whitespace-nowrap text-inverse space-x-3 px-8 py-4'>
-                      <span>Visit</span>
-                    </div>
-                  </a>
-                </div>
-                <div className='absolute left-16 top-0'>
-                  <img
-                    loading='lazy'
-                    decoding='async'
-                    className='h-28 w-28 object-scale-down pt-2'
-                    alt='logo'
-                    src={new URL(`../../assets/images/${project.imgSource}`, import.meta.url).href}
-                  />
-                </div>
-              </div>
-            </div>
-          )
-        })}
-      </div>
-      <div className='h-56 lg:h-64'></div>
+      */}
+       {/* Removed the large spacer div, section padding should handle spacing */}
     </div>
   )
 }

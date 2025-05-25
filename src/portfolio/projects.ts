@@ -1,5 +1,19 @@
 const projects = [
   {
+    title: 'MCP WebDriverAgent Server',
+    description:
+      'Model Context Protocol server for WebDriverAgent - enabling AI integration with iOS automation and device management.',
+    source: 'https://github.com/AppiumTestDistribution/mcp-webdriveragent',
+    imgSource: 'appium.webp',
+  },
+  {
+    title: 'MCP Appium Gestures Server',
+    description:
+      'Model Context Protocol server for Appium Gestures - bringing AI-powered gesture automation to mobile testing.',
+    source: 'https://github.com/AppiumTestDistribution/mcp-appium-gestures',
+    imgSource: 'appium.webp',
+  },
+  {
     title: 'Appium',
     description:
       'cross-platform test automation tool for native, hybrid, and mobile web and desktop apps.',

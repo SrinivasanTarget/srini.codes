@@ -1,62 +1,72 @@
 import React from 'react'
-import NavigationArrow from '../../components/navigationArrow/NavigationArrow'
+// NavigationArrow import removed
 import { conferences } from '../../portfolio/conferences'
+// Note: This component defines its own card layout, different from ConferenceCard.tsx.
+// The task is to remove router dependencies and update NavigationArrow usage.
+// Styling of these custom cards will be adjusted for the theme.
 
 export default function Conferences() {
+  // Displaying a subset of conferences.
+  const conferencesToShow = conferences.slice(0, 2);
+
   return (
-    <div className='relative mx-10vw pb-16' id='opensource'>
-      <div className='relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-4 mx-auto max-w-7xl'>
-        <div className='col-span-full flex flex-col space-y-10 lg:flex-row lg:items-end lg:justify-between lg:space-y-0 mb-16'>
-          <div className='space-y-2 lg:space-y-0  pl-2'>
-            <h2 className='leading-tight text-3xl md:text-4xl text-white'>Conferences</h2>
-            <p className='leading-tight text-3xl md:text-4xl text-gray-400'>
-              I love sharing my knowledge through conferences
-            </p>
-          </div>
-          <NavigationArrow arrow={{ link: 'talks', context: 'See all conferences' }} />
-        </div>
+    <div className='container mx-auto px-4 sm:px-6 lg:px-8' id='talks'> {/* Updated id and container class */}
+      <div className='text-center mb-12 md:mb-16'> {/* Centered title */}
+        <h2 className='leading-tight text-3xl md:text-4xl font-bold text-custom-highlight'>Conference Talks</h2>
+        <p className='leading-tight text-lg md:text-xl text-custom-gray-medium mt-2'>
+          I love sharing my knowledge through conferences and meetups.
+        </p>
+        {/* NavigationArrow removed as "See all conferences" requires new state logic */}
       </div>
-      <div className='relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6 mx-auto max-w-7xl gap-5 p-3'>
-        {conferences.slice(0, 2).map((conference, i) => {
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10'> {/* Grid for custom conference cards */}
+        {conferencesToShow.map((conference, i) => {
           return (
-            <div key={i} className='col-span-full lg:col-span-6'>
-              <div className='p-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-secondary text-primary flex h-full w-full flex-col justify-between rounded-xl text-white'>
-                <div className='p-0.5 bg-gray-800 rounded-xl'>
-                  <div className='lg:p-16 p-6'>
-                    <div className='-mr-4 mb-12 flex flex-wrap'>
-                      {conference.tags.map((tag, i) => {
+            <div key={i} className='col-span-1'> {/* Each card takes one column in the new grid */}
+              {/* Card with gradient border - kept gradient as highlight */}
+              <div className='p-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+                              flex flex-col justify-between rounded-xl h-full text-custom-gray-light'>
+                {/* Inner card content with themed background */}
+                <div className='bg-custom-black rounded-xl h-full flex flex-col justify-between'>
+                  <div className='p-6 md:p-8'> {/* Adjusted padding */}
+                    <div className='mb-6 flex flex-wrap'> {/* Adjusted margin */}
+                      {conference.tags.map((tag, k) => {
                         return (
                           <div
-                            key={i}
-                            className='text-primary mb-4 mr-4 rounded-full px-6 py-1 bg-gradient-to-r from-gray-800 via-gray-900 to-black'
+                            key={k}
+                            className='text-custom-gray-light mb-2 mr-2 rounded-full px-4 py-1 text-sm bg-custom-gray-dark' // Themed tags
                           >
                             {tag}
                           </div>
                         )
                       })}
                     </div>
-                    <span className='max-w-full text-lg text-secondary mb-10 pb-7 prose text-gray-400'>
-                      {conference.title}
-                    </span>
-                    <h3 className='text-2xl md:text-3xl mb-5 mt-5 h-28'>
-                      {conference.description}
+                    {/* Conference Title - using description as title as per original structure here */}
+                    <p className='max-w-full text-lg text-custom-gray-medium mb-4'> 
+                      {conference.title} {/* This was the original "title" span */}
+                    </p>
+                    {/* Conference Description - using title as main heading as per original structure */}
+                    <h3 className='text-xl md:text-2xl font-semibold text-custom-gray-light mb-4 min-h-[5rem]'> {/* Adjusted text size and color */}
+                      {conference.description} {/* This was the original h3 content */}
                     </h3>
                   </div>
                   <a
-                    className='text-primary inline-flex items-center text-left font-lora focus:outline-none cursor-pointer transition'
+                    className='group inline-flex items-center text-left font-lora focus:outline-none cursor-pointer transition 
+                               px-6 py-4 md:px-8 text-custom-highlight hover:text-pink-500' // Themed link
                     href={conference.url}
-                    aria-label='Conference'
+                    target='_blank' // Added target blank for external links
+                    rel='noopener noreferrer' // Added rel for security
+                    aria-label={`Read more about ${conference.title}`} // Improved aria-label
                   >
-                    <span className='text-xl font-medium'>
-                      <span className='hidden md:inline lg:pl-16 pl-6'>check this talk</span>
-                      <span className='md:hidden lg:pl-16 pl-6'>Read more</span>
+                    <span className='text-lg font-medium'>
+                      <span className='hidden md:inline'>Check this talk</span>
+                      <span className='md:hidden'>Read more</span>
                     </span>
-                    <div className='relative inline-flex h-14 w-14 flex-none items-center justify-center p-1'>
-                      <div className='absolute text-gray-200'>
+                    <div className='relative inline-flex h-10 w-10 flex-none items-center justify-center p-1 ml-2'> {/* Adjusted size and margin */}
+                      <div className='absolute text-custom-gray-medium group-hover:text-custom-highlight transition-colors duration-300'>
                         <svg
-                          className='transform rotate-[270deg] text-gray-400'
-                          width='40'
-                          height='40'
+                          className='transform rotate-[270deg]' // SVG kept as is
+                          width='32' // Adjusted size
+                          height='32' // Adjusted size
                           viewBox='0 0 32 32'
                           fill='none'
                           xmlns='http://www.w3.org/2000/svg'
@@ -77,7 +87,7 @@ export default function Conferences() {
           )
         })}
       </div>
-      <div className='h-56 lg:h-64'></div>
+      {/* Removed the large spacer div */}
     </div>
   )
 }
