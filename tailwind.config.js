@@ -20,6 +20,15 @@ export default {
       'extra-bold': 800,
       black: 900,
     },
+    extend: {
+      colors: {
+        'custom-black': '#121212',
+        'custom-gray-light': '#E0E0E0',
+        'custom-gray-medium': '#A9A9A9',
+        'custom-gray-dark': '#555555',
+        'custom-highlight': '#BB86FC',
+      },
+    },
   },
   plugins: [],
 }

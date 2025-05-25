@@ -1,6 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-custom-black text-custom-gray-light;
+}
+
+a {
+  @apply text-custom-highlight hover:text-custom-gray-light;
+}
 @font-face {
   font-family: 'Dancing Script';
   src: url('./assets/fonts/dancing-script-all-600-normal.woff');

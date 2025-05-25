@@ -2,10 +2,12 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <div className='md:container md:mx-auto pt-5' id='blogs'>
-      <p className='text-indigo-100 text-sm decoration-4 p-4 text-indigo-100 text-center'>
-        © Srinivasan Sekar
+    // Removed id='blogs' as it's not relevant for footer.
+    // Ensured full width and theme colors.
+    <footer className='bg-custom-black w-full py-8 border-t border-custom-gray-dark'>
+      <p className='text-custom-gray-medium text-sm text-center'>
+        © Srinivasan Sekar. All Rights Reserved.
       </p>
-    </div>
+    </footer>
   )
 }
