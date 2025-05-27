@@ -6,7 +6,7 @@ export default function Footer() {
     // Ensured full width and theme colors.
     <footer className='bg-custom-black w-full py-8 border-t border-custom-gray-dark'>
       <p className='text-custom-gray-medium text-sm text-center'>
-        © Srinivasan Sekar. All Rights Reserved.
+        © Sai Krishna. All Rights Reserved.
       </p>
     </footer>
   )

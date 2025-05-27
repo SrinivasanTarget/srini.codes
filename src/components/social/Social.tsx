@@ -2,11 +2,11 @@ export default function Social() {
   return (
     <div className='flex justify-start pt-3'>
       <a
-        href='https://github.com/SrinivasanTarget'
+        href='https://github.com/saikrishna321'
         className='pr-2'
         target='_blank'
         rel='noreferrer'
-        aria-label="Srinivasan's Github"
+        aria-label="Sai Krishna's Github"
       >
         <svg
           className='h-8 w-8'
@@ -22,11 +22,11 @@ export default function Social() {
         </svg>
       </a>
       <a
-        href='https://twitter.com/srinivasanskr'
+        href='https://mobile.twitter.com/saikrisv'
         className='pr-2'
         target='_blank'
         rel='noreferrer'
-        aria-label="Srinivasan's Twitter"
+        aria-label="Sai Krishna's Twitter"
       >
         <svg
           className='h-8 w-8'
@@ -45,11 +45,11 @@ export default function Social() {
         </svg>
       </a>
       <a
-        href='mailto:srinivasan.sekar1990@gmail.com'
+        href='mailto:saikrishna321@yahoo.com'
         className='pr-2'
         target='_blank'
         rel='noreferrer'
-        aria-label="Srinivasan's Email"
+        aria-label="Sai Krishna's Email"
       >
         <svg
           className='h-8 w-8'
@@ -68,11 +68,11 @@ export default function Social() {
         </svg>
       </a>
       <a
-        href='https://www.linkedin.com/in/srinivasan-sekar/'
+        href='https://www.linkedin.com/in/sai-krishna-3755407b/'
         className='pr-5'
         target='_blank'
         rel='noreferrer'
-        aria-label="Srinivasan's LinkedIn"
+        aria-label="Sai Krishna's LinkedIn"
       >
         <svg
           className='h-8 w-8'

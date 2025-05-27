@@ -1,213 +1,90 @@
 const conferences = [
-  {
-    title: 'Testμ 2023',
-    description: 'Elevate your testing game: Building Appium 2.0 plugin Live',
-    imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
-    url: 'https://www.youtube.com/embed/b6yWXfLpazc?enablejsapi=1&autoplay=1',
-    reverse: false,
-    tags: ['Mobile', 'Appium', 'Testing'],
-  },
-  {
-    title: 'XConf Singapore 2023',
-    description: 'Path to a more equitable testing process: Addressing unconscious bias and ethics',
-    imageURL:
-      'https://www.thoughtworks.com/etc.clientlibs/thoughtworks/clientlibs/clientlib-site/resources/images/thoughtworks-logo.svg',
-    url: 'https://youtu.be/QMr30Za_-vM?si=qFe-S4E9g3qjdT-g',
-    reverse: true,
-    tags: ['GenAI', 'Bias', 'Testing'],
-  },
-  {
-    title: 'SeleniumConf 2023',
-    description: 'Clean Code Practices for Test Automation: Part 2',
-    imageURL: 'https://seleniumconf.com/wp-content/uploads/2022/11/SeleniumConf-logo-white.svg',
-    url: 'https://seleniumconf.com/#advanced-appium-20',
-    reverse: false,
-    tags: ['Appium', 'Mobile', 'Testing'],
-  },
-  {
-    title: 'Lambdatest Webinar 2023',
-    description: 'Clean Code Practices for Test Automation: Part 2',
-    imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
-    url: 'https://www.lambdatest.com/webinar/clean-coding-practices-for-test-automation/',
-    reverse: true,
-    tags: ['Clean Code', 'Automation', 'Testing'],
-  },
-  {
-    title: 'VodQA Singapore 2023',
-    description: "Navigating mobile app testing challenges in today's tech landscape",
-    imageURL:
-      'https://www.thoughtworks.com/etc.clientlibs/thoughtworks/clientlibs/clientlib-site/resources/images/thoughtworks-logo.svg',
-    url: 'https://www.meetup.com/tech-talks-thoughtworks-singapore/events/292842778/',
-    reverse: false,
-    tags: ['Mobile', 'Challenges', 'Testing'],
-  },
-  {
-    title: 'AgileIndia 2022',
-    description: 'Speed Matters: Client Side Performance Improvement Tips & Tricks',
-    imageURL:
-      'https://2021.agileindia.org/wp-content/uploads/2021/06/agileindia2021-online-white-vector.png?x46041',
-    url: 'https://confengine.com/conferences/agile-india-2022/proposal/17003/speed-matters-client-side-performance-improvement-tips-amp-tricks',
-    reverse: true,
-    tags: ['UI', 'Performance', 'Testing'],
-  },
-  {
-    title: 'Lambdatest Webinar 2022',
-    description: 'Clean Coding Practices for Test Automation',
-    imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
-    url: 'https://www.lambdatest.com/webinar/clean-coding-practices-for-test-automation/',
-    reverse: false,
-    tags: ['Clean Code', 'Automation', 'Testing'],
-  },
-  {
-    title: 'VodQA Bangalore 2022',
-    description: 'Workshop - Build Appium 2.0 plugins',
-    imageURL: 'https://github.com/twqablore/vodqa/blob/gh-pages/src/assets/images/logo.png',
-    url: 'https://twqablore.github.io/vodqa/',
-    reverse: true,
-    tags: ['Mobile', 'Appium', 'Testing'],
-  },
-  {
-    title: 'Testμ 2022',
-    description: "Appium: Endgame & What's Next?",
-    imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
-    url: 'https://www.lambdatest.com/testuconf-2022/',
-    reverse: false,
-    tags: ['Mobile', 'Appium', 'Testing'],
-  },
-  {
-    title: 'SeleniumConf 2022',
-    description: 'Build your own Appium 2.0 Driver',
-    imageURL: 'https://seleniumconf.in/img/logo.svg',
-    url: 'https://confengine.com/conferences/selenium-conf-2022/',
-    reverse: true,
-    tags: ['Mobile', 'Appium', 'Testing'],
-  },
-  {
-    title: 'Automation GuildConf 2022',
-    description: 'Benefits and Best Practices: Testing Containers & k8s Manifests',
-    imageURL:
-      'https://2021.agileindia.org/wp-content/uploads/2021/06/agileindia2021-online-white-vector.png?x46041',
-    url: 'https://guildconferences.com/automation-guild-2022/',
-    reverse: false,
-    tags: ['Containers', 'Kubernetes', 'Testing'],
-  },
-  {
-    title: 'AgileIndia 2021',
-    description: 'Testing Service Mesh configs and k8s manifests',
-    imageURL:
-      'https://2021.agileindia.org/wp-content/uploads/2021/06/agileindia2021-online-white-vector.png?x46041',
-    url: 'https://confengine.com/conferences/agile-india-2021/proposal/15724/testing-service-mesh-configs-and-k8s-manifests',
-    reverse: true,
-    tags: ['Agile', 'DevOps', 'Kubernetes', 'Testing'],
-  },
-  {
+  // === Kept & Updated from existing conferences.ts ===
+  { // AppiumConf 2021 (Existing Item 13)
     title: 'AppiumConf 2021',
-    description: 'Build your own Appium plugin',
+    description: 'Build your own Appium plugin', // Kept existing description
     imageURL:
       'https://res.cloudinary.com/dnnqsdghx/image/upload/w_600,f_auto,q_auto:best/v1547088258/ConfLogos/szrzudmzoqf4yld9z7zo.png',
     url: 'https://confengine.com/conferences/appium-conf-2021/proposal/15821/build-your-own-appium-plugin',
     reverse: false,
-    tags: ['Appium', 'Mobile', 'Testing', 'Plugins'],
+    tags: ['Appium', 'Mobile', 'Testing', 'Plugins'], // Kept existing richer tags
   },
-  {
-    title: 'AnitaB.org 2021',
-    description: 'Why I Contribute to Open Source?',
-    imageURL:
-      'https://4b7xbg26zfmr1aupi724hrym-wpengine.netdna-ssl.com/wp-content/uploads/2020/07/logo@2x.png',
-    url: 'https://confengine.com/conferences/appium-conf-2021/proposal/15821/build-your-own-appium-plugin',
-    reverse: true,
-    tags: ['Open Source'],
+  { // Future of Testing: Mobile (Existing Item 16)
+    title: 'Future of Testing: Mobile', // Kept existing title
+    description: 'Appium 2.0: What’s Next', // Kept existing description
+    imageURL: '', // Kept existing
+    url: 'https://applitools.com/future-of-testing-mobile-apac-2021/', // Kept existing
+    reverse: true, // Kept existing
+    tags: ['Mobile Testing', 'Appium', 'Future Tech'], // Updated tags
   },
-  {
-    title: 'TestBusters Day&Night 2021',
-    description: 'Consumer-Driven Contracts on Event-Driven Apps',
-    imageURL: '',
-    url: '',
-    reverse: false,
-    tags: ['Testing', 'Event-Driven', 'Consumer-Driven'],
-  },
-  {
-    title: 'Future of Testing: Mobile',
-    description: 'Appium 2.0: What’s Next',
-    imageURL: '',
-    url: 'https://applitools.com/future-of-testing-mobile-apac-2021/',
-    reverse: true,
-    tags: ['Mobile', 'Testing', 'Appium'],
-  },
-  {
-    title: 'TestBusters Day&Night 2021',
-    description: 'Consumer-Driven Contracts on Event-Driven Apps',
-    imageURL: '',
-    url: '',
-    reverse: false,
-    tags: ['Testing', 'Event-Driven', 'Consumer-Driven'],
-  },
-  {
+  { // TestProject Webinar (Existing Item 17)
     title: 'TestProject Webinar',
-    description: 'Consumer Driven Contracts',
-    imageURL: '',
-    url: '',
-    reverse: true,
-    tags: ['Testing', 'Consumer-Driven'],
+    description: 'Consumer Driver Contract', // Updated description from website text
+    imageURL: '', // Kept existing
+    url: '', // Kept existing
+    reverse: true, // Kept existing
+    tags: ['Webinar', 'TestProject', 'Contract Testing'], // Updated tags
   },
-  {
-    title: 'Perfecto Webinar',
-    description: "What's next in Appium?",
-    imageURL: '',
-    url: '',
-    reverse: false,
-    tags: ['Mobile', 'Testing', 'Appium'],
+  { // Perfecto Webinar (Existing Item 18)
+    title: "Perfecto Webinar", // Kept existing title (with apostrophe)
+    description: "What's next in Appium?", // Kept existing description (with apostrophe)
+    imageURL: '', // Kept existing
+    url: '', // Kept existing
+    reverse: false, // Kept existing
+    tags: ['Webinar', 'Perfecto', 'Appium'], // Updated tags
   },
-  {
-    title: 'TestLeaf Webinar',
-    description: 'Ask me anything',
-    imageURL: '',
-    url: '',
-    reverse: true,
-    tags: ['Testing', 'Appium'],
-  },
-  {
+  { // AppiumConf 2019 (Life Cycle) (Existing Item 20)
     title: 'AppiumConf 2019',
-    description: 'Life Cycle of an Appium command',
+    description: 'Life Cycle of an Appium command', // Kept existing
     imageURL:
       'https://res.cloudinary.com/dnnqsdghx/image/upload/w_600,f_auto,q_auto:best/v1547088258/ConfLogos/szrzudmzoqf4yld9z7zo.png',
     url: 'https://confengine.com/conferences/appium-conf-2019/proposal/8935/life-cycle-of-an-appium-command',
     reverse: false,
-    tags: ['Mobile', 'Testing', 'Appium'],
+    tags: ['Mobile', 'Testing', 'Appium'], // Kept existing richer tags
   },
-  {
+  { // AppiumConf 2019 (Native Mobile) (Existing Item 21)
     title: 'AppiumConf 2019',
-    description: 'Native mobile commands in Appium',
+    description: 'Native mobile commands in Appium', // Kept existing
     imageURL:
       'https://res.cloudinary.com/dnnqsdghx/image/upload/w_600,f_auto,q_auto:best/v1547088258/ConfLogos/szrzudmzoqf4yld9z7zo.png',
     url: 'https://confengine.com/conferences/appium-conf-2019/proposal/8946/native-mobile-commands-in-appium',
     reverse: true,
-    tags: ['Mobile', 'Testing', 'Appium'],
+    tags: ['Appium', 'Conference', 'Mobile Testing', 'Native Commands'], // Updated tags
   },
-  {
+  { // SeleniumConf 2018 (Existing Item 22)
     title: 'SeleniumConf 2018',
-    description: 'Code Once Test Anywhere: On Demand Private Appium Device Cloud using ATD',
+    description: 'Code Once Test Anywhere: On Demand Private Appium Device Cloud using ATD', // Kept existing
     imageURL: 'https://seleniumconf.in/img/logo.svg',
     url: 'https://confengine.com/conferences/selenium-conf-2018/proposal/6171/code-once-test-anywhere-on-demand-private-appium-device-cloud-using-atd',
     reverse: false,
-    tags: ['Mobile', 'Testing', 'Appium'],
+    tags: ['Selenium', 'Conference', 'Test Automation', 'ATD', 'Appium'], // Updated tags
   },
-  {
-    title: 'SeleniumConf London 2018',
-    description: 'Next level of Front end testing with Devtools and WebDriver',
-    imageURL: 'https://seleniumconf.co.uk/perch/resources/selenium-london-logo-2019-w800.png',
-    url: 'https://seleniumconf.co.uk/talks#fathima-srinivasan',
-    reverse: true,
-    tags: ['Mobile', 'Testing', 'Appium'],
-  },
-  {
-    title: 'SeleniumConf Austin 2017',
-    description: 'Test Inside Containers: Dockerize Appium Tests',
-    imageURL: '',
-    url: 'https://youtu.be/jGW6ycW_tTQ',
-    reverse: false,
-    tags: ['Mobile', 'Testing', 'Appium'],
-  },
-]
 
-export { conferences }
+  // === New Entries from Website Text ===
+  {
+    title: "Global Testing Summit 2022",
+    description: "Appium 2.0",
+    imageURL: "https://via.placeholder.com/300x200.png?text=Global+Testing+Summit",
+    url: "https://www.saikrishna.tech/#conferences",
+    reverse: false,
+    tags: ["Testing", "Appium", "Summit"],
+  },
+  {
+    title: "TestAutomationDays Utrecht",
+    description: "Parallel Mobile Test",
+    imageURL: "https://via.placeholder.com/300x200.png?text=TestAutomationDays",
+    url: "https://www.saikrishna.tech/#conferences",
+    reverse: false,
+    tags: ["Test Automation", "Mobile Testing", "Parallel Testing"],
+  },
+  { // This replaces the previous SeleniumConf London 2018 entry
+    title: "SeleniumConf London 2018",
+    description: "Advance Appium Workshop",
+    imageURL: "https://via.placeholder.com/300x200.png?text=SeleniumConf+London+Workshop",
+    url: "https://www.saikrishna.tech/#conferences",
+    reverse: false,
+    tags: ["Selenium", "Conference", "Appium", "Workshop"],
+  },
+];
+
+export { conferences };

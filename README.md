@@ -1,6 +1,6 @@
 <p align="center">
-    <img alt="React" src="https://raw.githubusercontent.com/SrinivasanTarget/srini.codes/main/public/favicon.ico" width="60" />
-    <img src="https://avatars.githubusercontent.com/u/67109815?s=200&v=4" width="60"/>
+    <img alt="React" src="https://raw.githubusercontent.com/saikrishna321/saikrishna.tech/main/public/favicon.png" width="60" />
+    <img src="https://avatars.githubusercontent.com/saikrishna321" width="60"/>
 </p>
 
 <h3 align="center">

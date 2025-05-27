@@ -14,13 +14,13 @@ export default function Home() {
         <div className="container mx-auto">
           <img 
             src={heroImage} 
-            alt="Srinivasan Sekar" 
+            alt="Sai Krishna" 
             className="w-48 h-48 rounded-full mx-auto mb-8 border-4 border-custom-highlight" 
           />
-          <h1 className="text-5xl font-bold font-sign mb-4">Srinivasan Sekar</h1>
+          <h1 className="text-5xl font-bold font-sign mb-4">Sai Krishna</h1>
           <p className="text-2xl font-inter mb-6">Director of Engineering at LambdaTest</p>
           <div className="text-lg font-lora">
-            <p>Open Source Maintainer (Appium) | Conference Speaker | Blogger</p>
+            <p>Conference Speaker | Mentor | Blogger | Open Source Contributor | Community Organiser</p>
           </div>
         </div>
       </section>

@@ -23,7 +23,7 @@ export default function Greeting({
         {" I'm "}
         <span className='relative inline-block'>
           <span className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent'>
-            Srini
+            Sai Krishna
           </span>
         </span>
       </h1>

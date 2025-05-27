@@ -10,22 +10,22 @@ export default function AboutMe() {
           {/* Changed text color, adjusted column span for better balance with ProfileCard */}
           <div className='col-span-1 md:col-span-2 text-custom-gray-light pr-3'> 
             <div>
-              <h2 className='text-3xl md:text-4xl font-sign text-custom-highlight'>Srinivasan Sekar</h2>
+              <h2 className='text-3xl md:text-4xl font-sign text-custom-highlight'>Sai Krishna</h2>
               {/* Kept gradient for roles as it's a distinct visual feature. Ensure it's readable. */}
               <p className='max-w-md text-xl mt-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
-                Thoughtworker
-              </p>
-              <p className='max-w-md text-xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
-                Open Source Contributor
-              </p>
-              <p className='max-w-md text-xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
                 Conference Speaker
+              </p>
+              <p className='max-w-md text-xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
+                Mentor
               </p>
               <p className='max-w-md text-xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
                 Blogger
               </p>
               <p className='max-w-md text-xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
-                Mentor
+                Open Source Contributor
+              </p>
+              <p className='max-w-md text-xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
+                Community Organiser
               </p>
             </div>
           </div>
