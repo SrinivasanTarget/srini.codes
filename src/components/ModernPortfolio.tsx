@@ -41,7 +41,7 @@ const ModernPortfolio = () => {
       icon: '🎤',
       title: 'International Speaker',
       description:
-        '25+ conference talks across SeleniumConf, AppiumConf, QuestForQuality, SLASSCOM, Belgrade Test Conference, AutomationGuild, FOSDEM, TestμConf, Nordic Testing Days, Agile India',
+        '25+ conference talks across SeleniumConf, AppiumConf, QuestForQuality, Belgrade Test Conference, AutomationGuild, TestμConf, Nordic Testing Days, Agile India',
       highlight: '25+ Global Talks',
     },
     {
@@ -434,14 +434,9 @@ console.log('Test completed successfully!');`}</pre>
             </p>
             <p className='text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
               As an <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>international speaker</span>, I&apos;ve presented at <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>25+ conferences</span> including
-              SeleniumConf, AppiumConf, QuestForQuality, SLASSCOM, Belgrade Test Conference,
-              AutomationGuild, FOSDEM, TestμConf, Nordic Testing Days, and Agile India, sharing
+              SeleniumConf, AppiumConf, QuestForQuality, Belgrade Test Conference,
+              AutomationGuild, TestμConf, Nordic Testing Days, and Agile India, sharing
               insights on mobile automation, clean code practices, and the future of testing.
-            </p>
-            <p className='text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
-              I&apos;m passionate about <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>ethical testing practices</span>, reducing unconscious bias in
-              testing processes, and <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>mentoring the next generation of engineers</span>. My work spans
-              from <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>container-based testing</span> to <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>Kubernetes manifest validation</span>.
             </p>
           </div>
         </div>
