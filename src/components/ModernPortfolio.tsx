@@ -6,6 +6,28 @@ import heroImage from '../assets/images/profile_sai.webp'
 import lambdaTestLogo from '../assets/images/LambdaTest-logo1.png'
 import backgroundImage from '../assets/images/background1.png'
 
+// Import project images
+import appiumImg from '../assets/images/appium.webp'
+import seleniumImg from '../assets/images/selenium.webp'
+import webdriverioImg from '../assets/images/webdriverio.webp'
+import ATDImg from '../assets/images/ATD.webp'
+import DeviceFarmImg from '../assets/images/DeviceFarm-Logo.jpg'
+import AppiumWaitImg from '../assets/images/AppiumWait2.webp'
+import GesturesPluginImg from '../assets/images/GesturesPlugin.jpg'
+import taikoImg from '../assets/images/taiko.png'
+
+// Create mapping for project images
+const projectImageMap: Record<string, string> = {
+  'appium.webp': appiumImg,
+  'selenium.webp': seleniumImg,
+  'webdriverio.webp': webdriverioImg,
+  'ATD.webp': ATDImg,
+  'DeviceFarm-Logo.jpg': DeviceFarmImg,
+  'AppiumWait2.webp': AppiumWaitImg,
+  'GesturesPlugin.jpg': GesturesPluginImg,
+  'taiko.png': taikoImg,
+}
+
 const ModernPortfolio = () => {
   const [activeSection, setActiveSection] = useState('hero')
   const [isScrolled, setIsScrolled] = useState(false)
@@ -486,7 +508,7 @@ console.log('Test completed successfully!');`}</pre>
                   title={project.title}
                 >
                   <img
-                    src={project.imgSource.startsWith('http') ? project.imgSource : `/src/assets/images/${project.imgSource}`}
+                    src={project.imgSource.startsWith('http') ? project.imgSource : projectImageMap[project.imgSource] || ''}
                     alt={project.title}
                     className='w-24 h-24 object-cover rounded-full hover:shadow-lg'
                   />

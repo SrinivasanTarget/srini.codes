@@ -1,6 +1,29 @@
 import React from 'react'
 import { useState } from 'react'
-import { projectImages, type ProjectImageKey } from '../../assets/images'
+
+// Direct imports to ensure Vite bundles them
+import appiumImg from '../../assets/images/appium.webp'
+import seleniumImg from '../../assets/images/selenium.webp'
+import webdriverioImg from '../../assets/images/webdriverio.webp'
+import ATDImg from '../../assets/images/ATD.webp'
+import DeviceFarmImg from '../../assets/images/DeviceFarm-Logo.jpg'
+import AppiumWaitImg from '../../assets/images/AppiumWait2.webp'
+import GesturesPluginImg from '../../assets/images/GesturesPlugin.jpg'
+import taikoImg from '../../assets/images/taiko.png'
+
+// Create mapping
+const projectImages = {
+  'appium.webp': appiumImg,
+  'selenium.webp': seleniumImg,
+  'webdriverio.webp': webdriverioImg,
+  'ATD.webp': ATDImg,
+  'DeviceFarm-Logo.jpg': DeviceFarmImg,
+  'AppiumWait2.webp': AppiumWaitImg,
+  'GesturesPlugin.jpg': GesturesPluginImg,
+  'taiko.png': taikoImg,
+}
+
+type ProjectImageKey = keyof typeof projectImages
 
 type project = {
   source: string

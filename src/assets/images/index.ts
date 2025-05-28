@@ -1,12 +1,12 @@
-// Import all project logo images
-import appium from './appium.webp'
-import selenium from './selenium.webp'
-import webdriverio from './webdriverio.webp'
-import ATD from './ATD.webp'
-import DeviceFarmLogo from './DeviceFarm-Logo.jpg'
-import AppiumWait2 from './AppiumWait2.webp'
-import GesturesPlugin from './GesturesPlugin.jpg'
-import taiko from './taiko.png'
+// Import all project logo images with explicit URL imports
+import appium from './appium.webp?url'
+import selenium from './selenium.webp?url'
+import webdriverio from './webdriverio.webp?url'
+import ATD from './ATD.webp?url'
+import DeviceFarmLogo from './DeviceFarm-Logo.jpg?url'
+import AppiumWait2 from './AppiumWait2.webp?url'
+import GesturesPlugin from './GesturesPlugin.jpg?url'
+import taiko from './taiko.png?url'
 
 // Create a mapping object for easy access
 export const projectImages = {
