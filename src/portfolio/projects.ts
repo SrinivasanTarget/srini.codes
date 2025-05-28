@@ -1,4 +1,11 @@
-const projects = [
+import { type ProjectImageKey } from '../assets/images'
+
+const projects: Array<{
+  title: string
+  description: string
+  source: string
+  imgSource: ProjectImageKey
+}> = [
   // Kept and potentially updated items
   {
     // Appium (no change from analysis)

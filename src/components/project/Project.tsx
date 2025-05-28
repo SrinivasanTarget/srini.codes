@@ -1,9 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
+import { projectImages, type ProjectImageKey } from '../../assets/images'
 
 type project = {
   source: string
-  imgSource: string
+  imgSource: ProjectImageKey
   description: string
   title: string
 }
@@ -52,7 +53,7 @@ export default function Project({ project }: { project: project }) {
               decoding='async'
               loading='lazy' // Added lazy loading
               className='rounded-full h-20 w-20 md:h-24 md:w-24 p-1 mx-auto border-2 border-custom-gray-dark' // Adjusted size and added border
-              src={new URL(`../../assets/images/${project.imgSource}`, import.meta.url).href}
+              src={projectImages[project.imgSource]}
               alt={`${project.title} logo`} // Improved alt text
             />
             <div className='mt-2 text-center leading-tight text-lg text-custom-highlight font-semibold'>
