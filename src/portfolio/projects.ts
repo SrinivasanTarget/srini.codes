@@ -67,7 +67,14 @@ const projects: Array<{
     source: 'https://github.com/getgauge/taiko',
     imgSource: 'taiko.png',
   },
-  // MCP WebDriverAgent Server - REMOVED
+  // Added MCP WebDriverAgent
+  {
+    title: 'MCP WebDriverAgent',
+    description:
+      'Model Context Protocol server for WebDriverAgent enabling AI integration with mobile automation',
+    source: 'https://github.com/AppiumTestDistribution/mcp-webdriveragent',
+    imgSource: 'mcp-wdalogo.png',
+  },
   // MCP Appium Gestures Server - REMOVED
   // Angular Testing Library - REMOVED
 ]

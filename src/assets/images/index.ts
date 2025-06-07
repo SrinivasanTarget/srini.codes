@@ -7,6 +7,7 @@ import DeviceFarmLogo from './DeviceFarm-Logo.jpg?url'
 import AppiumWait2 from './AppiumWait2.webp?url'
 import GesturesPlugin from './GesturesPlugin.jpg?url'
 import taiko from './taiko.png?url'
+import mcpWdaLogo from './mcp-wdalogo.png?url'
 
 // Create a mapping object for easy access
 export const projectImages = {
@@ -18,6 +19,7 @@ export const projectImages = {
   'AppiumWait2.webp': AppiumWait2,
   'GesturesPlugin.jpg': GesturesPlugin,
   'taiko.png': taiko,
+  'mcp-wdalogo.png': mcpWdaLogo,
 }
 
 // Type for the image keys
