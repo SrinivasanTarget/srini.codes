@@ -32,6 +32,7 @@ const ModernPortfolio = () => {
   const [activeSection, setActiveSection] = useState('hero')
   const [isScrolled, setIsScrolled] = useState(false)
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const roles = ['Blogger', 'Open source contributor', 'Mentor', 'Conference Speaker', 'Community Organizer']
 
@@ -143,7 +144,12 @@ const ModernPortfolio = () => {
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
+      setIsMobileMenuOpen(false) // Close mobile menu after navigation
     }
+  }
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
   return (
@@ -155,7 +161,8 @@ const ModernPortfolio = () => {
         }`}
       >
         <div className='max-w-7xl mx-auto px-6 py-4'>
-          <div className='flex justify-center items-center'>
+          {/* Desktop Navigation */}
+          <div className='hidden md:flex justify-center items-center'>
             <div className='flex space-x-12'>
               {[
                 { label: 'Home', section: 'hero' },
@@ -175,6 +182,64 @@ const ModernPortfolio = () => {
               ))}
             </div>
           </div>
+
+          {/* Mobile Navigation */}
+          <div className='md:hidden flex justify-between items-center'>
+            <div className='text-white font-bold text-xl'>SK</div>
+            <button
+              onClick={toggleMobileMenu}
+              className='text-white p-2 rounded-md hover:bg-gray-800 transition-colors duration-200'
+              aria-label='Toggle mobile menu'
+            >
+              <svg
+                className='w-6 h-6'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                {isMobileMenuOpen ? (
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M6 18L18 6M6 6l12 12'
+                  />
+                ) : (
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M4 6h16M4 12h16M4 18h16'
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
+
+          {/* Mobile Menu Dropdown */}
+          {isMobileMenuOpen && (
+            <div className='md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-md border-b border-gray-800'>
+              <div className='px-6 py-4 space-y-4'>
+                {[
+                  { label: 'Home', section: 'hero' },
+                  { label: 'Skills', section: 'about' },
+                  { label: 'Open Source', section: 'projects' },
+                  { label: 'Conferences', section: 'talks' },
+                  { label: 'Workshops', section: 'achievements' },
+                  { label: 'Blogs', section: 'blogs' }
+                ].map((item) => (
+                  <button
+                    key={item.label}
+                    onClick={() => scrollToSection(item.section)}
+                    className='block w-full text-left py-2 px-4 text-white hover:text-blue-400 hover:bg-gray-800/50 rounded-md transition-all duration-200 font-medium'
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -255,18 +320,6 @@ console.log('Test completed successfully!');`}</pre>
           </div>
         </div>
 
-        {/* Large Hello Background Text */}
-        <div className='absolute inset-0 flex items-center justify-center pointer-events-none z-5'>
-          <h1 
-            className='text-[300px] lg:text-[400px] xl:text-[500px] font-bold leading-none bg-gradient-to-b from-purple-400/10 to-purple-800/10 bg-clip-text text-transparent select-none animate-fadeIn'
-            style={{
-              animationDelay: '350ms',
-              animationFillMode: 'both'
-            }}
-          >
-            Hello
-          </h1>
-        </div>
 
         {/* Social Media Icons - Right Side */}
         <div className='fixed right-8 top-1/2 transform -translate-y-1/2 z-50 flex flex-col space-y-4'>
@@ -314,98 +367,84 @@ console.log('Test completed successfully!');`}</pre>
           </a>
         </div>
 
-        <div className='relative z-10 flex items-center justify-center w-full max-w-7xl mx-auto px-6'>
-          <div className='grid lg:grid-cols-2 gap-12 items-center w-full'>
-            {/* Left side - Content */}
-            <div className='text-left lg:text-left order-2 lg:order-1'>
-              <div className='mb-3'>
-                <span 
-                  style={{
-                    color: '#d1d2e4',
-                    fontFamily: '"Fira Sans", Sans-serif',
-                    fontSize: '32px',
-                    fontWeight: 400,
-                    lineHeight: '1.3',
-                    letterSpacing: '0px',
-                    wordSpacing: '0px'
-                  }}
-                >
-                  I'm
+        <div className='relative z-10 w-full max-w-7xl mx-auto px-6 py-12'>
+          <div className='flex flex-col lg:flex-row items-center justify-between min-h-[80vh] gap-6 lg:gap-8'>
+            {/* Left side - Profile Image */}
+            <div className='flex-1 flex justify-center lg:justify-start order-1 lg:order-1 max-w-lg'>
+              <div className='relative'>
+                {/* Decorative elements */}
+                <div className='absolute -top-4 -left-4 w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl'></div>
+                <div className='absolute -bottom-4 -right-4 w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 bg-gradient-to-tl from-purple-500/20 to-pink-500/20 rounded-full blur-3xl'></div>
+                
+                {/* Main profile image */}
+                <div className='relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl'>
+                  <img
+                    src={heroImage}
+                    alt='Sai Krishna'
+                    className='w-full h-full object-cover transform hover:scale-110 transition-transform duration-700'
+                    style={{
+                      objectPosition: '50% 30%',
+                    }}
+                  />
+                </div>
+
+              </div>
+            </div>
+
+            {/* Right side - Content */}
+            <div className='flex-1 text-center lg:text-left order-2 lg:order-2 max-w-2xl'>
+              {/* Greeting */}
+              <div className='mb-6'>
+                <span className='text-2xl md:text-3xl lg:text-4xl text-gray-300 font-light tracking-wide'>
+                  Hello, I'm
                 </span>
               </div>
 
-              <h2 
-                className='mb-4'
-                style={{
-                  fontFamily: '"Fira Sans", Sans-serif',
-                  fontSize: '72px',
-                  fontWeight: 600,
-                  lineHeight: '1.0',
-                  letterSpacing: '-1px',
-                  wordSpacing: '0px',
-                  color: '#f9f6ee'
-                }}
-              >
+              {/* Name */}
+              <h1 className='text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent leading-tight'>
                 Sai Krishna
-              </h2>
+              </h1>
 
-              <div className='mb-5'>
-                <p 
-                  className='mb-4'
-                  style={{
-                    color: '#d1d2e4',
-                    fontFamily: '"Fira Sans", Sans-serif',
-                    fontSize: '32px',
-                    fontWeight: 400,
-                    lineHeight: '1.3',
-                    letterSpacing: '0px',
-                    wordSpacing: '0px'
-                  }}
-                >
-                  Director of Engineering at
-                </p>
-                <div className='flex items-center'>
+              {/* Title */}
+              <div className='mb-8'>
+                <h2 className='text-xl md:text-2xl lg:text-3xl text-blue-400 font-semibold mb-4'>
+                  Director of Engineering
+                </h2>
+                <div className='flex justify-center lg:justify-start items-center mb-6'>
+                  <span className='text-lg md:text-xl text-gray-300 mr-3'>at</span>
                   <img 
                     src={lambdaTestLogo} 
                     alt='LambdaTest Logo' 
-                    className='w-40 h-auto'
+                    className='w-32 md:w-40 h-auto'
                   />
                 </div>
               </div>
 
+              {/* Dynamic Role */}
               <div className='mb-8'>
-                <p 
-                  style={{
-                    color: '#d1d2e4',
-                    fontFamily: '"Fira Sans", Sans-serif',
-                    fontSize: '22px',
-                    fontWeight: 400,
-                    lineHeight: '1.4',
-                    letterSpacing: '0px',
-                    wordSpacing: '0px'
-                  }}
-                >
-                  also a{' '}
-                  <span className='text-purple-400 font-medium transition-all duration-500 ease-in-out'>
+                <p className='text-lg md:text-xl lg:text-2xl text-gray-300'>
+                  Also a{' '}
+                  <span className='text-purple-400 font-semibold transition-all duration-500 ease-in-out bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent'>
                     {roles[currentRoleIndex]}
                   </span>
-                  <span className='text-purple-400 animate-pulse'>|</span>
+                  <span className='text-purple-400 animate-pulse ml-1'>|</span>
                 </p>
               </div>
-            </div>
 
-            {/* Right side - Profile Image */}
-            <div className='relative flex justify-center lg:justify-start order-1 lg:order-2'>
-              {/* Main profile image - Circular */}
-              <div className='relative w-[450px] h-[450px] lg:w-[600px] lg:h-[600px] rounded-full overflow-hidden'>
-                <img
-                  src={heroImage}
-                  alt='Sai Krishna'
-                  className='w-full h-full object-cover'
-                  style={{
-                    objectPosition: '50% 30%',
-                  }}
-                />
+              {/* CTA Buttons */}
+              <div className='flex flex-col sm:flex-row gap-4 justify-center lg:justify-start'>
+                <button 
+                  onClick={() => scrollToSection('about')}
+                  className='px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl'
+                >
+                  Learn More
+                </button>
+                <button 
+                  onClick={() => scrollToSection('projects')}
+                  className='px-8 py-3 border-2 border-blue-400 text-blue-400 font-semibold rounded-full hover:bg-blue-400 hover:text-black transition-all duration-300 transform hover:scale-105'
+                >
+                  View Projects
+                </button>
               </div>
             </div>
           </div>
