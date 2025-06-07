@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { projects } from '../portfolio/projects'
 import { conferences } from '../portfolio/conferences'
 import { blogs } from '../portfolio/blogs'
-import heroImage from '../assets/images/profile_sai.webp'
+import heroImage from '../assets/images/ProfilePic.webp'
 import lambdaTestLogo from '../assets/images/LambdaTest-logo1.png'
 import backgroundImage from '../assets/images/background1.png'
 
