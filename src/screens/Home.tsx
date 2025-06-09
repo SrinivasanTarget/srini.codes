@@ -5,6 +5,7 @@ import Conferences from '../containers/conferences/conferences'
 import Workshops from '../containers/workshops/Workshops'
 import AboutMe from '../containers/aboutme/AboutMe' // Added import
 import heroImage from '../assets/images/SrinivasanSekar.webp' // Added import
+import WorldMap from '../components/WorldMap'; // Import the WorldMap component
 
 export default function Home() {
   return (
@@ -48,6 +49,14 @@ export default function Home() {
       {/* Workshops Section */}
       <section id="workshops" className="py-16 bg-custom-black">
         <Workshops />
+      </section>
+
+      {/* World Map Section */}
+      <section id="worldmap" className="py-16 bg-custom-black text-center">
+        <h2 className="text-3xl font-bold text-custom-gray-light mb-8">My Global Presence</h2>
+        <div className="container mx-auto px-4">
+          <WorldMap />
+        </div>
       </section>
 
       {/* Contact Section (Placeholder) */}
