@@ -8,7 +8,7 @@ import heroImage from '../assets/images/SrinivasanSekar.webp' // Added import
 
 export default function Home() {
   return (
-    <main className="pt-16"> {/* Added padding-top to account for sticky header */}
+    <main className="pt-36 md:pt-24 lg:pt-20"> {/* Added padding-top to account for sticky header */}
       {/* Hero Section */}
       <section id="top" className="py-20 text-center bg-custom-black text-custom-gray-light">
         <div className="container mx-auto">
