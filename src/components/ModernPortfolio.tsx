@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { projects } from '../portfolio/projects'
 import { conferences } from '../portfolio/conferences'
 import { blogs } from '../portfolio/blogs'
-import heroImage from '../assets/images/profile.webp'
+import heroImage from '../assets/images/ProfilePic.png'
 
 const ModernPortfolio = () => {
   const [activeSection, setActiveSection] = useState('hero')
@@ -227,20 +227,22 @@ export class DeviceFarmPlugin {
                 ⚡
               </div>
 
-              {/* Main profile image */}
-              <div className='relative w-80 h-96 rounded-2xl overflow-hidden shadow-2xl'>
+              {/* Main profile image - Circular */}
+              <div className='relative w-80 h-80 rounded-full overflow-hidden shadow-2xl'>
                 <img
                   src={heroImage}
                   alt='Srinivasan Sekar'
-                  className='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+                  className='w-full h-full object-cover hover:scale-110 transition-transform duration-500'
                   style={{
                     objectPosition: '50% 30%',
-                    transform: 'scale(1.1)',
                   }}
                 />
 
-                {/* Simple gradient overlay */}
-                <div className='absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent'></div>
+                {/* Subtle circular gradient overlay */}
+                <div className='absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent'></div>
+                
+                {/* Glowing ring effect */}
+                <div className='absolute -inset-1 bg-gradient-to-r from-blue-500/50 via-purple-500/50 to-blue-500/50 rounded-full blur-sm -z-10'></div>
               </div>
             </div>
 
@@ -334,27 +336,71 @@ export class DeviceFarmPlugin {
           <div className='max-w-4xl mx-auto'>
             <p className='text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
               I&apos;m a passionate technologist and leader in the software testing and automation
-              space. As <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>Director of Engineering at LambdaTest</span>, I drive innovation in cloud-based
-              testing platforms that serve <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>millions of developers worldwide</span>, enabling seamless
-              cross-browser and mobile testing.
+              space. As{' '}
+              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>
+                Director of Engineering at LambdaTest
+              </span>
+              , I drive innovation in cloud-based testing platforms that serve{' '}
+              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>
+                millions of developers worldwide
+              </span>
+              , enabling seamless cross-browser and mobile testing.
             </p>
             <p className='text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
-              My journey in open source began with contributing to <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>Appium</span>, where I became a <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>core
-              maintainer</span> and helped architect <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>Appium 2.0</span>. I&apos;ve created multiple plugins
-              including <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>Device Farm, Wait Plugin, and Gestures Plugin</span> that are used by thousands
-              of developers globally. Recently, I&apos;ve pioneered <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>Model Context Protocol (MCP)
-              servers</span> for mobile automation, bridging AI and testing workflows.
+              My journey in open source began with contributing to{' '}
+              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>
+                Appium
+              </span>
+              , where I became a{' '}
+              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>
+                core maintainer
+              </span>{' '}
+              and helped architect{' '}
+              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>
+                Appium 2.0
+              </span>
+              . I&apos;ve created multiple plugins including{' '}
+              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>
+                Device Farm, Wait Plugin, and Gestures Plugin
+              </span>{' '}
+              that are used by thousands of developers globally. Recently, I&apos;ve pioneered{' '}
+              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>
+                Model Context Protocol (MCP) servers
+              </span>{' '}
+              for mobile automation, bridging AI and testing workflows.
             </p>
             <p className='text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
-              As an <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>international speaker</span>, I&apos;ve presented at <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>25+ conferences</span> including
-              SeleniumConf, AppiumConf, QuestForQuality, SLASSCOM, Belgrade Test Conference,
-              AutomationGuild, FOSDEM, TestμConf, Nordic Testing Days, and Agile India, sharing
-              insights on mobile automation, clean code practices, and the future of testing.
+              As an{' '}
+              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>
+                international speaker
+              </span>
+              , I&apos;ve presented at{' '}
+              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>
+                25+ conferences
+              </span>{' '}
+              including SeleniumConf, AppiumConf, QuestForQuality, SLASSCOM, Belgrade Test
+              Conference, AutomationGuild, FOSDEM, TestμConf, Nordic Testing Days, and Agile India,
+              sharing insights on mobile automation, clean code practices, and the future of
+              testing.
             </p>
             <p className='text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
-              I&apos;m passionate about <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>ethical testing practices</span>, reducing unconscious bias in
-              testing processes, and <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>mentoring the next generation of engineers</span>. My work spans
-              from <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>container-based testing</span> to <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>Kubernetes manifest validation</span>.
+              I&apos;m passionate about{' '}
+              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>
+                ethical testing practices
+              </span>
+              , reducing unconscious bias in testing processes, and{' '}
+              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>
+                mentoring the next generation of engineers
+              </span>
+              . My work spans from{' '}
+              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>
+                container-based testing
+              </span>{' '}
+              to{' '}
+              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>
+                Kubernetes manifest validation
+              </span>
+              .
             </p>
           </div>
         </div>
