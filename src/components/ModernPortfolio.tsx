@@ -391,10 +391,10 @@ console.log('Test completed successfully!');`}</pre>
 
         {/* Main Content Container */}
         <div className='relative z-10 w-full max-w-7xl mx-auto px-6 py-12'>
-          <div className='flex flex-col lg:flex-row items-center justify-between min-h-[80vh] gap-1 lg:gap-0'>
+          <div className='flex flex-col lg:flex-row items-center justify-center min-h-[80vh] gap-8 lg:gap-12'>
             
             {/* Left side - Professional Profile Image */}
-            <div className='flex-1 flex justify-center lg:justify-start order-1 lg:order-1 max-w-xl'>
+            <div className='flex-shrink-0 flex justify-center order-1 lg:order-1'>
               <div className='relative'>
                 {/* Main Profile Image - Professional Size */}
                 <div className='relative w-[25rem] h-[16.8rem] md:w-[20.4rem] md:h-[20.4rem] lg:w-96 lg:h-96 mx-auto'>
@@ -421,8 +421,7 @@ console.log('Test completed successfully!');`}</pre>
           </div>
         </div>
 
-                {/* Additional Animated Elements */}
-                
+               
                 {/* Floating Tech Orbs with Trails */}
                 <div className='absolute top-0 left-1/2 w-4 h-4 bg-blue-400 rounded-full blur-sm animate-orbit shadow-lg shadow-blue-400/50'></div>
                 <div className='absolute bottom-0 right-1/2 w-3 h-3 bg-purple-400 rounded-full blur-sm animate-orbit-reverse shadow-lg shadow-purple-400/50'></div>
@@ -436,7 +435,7 @@ console.log('Test completed successfully!');`}</pre>
             </div>
 
             {/* Right side - Text Content */}
-            <div className='flex-1 text-center lg:text-left order-2 lg:order-2 max-w-2xl lg:-ml-16'>
+            <div className='flex-3 order-2 lg:order-2 max-w-2xl'>
               {/* Greeting */}
               <div className='mb-1'>
                 <span className='text-2xl md:text-3xl lg:text-4xl text-gray-300 font-light tracking-wide'>
