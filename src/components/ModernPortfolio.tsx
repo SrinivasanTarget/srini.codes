@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { projects } from '../portfolio/projects'
 import { conferences } from '../portfolio/conferences'
 import { blogs } from '../portfolio/blogs'
@@ -188,6 +189,12 @@ const ModernPortfolio = () => {
                   {item.label}
                 </button>
               ))}
+              <Link
+                to="/videos"
+                className='hover:text-blue-400 transition-colors duration-200 font-medium text-white'
+              >
+                Videos
+              </Link>
             </div>
           </div>
 
@@ -245,6 +252,13 @@ const ModernPortfolio = () => {
                     {item.label}
                   </button>
                 ))}
+                <Link
+                  to="/videos"
+                  className='block w-full text-left py-2 px-4 text-white hover:text-blue-400 hover:bg-gray-800/50 rounded-md transition-all duration-200 font-medium'
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Videos
+                </Link>
               </div>
             </div>
           )}
