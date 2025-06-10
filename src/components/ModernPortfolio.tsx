@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { projects } from '../portfolio/projects'
 import { conferences } from '../portfolio/conferences'
 import { blogs } from '../portfolio/blogs'
-import heroImage from '../assets/images/ProfilePic.webp'
+import heroImage from '../assets/images/profile_sai.webp'
 import lambdaTestLogo from '../assets/images/LambdaTest-logo1.png'
 import backgroundImage from '../assets/images/background1.png'
 
@@ -335,7 +335,7 @@ console.log('Test completed successfully!');`}</pre>
             href='https://github.com/saikrishna321'
             target='_blank'
             rel='noopener noreferrer'
-            className='w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg'
+            className='w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg'
             style={{ backgroundColor: '#c2f900' }}
           >
             <svg className='w-6 h-6 text-black' fill='currentColor' viewBox='0 0 24 24'>
@@ -346,7 +346,7 @@ console.log('Test completed successfully!');`}</pre>
             href='https://twitter.com/saikrisv'
             target='_blank'
             rel='noopener noreferrer'
-            className='w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg'
+            className='w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg'
             style={{ backgroundColor: '#c2f900' }}
           >
             <svg className='w-6 h-6 text-black' fill='currentColor' viewBox='0 0 24 24'>
@@ -354,10 +354,10 @@ console.log('Test completed successfully!');`}</pre>
             </svg>
           </a>
           <a
-            href='https://www.linkedin.com/in/saikrishna321/'
+            href='https://www.linkedin.com/in/sai-krishna-3755407b/'
             target='_blank'
             rel='noopener noreferrer'
-            className='w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg'
+            className='w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg'
             style={{ backgroundColor: '#c2f900' }}
           >
             <svg className='w-6 h-6 text-black' fill='currentColor' viewBox='0 0 24 24'>
@@ -365,8 +365,8 @@ console.log('Test completed successfully!');`}</pre>
             </svg>
           </a>
           <a
-            href='mailto:srinivasan.sekar1995@gmail.com'
-            className='w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg'
+            href='mailto:saidotkrishna@gmail.com'
+            className='w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg'
             style={{ backgroundColor: '#c2f900' }}
           >
             <svg className='w-6 h-6 text-black' fill='currentColor' viewBox='0 0 24 24'>
@@ -375,46 +375,81 @@ console.log('Test completed successfully!');`}</pre>
           </a>
         </div>
 
+        {/* Main Content Container */}
         <div className='relative z-10 w-full max-w-7xl mx-auto px-6 py-12'>
-          <div className='flex flex-col lg:flex-row items-center justify-between min-h-[80vh] gap-4 lg:gap-5'>
-            {/* Left side - Profile Image */}
-            <div className='flex-1 flex justify-center lg:justify-end order-1 lg:order-1 max-w-xl'>
+          <div className='flex flex-col lg:flex-row items-center justify-between min-h-[80vh] gap-1 lg:gap-0'>
+            
+            {/* Left side - Professional Profile Image */}
+            <div className='flex-1 flex justify-center lg:justify-start order-1 lg:order-1 max-w-xl'>
               <div className='relative'>
-                {/* Decorative elements */}
-                <div className='absolute -top-4 -left-4 w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl'></div>
-                <div className='absolute -bottom-4 -right-4 w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 bg-gradient-to-tl from-purple-500/20 to-pink-500/20 rounded-full blur-3xl'></div>
+                {/* Main Profile Image - Professional Size */}
+                <div className='relative w-[25rem] h-[16.8rem] md:w-[20.4rem] md:h-[20.4rem] lg:w-96 lg:h-96 mx-auto'>
+                  <div className='w-full h-full rounded-full overflow-hidden shadow-2xl border-0 border-white/10 backdrop-blur-sm'>
+                    <img
+                      src={heroImage}
+                      alt='Sai Krishna'
+                      className='w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-500'
+                      style={{
+                        objectPosition: '50% 30%',
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Professional Tech Indicators */}
+                  <div className='absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg'>
+                    <span className='text-white font-bold text-xs'>JS</span>
+                  </div>
+                  <div className='absolute -bottom-3 -left-3 w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-lg'>
+                    <span className='text-white font-bold text-xs'>AI</span>
+                  </div>
+          <div className='absolute top-1/4 -left-4 w-6 h-6 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg'>
+            <span className='text-white font-bold text-xs'>⚡</span>
+          </div>
+        </div>
 
-                {/* Main profile image */}
-                <div className='relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl'>
-                  <img
-                    src={heroImage}
-                    alt='Sai Krishna'
-                    className='w-full h-full object-cover transform hover:scale-110 transition-transform duration-700'
-                    style={{
-                      objectPosition: '50% 30%',
-                    }}
-                  />
-                </div>
+                {/* Additional Animated Elements */}
+                
+                {/* Floating Tech Orbs with Trails */}
+                <div className='absolute top-0 left-1/2 w-4 h-4 bg-blue-400 rounded-full blur-sm animate-orbit shadow-lg shadow-blue-400/50'></div>
+                <div className='absolute bottom-0 right-1/2 w-3 h-3 bg-purple-400 rounded-full blur-sm animate-orbit-reverse shadow-lg shadow-purple-400/50'></div>
+                <div className='absolute left-0 top-1/2 w-2 h-2 bg-cyan-400 rounded-full blur-sm animate-bounce shadow-lg shadow-cyan-400/50'></div>
+                <div className='absolute right-0 bottom-1/2 w-3 h-3 bg-pink-400 rounded-full blur-sm animate-pulse shadow-lg shadow-pink-400/50'></div>
+
+                {/* Additional Orbiting Elements */}
+                <div className='absolute top-1/4 right-1/4 w-1.5 h-1.5 bg-yellow-400 rounded-full animate-orbit-slow shadow-sm shadow-yellow-400/50'></div>
+                <div className='absolute bottom-1/4 left-1/4 w-2 h-2 bg-green-400 rounded-full animate-orbit-reverse-slow shadow-sm shadow-green-400/50'></div>
               </div>
             </div>
 
-            {/* Right side - Content */}
-            <div className='flex-1 text-center lg:text-left order-2 lg:order-2 max-w-2xl'>
+            {/* Right side - Text Content */}
+            <div className='flex-1 text-center lg:text-left order-2 lg:order-2 max-w-2xl lg:-ml-16'>
               {/* Greeting */}
-              <div className='mb-6'>
+              <div className='mb-1'>
                 <span className='text-2xl md:text-3xl lg:text-4xl text-gray-300 font-light tracking-wide'>
                   Hello, I&apos;m
                 </span>
               </div>
 
               {/* Name */}
-              <h1 className='text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent leading-tight'>
-                Sai Krishna
+              <h1 className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 leading-tight'>
+                <span 
+                  className='gradient-text'
+                  style={{
+                    background: 'linear-gradient(90deg, #8B5CF6, #3B82F6, #06B6D4, #3B82F6, #8B5CF6)',
+                    backgroundSize: '200% 100%',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    animation: 'gradient-shift 3s ease-in-out infinite'
+                  }}
+                >
+                  Sai Krishna
+                </span>
               </h1>
 
               {/* Title */}
-              <div className='mb-8'>
-                <h2 className='text-xl md:text-2xl lg:text-3xl text-blue-400 font-semibold mb-4'>
+              <div className='mb-1'>
+                <h2 className='text-xl md:text-2xl lg:text-3xl text-white font-semibold mb-2'>
                   Director of Engineering
                 </h2>
                 <div className='flex justify-center lg:justify-start items-center mb-6'>
@@ -424,7 +459,7 @@ console.log('Test completed successfully!');`}</pre>
               </div>
 
               {/* Dynamic Role */}
-              <div className='mb-8'>
+              <div className='mb-6'>
                 <p className='text-lg md:text-xl lg:text-2xl text-gray-300'>
                   Also a{' '}
                   <span className='text-purple-400 font-semibold transition-all duration-500 ease-in-out bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent'>
@@ -450,32 +485,156 @@ console.log('Test completed successfully!');`}</pre>
                 </button>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Stats Section */}
-      <section className='py-16 bg-gray-900/30'>
-        <div className='max-w-6xl mx-auto px-6'>
-          <div className='grid md:grid-cols-4 gap-8 text-center'>
-            <div className='bg-gray-800/30 p-6 rounded-xl border border-gray-700'>
-              <div className='text-3xl font-bold text-blue-400 mb-2'>25+</div>
-              <div className='text-gray-300'>Conference Talks</div>
-            </div>
-            <div className='bg-gray-800/30 p-6 rounded-xl border border-gray-700'>
-              <div className='text-3xl font-bold text-blue-400 mb-2'>10+</div>
-              <div className='text-gray-300'>Technical Articles</div>
-            </div>
-            <div className='bg-gray-800/30 p-6 rounded-xl border border-gray-700'>
-              <div className='text-3xl font-bold text-blue-400 mb-2'>∞</div>
-              <div className='text-gray-300'>Open Source Projects</div>
-            </div>
-            <div className='bg-gray-800/30 p-6 rounded-xl border border-gray-700'>
-              <div className='text-3xl font-bold text-blue-400 mb-2'>13+</div>
-              <div className='text-gray-300'>Years in Testing</div>
+          </div>
+
+          {/* Stats Section - Within Hero Section */}
+          <div className='relative z-10 w-full max-w-4xl mx-auto pb-8'>
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-8 text-center'>
+              <div className='bg-gray-800/30 p-6 rounded-full border border-gray-700 w-40 h-40 mx-auto flex flex-col items-center justify-center'>
+                <div className='text-3xl font-bold text-blue-400 mb-2'>25+</div>
+                <div className='text-gray-300 text-sm'>Conference Talks</div>
+              </div>
+              <div className='bg-gray-800/30 p-6 rounded-full border border-gray-700 w-40 h-40 mx-auto flex flex-col items-center justify-center'>
+                <div className='text-3xl font-bold text-blue-400 mb-2'>10+</div>
+                <div className='text-gray-300 text-sm'>Technical Articles</div>
+              </div>
+              <div className='bg-gray-800/30 p-6 rounded-full border border-gray-700 w-40 h-40 mx-auto flex flex-col items-center justify-center'>
+                <div className='text-3xl font-bold text-blue-400 mb-2'>∞</div>
+                <div className='text-gray-300 text-sm'>Open Source Projects</div>
+              </div>
+              <div className='bg-gray-800/30 p-6 rounded-full border border-gray-700 w-40 h-40 mx-auto flex flex-col items-center justify-center'>
+                <div className='text-3xl font-bold text-blue-400 mb-2'>13+</div>
+                <div className='text-gray-300'>Years in Testing</div>
+              </div>
             </div>
           </div>
+
+          {/* Gradient text animation styles */}
+          <style dangerouslySetInnerHTML={{
+            __html: `
+              @keyframes gradient-shift {
+                0%, 100% {
+                  background-position: 0% 50%;
+                }
+                50% {
+                  background-position: 100% 50%;
+                }
+              }
+              @keyframes float {
+                0%, 100% {
+                  transform: translateY(0px) rotate(0deg);
+                }
+                50% {
+                  transform: translateY(-10px) rotate(2deg);
+                }
+              }
+              @keyframes float-delayed {
+                0%, 100% {
+                  transform: translateY(0px) rotate(0deg);
+                }
+                50% {
+                  transform: translateY(-15px) rotate(-2deg);
+                }
+              }
+              @keyframes spin-slow {
+                from {
+                  transform: rotate(0deg);
+                }
+                to {
+                  transform: rotate(360deg);
+                }
+              }
+              @keyframes spin-reverse {
+                from {
+                  transform: rotate(360deg);
+                }
+                to {
+                  transform: rotate(0deg);
+                }
+              }
+              @keyframes orbit {
+                0% {
+                  transform: rotate(0deg) translateX(120px) rotate(0deg);
+                }
+                100% {
+                  transform: rotate(360deg) translateX(120px) rotate(-360deg);
+                }
+              }
+              @keyframes orbit-reverse {
+                0% {
+                  transform: rotate(360deg) translateX(100px) rotate(-360deg);
+                }
+                100% {
+                  transform: rotate(0deg) translateX(100px) rotate(0deg);
+                }
+              }
+              .animate-float {
+                animation: float 6s ease-in-out infinite;
+              }
+              .animate-float-delayed {
+                animation: float-delayed 8s ease-in-out infinite;
+              }
+              .animate-spin-slow {
+                animation: spin-slow 20s linear infinite;
+              }
+              .animate-spin-reverse {
+                animation: spin-reverse 15s linear infinite;
+              }
+              .animate-orbit {
+                animation: orbit 25s linear infinite;
+              }
+              .animate-orbit-reverse {
+                animation: orbit-reverse 30s linear infinite;
+              }
+              @keyframes orbit-slow {
+                0% {
+                  transform: rotate(0deg) translateX(80px) rotate(0deg);
+                }
+                100% {
+                  transform: rotate(360deg) translateX(80px) rotate(-360deg);
+                }
+              }
+              @keyframes orbit-reverse-slow {
+                0% {
+                  transform: rotate(360deg) translateX(70px) rotate(-360deg);
+                }
+                100% {
+                  transform: rotate(0deg) translateX(70px) rotate(0deg);
+                }
+              }
+              @keyframes pulse-slow {
+                0%, 100% {
+                  opacity: 0.4;
+                }
+                50% {
+                  opacity: 0.8;
+                }
+              }
+              @keyframes pulse-fast {
+                0%, 100% {
+                  opacity: 0.3;
+                }
+                50% {
+                  opacity: 0.9;
+                }
+              }
+              .animate-orbit-slow {
+                animation: orbit-slow 35s linear infinite;
+              }
+              .animate-orbit-reverse-slow {
+                animation: orbit-reverse-slow 40s linear infinite;
+              }
+              .animate-pulse-slow {
+                animation: pulse-slow 4s ease-in-out infinite;
+              }
+              .animate-pulse-fast {
+                animation: pulse-fast 2s ease-in-out infinite;
+              }
+            `
+          }} />
         </div>
+
       </section>
 
       {/* About Section */}
