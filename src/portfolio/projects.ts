@@ -1,17 +1,30 @@
 const projects = [
   {
+    title: 'Jarvis Appium',
+    description:
+      'An intelligent MCP server that provides AI assistants with powerful tools and resources for Appium mobile automation',
+    source: 'https://github.com/AppiumTestDistribution/jarvis-appium',
+    imgSource: 'jarvislogo.png',
+  },
+  {
+    title: 'Secure Hulk',
+    description: 'Secure-Hulk is a security scanner for Model Context Protocol.',
+    source: 'https://github.com/AppiumTestDistribution/secure-hulk',
+    imgSource: 'MCPSecureHulk.png',
+  },
+  {
     title: 'MCP WebDriverAgent Server',
     description:
       'Model Context Protocol server for WebDriverAgent - enabling AI integration with iOS automation and device management.',
     source: 'https://github.com/AppiumTestDistribution/mcp-webdriveragent',
-    imgSource: 'appium.webp',
+    imgSource: 'mcp-wdalogo.png',
   },
   {
     title: 'MCP Appium Gestures Server',
     description:
       'Model Context Protocol server for Appium Gestures - bringing AI-powered gesture automation to mobile testing.',
     source: 'https://github.com/AppiumTestDistribution/mcp-appium-gestures',
-    imgSource: 'appium.webp',
+    imgSource: 'mcp-appium-gestures.png',
   },
   {
     title: 'Appium',

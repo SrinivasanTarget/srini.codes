@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { projects } from '../portfolio/projects'
 import { conferences } from '../portfolio/conferences'
 import { UnifiedBlogService, UnifiedBlogPost } from '../services/unifiedBlog'
+import { EnhancedProjectsService, EnhancedProjectData } from '../services/enhancedProjects'
 import UnifiedBlogCard from './blogcard/UnifiedBlogCard'
+import SimpleProjectCard from './project/SimpleProjectCard'
 import heroImage from '../assets/images/ProfilePic.png'
 
 const ModernPortfolio = () => {
-  const [activeSection, setActiveSection] = useState('hero')
   const [isScrolled, setIsScrolled] = useState(false)
   const [recentBlogs, setRecentBlogs] = useState<UnifiedBlogPost[]>([])
   const [blogsLoading, setBlogsLoading] = useState(true)
+  const [enhancedProjects, setEnhancedProjects] = useState<EnhancedProjectData[]>([])
+  const [projectsLoading, setProjectsLoading] = useState(true)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +24,7 @@ const ModernPortfolio = () => {
 
   useEffect(() => {
     loadRecentBlogs()
+    loadEnhancedProjects()
   }, [])
 
   const loadRecentBlogs = async () => {
@@ -33,6 +36,18 @@ const ModernPortfolio = () => {
       console.error('Failed to load recent blogs:', error)
     } finally {
       setBlogsLoading(false)
+    }
+  }
+
+  const loadEnhancedProjects = async () => {
+    try {
+      setProjectsLoading(true)
+      const projects = await EnhancedProjectsService.getEnhancedProjects()
+      setEnhancedProjects(projects)
+    } catch (error) {
+      console.error('Failed to load enhanced projects:', error)
+    } finally {
+      setProjectsLoading(false)
     }
   }
 
@@ -272,7 +287,7 @@ export class DeviceFarmPlugin {
 
                 {/* Subtle circular gradient overlay */}
                 <div className='absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent'></div>
-                
+
                 {/* Glowing ring effect */}
                 <div className='absolute -inset-1 bg-gradient-to-r from-blue-500/50 via-purple-500/50 to-blue-500/50 rounded-full blur-sm -z-10'></div>
               </div>
@@ -467,32 +482,25 @@ export class DeviceFarmPlugin {
       {/* Projects Section */}
       <section id='projects' className='py-20 bg-gray-900/50'>
         <div className='max-w-7xl mx-auto px-6'>
-          <h2 className='text-4xl font-heading font-bold text-center mb-16 text-white'>
-            Open Source Projects
+          <h2 className='text-4xl font-heading font-bold text-center mb-8 text-white'>
+            Open Source Contributions
           </h2>
-          <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className='bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 hover:transform hover:scale-105'
-              >
-                <div className='p-6'>
-                  <h3 className='text-xl font-heading font-bold mb-3 text-white'>
-                    {project.title}
-                  </h3>
-                  <p className='text-gray-400 mb-4'>{project.description}</p>
-                  <a
-                    href={project.source}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200'
-                  >
-                    View Project →
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
+          <p className='text-xl text-gray-300 text-center mb-16 max-w-3xl mx-auto'>
+            Key contributions to testing and automation ecosystem
+          </p>
+
+          {projectsLoading ? (
+            <div className='text-center py-12'>
+              <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4'></div>
+              <p className='text-gray-400'>Loading projects...</p>
+            </div>
+          ) : (
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6'>
+              {enhancedProjects.map((project, index) => (
+                <SimpleProjectCard key={index} project={project} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -547,7 +555,7 @@ export class DeviceFarmPlugin {
           <p className='text-xl text-gray-300 text-center mb-12 max-w-3xl mx-auto'>
             Recent articles from my personal blog and guest posts on leading tech platforms
           </p>
-          
+
           {blogsLoading ? (
             <div className='text-center py-12'>
               <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4'></div>
