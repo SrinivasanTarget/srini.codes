@@ -26,7 +26,7 @@ export default function SimpleProjectCard({ project }: SimpleProjectCardProps) {
       <div className='flex justify-center mb-4'>
         <div className='relative w-16 h-16 rounded-lg overflow-hidden bg-gray-800 flex items-center justify-center'>
           <img
-            src={`/src/assets/images/${project.imgSource}`}
+            src={`/assets/images/${project.imgSource}`}
             alt={project.title}
             className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-300'
             onError={(e) => {
