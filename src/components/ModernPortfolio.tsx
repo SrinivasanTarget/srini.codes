@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { projects } from '../portfolio/projects'
 import { conferences } from '../portfolio/conferences'
-import { blogs } from '../portfolio/blogs'
+import { UnifiedBlogService, UnifiedBlogPost } from '../services/unifiedBlog'
+import UnifiedBlogCard from './blogcard/UnifiedBlogCard'
 import heroImage from '../assets/images/ProfilePic.png'
 
 const ModernPortfolio = () => {
   const [activeSection, setActiveSection] = useState('hero')
   const [isScrolled, setIsScrolled] = useState(false)
+  const [recentBlogs, setRecentBlogs] = useState<UnifiedBlogPost[]>([])
+  const [blogsLoading, setBlogsLoading] = useState(true)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +19,22 @@ const ModernPortfolio = () => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    loadRecentBlogs()
+  }, [])
+
+  const loadRecentBlogs = async () => {
+    try {
+      setBlogsLoading(true)
+      const blogs = await UnifiedBlogService.getRecentBlogs(6)
+      setRecentBlogs(blogs)
+    } catch (error) {
+      console.error('Failed to load recent blogs:', error)
+    } finally {
+      setBlogsLoading(false)
+    }
+  }
 
   const achievements = [
     {
@@ -127,7 +147,7 @@ const ModernPortfolio = () => {
               </div>
             </div>
             <div className='hidden md:flex space-x-8'>
-              {['About', 'Achievements', 'Projects', 'Talks', 'Blogs', 'Contact'].map((item) => (
+              {['About', 'Achievements', 'Projects', 'Talks', 'Contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -136,6 +156,18 @@ const ModernPortfolio = () => {
                   {item}
                 </button>
               ))}
+              <button
+                onClick={() => scrollToSection('blogs')}
+                className='hover:text-blue-400 transition-colors duration-200 font-medium'
+              >
+                Latest Blogs
+              </button>
+              <Link
+                to='/blog'
+                className='hover:text-blue-400 transition-colors duration-200 font-medium'
+              >
+                All Blogs
+              </Link>
             </div>
             <div className='md:hidden'>
               <button className='text-white hover:text-blue-400'>
@@ -510,29 +542,35 @@ export class DeviceFarmPlugin {
       <section id='blogs' className='py-20 bg-gray-900/50'>
         <div className='max-w-7xl mx-auto px-6'>
           <h2 className='text-4xl font-heading font-bold text-center mb-16 text-white'>
-            Technical Articles & Blogs
+            Latest Writings
           </h2>
-          <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
-            {blogs.map((blog, index) => (
-              <div
-                key={index}
-                className='bg-gray-800/50 p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 hover:transform hover:scale-105'
-              >
-                <h3 className='text-lg font-heading font-bold mb-3 text-white line-clamp-2'>
-                  {blog.title}
-                </h3>
-                <p className='text-blue-400 text-sm mb-4'>{blog.tags}</p>
-                <a
-                  href={blog.source}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200'
-                >
-                  Read Article →
-                </a>
+          <p className='text-xl text-gray-300 text-center mb-12 max-w-3xl mx-auto'>
+            Recent articles from my personal blog and guest posts on leading tech platforms
+          </p>
+          
+          {blogsLoading ? (
+            <div className='text-center py-12'>
+              <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4'></div>
+              <p className='text-gray-400'>Loading latest articles...</p>
+            </div>
+          ) : (
+            <>
+              <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12'>
+                {recentBlogs.map((blog) => (
+                  <UnifiedBlogCard key={blog.id} post={blog} />
+                ))}
               </div>
-            ))}
-          </div>
+              <div className='text-center'>
+                <Link
+                  to='/blog'
+                  className='bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-lg transition-all duration-200 transform hover:scale-105 inline-flex items-center space-x-2'
+                >
+                  <span>View All Articles</span>
+                  <span>→</span>
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </section>
 

@@ -1,39 +1,28 @@
 const blogs = [
   {
-    title: 'Next Generation Front End Testing using WebDriver and DevTools: Part 1',
-    tags: 'Webdriver, DevTools',
-    source:
-      'https://blog.testproject.io/2019/11/26/next-generation-front-end-testing-using-webdriver-and-devtools-part-1/',
+    title: 'Optimizing Client-Side Performance: A Comprehensive Guide To Improving User Experience',
+    tags: 'Performance, Web, Testing',
+    source: 'https://www.lambdatest.com/blog/optimizing-client-side-performance/',
   },
   {
-    title: 'Next Generation Front End Testing using WebDriver and Chrome DevTools: Part 2',
-    tags: 'Webdriver, DevTools',
-    source:
-      'https://blog.testproject.io/2020/01/09/next-generation-front-end-testing-using-webdriver-and-chrome-devtools-part-2/',
+    title: 'Mastering Android: A Comprehensive Guide to ADB Commands',
+    tags: 'Android, ADB, Testing',
+    source: 'https://www.lambdatest.com/blog/adb-commands/',
   },
   {
-    title: 'Consumer-Driven Contract Testing using Pact Java',
-    tags: 'API, Contracts',
-    source:
-      'https://blog.testproject.io/2020/05/27/consumer-driven-contract-testing-using-pact-java/',
+    title: 'Exploring Responsible Tech in Testing: Ethical Frameworks and Real-World Implications',
+    tags: 'Testing, Ethical, AI',
+    source: 'https://www.lambdatest.com/blog/exploring-responsible-tech-in-testing/',
   },
   {
-    title: 'Consumer-Driven Contract Testing using Spring Cloud Contract',
-    tags: 'API, Contracts',
-    source:
-      'https://blog.testproject.io/2020/05/20/consumer-driven-contract-testing-using-spring-cloud-contract/',
+    title: 'Exploring Responsible Tech in Testing: Ethical Frameworks and Real-World Implications',
+    tags: 'Testing, Ethical, AI',
+    source: 'https://www.lambdatest.com/blog/exploring-responsible-tech-in-testing/',
   },
   {
-    title: 'Event Driven Architecture: How to Perform Contract Testing in Kafka/PubSub',
-    tags: 'Events, Kafka, PubSub, Streaming, Contracts',
-    source:
-      'https://blog.testproject.io/2020/06/03/event-driven-architecture-how-to-perform-contract-testing-in-kafka-pubsub/',
-  },
-  {
-    title: 'Consumer Driven Contract Testing [Webinar Recording]',
-    tags: 'Webinar, API, Contracts',
-    source:
-      'https://blog.testproject.io/2020/06/15/consumer-driven-contract-testing-the-ultimate-guide-to-testing-microservices/',
+    title: 'Unveiling the Power of Web Performance Metrics for Testers',
+    tags: 'Performance, Web, Testing',
+    source: 'https://www.lambdatest.com/blog/web-performance-metrics-for-testers/',
   },
   {
     title: 'Getting Started with Appium 2.0 Beta',
