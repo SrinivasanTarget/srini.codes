@@ -88,11 +88,11 @@ export default function BlogPost() {
 
       {/* Cover Image */}
       {post.coverImage && (
-        <div className='aspect-video max-h-96 overflow-hidden'>
+        <div className='w-full h-[500px] overflow-hidden bg-black flex items-center justify-center'>
           <img
             src={post.coverImage.url}
             alt={post.title}
-            className='w-full h-full object-cover'
+            className='max-w-full h-full object-contain'
           />
         </div>
       )}

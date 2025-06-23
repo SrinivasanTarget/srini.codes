@@ -382,72 +382,27 @@ export class DeviceFarmPlugin {
           <h2 className='text-4xl font-heading font-bold text-center mb-16 text-white'>About Me</h2>
           <div className='max-w-4xl mx-auto'>
             <p className='text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
-              I&apos;m a passionate technologist and leader in the software testing and automation
-              space. As{' '}
-              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>
-                Director of Engineering at LambdaTest
-              </span>
-              , I drive innovation in cloud-based testing platforms that serve{' '}
-              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>
-                millions of developers worldwide
-              </span>
-              , enabling seamless cross-browser and mobile testing.
+              I&apos;m a passionate technologist and leader in software testing and automation. As{' '}
+              <span className='modern-highlight'>Director of Engineering at LambdaTest</span>, I
+              drive innovation in cloud-based testing platforms serving millions of developers
+              worldwide.
             </p>
             <p className='text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
-              My journey in open source began with contributing to{' '}
-              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>
-                Appium
-              </span>
-              , where I became a{' '}
-              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>
-                core maintainer
-              </span>{' '}
-              and helped architect{' '}
-              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>
-                Appium 2.0
-              </span>
-              . I&apos;ve created multiple plugins including{' '}
-              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>
+              My open source journey began with <span className='modern-highlight'>Appium</span>,
+              where I became a core maintainer and helped architect Appium 2.0. I&apos;ve created
+              plugins like{' '}
+              <span className='modern-highlight'>
                 Device Farm, Wait Plugin, and Gestures Plugin
               </span>{' '}
-              that are used by thousands of developers globally. Recently, I&apos;ve pioneered{' '}
-              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>
-                Model Context Protocol (MCP) servers
-              </span>{' '}
-              for mobile automation, bridging AI and testing workflows.
+              used by thousands globally. Recently, I pioneered{' '}
+              <span className='modern-highlight'>Model Context Protocol (MCP) servers</span> for
+              mobile automation, bridging AI and testing workflows.
             </p>
             <p className='text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
-              As an{' '}
-              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>
-                international speaker
-              </span>
-              , I&apos;ve presented at{' '}
-              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>
-                25+ conferences
-              </span>{' '}
-              including SeleniumConf, AppiumConf, QuestForQuality, SLASSCOM, Belgrade Test
-              Conference, AutomationGuild, FOSDEM, TestμConf, Nordic Testing Days, and Agile India,
-              sharing insights on mobile automation, clean code practices, and the future of
-              testing.
-            </p>
-            <p className='text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
-              I&apos;m passionate about{' '}
-              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>
-                ethical testing practices
-              </span>
-              , reducing unconscious bias in testing processes, and{' '}
-              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>
-                mentoring the next generation of engineers
-              </span>
-              . My work spans from{' '}
-              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform skew-x-1'>
-                container-based testing
-              </span>{' '}
-              to{' '}
-              <span className='relative inline-block bg-gradient-to-r from-blue-400/30 via-blue-400/40 to-blue-400/30 px-1 py-0.5 rounded-sm transform -skew-x-1'>
-                Kubernetes manifest validation
-              </span>
-              .
+              As an <span className='modern-highlight'>international speaker</span>, I&apos;ve
+              presented at <span className='modern-highlight'>25+ conferences</span> including
+              SeleniumConf, AppiumConf, FOSDEM, and Agile India, sharing insights on mobile
+              automation and testing innovation.
             </p>
           </div>
         </div>

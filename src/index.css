@@ -115,3 +115,61 @@ a:focus {
 .profile-container:hover .profile-image {
   transform: scale(1.05);
 }
+
+/* Hand-drawn underline effect */
+.handdrawn-underline {
+  position: relative;
+}
+
+.handdrawn-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 6px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 12'%3E%3Cpath d='M5,6 Q50,2 100,6 T200,6 Q250,4 295,6' stroke='%233b82f6' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 300px 12px;
+  opacity: 0.8;
+  animation: draw-underline 2s ease-in-out;
+}
+
+@keyframes draw-underline {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Modern highlight styles */
+.modern-highlight {
+  position: relative;
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+.modern-highlight::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6);
+  background-size: 200% 100%;
+  border-radius: 2px;
+  opacity: 0.7;
+  animation: highlight-flow 3s ease-in-out infinite;
+}
+
+@keyframes highlight-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
