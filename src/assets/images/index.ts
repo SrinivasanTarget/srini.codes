@@ -1,14 +1,15 @@
 // Import all project logo images with explicit URL imports
 import appium from './appium.webp?url'
-import selenium from './selenium.webp?url'
-import webdriverio from './webdriverio.webp?url'
+import AppiumWait2 from './AppiumWait2.webp?url'
 import ATD from './ATD.webp?url'
 import DeviceFarmLogo from './DeviceFarm-Logo.jpg?url'
-import AppiumWait2 from './AppiumWait2.webp?url'
 import GesturesPlugin from './GesturesPlugin.jpg?url'
-import taiko from './taiko.png?url'
+import jarvisLogo from './jarvislogo.webp?url'
 import mcpWdaLogo from './mcp-wdalogo.png?url'
 import saiProfile2 from './SaiProfile2.jp2?url'
+import selenium from './selenium.webp?url'
+import taiko from './taiko.png?url'
+import webdriverio from './webdriverio.webp?url'
 
 // Export profile image
 export { saiProfile2 }
@@ -24,6 +25,7 @@ export const projectImages = {
   'GesturesPlugin.jpg': GesturesPlugin,
   'taiko.png': taiko,
   'mcp-wdalogo.png': mcpWdaLogo,
+  'jarvislogo.webp': jarvisLogo,
 }
 
 // Type for the image keys

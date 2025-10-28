@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { videos } from '../portfolio/videos'
-import VideoCard from '../components/videocard/VideoCard'
 import { Link } from 'react-router-dom'
+import VideoCard from '../components/videocard/VideoCard'
+import { videos } from '../portfolio/videos'
 
 const Videos: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -10,13 +10,15 @@ const Videos: React.FC = () => {
   // Get all unique tags
   const allTags = Array.from(new Set(videos.flatMap(video => video.tags))).sort()
 
-  // Filter videos based on search term and selected tag
-  const filteredVideos = videos.filter(video => {
-    const matchesSearch = video.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         video.description.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesTag = selectedTag === '' || video.tags.includes(selectedTag)
-    return matchesSearch && matchesTag
-  })
+  // Filter videos based on search term and selected tag, then sort by date (newest first)
+  const filteredVideos = videos
+    .filter(video => {
+      const matchesSearch = video.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           video.description.toLowerCase().includes(searchTerm.toLowerCase())
+      const matchesTag = selectedTag === '' || video.tags.includes(selectedTag)
+      return matchesSearch && matchesTag
+    })
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
 
   return (
     <div className='bg-black text-white min-h-screen'>

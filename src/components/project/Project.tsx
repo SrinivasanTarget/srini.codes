@@ -1,16 +1,16 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 // Direct imports to ensure Vite bundles them
 import appiumImg from '../../assets/images/appium.webp'
-import seleniumImg from '../../assets/images/selenium.webp'
-import webdriverioImg from '../../assets/images/webdriverio.webp'
+import AppiumWaitImg from '../../assets/images/AppiumWait2.webp'
 import ATDImg from '../../assets/images/ATD.webp'
 import DeviceFarmImg from '../../assets/images/DeviceFarm-Logo.jpg'
-import AppiumWaitImg from '../../assets/images/AppiumWait2.webp'
 import GesturesPluginImg from '../../assets/images/GesturesPlugin.jpg'
-import taikoImg from '../../assets/images/taiko.png'
+import jarvisLogoImg from '../../assets/images/jarvislogo.webp'
 import mcpWdaLogoImg from '../../assets/images/mcp-wdalogo.png'
+import seleniumImg from '../../assets/images/selenium.webp'
+import taikoImg from '../../assets/images/taiko.png'
+import webdriverioImg from '../../assets/images/webdriverio.webp'
 
 // Create mapping
 const projectImages = {
@@ -23,6 +23,7 @@ const projectImages = {
   'GesturesPlugin.jpg': GesturesPluginImg,
   'taiko.png': taikoImg,
   'mcp-wdalogo.png': mcpWdaLogoImg,
+  'jarvislogo.webp': jarvisLogoImg,
 }
 
 type ProjectImageKey = keyof typeof projectImages

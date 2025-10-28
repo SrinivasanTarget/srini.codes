@@ -75,6 +75,13 @@ const projects: Array<{
     source: 'https://github.com/AppiumTestDistribution/mcp-webdriveragent',
     imgSource: 'mcp-wdalogo.png',
   },
+  {
+    title: 'Jarvis Appium',
+    description:
+      'An AI-powered assistant for Appium that helps with mobile test automation and debugging.',
+    source: 'https://github.com/AppiumTestDistribution/jarvis-appium',
+    imgSource: 'jarvislogo.webp',
+  },
   // MCP Appium Gestures Server - REMOVED
   // Angular Testing Library - REMOVED
 ]

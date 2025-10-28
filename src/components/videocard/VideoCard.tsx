@@ -56,14 +56,6 @@ const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
 
       {/* Video Content */}
       <div className='p-6'>
-        <h3 className='text-xl font-bold text-white mb-3 line-clamp-2 hover:text-blue-400 transition-colors duration-200'>
-          {video.title}
-        </h3>
-        
-        <p className='text-gray-400 mb-4 line-clamp-3 leading-relaxed'>
-          {video.description}
-        </p>
-
         {/* Tags */}
         <div className='flex flex-wrap gap-2 mb-4'>
           {video.tags.slice(0, 3).map((tag, index) => (
