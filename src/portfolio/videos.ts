@@ -181,4 +181,22 @@ export const videos: Video[] = [
     publishedAt: '2024-10-28',
     tags: ['Appium', 'Shorts', 'Mobile Testing'],
   },
+  {
+    id: '18',
+    title: 'New Video',
+    description: 'Shared video link.',
+    url: 'https://www.youtube.com/watch?v=qcoKFS6VI0A',
+    thumbnail: 'https://img.youtube.com/vi/qcoKFS6VI0A/maxresdefault.jpg',
+    publishedAt: '2025-11-01',
+    tags: ['YouTube', 'Video'],
+  },
+  {
+    id: '19',
+    title: 'New Video',
+    description: 'Shared video link.',
+    url: 'https://www.youtube.com/watch?v=lugEm6j1Nl8',
+    thumbnail: 'https://img.youtube.com/vi/lugEm6j1Nl8/maxresdefault.jpg',
+    publishedAt: '2025-11-01',
+    tags: ['YouTube', 'Video'],
+  }
 ]
