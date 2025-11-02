@@ -36,6 +36,11 @@ export default {
         'custom-gray-medium': '#A9A9A9',
         'custom-gray-dark': '#555555',
         'custom-highlight': '#BB86FC',
+        // Minimalist portfolio colors
+        dark: '#1b1b1b',
+        light: '#f5f5f5',
+        primary: '#64ffda',
+        surface: '#2c2c2c',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
