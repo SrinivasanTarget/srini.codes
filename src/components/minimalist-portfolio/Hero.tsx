@@ -236,7 +236,7 @@ const Hero: React.FC<HeroProps> = ({ onGetInTouch }) => {
 
   return (
     <motion.div 
-      className="w-full h-screen flex items-center justify-center relative"
+      className="w-full min-h-screen flex items-center justify-center relative pt-20 md:pt-0 pb-8 md:pb-0"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
