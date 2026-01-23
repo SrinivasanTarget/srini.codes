@@ -5,7 +5,8 @@ import { UnifiedBlogService, UnifiedBlogPost } from '../services/unifiedBlog'
 import { EnhancedProjectsService, EnhancedProjectData } from '../services/enhancedProjects'
 import UnifiedBlogCard from './blogcard/UnifiedBlogCard'
 import SimpleProjectCard from './project/SimpleProjectCard'
-import heroImage from '../assets/images/ProfilePic.png'
+import heroImage from '../assets/images/ProfilePic.webp'
+import TiltProfileImage from './TiltProfileImage'
 
 // Lazy load Remotion background for performance
 const HeroVideoBackground = lazy(() => import('../remotion/HeroVideoBackground'))
@@ -348,42 +349,12 @@ export class DeviceFarmPlugin {
           <div className='grid lg:grid-cols-2 gap-8 sm:gap-12 items-center w-full'>
             {/* Left side - Profile Image */}
             <div className='relative flex justify-center lg:justify-end order-1 lg:order-1'>
-              {/* Subtle AI background text - hidden on small screens */}
-              <div className='absolute -top-10 left-10 text-[50px] sm:text-[80px] font-bold text-gray-500/[0.08] select-none font-mono transform rotate-12 hidden sm:block'>
-                GenAI
-              </div>
-              <div className='absolute bottom-10 right-10 text-[40px] sm:text-[60px] font-bold text-gray-500/[0.12] select-none font-mono transform -rotate-12 hidden sm:block'>
-                MCPs
-              </div>
-              <div className='absolute top-32 -left-10 text-[35px] sm:text-[55px] font-bold text-gray-500/[0.10] select-none font-mono transform rotate-45 hidden md:block'>
-                LLMs
-              </div>
-
-              {/* Geometric shapes - hidden on mobile */}
-              <div className='absolute top-10 right-10 w-16 sm:w-20 h-16 sm:h-20 border-4 border-purple-500/30 rotate-45 hidden sm:block'></div>
-              <div className='absolute bottom-20 left-5 w-12 sm:w-16 h-12 sm:h-16 bg-blue-500/20 rotate-12 hidden sm:block'></div>
-
-              <div className='absolute -bottom-5 -right-5 text-4xl sm:text-6xl text-purple-500/40 font-mono hidden sm:block'>
-                ⚡
-              </div>
-
-              {/* Main profile image - Circular with responsive sizing */}
-              <div className='relative w-56 sm:w-64 md:w-72 lg:w-80 h-56 sm:h-64 md:h-72 lg:h-80 rounded-full overflow-hidden shadow-2xl'>
-                <img
-                  src={heroImage}
-                  alt='Srinivasan Sekar'
-                  className='w-full h-full object-cover hover:scale-110 transition-transform duration-500'
-                  style={{
-                    objectPosition: '50% 30%',
-                  }}
-                />
-
-                {/* Subtle circular gradient overlay */}
-                <div className='absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent'></div>
-
-                {/* Glowing ring effect */}
-                <div className='absolute -inset-1 bg-gradient-to-r from-blue-500/50 via-purple-500/50 to-blue-500/50 rounded-full blur-sm -z-10'></div>
-              </div>
+              {/* Main profile image - seamlessly blended with background */}
+              <TiltProfileImage
+                src={heroImage}
+                alt='Srinivasan Sekar'
+                className='w-64 sm:w-72 md:w-80 lg:w-96 h-64 sm:h-72 md:h-80 lg:h-96'
+              />
             </div>
 
             {/* Right side - Content */}
@@ -419,25 +390,36 @@ export class DeviceFarmPlugin {
                   href='https://github.com/srinivasanTarget'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='glass-button px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg flex items-center space-x-2 touch-target'
+                  className='glass-button p-3 sm:p-4 rounded-lg flex items-center touch-target'
+                  aria-label='GitHub'
                 >
-                  <span>GitHub</span>
+                  <svg className='w-6 h-6' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+                    <path d='M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22' />
+                  </svg>
                 </a>
                 <a
                   href='https://twitter.com/srinivasanskr'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='glass-button px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg flex items-center space-x-2 touch-target'
+                  className='glass-button p-3 sm:p-4 rounded-lg flex items-center touch-target'
+                  aria-label='Twitter'
                 >
-                  <span>Twitter</span>
+                  <svg className='w-6 h-6' viewBox='0 0 24 24' fill='currentColor'>
+                    <path d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z' />
+                  </svg>
                 </a>
                 <a
                   href='https://www.linkedin.com/in/srinivasan-sekar/'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='glass-button px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg flex items-center space-x-2 touch-target'
+                  className='glass-button p-3 sm:p-4 rounded-lg flex items-center touch-target'
+                  aria-label='LinkedIn'
                 >
-                  <span>LinkedIn</span>
+                  <svg className='w-6 h-6' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+                    <path d='M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z' />
+                    <rect x='2' y='9' width='4' height='12' />
+                    <circle cx='4' cy='4' r='2' />
+                  </svg>
                 </a>
               </div>
             </div>
@@ -642,25 +624,35 @@ export class DeviceFarmPlugin {
           <div className='flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 scale-up'>
             <a
               href='mailto:srinivasan.sekar1995@gmail.com'
-              className='glass-button bg-blue-600/80 hover:bg-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-200 touch-target'
+              className='glass-button bg-blue-600/80 hover:bg-blue-600 p-3 sm:p-4 rounded-full transition-all duration-200 touch-target'
+              aria-label='Email Me'
             >
-              Email Me
+              <svg className='w-6 h-6' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+                <rect x='3' y='5' width='18' height='14' rx='2' />
+                <polyline points='3 7 12 13 21 7' />
+              </svg>
             </a>
             <a
               href='https://twitter.com/srinivasanskr'
               target='_blank'
               rel='noopener noreferrer'
-              className='glass-button px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-colors duration-200 touch-target'
+              className='glass-button p-3 sm:p-4 rounded-full transition-colors duration-200 touch-target'
+              aria-label='Twitter'
             >
-              Twitter
+              <svg className='w-6 h-6' viewBox='0 0 24 24' fill='currentColor'>
+                <path d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z' />
+              </svg>
             </a>
             <a
               href='https://github.com/srinivasanTarget'
               target='_blank'
               rel='noopener noreferrer'
-              className='glass-button px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-colors duration-200 touch-target'
+              className='glass-button p-3 sm:p-4 rounded-full transition-colors duration-200 touch-target'
+              aria-label='GitHub'
             >
-              GitHub
+              <svg className='w-6 h-6' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+                <path d='M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22' />
+              </svg>
             </a>
           </div>
         </div>
