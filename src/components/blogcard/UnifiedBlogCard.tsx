@@ -18,7 +18,7 @@ export default function UnifiedBlogCard({ post }: UnifiedBlogCardProps) {
 
   const getPlatformColor = (platform?: string) => {
     switch (platform) {
-      case 'LambdaTest':
+      case 'TestMu AI':
         return 'bg-purple-600/20 text-purple-300'
       case 'Applitools':
         return 'bg-green-600/20 text-green-300'

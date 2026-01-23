@@ -53,7 +53,7 @@ export class UnifiedBlogService {
         let platform = 'External'
         if (post.source.includes('testproject.io')) platform = 'TestProject'
         else if (post.source.includes('applitools.com')) platform = 'Applitools'
-        else if (post.source.includes('lambdatest.com')) platform = 'LambdaTest'
+        else if (post.source.includes('lambdatest.com')) platform = 'TestMu AI'
 
         return {
           id: `external-${index}`,
@@ -88,7 +88,7 @@ export class UnifiedBlogService {
         let platform = 'External'
         if (post.source.includes('testproject.io')) platform = 'TestProject'
         else if (post.source.includes('applitools.com')) platform = 'Applitools'
-        else if (post.source.includes('lambdatest.com')) platform = 'LambdaTest'
+        else if (post.source.includes('lambdatest.com')) platform = 'TestMu AI'
 
         return {
           id: `external-${index}`,

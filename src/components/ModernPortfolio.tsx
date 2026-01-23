@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
 import { conferences } from '../portfolio/conferences'
 import { UnifiedBlogService, UnifiedBlogPost } from '../services/unifiedBlog'
@@ -7,12 +7,51 @@ import UnifiedBlogCard from './blogcard/UnifiedBlogCard'
 import SimpleProjectCard from './project/SimpleProjectCard'
 import heroImage from '../assets/images/ProfilePic.png'
 
+// Lazy load Remotion background for performance
+const HeroVideoBackground = lazy(() => import('../remotion/HeroVideoBackground'))
+
+// Custom hook for intersection observer animations
+const useIntersectionAnimation = (dependencies: unknown[] = []) => {
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -50px 0px',
+      threshold: 0.05,
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+        }
+      })
+    }, observerOptions)
+
+    // Small delay to ensure DOM is updated after data loads
+    const timeoutId = setTimeout(() => {
+      const animatedElements = document.querySelectorAll(
+        '.section-animate, .stagger-animate, .slide-left, .slide-right, .scale-up, .blur-reveal, .title-animate'
+      )
+      animatedElements.forEach((el) => observer.observe(el))
+    }, 100)
+
+    return () => {
+      clearTimeout(timeoutId)
+      observer.disconnect()
+    }
+  }, dependencies)
+}
+
 const ModernPortfolio = () => {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [recentBlogs, setRecentBlogs] = useState<UnifiedBlogPost[]>([])
   const [blogsLoading, setBlogsLoading] = useState(true)
   const [enhancedProjects, setEnhancedProjects] = useState<EnhancedProjectData[]>([])
   const [projectsLoading, setProjectsLoading] = useState(true)
+
+  // Initialize intersection observer for animations - re-run when data loads
+  useIntersectionAnimation([blogsLoading, projectsLoading])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,8 +114,8 @@ const ModernPortfolio = () => {
     {
       icon: '🚀',
       title: 'Director of Engineering',
-      description: 'Leading engineering teams at LambdaTest - cloud testing platform',
-      highlight: 'LambdaTest Leadership',
+      description: 'Leading engineering teams at TestMu AI - AI-powered testing platform',
+      highlight: 'TestMu AI Leadership',
     },
     {
       icon: '🔧',
@@ -144,6 +183,7 @@ const ModernPortfolio = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
+    setMobileMenuOpen(false)
   }
 
   return (
@@ -151,51 +191,99 @@ const ModernPortfolio = () => {
       {/* Navigation */}
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-black/90 backdrop-blur-md border-b border-gray-800' : 'bg-transparent'
+          isScrolled ? 'glass-nav' : 'bg-transparent'
         }`}
       >
-        <div className='max-w-7xl mx-auto px-6 py-4'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center'>
-              <div className='text-2xl font-signature text-blue-400 tracking-wide'>
+              <div className='text-xl sm:text-2xl font-signature text-blue-400 tracking-wide font-semibold' style={{ textShadow: 'none', WebkitFontSmoothing: 'antialiased' }}>
                 Srinivasan Sekar
               </div>
             </div>
-            <div className='hidden md:flex space-x-8'>
+            <div className='hidden md:flex space-x-6 lg:space-x-8'>
               {['About', 'Achievements', 'Projects', 'Talks', 'Contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
-                  className='hover:text-blue-400 transition-colors duration-200 font-medium'
+                  className='nav-link font-medium'
                 >
                   {item}
                 </button>
               ))}
               <button
                 onClick={() => scrollToSection('blogs')}
-                className='hover:text-blue-400 transition-colors duration-200 font-medium'
+                className='nav-link font-medium'
               >
                 Latest Blogs
               </button>
               <Link
                 to='/blog'
-                className='hover:text-blue-400 transition-colors duration-200 font-medium'
+                className='nav-link font-medium'
               >
                 All Blogs
               </Link>
             </div>
+            {/* Mobile menu button */}
             <div className='md:hidden'>
-              <button className='text-white hover:text-blue-400'>
-                <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={2}
-                    d='M4 6h16M4 12h16M4 18h16'
-                  />
-                </svg>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className='text-white hover:text-blue-400 p-2 touch-target'
+                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              >
+                {mobileMenuOpen ? (
+                  <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M6 18L18 6M6 6l12 12'
+                    />
+                  </svg>
+                ) : (
+                  <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M4 6h16M4 12h16M4 18h16'
+                    />
+                  </svg>
+                )}
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* Mobile menu panel */}
+        <div
+          className={`md:hidden mobile-menu-panel overflow-hidden transition-all duration-300 ${
+            mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className='px-4 py-4 space-y-1'>
+            {['About', 'Achievements', 'Projects', 'Talks', 'Contact'].map((item) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(item.toLowerCase())}
+                className='mobile-nav-link block w-full text-left py-3 px-4 text-white rounded-lg transition-all duration-200 touch-target'
+              >
+                {item}
+              </button>
+            ))}
+            <button
+              onClick={() => scrollToSection('blogs')}
+              className='mobile-nav-link block w-full text-left py-3 px-4 text-white rounded-lg transition-all duration-200 touch-target'
+            >
+              Latest Blogs
+            </button>
+            <Link
+              to='/blog'
+              onClick={() => setMobileMenuOpen(false)}
+              className='mobile-nav-link block w-full text-left py-3 px-4 text-white rounded-lg transition-all duration-200 touch-target'
+            >
+              All Blogs
+            </Link>
           </div>
         </div>
       </nav>
@@ -203,13 +291,22 @@ const ModernPortfolio = () => {
       {/* Hero Section */}
       <section
         id='hero'
-        className='min-h-screen flex items-center justify-center relative overflow-hidden'
+        className='min-h-screen flex items-center justify-center relative overflow-hidden pt-16 sm:pt-0'
       >
-        {/* Background with code pattern */}
-        <div className='absolute inset-0 bg-gradient-to-br from-blue-900/25 via-gray-900/40 to-black'></div>
+        {/* Remotion Video Background */}
+        <Suspense
+          fallback={
+            <div className='absolute inset-0 bg-gradient-to-br from-blue-900/25 via-gray-900/40 to-black' />
+          }
+        >
+          <HeroVideoBackground className='absolute inset-0 z-0' />
+        </Suspense>
 
-        {/* Code background text */}
-        <div className='absolute inset-0 opacity-10 font-mono text-xs text-blue-300 overflow-hidden'>
+        {/* Overlay gradient for better text readability */}
+        <div className='absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-black/50 z-[1]'></div>
+
+        {/* Code background text - hidden on mobile for performance */}
+        <div className='absolute inset-0 opacity-10 font-mono text-xs text-blue-300 overflow-hidden hidden sm:block'>
           <div className='absolute top-20 left-10 transform rotate-12'>
             <pre>{`const appium = require('appium');
 const driver = await appium.remote({
@@ -229,7 +326,7 @@ console.log('Test completed successfully!');`}</pre>
     await driver.setValue('#username', 'testuser');
     await driver.setValue('#password', 'password');
     await driver.click('#login');
-    
+
     const welcomeText = await driver.getText('.welcome');
     expect(welcomeText).toBe('Welcome!');
   });
@@ -247,35 +344,31 @@ export class DeviceFarmPlugin {
           </div>
         </div>
 
-        <div className='relative z-10 flex items-center justify-center w-full max-w-7xl mx-auto px-6'>
-          <div className='grid lg:grid-cols-2 gap-12 items-center w-full'>
+        <div className='relative z-20 flex items-center justify-center w-full max-w-7xl mx-auto px-4 sm:px-6'>
+          <div className='grid lg:grid-cols-2 gap-8 sm:gap-12 items-center w-full'>
             {/* Left side - Profile Image */}
-            <div className='relative flex justify-center lg:justify-end'>
-              {/* Subtle AI background text */}
-              <div className='absolute -top-10 left-10 text-[80px] font-bold text-gray-500/[0.08] select-none font-mono transform rotate-12'>
+            <div className='relative flex justify-center lg:justify-end order-1 lg:order-1'>
+              {/* Subtle AI background text - hidden on small screens */}
+              <div className='absolute -top-10 left-10 text-[50px] sm:text-[80px] font-bold text-gray-500/[0.08] select-none font-mono transform rotate-12 hidden sm:block'>
                 GenAI
               </div>
-              <div className='absolute bottom-10 right-10 text-[60px] font-bold text-gray-500/[0.12] select-none font-mono transform -rotate-12'>
+              <div className='absolute bottom-10 right-10 text-[40px] sm:text-[60px] font-bold text-gray-500/[0.12] select-none font-mono transform -rotate-12 hidden sm:block'>
                 MCPs
               </div>
-              <div className='absolute top-32 -left-10 text-[55px] font-bold text-gray-500/[0.10] select-none font-mono transform rotate-45'>
+              <div className='absolute top-32 -left-10 text-[35px] sm:text-[55px] font-bold text-gray-500/[0.10] select-none font-mono transform rotate-45 hidden md:block'>
                 LLMs
               </div>
 
-              {/* Geometric shapes */}
-              <div className='absolute top-10 right-10 w-20 h-20 border-4 border-purple-500/30 rotate-45'></div>
-              <div className='absolute bottom-20 left-5 w-16 h-16 bg-blue-500/20 rotate-12'></div>
+              {/* Geometric shapes - hidden on mobile */}
+              <div className='absolute top-10 right-10 w-16 sm:w-20 h-16 sm:h-20 border-4 border-purple-500/30 rotate-45 hidden sm:block'></div>
+              <div className='absolute bottom-20 left-5 w-12 sm:w-16 h-12 sm:h-16 bg-blue-500/20 rotate-12 hidden sm:block'></div>
 
-              {/* AI symbols */}
-              {/* <div className='absolute -top-5 -left-5 text-6xl text-purple-500/40 font-mono'>
-                🤖
-              </div> */}
-              <div className='absolute -bottom-5 -right-5 text-6xl text-purple-500/40 font-mono'>
+              <div className='absolute -bottom-5 -right-5 text-4xl sm:text-6xl text-purple-500/40 font-mono hidden sm:block'>
                 ⚡
               </div>
 
-              {/* Main profile image - Circular */}
-              <div className='relative w-80 h-80 rounded-full overflow-hidden shadow-2xl'>
+              {/* Main profile image - Circular with responsive sizing */}
+              <div className='relative w-56 sm:w-64 md:w-72 lg:w-80 h-56 sm:h-64 md:h-72 lg:h-80 rounded-full overflow-hidden shadow-2xl'>
                 <img
                   src={heroImage}
                   alt='Srinivasan Sekar'
@@ -294,39 +387,39 @@ export class DeviceFarmPlugin {
             </div>
 
             {/* Right side - Content */}
-            <div className='text-left lg:text-left'>
-              <h1 className='text-5xl lg:text-7xl font-heading font-bold mb-4 text-white leading-tight'>
+            <div className='text-center lg:text-left order-2 lg:order-2'>
+              <h1 className='text-4xl sm:text-5xl lg:text-7xl font-heading font-bold mb-4 text-white leading-tight'>
                 Srinivasan
                 <br />
                 <span className='text-blue-400'>Sekar</span>
               </h1>
 
               <div className='mb-6'>
-                <span className='text-blue-400 font-mono text-lg'>
-                  {'Director of Engineering @LambdaTest'}
+                <span className='text-blue-400 font-mono text-base sm:text-lg'>
+                  {'Director of Engineering @TestMu AI'}
                 </span>
               </div>
 
               <div className='mb-6 space-y-2'>
-                <div className='flex flex-wrap gap-4 text-sm'>
-                  <span className='bg-blue-600/20 text-blue-300 px-3 py-1 rounded-full'>
+                <div className='flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-4 text-xs sm:text-sm'>
+                  <span className='glass-card px-3 py-1.5 rounded-full text-blue-300'>
                     Open Source Advocate
                   </span>
-                  <span className='bg-blue-600/20 text-blue-300 px-3 py-1 rounded-full'>
+                  <span className='glass-card px-3 py-1.5 rounded-full text-blue-300'>
                     International Speaker
                   </span>
-                  <span className='bg-blue-600/20 text-blue-300 px-3 py-1 rounded-full'>
+                  <span className='glass-card px-3 py-1.5 rounded-full text-blue-300'>
                     Technical Author
                   </span>
                 </div>
               </div>
 
-              <div className='flex flex-wrap gap-4'>
+              <div className='flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4'>
                 <a
                   href='https://github.com/srinivasanTarget'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg transition-colors duration-200 flex items-center space-x-2'
+                  className='glass-button px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg flex items-center space-x-2 touch-target'
                 >
                   <span>GitHub</span>
                 </a>
@@ -334,7 +427,7 @@ export class DeviceFarmPlugin {
                   href='https://twitter.com/srinivasanskr'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg transition-colors duration-200 flex items-center space-x-2'
+                  className='glass-button px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg flex items-center space-x-2 touch-target'
                 >
                   <span>Twitter</span>
                 </a>
@@ -342,7 +435,7 @@ export class DeviceFarmPlugin {
                   href='https://www.linkedin.com/in/srinivasan-sekar/'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg transition-colors duration-200 flex items-center space-x-2'
+                  className='glass-button px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg flex items-center space-x-2 touch-target'
                 >
                   <span>LinkedIn</span>
                 </a>
@@ -353,52 +446,54 @@ export class DeviceFarmPlugin {
       </section>
 
       {/* Stats Section */}
-      <section className='py-16 bg-gray-900/30'>
-        <div className='max-w-6xl mx-auto px-6'>
-          <div className='grid md:grid-cols-4 gap-8 text-center'>
-            <div className='bg-gray-800/30 p-6 rounded-xl border border-gray-700'>
-              <div className='text-3xl font-bold text-blue-400 mb-2'>25+</div>
-              <div className='text-gray-300'>Conference Talks</div>
+      <section className='py-12 sm:py-16 bg-gray-900/30'>
+        <div className='max-w-6xl mx-auto px-4 sm:px-6'>
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 text-center stagger-animate'>
+            <div className='glass-card-hover p-4 sm:p-6 rounded-xl'>
+              <div className='text-2xl sm:text-3xl font-bold text-blue-400 mb-2'>25+</div>
+              <div className='text-gray-300 text-sm sm:text-base'>Conference Talks</div>
             </div>
-            <div className='bg-gray-800/30 p-6 rounded-xl border border-gray-700'>
-              <div className='text-3xl font-bold text-blue-400 mb-2'>10+</div>
-              <div className='text-gray-300'>Technical Articles</div>
+            <div className='glass-card-hover p-4 sm:p-6 rounded-xl'>
+              <div className='text-2xl sm:text-3xl font-bold text-blue-400 mb-2'>10+</div>
+              <div className='text-gray-300 text-sm sm:text-base'>Technical Articles</div>
             </div>
-            <div className='bg-gray-800/30 p-6 rounded-xl border border-gray-700'>
-              <div className='text-3xl font-bold text-blue-400 mb-2'>∞</div>
-              <div className='text-gray-300'>Open Source Projects</div>
+            <div className='glass-card-hover p-4 sm:p-6 rounded-xl'>
+              <div className='text-2xl sm:text-3xl font-bold text-blue-400 mb-2'>∞</div>
+              <div className='text-gray-300 text-sm sm:text-base'>Open Source Projects</div>
             </div>
-            <div className='bg-gray-800/30 p-6 rounded-xl border border-gray-700'>
-              <div className='text-3xl font-bold text-blue-400 mb-2'>13+</div>
-              <div className='text-gray-300'>Years in Testing</div>
+            <div className='glass-card-hover p-4 sm:p-6 rounded-xl'>
+              <div className='text-2xl sm:text-3xl font-bold text-blue-400 mb-2'>13+</div>
+              <div className='text-gray-300 text-sm sm:text-base'>Years in Testing</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id='about' className='py-20 bg-gray-900/50'>
-        <div className='max-w-6xl mx-auto px-6'>
-          <h2 className='text-4xl font-heading font-bold text-center mb-16 text-white'>About Me</h2>
-          <div className='max-w-4xl mx-auto'>
-            <p className='text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
+      <section id='about' className='py-12 sm:py-16 lg:py-20 bg-gray-900/50'>
+        <div className='max-w-6xl mx-auto px-4 sm:px-6'>
+          <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
+            About Me
+          </h2>
+          <div className='max-w-4xl mx-auto glass-card p-6 sm:p-8 lg:p-10 rounded-2xl blur-reveal glow-on-enter'>
+            <p className='text-base sm:text-lg lg:text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
               I&apos;m a passionate technologist and leader in software testing and automation. As{' '}
-              <span className='modern-highlight'>Director of Engineering at LambdaTest</span>, I
+              <span className='modern-highlight'>Director of Engineering at TestMu AI</span>, I
               drive innovation in cloud-based testing platforms serving millions of developers
               worldwide.
             </p>
-            <p className='text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
+            <p className='text-base sm:text-lg lg:text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
               My open source journey began with <span className='modern-highlight'>Appium</span>,
               where I became a core maintainer and helped architect Appium 2.0. I&apos;ve created
               plugins like{' '}
               <span className='modern-highlight'>
                 Device Farm, Wait Plugin, and Gestures Plugin
               </span>{' '}
-              used by thousands globally. Recently, I pioneered{' '}
+              used by millions globally. Recently, I pioneered{' '}
               <span className='modern-highlight'>Model Context Protocol (MCP) servers</span> for
               mobile automation, bridging AI and testing workflows.
             </p>
-            <p className='text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
+            <p className='text-base sm:text-lg lg:text-xl text-gray-200 leading-relaxed font-medium'>
               As an <span className='modern-highlight'>international speaker</span>, I&apos;ve
               presented at <span className='modern-highlight'>25+ conferences</span> including
               SeleniumConf, AppiumConf, FOSDEM, and Agile India, sharing insights on mobile
@@ -409,23 +504,23 @@ export class DeviceFarmPlugin {
       </section>
 
       {/* Achievements Section */}
-      <section id='achievements' className='py-20'>
-        <div className='max-w-7xl mx-auto px-6'>
-          <h2 className='text-4xl font-heading font-bold text-center mb-16 text-white'>
+      <section id='achievements' className='py-12 sm:py-16 lg:py-20'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+          <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
             Key Achievements
           </h2>
-          <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 stagger-animate'>
             {achievements.map((achievement, index) => (
               <div
                 key={index}
-                className='bg-gray-900/50 p-8 rounded-xl border border-gray-800 hover:border-blue-500 transition-all duration-300 hover:transform hover:scale-105'
+                className='glass-card-hover glass-border-gradient p-6 sm:p-8 rounded-xl'
               >
-                <div className='text-4xl mb-4'>{achievement.icon}</div>
-                <h3 className='text-xl font-heading font-bold mb-3 text-white'>
+                <div className='text-3xl sm:text-4xl mb-4'>{achievement.icon}</div>
+                <h3 className='text-lg sm:text-xl font-heading font-bold mb-3 text-white'>
                   {achievement.title}
                 </h3>
-                <p className='text-gray-400 mb-4'>{achievement.description}</p>
-                <span className='inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-sm'>
+                <p className='text-gray-400 mb-4 text-sm sm:text-base'>{achievement.description}</p>
+                <span className='inline-block bg-blue-600/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs sm:text-sm'>
                   {achievement.highlight}
                 </span>
               </div>
@@ -435,12 +530,12 @@ export class DeviceFarmPlugin {
       </section>
 
       {/* Projects Section */}
-      <section id='projects' className='py-20 bg-gray-900/50'>
-        <div className='max-w-7xl mx-auto px-6'>
-          <h2 className='text-4xl font-heading font-bold text-center mb-8 text-white'>
+      <section id='projects' className='py-12 sm:py-16 lg:py-20 bg-gray-900/50'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+          <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-6 sm:mb-8 text-white title-animate'>
             Open Source Contributions
           </h2>
-          <p className='text-xl text-gray-300 text-center mb-16 max-w-3xl mx-auto'>
+          <p className='text-base sm:text-lg lg:text-xl text-gray-300 text-center mb-10 sm:mb-16 max-w-3xl mx-auto section-animate'>
             Key contributions to testing and automation ecosystem
           </p>
 
@@ -450,7 +545,7 @@ export class DeviceFarmPlugin {
               <p className='text-gray-400'>Loading projects...</p>
             </div>
           ) : (
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 stagger-animate'>
               {enhancedProjects.map((project, index) => (
                 <SimpleProjectCard key={index} project={project} />
               ))}
@@ -460,17 +555,14 @@ export class DeviceFarmPlugin {
       </section>
 
       {/* Talks Section */}
-      <section id='talks' className='py-20'>
-        <div className='max-w-7xl mx-auto px-6'>
-          <h2 className='text-4xl font-heading font-bold text-center mb-16 text-white'>
+      <section id='talks' className='py-12 sm:py-16 lg:py-20'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+          <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
             Conference Talks & Presentations
           </h2>
-          <div className='grid md:grid-cols-2 gap-8'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 stagger-animate'>
             {conferences.slice(0, 8).map((conference, index) => (
-              <div
-                key={index}
-                className='bg-gray-900/50 p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition-all duration-300'
-              >
+              <div key={index} className='glass-card-hover p-5 sm:p-6 rounded-xl'>
                 <div className='flex flex-wrap gap-2 mb-3'>
                   {conference.tags.map((tag, tagIndex) => (
                     <span
@@ -481,16 +573,16 @@ export class DeviceFarmPlugin {
                     </span>
                   ))}
                 </div>
-                <h3 className='text-lg font-heading font-bold mb-2 text-white'>
+                <h3 className='text-base sm:text-lg font-heading font-bold mb-2 text-white'>
                   {conference.title}
                 </h3>
-                <p className='text-gray-400 mb-4'>{conference.description}</p>
+                <p className='text-gray-400 mb-4 text-sm sm:text-base'>{conference.description}</p>
                 {conference.url && (
                   <a
                     href={conference.url}
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200'
+                    className='inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 touch-target'
                   >
                     Watch Talk →
                   </a>
@@ -502,12 +594,12 @@ export class DeviceFarmPlugin {
       </section>
 
       {/* Blogs Section */}
-      <section id='blogs' className='py-20 bg-gray-900/50'>
-        <div className='max-w-7xl mx-auto px-6'>
-          <h2 className='text-4xl font-heading font-bold text-center mb-16 text-white'>
+      <section id='blogs' className='py-12 sm:py-16 lg:py-20 bg-gray-900/50'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+          <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
             Latest Writings
           </h2>
-          <p className='text-xl text-gray-300 text-center mb-12 max-w-3xl mx-auto'>
+          <p className='text-base sm:text-lg lg:text-xl text-gray-300 text-center mb-8 sm:mb-12 max-w-3xl mx-auto section-animate'>
             Recent articles from my personal blog and guest posts on leading tech platforms
           </p>
 
@@ -518,7 +610,7 @@ export class DeviceFarmPlugin {
             </div>
           ) : (
             <>
-              <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 stagger-animate'>
                 {recentBlogs.map((blog) => (
                   <UnifiedBlogCard key={blog.id} post={blog} />
                 ))}
@@ -526,7 +618,7 @@ export class DeviceFarmPlugin {
               <div className='text-center'>
                 <Link
                   to='/blog'
-                  className='bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-lg transition-all duration-200 transform hover:scale-105 inline-flex items-center space-x-2'
+                  className='glass-button bg-blue-600/80 hover:bg-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-200 inline-flex items-center space-x-2 touch-target'
                 >
                   <span>View All Articles</span>
                   <span>→</span>
@@ -538,17 +630,19 @@ export class DeviceFarmPlugin {
       </section>
 
       {/* Contact Section */}
-      <section id='contact' className='py-20'>
-        <div className='max-w-4xl mx-auto px-6 text-center'>
-          <h2 className='text-4xl font-heading font-bold mb-8 text-white'>Let&apos;s Connect</h2>
-          <p className='text-xl text-gray-300 mb-12'>
+      <section id='contact' className='py-12 sm:py-16 lg:py-20'>
+        <div className='max-w-4xl mx-auto px-4 sm:px-6 text-center'>
+          <h2 className='text-3xl sm:text-4xl font-heading font-bold mb-6 sm:mb-8 text-white title-animate'>
+            Let&apos;s Connect
+          </h2>
+          <p className='text-base sm:text-lg lg:text-xl text-gray-300 mb-8 sm:mb-12 section-animate'>
             Interested in collaboration, speaking opportunities, or just want to chat about testing
             and automation?
           </p>
-          <div className='flex flex-wrap justify-center gap-6'>
+          <div className='flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 scale-up'>
             <a
               href='mailto:srinivasan.sekar1995@gmail.com'
-              className='bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-full transition-all duration-200 transform hover:scale-105'
+              className='glass-button bg-blue-600/80 hover:bg-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-200 touch-target'
             >
               Email Me
             </a>
@@ -556,7 +650,7 @@ export class DeviceFarmPlugin {
               href='https://twitter.com/srinivasanskr'
               target='_blank'
               rel='noopener noreferrer'
-              className='bg-gray-800 hover:bg-gray-700 px-8 py-4 rounded-full transition-colors duration-200'
+              className='glass-button px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-colors duration-200 touch-target'
             >
               Twitter
             </a>
@@ -564,7 +658,7 @@ export class DeviceFarmPlugin {
               href='https://github.com/srinivasanTarget'
               target='_blank'
               rel='noopener noreferrer'
-              className='bg-gray-800 hover:bg-gray-700 px-8 py-4 rounded-full transition-colors duration-200'
+              className='glass-button px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-colors duration-200 touch-target'
             >
               GitHub
             </a>
@@ -573,9 +667,11 @@ export class DeviceFarmPlugin {
       </section>
 
       {/* Footer */}
-      <footer className='py-8 border-t border-gray-800'>
-        <div className='max-w-7xl mx-auto px-6 text-center'>
-          <p className='text-gray-400'>© 2025 Srinivasan Sekar. Built with React & Tailwind CSS.</p>
+      <footer className='py-6 sm:py-8 border-t border-white/10'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 text-center'>
+          <p className='text-gray-400 text-sm sm:text-base'>
+            © 2025 Srinivasan Sekar. Built with React & Tailwind CSS.
+          </p>
         </div>
       </footer>
     </div>

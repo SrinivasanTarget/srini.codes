@@ -1,10 +1,67 @@
 const conferences = [
   {
+    title: 'TestCon Europe 2025',
+    description: 'Testing Agentic AI Applications: Beyond Traditional QA',
+    imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
+    url: 'https://www.testconeurope.com/',
+    reverse: false,
+    tags: ['AI', 'Agentic', 'Testing', 'Quality'],
+  },
+  {
+    title: 'LambdaTest Testμ Conference 2025',
+    description:
+      'Build Your Testing Sidekick: Custom Tools with Model Context Protocol & Testing the Untestable: Introducing Agent to Agent Testing',
+    imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
+    url: 'https://www.lambdatest.com/testmuconf-2025/',
+    reverse: true,
+    tags: ['AI', 'Testing', 'MCP', 'Agents'],
+  },
+  {
+    title: 'Nordic Testing Days 2025',
+    description: 'Advanced Appium Workshop: Simplifying Mobile Test Automation',
+    imageURL: 'https://nordictestingdays.eu/images/logo.svg',
+    url: 'https://nordictestingdays.eu/',
+    reverse: false,
+    tags: ['Mobile', 'Appium', 'Testing', 'Automation'],
+  },
+  {
+    title: 'SeleniumConf & AppiumConf Valencia 2025',
+    description: 'Advanced Appium 2.0',
+    imageURL: 'https://seleniumconf.com/wp-content/uploads/2022/11/SeleniumConf-logo-white.svg',
+    url: 'https://seleniumconf.com/valencia-2025/',
+    reverse: true,
+    tags: ['Mobile', 'Appium', 'Selenium', 'Testing'],
+  },
+  {
+    title: 'AppiumConf 2024',
+    description: 'Advanced Appium 2.0',
+    imageURL: 'https://appiumconf.com/images/appium-logo.svg',
+    url: 'https://appiumconf.com/',
+    reverse: false,
+    tags: ['Mobile', 'Appium', 'Testing', 'Automation'],
+  },
+  {
+    title: 'HUSTEF 2024',
+    description: "Mobile App Crashes in Production: Lessons Learned from a Tester's Viewpoint",
+    imageURL: 'https://hustef.com/images/logo.svg',
+    url: 'https://hustef.com/',
+    reverse: true,
+    tags: ['Mobile', 'Testing', 'Quality', 'Crashes'],
+  },
+  {
+    title: 'LambdaTest Spartan Summit 2024',
+    description: 'Unveiling the Power of Web Performance Metrics for Testers',
+    imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
+    url: 'https://www.lambdatest.com/spartans-summit-2024/',
+    reverse: false,
+    tags: ['Performance', 'Web', 'Testing', 'Metrics'],
+  },
+  {
     title: 'Testμ 2023',
     description: 'Elevate your testing game: Building Appium 2.0 plugin Live',
     imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
     url: 'https://www.youtube.com/embed/b6yWXfLpazc?enablejsapi=1&autoplay=1',
-    reverse: false,
+    reverse: true,
     tags: ['Mobile', 'Appium', 'Testing'],
   },
   {
@@ -13,7 +70,7 @@ const conferences = [
     imageURL:
       'https://www.thoughtworks.com/etc.clientlibs/thoughtworks/clientlibs/clientlib-site/resources/images/thoughtworks-logo.svg',
     url: 'https://youtu.be/QMr30Za_-vM?si=qFe-S4E9g3qjdT-g',
-    reverse: true,
+    reverse: false,
     tags: ['GenAI', 'Bias', 'Testing'],
   },
   {
@@ -21,7 +78,7 @@ const conferences = [
     description: 'Clean Code Practices for Test Automation: Part 2',
     imageURL: 'https://seleniumconf.com/wp-content/uploads/2022/11/SeleniumConf-logo-white.svg',
     url: 'https://seleniumconf.com/#advanced-appium-20',
-    reverse: false,
+    reverse: true,
     tags: ['Appium', 'Mobile', 'Testing'],
   },
   {
@@ -29,7 +86,7 @@ const conferences = [
     description: 'Clean Code Practices for Test Automation: Part 2',
     imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
     url: 'https://www.lambdatest.com/webinar/clean-coding-practices-for-test-automation/',
-    reverse: true,
+    reverse: false,
     tags: ['Clean Code', 'Automation', 'Testing'],
   },
   {
@@ -38,7 +95,7 @@ const conferences = [
     imageURL:
       'https://www.thoughtworks.com/etc.clientlibs/thoughtworks/clientlibs/clientlib-site/resources/images/thoughtworks-logo.svg',
     url: 'https://www.meetup.com/tech-talks-thoughtworks-singapore/events/292842778/',
-    reverse: false,
+    reverse: true,
     tags: ['Mobile', 'Challenges', 'Testing'],
   },
   {
@@ -47,7 +104,7 @@ const conferences = [
     imageURL:
       'https://2021.agileindia.org/wp-content/uploads/2021/06/agileindia2021-online-white-vector.png?x46041',
     url: 'https://confengine.com/conferences/agile-india-2022/proposal/17003/speed-matters-client-side-performance-improvement-tips-amp-tricks',
-    reverse: true,
+    reverse: false,
     tags: ['UI', 'Performance', 'Testing'],
   },
   {
@@ -55,7 +112,7 @@ const conferences = [
     description: 'Clean Coding Practices for Test Automation',
     imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
     url: 'https://www.lambdatest.com/webinar/clean-coding-practices-for-test-automation/',
-    reverse: false,
+    reverse: true,
     tags: ['Clean Code', 'Automation', 'Testing'],
   },
   {
@@ -63,7 +120,7 @@ const conferences = [
     description: 'Workshop - Build Appium 2.0 plugins',
     imageURL: 'https://github.com/twqablore/vodqa/blob/gh-pages/src/assets/images/logo.png',
     url: 'https://twqablore.github.io/vodqa/',
-    reverse: true,
+    reverse: false,
     tags: ['Mobile', 'Appium', 'Testing'],
   },
   {
@@ -71,7 +128,7 @@ const conferences = [
     description: "Appium: Endgame & What's Next?",
     imageURL: 'https://www.lambdatest.com/resources/images/logos/logo.svg',
     url: 'https://www.lambdatest.com/testuconf-2022/',
-    reverse: false,
+    reverse: true,
     tags: ['Mobile', 'Appium', 'Testing'],
   },
   {
@@ -79,7 +136,7 @@ const conferences = [
     description: 'Build your own Appium 2.0 Driver',
     imageURL: 'https://seleniumconf.in/img/logo.svg',
     url: 'https://confengine.com/conferences/selenium-conf-2022/',
-    reverse: true,
+    reverse: false,
     tags: ['Mobile', 'Appium', 'Testing'],
   },
   {
@@ -88,7 +145,7 @@ const conferences = [
     imageURL:
       'https://2021.agileindia.org/wp-content/uploads/2021/06/agileindia2021-online-white-vector.png?x46041',
     url: 'https://guildconferences.com/automation-guild-2022/',
-    reverse: false,
+    reverse: true,
     tags: ['Containers', 'Kubernetes', 'Testing'],
   },
   {
@@ -97,7 +154,7 @@ const conferences = [
     imageURL:
       'https://2021.agileindia.org/wp-content/uploads/2021/06/agileindia2021-online-white-vector.png?x46041',
     url: 'https://confengine.com/conferences/agile-india-2021/proposal/15724/testing-service-mesh-configs-and-k8s-manifests',
-    reverse: true,
+    reverse: false,
     tags: ['Agile', 'DevOps', 'Kubernetes', 'Testing'],
   },
   {
@@ -106,7 +163,7 @@ const conferences = [
     imageURL:
       'https://res.cloudinary.com/dnnqsdghx/image/upload/w_600,f_auto,q_auto:best/v1547088258/ConfLogos/szrzudmzoqf4yld9z7zo.png',
     url: 'https://confengine.com/conferences/appium-conf-2021/proposal/15821/build-your-own-appium-plugin',
-    reverse: false,
+    reverse: true,
     tags: ['Appium', 'Mobile', 'Testing', 'Plugins'],
   },
   {
@@ -115,7 +172,7 @@ const conferences = [
     imageURL:
       'https://4b7xbg26zfmr1aupi724hrym-wpengine.netdna-ssl.com/wp-content/uploads/2020/07/logo@2x.png',
     url: 'https://confengine.com/conferences/appium-conf-2021/proposal/15821/build-your-own-appium-plugin',
-    reverse: true,
+    reverse: false,
     tags: ['Open Source'],
   },
   {
@@ -123,24 +180,16 @@ const conferences = [
     description: 'Consumer-Driven Contracts on Event-Driven Apps',
     imageURL: '',
     url: '',
-    reverse: false,
+    reverse: true,
     tags: ['Testing', 'Event-Driven', 'Consumer-Driven'],
   },
   {
     title: 'Future of Testing: Mobile',
-    description: 'Appium 2.0: What’s Next',
+    description: "Appium 2.0: What's Next",
     imageURL: '',
     url: 'https://applitools.com/future-of-testing-mobile-apac-2021/',
-    reverse: true,
-    tags: ['Mobile', 'Testing', 'Appium'],
-  },
-  {
-    title: 'TestBusters Day&Night 2021',
-    description: 'Consumer-Driven Contracts on Event-Driven Apps',
-    imageURL: '',
-    url: '',
     reverse: false,
-    tags: ['Testing', 'Event-Driven', 'Consumer-Driven'],
+    tags: ['Mobile', 'Testing', 'Appium'],
   },
   {
     title: 'TestProject Webinar',

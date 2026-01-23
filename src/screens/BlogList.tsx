@@ -70,7 +70,7 @@ export default function BlogList() {
           </h1>
           <p className='text-xl text-gray-300 max-w-3xl mx-auto'>
             A comprehensive collection of my technical articles, tutorials, and insights published
-            on my personal blog and guest posts on platforms like LambdaTest, Applitools, and more.
+            on my personal blog and guest posts on platforms like TestMu AI, Applitools, and more.
           </p>
         </div>
       </div>
