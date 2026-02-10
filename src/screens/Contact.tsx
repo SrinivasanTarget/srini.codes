@@ -35,7 +35,7 @@ const CONTACT_INFO = {
   title: 'Director of Engineering',
   subtitle: 'Open Source Contributor',
   company: 'TestMu AI',
-  email: 'srinivasan.sekar1995@gmail.com',
+  email: 'srinivasan.sekar1990@gmail.com',
   phone: '+919025582170',
   website: 'https://srini.codes',
   linkedin: 'srinivasan-sekar',

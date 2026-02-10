@@ -623,7 +623,7 @@ export class DeviceFarmPlugin {
           </p>
           <div className='flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 scale-up'>
             <a
-              href='mailto:srinivasan.sekar1995@gmail.com'
+              href='mailto:srinivasan.sekar1990@gmail.com'
               className='glass-button bg-blue-600/80 hover:bg-blue-600 p-3 sm:p-4 rounded-full transition-all duration-200 touch-target'
               aria-label='Email Me'
             >
