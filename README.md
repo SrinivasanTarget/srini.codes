@@ -35,26 +35,31 @@ This is my personal portfolio website, built with modern web technologies to sho
 ## 🛠️ Tech Stack
 
 ### Core
+
 - **React 18.2** - UI library
 - **TypeScript 5.1** - Type-safe JavaScript
 - **Vite 4.3** - Fast build tool and dev server
 - **React Router DOM 7.6** - Client-side routing
 
 ### Styling
+
 - **TailwindCSS 3.3** - Utility-first CSS framework
 - **Tailwind Typography** - Beautiful typographic defaults
 - **Custom Design System** - Glassmorphism, custom fonts, and animations
 
 ### Special Features
+
 - **Remotion 4.0** - Programmatic video generation for animated backgrounds
 - **Partytown 0.8** - Web worker for third-party scripts
 - **React Twitter Widgets** - Embedded Twitter content
 
 ### Analytics & Monitoring
+
 - **Vercel Analytics** - Web analytics
 - **Plausible Analytics** - Privacy-friendly analytics
 
 ### Development Tools
+
 - **ESLint** - Code linting
 - **Prettier** - Code formatting
 - **PostCSS** - CSS processing
@@ -70,17 +75,20 @@ This is my personal portfolio website, built with modern web technologies to sho
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/SrinivasanTarget/srini.codes.git
 cd srini.codes
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -106,6 +114,7 @@ npm run build
 ```
 
 This command:
+
 1. Compiles TypeScript files
 2. Copies Partytown library files to the build directory
 3. Builds the optimized production bundle with Vite
@@ -151,6 +160,7 @@ This is a personal portfolio project, but if you find any bugs or have suggestio
 ## 👤 Author
 
 **Srinivasan Sekar**
+
 - Website: [srini.codes](https://srini.codes)
 - GitHub: [@SrinivasanTarget](https://github.com/SrinivasanTarget)
 
