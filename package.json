@@ -21,6 +21,7 @@
     "eslint-config-react-app": "^7.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-globe.gl": "^2.37.0",
     "react-router-dom": "^7.6.2",
     "react-twitter-widgets": "^1.11.0",
     "remotion": "^4.0.409"

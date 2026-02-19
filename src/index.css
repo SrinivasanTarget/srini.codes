@@ -28,7 +28,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  @apply text-blue-400 hover:text-blue-300;
+  @apply text-gray-300 hover:text-white;
   transition: color 0.2s ease;
 }
 
@@ -42,12 +42,12 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3b82f6;
+  background: #f59e0b;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2563eb;
+  background: #b45309;
 }
 
 /* Smooth animations */
@@ -57,7 +57,7 @@ a {
 
 /* Better text rendering */
 .text-gradient {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  background: linear-gradient(135deg, #f59e0b, #d97706);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -72,7 +72,7 @@ a:focus {
 button:focus-visible,
 a:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.5);
   border-radius: 4px;
 }
 
@@ -90,7 +90,7 @@ a:focus-visible {
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(90deg, #f59e0b, #eab308);
   border-radius: 1px;
   transition: width 0.3s ease, left 0.3s ease;
 }
@@ -103,7 +103,7 @@ a:focus-visible {
 
 .nav-link:hover,
 .nav-link:focus {
-  color: #60a5fa;
+  color: #fbbf24;
 }
 
 /* Mobile navigation link styles */
@@ -115,13 +115,13 @@ a:focus-visible {
 
 .mobile-nav-link:hover,
 .mobile-nav-link:focus {
-  color: #60a5fa;
-  background: rgba(59, 130, 246, 0.1);
-  border-left-color: #3b82f6;
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.1);
+  border-left-color: #f59e0b;
 }
 
 .mobile-nav-link:active {
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(245, 158, 11, 0.15);
 }
 
 /* Signature font clarity */
@@ -144,8 +144,8 @@ a:focus-visible {
 }
 
 @keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+  0%, 100% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(245, 158, 11, 0.6); }
 }
 
 .animate-float {
@@ -190,7 +190,7 @@ a:focus-visible {
   bottom: -8px;
   width: 100%;
   height: 6px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 12'%3E%3Cpath d='M5,6 Q50,2 100,6 T200,6 Q250,4 295,6' stroke='%233b82f6' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 12'%3E%3Cpath d='M5,6 Q50,2 100,6 T200,6 Q250,4 295,6' stroke='%23f59e0b' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: repeat-x;
   background-size: 300px 12px;
   opacity: 0.8;
@@ -209,22 +209,12 @@ a:focus-visible {
 /* Modern highlight styles */
 .modern-highlight {
   position: relative;
-  color: #60a5fa;
+  color: #fbbf24;
   font-weight: 600;
 }
 
 .modern-highlight::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6);
-  background-size: 200% 100%;
-  border-radius: 2px;
-  opacity: 0.7;
-  animation: highlight-flow 3s ease-in-out infinite;
+  display: none;
 }
 
 @keyframes highlight-flow {
@@ -261,8 +251,8 @@ a:focus-visible {
 
 .glass-card-hover:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(59, 130, 246, 0.5);
-  box-shadow: 0 8px 32px 0 rgba(59, 130, 246, 0.2);
+  border-color: rgba(245, 158, 11, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(245, 158, 11, 0.2);
   transform: translateY(-4px);
 }
 
@@ -286,7 +276,7 @@ a:focus-visible {
 .glass-button:hover {
   background: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
 }
 
 /* Gradient border effect using pseudo-element */
@@ -300,7 +290,7 @@ a:focus-visible {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.5), rgba(139, 92, 246, 0.5));
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.5), rgba(234, 179, 8, 0.5));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -357,8 +347,8 @@ a:focus-visible {
 
 .glass-input:focus {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(59, 130, 246, 0.5);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+  border-color: rgba(245, 158, 11, 0.5);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
   outline: none;
 }
 
@@ -527,13 +517,13 @@ a:focus-visible {
 
 @keyframes section-glow {
   0% {
-    box-shadow: 0 0 0 rgba(59, 130, 246, 0);
+    box-shadow: 0 0 0 rgba(245, 158, 11, 0);
   }
   50% {
-    box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
   }
   100% {
-    box-shadow: 0 0 0 rgba(59, 130, 246, 0);
+    box-shadow: 0 0 0 rgba(245, 158, 11, 0);
   }
 }
 
@@ -550,7 +540,7 @@ a:focus-visible {
   left: 50%;
   width: 0;
   height: 3px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(90deg, #f59e0b, #eab308);
   border-radius: 2px;
   transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1),
               left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -570,5 +560,5 @@ a:focus-visible {
 .card-lift:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
-              0 0 30px rgba(59, 130, 246, 0.1);
+              0 0 30px rgba(245, 158, 11, 0.1);
 }

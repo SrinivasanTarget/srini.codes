@@ -7,20 +7,20 @@ export default function BlogNavigation() {
       <div className='max-w-7xl mx-auto px-6 py-4'>
         <div className='flex justify-between items-center'>
           <Link to='/' className='flex items-center'>
-            <div className='text-2xl font-signature text-blue-400 tracking-wide'>
+            <div className='text-2xl font-signature text-amber-400 tracking-wide'>
               Srinivasan Sekar
             </div>
           </Link>
           <div className='flex space-x-6'>
             <Link
               to='/'
-              className='hover:text-blue-400 transition-colors duration-200 font-medium text-white'
+              className='hover:text-white transition-colors duration-200 font-medium text-gray-300'
             >
               Home
             </Link>
             <Link
               to='/blog'
-              className='hover:text-blue-400 transition-colors duration-200 font-medium text-blue-400'
+              className='hover:text-white transition-colors duration-200 font-medium text-white'
             >
               Blog
             </Link>

@@ -21,7 +21,7 @@ const ParticleField: React.FC<ParticleFieldProps> = ({ particleCount = 30, seed 
     const startY = random(0, 100, i + 100)
     const size = random(2, 6, i + 200)
     const speed = random(0.5, 2, i + 300)
-    const isBlue = random(0, 1, i + 400) > 0.4
+    const isAmber = random(0, 1, i + 400) > 0.4
     const delay = random(0, 100, i + 500)
 
     // Circular floating animation
@@ -60,12 +60,12 @@ const ParticleField: React.FC<ParticleFieldProps> = ({ particleCount = 30, seed 
           width: `${size}px`,
           height: `${size}px`,
           borderRadius: '50%',
-          background: isBlue
-            ? `radial-gradient(circle, ${COLORS.blue}, transparent)`
-            : `radial-gradient(circle, ${COLORS.purple}, transparent)`,
+          background: isAmber
+            ? `radial-gradient(circle, ${COLORS.amber}, transparent)`
+            : `radial-gradient(circle, ${COLORS.gold}, transparent)`,
           transform: `translate(${xOffset}px, ${yOffset}px) scale(${scale})`,
           opacity,
-          boxShadow: `0 0 ${size * 3}px ${isBlue ? COLORS.blueGlow : COLORS.purpleGlow}`,
+          boxShadow: `0 0 ${size * 3}px ${isAmber ? COLORS.amberGlow : COLORS.goldGlow}`,
           pointerEvents: 'none',
         }}
       />

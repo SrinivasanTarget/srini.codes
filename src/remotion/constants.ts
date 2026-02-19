@@ -6,11 +6,11 @@ export const ANIMATION_CONFIG = {
 }
 
 export const COLORS = {
-  blue: '#3b82f6',
-  purple: '#8b5cf6',
+  amber: '#f59e0b',
+  gold: '#eab308',
   cyan: '#06b6d4',
-  blueGlow: 'rgba(59, 130, 246, 0.3)',
-  purpleGlow: 'rgba(139, 92, 246, 0.3)',
+  amberGlow: 'rgba(245, 158, 11, 0.3)',
+  goldGlow: 'rgba(234, 179, 8, 0.3)',
 }
 
 export const CODE_SNIPPETS = [

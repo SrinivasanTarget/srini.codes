@@ -23,7 +23,7 @@ export default function Conferences() {
           return (
             <div key={i} className='col-span-1'> {/* Each card takes one column in the new grid */}
               {/* Card with gradient border - kept gradient as highlight */}
-              <div className='p-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+              <div className='p-0.5 bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 
                               flex flex-col justify-between rounded-xl h-full text-custom-gray-light'>
                 {/* Inner card content with themed background */}
                 <div className='bg-custom-black rounded-xl h-full flex flex-col justify-between'>

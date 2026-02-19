@@ -51,11 +51,11 @@ const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ className = '
   if (prefersReducedMotion || isMobile || !shouldRender) {
     return (
       <div
-        className={`${className} bg-gradient-to-br from-blue-900/20 via-gray-900/30 to-black`}
+        className={`${className} bg-gradient-to-br from-amber-900/20 via-gray-900/30 to-black`}
         style={{
           backgroundImage: `
-            radial-gradient(ellipse at 30% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-            radial-gradient(ellipse at 70% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 50%)
+            radial-gradient(ellipse at 30% 30%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
+            radial-gradient(ellipse at 70% 70%, rgba(234, 179, 8, 0.08) 0%, transparent 50%)
           `,
         }}
       />
@@ -66,7 +66,7 @@ const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ className = '
     <div className={className}>
       <Suspense
         fallback={
-          <div className='absolute inset-0 bg-gradient-to-br from-blue-900/20 via-gray-900/30 to-black' />
+          <div className='absolute inset-0 bg-gradient-to-br from-amber-900/20 via-gray-900/30 to-black' />
         }
       >
         <Player

@@ -37,12 +37,12 @@ export default {
         'custom-gray-light': '#E0E0E0',
         'custom-gray-medium': '#A9A9A9',
         'custom-gray-dark': '#555555',
-        'custom-highlight': '#BB86FC',
+        'custom-highlight': '#f59e0b',
         // Glassmorphism colors
         'glass-white': 'rgba(255, 255, 255, 0.05)',
         'glass-border': 'rgba(255, 255, 255, 0.1)',
-        'glass-blue': 'rgba(59, 130, 246, 0.1)',
-        'glass-purple': 'rgba(139, 92, 246, 0.1)',
+        'glass-amber': 'rgba(245, 158, 11, 0.1)',
+        'glass-gold': 'rgba(234, 179, 8, 0.1)',
       },
       backdropBlur: {
         xs: '2px',
@@ -52,9 +52,9 @@ export default {
       boxShadow: {
         glass: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
         'glass-lg': '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
-        'glow-blue': '0 0 40px rgba(59, 130, 246, 0.3)',
-        'glow-purple': '0 0 40px rgba(139, 92, 246, 0.3)',
-        'glow-blue-lg': '0 0 60px rgba(59, 130, 246, 0.4)',
+        'glow-amber': '0 0 40px rgba(245, 158, 11, 0.3)',
+        'glow-gold': '0 0 40px rgba(234, 179, 8, 0.3)',
+        'glow-amber-lg': '0 0 60px rgba(245, 158, 11, 0.4)',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
@@ -77,8 +77,8 @@ export default {
           '100%': { backgroundPosition: '200% 0' },
         },
         pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)' },
-          '50%': { boxShadow: '0 0 40px rgba(59, 130, 246, 0.6)' },
+          '0%, 100%': { boxShadow: '0 0 20px rgba(245, 158, 11, 0.3)' },
+          '50%': { boxShadow: '0 0 40px rgba(245, 158, 11, 0.6)' },
         },
         float: {
           '0%, 100%': { transform: 'translateY(0)' },

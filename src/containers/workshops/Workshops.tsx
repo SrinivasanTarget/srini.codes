@@ -52,8 +52,8 @@ export default function Workshops() {
           </p>
           <a
             className='group relative rounded-lg inline-flex text-lg font-inter 
-                       bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
-                       hover:from-pink-500 hover:to-indigo-500 transition-all duration-300 ease-in-out
+                       bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 
+                       hover:from-orange-500 hover:to-amber-500 transition-all duration-300 ease-in-out
                        transform hover:scale-105 px-8 py-3' // Adjusted padding and added hover effect
             href={workshop.source}
             target='_blank'

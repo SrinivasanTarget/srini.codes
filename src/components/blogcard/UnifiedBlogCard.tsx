@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { UnifiedBlogPost } from '../../services/unifiedBlog'
+import testmuLogo from '../../assets/images/TestMu AI White Logo 512px.svg'
 
 interface UnifiedBlogCardProps {
   post: UnifiedBlogPost
@@ -19,13 +20,13 @@ export default function UnifiedBlogCard({ post }: UnifiedBlogCardProps) {
   const getPlatformColor = (platform?: string) => {
     switch (platform) {
       case 'TestMu AI':
-        return 'bg-purple-600/20 text-purple-300'
+        return 'bg-yellow-600/20 text-yellow-300'
       case 'Applitools':
         return 'bg-green-600/20 text-green-300'
       case 'TestProject':
         return 'bg-orange-600/20 text-orange-300'
       case 'Personal Blog':
-        return 'bg-blue-600/20 text-blue-300'
+        return 'bg-white/10 text-gray-300'
       default:
         return 'bg-gray-600/20 text-gray-300'
     }
@@ -34,7 +35,7 @@ export default function UnifiedBlogCard({ post }: UnifiedBlogCardProps) {
   const isExternal = post.source === 'external'
 
   return (
-    <article className='bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800 hover:border-blue-500 transition-all duration-300 hover:transform hover:scale-105'>
+    <article className='bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-300 hover:transform hover:scale-105'>
       {post.coverImage && (
         <div className='aspect-video overflow-hidden'>
           <img
@@ -48,14 +49,18 @@ export default function UnifiedBlogCard({ post }: UnifiedBlogCardProps) {
       <div className='p-6'>
         <div className='flex flex-wrap gap-2 mb-3'>
           {post.platform && (
-            <span className={`px-2 py-1 rounded text-xs font-medium ${getPlatformColor(post.platform)}`}>
-              {post.platform}
+            <span className={`px-2 py-1 rounded text-xs font-medium inline-flex items-center ${getPlatformColor(post.platform)}`}>
+              {post.platform === 'TestMu AI' ? (
+                <img src={testmuLogo} alt='TestMu AI' className='h-3' />
+              ) : (
+                post.platform
+              )}
             </span>
           )}
           {post.tags.slice(0, 2).map((tag, index) => (
             <span
               key={index}
-              className='bg-blue-600/20 text-blue-300 px-2 py-1 rounded text-xs'
+              className='bg-white/10 text-gray-300 px-2 py-1 rounded text-xs'
             >
               {tag}
             </span>
@@ -88,7 +93,7 @@ export default function UnifiedBlogCard({ post }: UnifiedBlogCardProps) {
             href={post.url}
             target='_blank'
             rel='noopener noreferrer'
-            className='inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium'
+            className='inline-flex items-center text-gray-300 hover:text-white transition-colors duration-200 font-medium'
           >
             Read Article
             <svg className='ml-1 w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -98,7 +103,7 @@ export default function UnifiedBlogCard({ post }: UnifiedBlogCardProps) {
         ) : (
           <Link
             to={post.url}
-            className='inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium'
+            className='inline-flex items-center text-gray-300 hover:text-white transition-colors duration-200 font-medium'
           >
             Read Article →
           </Link>

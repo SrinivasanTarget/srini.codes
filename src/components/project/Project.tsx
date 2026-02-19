@@ -44,7 +44,7 @@ export default function Project({ project }: { project: project }) {
   return (
     <div className='col-span-4 mb-5 text-custom-gray-light transition-transform duration-300 ease-in-out hover:scale-105'>
       {/* Retaining the gradient border */}
-      <div className='p-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl h-full'>
+      <div className='p-0.5 bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 rounded-xl h-full'>
         {/* Changed inner background to custom-black */}
         <div className='p-0.5 bg-custom-black rounded-xl h-full flex flex-col'>
           <a href={project.source} target='_blank' rel='noreferrer' className="flex flex-col flex-grow p-3">

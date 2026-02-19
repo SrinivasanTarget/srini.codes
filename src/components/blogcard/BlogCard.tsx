@@ -9,7 +9,7 @@ export default function BlogCard({ blog }: { blog: blog }) {
   return (
     <div className='col-span-4 mb-5 font-lora text-custom-gray-light transition-transform duration-300 ease-in-out hover:scale-105'>
       {/* Retaining the gradient border as a highlight feature */}
-      <div className='p-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl'>
+      <div className='p-0.5 bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 rounded-xl'>
         {/* Changed inner background to custom-black */}
         <div className='p-0.5 bg-custom-black rounded-xl skew-x-1 rotate-1 h-full'> {/* Ensure h-full for consistent height if inner content varies */}
           <a href={blog.source} target='_blank' rel='noreferrer' className="block h-full"> {/* Ensure link covers the card */}

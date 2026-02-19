@@ -20,7 +20,7 @@ export default function SimpleProjectCard({ project }: SimpleProjectCardProps) {
       href={project.source}
       target='_blank'
       rel='noopener noreferrer'
-      className='group block bg-gray-900/30 rounded-xl p-6 border border-gray-800 hover:border-blue-500 transition-all duration-300 hover:transform hover:scale-105 hover:bg-gray-900/50'
+      className='group block bg-gray-900/30 rounded-xl p-6 border border-gray-800 hover:border-gray-600 transition-all duration-300 hover:transform hover:scale-105 hover:bg-gray-900/50'
     >
       {/* Project Logo/Image */}
       <div className='flex justify-center mb-4'>
@@ -41,7 +41,7 @@ export default function SimpleProjectCard({ project }: SimpleProjectCardProps) {
       </div>
 
       {/* Project Title */}
-      <h3 className='text-lg font-heading font-bold text-white text-center mb-2 group-hover:text-blue-300 transition-colors duration-200'>
+      <h3 className='text-lg font-heading font-bold text-white text-center mb-2 group-hover:text-white transition-colors duration-200'>
         {project.title}
       </h3>
 

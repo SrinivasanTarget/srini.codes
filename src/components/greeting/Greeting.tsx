@@ -22,7 +22,7 @@ export default function Greeting({
       <h1 className='leading-tight text-3xl md:text-5xl font-lora'>
         {" I'm "}
         <span className='relative inline-block'>
-          <span className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent'>
+          <span className='bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 bg-clip-text text-transparent'>
             Srini
           </span>
         </span>

@@ -21,8 +21,8 @@ const styles = `
     to { opacity: 1; transform: translateY(0); }
   }
   @keyframes glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
-    50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.5); }
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.15); }
+    50% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.25); }
   }
   @keyframes card-enter {
     0% { transform: perspective(1000px) rotateX(20deg) translateY(100px) scale(0.9); opacity: 0; }
@@ -150,8 +150,8 @@ END:VCARD`
 
       {/* Ambient background */}
       <div className='absolute inset-0 overflow-hidden'>
-        <div className='absolute top-1/4 -left-32 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl' />
-        <div className='absolute bottom-1/4 -right-32 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl' />
+        <div className='absolute top-1/4 -left-32 w-64 h-64 bg-white/5 rounded-full blur-3xl' />
+        <div className='absolute bottom-1/4 -right-32 w-64 h-64 bg-white/5 rounded-full blur-3xl' />
       </div>
 
       {/* Apple Wallet Pass */}
@@ -200,7 +200,7 @@ END:VCARD`
           <div className='relative px-6 pt-6 pb-4'>
             <div className='flex items-center justify-between'>
               <div className='flex items-center gap-2'>
-                <div className='w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center'>
+                <div className='w-8 h-8 rounded-lg bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center'>
                   <svg className='w-4 h-4 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                     <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' />
                   </svg>
@@ -224,7 +224,7 @@ END:VCARD`
               {/* Avatar with glow ring */}
               <div className='relative'>
                 <div
-                  className='absolute -inset-1 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 opacity-40 blur-sm'
+                  className='absolute -inset-1 rounded-2xl bg-gradient-to-br from-white/30 to-white/20 opacity-40 blur-sm'
                   style={{ animation: 'pulse-ring 3s ease-in-out infinite' }}
                 />
                 <img
@@ -239,7 +239,7 @@ END:VCARD`
                 <h1 className='text-[22px] font-semibold text-white tracking-tight leading-tight'>
                   {CONTACT_INFO.name}
                 </h1>
-                <p className='text-sm text-indigo-300/90 font-medium mt-1'>{CONTACT_INFO.title}</p>
+                <p className='text-sm text-gray-300 font-medium mt-1'>{CONTACT_INFO.title}</p>
                 <p className='text-xs text-white/40 mt-0.5'>{CONTACT_INFO.subtitle}</p>
               </div>
             </div>
@@ -247,10 +247,17 @@ END:VCARD`
             {/* Contact Fields */}
             <div className='space-y-1'>
               {[
-                { icon: 'globe', label: 'Website', value: 'srini.codes', href: CONTACT_INFO.website, color: 'indigo' },
-                { icon: 'mail', label: 'Email', value: CONTACT_INFO.email, href: `mailto:${CONTACT_INFO.email}`, color: 'violet' },
+                { icon: 'globe', label: 'Website', value: 'srini.codes', href: CONTACT_INFO.website, color: 'amber' },
+                { icon: 'mail', label: 'Email', value: CONTACT_INFO.email, href: `mailto:${CONTACT_INFO.email}`, color: 'yellow' },
                 { icon: 'phone', label: 'Phone', value: '+91 902 558 2170', href: `tel:${CONTACT_INFO.phone}`, color: 'emerald' },
-              ].map((item, i) => (
+              ].map((item, i) => {
+                const colorClasses: Record<string, { bg: string; text: string }> = {
+                  amber: { bg: 'bg-white/5', text: 'text-gray-400' },
+                  yellow: { bg: 'bg-white/5', text: 'text-gray-400' },
+                  emerald: { bg: 'bg-emerald-500/10', text: 'text-emerald-400' },
+                }
+                const colors = colorClasses[item.color] || colorClasses.amber
+                return (
                 <a
                   key={item.label}
                   href={item.href}
@@ -259,19 +266,19 @@ END:VCARD`
                   className='flex items-center gap-4 py-3 px-3 -mx-3 rounded-xl hover:bg-white/[0.03] transition-colors group'
                   style={{ animation: isLoaded ? `slide-up 0.4s ease-out ${0.1 + i * 0.05}s both` : 'none' }}
                 >
-                  <div className={`w-9 h-9 rounded-xl bg-${item.color}-500/10 flex items-center justify-center`}>
+                  <div className={`w-9 h-9 rounded-xl ${colors.bg} flex items-center justify-center`}>
                     {item.icon === 'globe' && (
-                      <svg className={`w-4 h-4 text-${item.color}-400`} fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                      <svg className={`w-4 h-4 ${colors.text}`} fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                         <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9' />
                       </svg>
                     )}
                     {item.icon === 'mail' && (
-                      <svg className={`w-4 h-4 text-${item.color}-400`} fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                      <svg className={`w-4 h-4 ${colors.text}`} fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                         <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' />
                       </svg>
                     )}
                     {item.icon === 'phone' && (
-                      <svg className={`w-4 h-4 text-${item.color}-400`} fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                      <svg className={`w-4 h-4 ${colors.text}`} fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                         <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z' />
                       </svg>
                     )}
@@ -284,7 +291,8 @@ END:VCARD`
                     <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
                   </svg>
                 </a>
-              ))}
+                )
+              })}
             </div>
           </div>
 

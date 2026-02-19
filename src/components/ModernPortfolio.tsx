@@ -7,6 +7,7 @@ import UnifiedBlogCard from './blogcard/UnifiedBlogCard'
 import SimpleProjectCard from './project/SimpleProjectCard'
 import heroImage from '../assets/images/ProfilePic.webp'
 import TiltProfileImage from './TiltProfileImage'
+import testmuLogo from '../assets/images/TestMu AI White Logo 512px.svg'
 
 // Lazy load Remotion background for performance
 const HeroVideoBackground = lazy(() => import('../remotion/HeroVideoBackground'))
@@ -198,12 +199,12 @@ const ModernPortfolio = () => {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center'>
-              <div className='text-xl sm:text-2xl font-signature text-blue-400 tracking-wide font-semibold' style={{ textShadow: 'none', WebkitFontSmoothing: 'antialiased' }}>
+              <div className='text-xl sm:text-2xl font-signature text-amber-400 tracking-wide font-semibold' style={{ textShadow: 'none', WebkitFontSmoothing: 'antialiased' }}>
                 Srinivasan Sekar
               </div>
             </div>
             <div className='hidden md:flex space-x-6 lg:space-x-8'>
-              {['About', 'Achievements', 'Projects', 'Talks', 'Contact'].map((item) => (
+              {['About', 'Achievements', 'Projects', 'Talks'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -216,20 +217,32 @@ const ModernPortfolio = () => {
                 onClick={() => scrollToSection('blogs')}
                 className='nav-link font-medium'
               >
-                Latest Blogs
+                Blogs
               </button>
               <Link
-                to='/blog'
+                to='/contact'
                 className='nav-link font-medium'
               >
-                All Blogs
+                Contact
+              </Link>
+              <Link
+                to='/conferences'
+                className='nav-link font-medium'
+              >
+                Speaker Map
+              </Link>
+              <Link
+                to='/book'
+                className='nav-link font-medium'
+              >
+                Book
               </Link>
             </div>
             {/* Mobile menu button */}
             <div className='md:hidden'>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className='text-white hover:text-blue-400 p-2 touch-target'
+                className='text-white hover:text-gray-300 p-2 touch-target'
                 aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
               >
                 {mobileMenuOpen ? (
@@ -263,7 +276,7 @@ const ModernPortfolio = () => {
           }`}
         >
           <div className='px-4 py-4 space-y-1'>
-            {['About', 'Achievements', 'Projects', 'Talks', 'Contact'].map((item) => (
+            {['About', 'Achievements', 'Projects', 'Talks'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -279,11 +292,25 @@ const ModernPortfolio = () => {
               Latest Blogs
             </button>
             <Link
-              to='/blog'
+              to='/contact'
               onClick={() => setMobileMenuOpen(false)}
               className='mobile-nav-link block w-full text-left py-3 px-4 text-white rounded-lg transition-all duration-200 touch-target'
             >
-              All Blogs
+              Contact
+            </Link>
+            <Link
+              to='/conferences'
+              onClick={() => setMobileMenuOpen(false)}
+              className='mobile-nav-link block w-full text-left py-3 px-4 text-white rounded-lg transition-all duration-200 touch-target'
+            >
+              Speaker Map
+            </Link>
+            <Link
+              to='/book'
+              onClick={() => setMobileMenuOpen(false)}
+              className='mobile-nav-link block w-full text-left py-3 px-4 text-white rounded-lg transition-all duration-200 touch-target'
+            >
+              Book
             </Link>
           </div>
         </div>
@@ -297,7 +324,7 @@ const ModernPortfolio = () => {
         {/* Remotion Video Background */}
         <Suspense
           fallback={
-            <div className='absolute inset-0 bg-gradient-to-br from-blue-900/25 via-gray-900/40 to-black' />
+            <div className='absolute inset-0 bg-gradient-to-br from-amber-900/25 via-gray-900/40 to-black' />
           }
         >
           <HeroVideoBackground className='absolute inset-0 z-0' />
@@ -307,7 +334,7 @@ const ModernPortfolio = () => {
         <div className='absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-black/50 z-[1]'></div>
 
         {/* Code background text - hidden on mobile for performance */}
-        <div className='absolute inset-0 opacity-10 font-mono text-xs text-blue-300 overflow-hidden hidden sm:block'>
+        <div className='absolute inset-0 opacity-10 font-mono text-xs text-gray-400 overflow-hidden hidden sm:block'>
           <div className='absolute top-20 left-10 transform rotate-12'>
             <pre>{`const appium = require('appium');
 const driver = await appium.remote({
@@ -362,24 +389,24 @@ export class DeviceFarmPlugin {
               <h1 className='text-4xl sm:text-5xl lg:text-7xl font-heading font-bold mb-4 text-white leading-tight'>
                 Srinivasan
                 <br />
-                <span className='text-blue-400'>Sekar</span>
+                <span className='text-amber-400'>Sekar</span>
               </h1>
 
               <div className='mb-6'>
-                <span className='text-blue-400 font-mono text-base sm:text-lg'>
-                  {'Director of Engineering @TestMu AI'}
+                <span className='text-white font-mono text-base sm:text-lg inline-flex items-center gap-2'>
+                  Director of Engineering at <img src={testmuLogo} alt='TestMu AI' className='inline h-4 sm:h-5' />
                 </span>
               </div>
 
               <div className='mb-6 space-y-2'>
                 <div className='flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-4 text-xs sm:text-sm'>
-                  <span className='glass-card px-3 py-1.5 rounded-full text-blue-300'>
+                  <span className='glass-card px-3 py-1.5 rounded-full text-white/90 border border-white/10'>
                     Open Source Advocate
                   </span>
-                  <span className='glass-card px-3 py-1.5 rounded-full text-blue-300'>
+                  <span className='glass-card px-3 py-1.5 rounded-full text-white/90 border border-white/10'>
                     International Speaker
                   </span>
-                  <span className='glass-card px-3 py-1.5 rounded-full text-blue-300'>
+                  <span className='glass-card px-3 py-1.5 rounded-full text-white/90 border border-white/10'>
                     Technical Author
                   </span>
                 </div>
@@ -390,7 +417,7 @@ export class DeviceFarmPlugin {
                   href='https://github.com/srinivasanTarget'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='glass-button p-3 sm:p-4 rounded-lg flex items-center touch-target'
+                  className='text-gray-400 hover:text-white transition-colors duration-200'
                   aria-label='GitHub'
                 >
                   <svg className='w-6 h-6' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
@@ -401,7 +428,7 @@ export class DeviceFarmPlugin {
                   href='https://twitter.com/srinivasanskr'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='glass-button p-3 sm:p-4 rounded-lg flex items-center touch-target'
+                  className='text-gray-400 hover:text-white transition-colors duration-200'
                   aria-label='Twitter'
                 >
                   <svg className='w-6 h-6' viewBox='0 0 24 24' fill='currentColor'>
@@ -412,7 +439,7 @@ export class DeviceFarmPlugin {
                   href='https://www.linkedin.com/in/srinivasan-sekar/'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='glass-button p-3 sm:p-4 rounded-lg flex items-center touch-target'
+                  className='text-gray-400 hover:text-white transition-colors duration-200'
                   aria-label='LinkedIn'
                 >
                   <svg className='w-6 h-6' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
@@ -432,19 +459,19 @@ export class DeviceFarmPlugin {
         <div className='max-w-6xl mx-auto px-4 sm:px-6'>
           <div className='grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 text-center stagger-animate'>
             <div className='glass-card-hover p-4 sm:p-6 rounded-xl'>
-              <div className='text-2xl sm:text-3xl font-bold text-blue-400 mb-2'>25+</div>
+              <div className='text-2xl sm:text-3xl font-bold text-white mb-2'>25+</div>
               <div className='text-gray-300 text-sm sm:text-base'>Conference Talks</div>
             </div>
             <div className='glass-card-hover p-4 sm:p-6 rounded-xl'>
-              <div className='text-2xl sm:text-3xl font-bold text-blue-400 mb-2'>10+</div>
+              <div className='text-2xl sm:text-3xl font-bold text-white mb-2'>10+</div>
               <div className='text-gray-300 text-sm sm:text-base'>Technical Articles</div>
             </div>
             <div className='glass-card-hover p-4 sm:p-6 rounded-xl'>
-              <div className='text-2xl sm:text-3xl font-bold text-blue-400 mb-2'>∞</div>
+              <div className='text-2xl sm:text-3xl font-bold text-white mb-2'>∞</div>
               <div className='text-gray-300 text-sm sm:text-base'>Open Source Projects</div>
             </div>
             <div className='glass-card-hover p-4 sm:p-6 rounded-xl'>
-              <div className='text-2xl sm:text-3xl font-bold text-blue-400 mb-2'>13+</div>
+              <div className='text-2xl sm:text-3xl font-bold text-white mb-2'>13+</div>
               <div className='text-gray-300 text-sm sm:text-base'>Years in Testing</div>
             </div>
           </div>
@@ -460,7 +487,7 @@ export class DeviceFarmPlugin {
           <div className='max-w-4xl mx-auto glass-card p-6 sm:p-8 lg:p-10 rounded-2xl blur-reveal glow-on-enter'>
             <p className='text-base sm:text-lg lg:text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
               I&apos;m a passionate technologist and leader in software testing and automation. As{' '}
-              <span className='modern-highlight'>Director of Engineering at TestMu AI</span>, I
+              <span className='modern-highlight inline-flex items-center gap-1.5'>Director of Engineering at <img src={testmuLogo} alt='TestMu AI' className='inline h-4' /></span>, I
               drive innovation in cloud-based testing platforms serving millions of developers
               worldwide.
             </p>
@@ -502,7 +529,7 @@ export class DeviceFarmPlugin {
                   {achievement.title}
                 </h3>
                 <p className='text-gray-400 mb-4 text-sm sm:text-base'>{achievement.description}</p>
-                <span className='inline-block bg-blue-600/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs sm:text-sm'>
+                <span className='inline-block bg-white/10 backdrop-blur-sm text-gray-300 px-3 py-1 rounded-full text-xs sm:text-sm'>
                   {achievement.highlight}
                 </span>
               </div>
@@ -523,7 +550,7 @@ export class DeviceFarmPlugin {
 
           {projectsLoading ? (
             <div className='text-center py-12'>
-              <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4'></div>
+              <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-gray-400 mx-auto mb-4'></div>
               <p className='text-gray-400'>Loading projects...</p>
             </div>
           ) : (
@@ -549,7 +576,7 @@ export class DeviceFarmPlugin {
                   {conference.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className='bg-blue-600/20 text-blue-300 px-2 py-1 rounded text-xs'
+                      className='bg-white/10 text-gray-300 px-2 py-1 rounded text-xs'
                     >
                       {tag}
                     </span>
@@ -564,7 +591,7 @@ export class DeviceFarmPlugin {
                     href={conference.url}
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 touch-target'
+                    className='inline-flex items-center text-gray-300 hover:text-white transition-colors duration-200 touch-target'
                   >
                     Watch Talk →
                   </a>
@@ -587,7 +614,7 @@ export class DeviceFarmPlugin {
 
           {blogsLoading ? (
             <div className='text-center py-12'>
-              <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4'></div>
+              <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-gray-400 mx-auto mb-4'></div>
               <p className='text-gray-400'>Loading latest articles...</p>
             </div>
           ) : (
@@ -600,7 +627,7 @@ export class DeviceFarmPlugin {
               <div className='text-center'>
                 <Link
                   to='/blog'
-                  className='glass-button bg-blue-600/80 hover:bg-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-200 inline-flex items-center space-x-2 touch-target'
+                  className='glass-button bg-amber-600/80 hover:bg-amber-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-200 inline-flex items-center space-x-2 touch-target'
                 >
                   <span>View All Articles</span>
                   <span>→</span>
@@ -624,7 +651,7 @@ export class DeviceFarmPlugin {
           <div className='flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 scale-up'>
             <a
               href='mailto:srinivasan.sekar1990@gmail.com'
-              className='glass-button bg-blue-600/80 hover:bg-blue-600 p-3 sm:p-4 rounded-full transition-all duration-200 touch-target'
+              className='glass-button bg-amber-600/80 hover:bg-amber-600 p-3 sm:p-4 rounded-full transition-all duration-200 touch-target'
               aria-label='Email Me'
             >
               <svg className='w-6 h-6' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
@@ -662,7 +689,7 @@ export class DeviceFarmPlugin {
       <footer className='py-6 sm:py-8 border-t border-white/10'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 text-center'>
           <p className='text-gray-400 text-sm sm:text-base'>
-            © 2025 Srinivasan Sekar. Built with React & Tailwind CSS.
+            © 2026 Srinivasan Sekar. Built with React & Tailwind CSS.
           </p>
         </div>
       </footer>

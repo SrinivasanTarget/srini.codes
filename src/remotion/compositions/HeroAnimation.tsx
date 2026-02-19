@@ -37,12 +37,12 @@ const HeroAnimation: React.FC = () => {
           background: `
             radial-gradient(
               ellipse at 30% 30%,
-              rgba(59, 130, 246, 0.15) 0%,
+              rgba(245, 158, 11, 0.15) 0%,
               transparent 50%
             ),
             radial-gradient(
               ellipse at 70% 70%,
-              rgba(139, 92, 246, 0.1) 0%,
+              rgba(234, 179, 8, 0.1) 0%,
               transparent 50%
             )
           `,
@@ -57,8 +57,8 @@ const HeroAnimation: React.FC = () => {
           position: 'absolute',
           inset: 0,
           backgroundImage: `
-            linear-gradient(rgba(59, 130, 246, ${gridOpacity}) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(59, 130, 246, ${gridOpacity}) 1px, transparent 1px)
+            linear-gradient(rgba(245, 158, 11, ${gridOpacity}) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(245, 158, 11, ${gridOpacity}) 1px, transparent 1px)
           `,
           backgroundSize: '60px 60px',
         }}
@@ -95,9 +95,9 @@ const HeroAnimation: React.FC = () => {
               fontSize: '18px',
               fontFamily: 'JetBrains Mono, monospace',
               fontWeight: 'bold',
-              color: i % 2 === 0 ? COLORS.blue : COLORS.purple,
+              color: i % 2 === 0 ? COLORS.amber : COLORS.gold,
               opacity,
-              textShadow: `0 0 15px ${i % 2 === 0 ? COLORS.blueGlow : COLORS.purpleGlow}`,
+              textShadow: `0 0 15px ${i % 2 === 0 ? COLORS.amberGlow : COLORS.goldGlow}`,
               padding: '8px 12px',
               borderRadius: '8px',
               background: 'rgba(255, 255, 255, 0.05)',
@@ -119,7 +119,7 @@ const HeroAnimation: React.FC = () => {
           width: '400px',
           height: '400px',
           transform: 'translate(-50%, -50%)',
-          background: `radial-gradient(circle, ${COLORS.blueGlow} 0%, transparent 70%)`,
+          background: `radial-gradient(circle, ${COLORS.amberGlow} 0%, transparent 70%)`,
           opacity: interpolate(frame, [0, 150, 300], [0.3, 0.6, 0.3], {
             extrapolateRight: 'clamp',
           }),

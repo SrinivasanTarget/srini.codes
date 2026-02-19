@@ -4,6 +4,8 @@ import ModernPortfolio from './components/ModernPortfolio'
 import BlogList from './screens/BlogList'
 import BlogPost from './screens/BlogPost'
 import Contact from './screens/Contact'
+import Conferences from './screens/Conferences'
+import Book from './screens/Book'
 import CustomCursor from './components/CustomCursor'
 import { Analytics } from '@vercel/analytics/react'
 
@@ -15,6 +17,8 @@ function App() {
         <Routes>
           <Route path="/" element={<ModernPortfolio />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/conferences" element={<Conferences />} />
+          <Route path="/book" element={<Book />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>

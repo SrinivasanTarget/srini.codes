@@ -124,12 +124,12 @@ const CustomCursor: React.FC = () => {
         }}
       >
         <div
-          className='rounded-full border-2 border-blue-400/60'
+          className='rounded-full border-2 border-white/40'
           style={{
             width: isHovering ? '50px' : isClicking ? '30px' : '40px',
             height: isHovering ? '50px' : isClicking ? '30px' : '40px',
             transition: 'width 0.2s ease, height 0.2s ease, border-color 0.2s ease',
-            borderColor: isHovering ? 'rgba(139, 92, 246, 0.7)' : 'rgba(59, 130, 246, 0.5)',
+            borderColor: isHovering ? 'rgba(255, 255, 255, 0.6)' : 'rgba(255, 255, 255, 0.3)',
           }}
         />
       </div>

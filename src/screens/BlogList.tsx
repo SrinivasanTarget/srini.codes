@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { UnifiedBlogService, UnifiedBlogPost } from '../services/unifiedBlog'
 import UnifiedBlogCard from '../components/blogcard/UnifiedBlogCard'
 import BlogNavigation from '../components/navigation/BlogNavigation'
+import testmuLogo from '../assets/images/TestMu AI White Logo 512px.svg'
 
 export default function BlogList() {
   const [posts, setPosts] = useState<UnifiedBlogPost[]>([])
@@ -30,7 +31,7 @@ export default function BlogList() {
         <BlogNavigation />
         <div className='max-w-7xl mx-auto px-6 py-20 pt-32'>
           <div className='text-center'>
-            <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4'></div>
+            <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-gray-400 mx-auto mb-4'></div>
             <p className='text-gray-400'>Loading blog posts...</p>
           </div>
         </div>
@@ -49,7 +50,7 @@ export default function BlogList() {
             <p className='text-gray-400 mb-6'>{error}</p>
             <button
               onClick={loadAllPosts}
-              className='bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg transition-colors duration-200'
+              className='bg-amber-600 hover:bg-amber-700 px-6 py-3 rounded-lg transition-colors duration-200'
             >
               Try Again
             </button>
@@ -63,14 +64,14 @@ export default function BlogList() {
     <div className='min-h-screen bg-black text-white'>
       <BlogNavigation />
       {/* Header */}
-      <div className='bg-gradient-to-r from-blue-900/25 via-gray-900/40 to-black py-20 pt-32'>
+      <div className='bg-gradient-to-r from-gray-900/40 via-gray-900/40 to-black py-20 pt-32'>
         <div className='max-w-7xl mx-auto px-6 text-center'>
           <h1 className='text-5xl font-heading font-bold mb-6 text-white'>
             All My Writings
           </h1>
           <p className='text-xl text-gray-300 max-w-3xl mx-auto'>
             A comprehensive collection of my technical articles, tutorials, and insights published
-            on my personal blog and guest posts on platforms like TestMu AI, Applitools, and more.
+            on my personal blog and guest posts on platforms like <img src={testmuLogo} alt='TestMu AI' className='inline h-4 align-middle' />, Applitools, and more.
           </p>
         </div>
       </div>

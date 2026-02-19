@@ -41,7 +41,7 @@ export default function BlogPost() {
         <BlogNavigation />
         <div className='max-w-4xl mx-auto px-6 py-20 pt-32'>
           <div className='text-center'>
-            <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4'></div>
+            <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-gray-400 mx-auto mb-4'></div>
             <p className='text-gray-400'>Loading blog post...</p>
           </div>
         </div>
@@ -60,7 +60,7 @@ export default function BlogPost() {
             <p className='text-gray-400 mb-6'>{error || 'The requested blog post could not be found.'}</p>
             <Link
               to='/blog'
-              className='bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg transition-colors duration-200 inline-block'
+              className='bg-amber-600 hover:bg-amber-700 px-6 py-3 rounded-lg transition-colors duration-200 inline-block'
             >
               Back to Blog
             </Link>
@@ -79,7 +79,7 @@ export default function BlogPost() {
         <div className='max-w-4xl mx-auto px-6 py-4'>
           <Link
             to='/blog'
-            className='inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200'
+            className='inline-flex items-center text-gray-300 hover:text-white transition-colors duration-200'
           >
             ← Back to Blog
           </Link>
@@ -105,7 +105,7 @@ export default function BlogPost() {
             {post.tags.map((tag) => (
               <span
                 key={tag.slug}
-                className='bg-blue-600/20 text-blue-300 px-3 py-1 rounded-full text-sm'
+                className='bg-white/10 text-gray-300 px-3 py-1 rounded-full text-sm'
               >
                 {tag.name}
               </span>
@@ -135,11 +135,11 @@ export default function BlogPost() {
           className='prose prose-invert prose-lg max-w-none
             prose-headings:text-white prose-headings:font-heading
             prose-p:text-gray-300 prose-p:leading-relaxed
-            prose-a:text-blue-400 prose-a:no-underline hover:prose-a:text-blue-300
+            prose-a:text-gray-300 prose-a:no-underline hover:prose-a:text-white
             prose-strong:text-white
-            prose-code:text-blue-300 prose-code:bg-gray-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+            prose-code:text-gray-300 prose-code:bg-gray-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
             prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-700
-            prose-blockquote:border-l-blue-400 prose-blockquote:text-gray-300
+            prose-blockquote:border-l-gray-600 prose-blockquote:text-gray-300
             prose-ul:text-gray-300 prose-ol:text-gray-300
             prose-li:text-gray-300'
           dangerouslySetInnerHTML={{ __html: post.content.html }}
@@ -159,7 +159,7 @@ export default function BlogPost() {
               href={post.url}
               target='_blank'
               rel='noopener noreferrer'
-              className='text-blue-400 hover:text-blue-300 transition-colors duration-200'
+              className='text-gray-300 hover:text-white transition-colors duration-200'
             >
               View on Hashnode →
             </a>

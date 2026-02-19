@@ -23,7 +23,7 @@ const FloatingCode: React.FC<FloatingCodeProps> = ({ seed }) => {
     const rotation = random(-30, 30, i + 400)
     const snippet = CODE_SNIPPETS[Math.floor(random(0, CODE_SNIPPETS.length, i + 500))]
     const opacity = random(0.1, 0.4, i + 600)
-    const isBlue = random(0, 1, i + 700) > 0.5
+    const isAmber = random(0, 1, i + 700) > 0.5
 
     // Floating animation
     const yOffset = interpolate(
@@ -57,9 +57,9 @@ const FloatingCode: React.FC<FloatingCodeProps> = ({ seed }) => {
           transform: `translate(${xOffset}px, ${yOffset}px) rotate(${rotation}deg)`,
           fontSize: `${size}px`,
           fontFamily: 'JetBrains Mono, monospace',
-          color: isBlue ? COLORS.blue : COLORS.purple,
+          color: isAmber ? COLORS.amber : COLORS.gold,
           opacity: currentOpacity,
-          textShadow: `0 0 20px ${isBlue ? COLORS.blueGlow : COLORS.purpleGlow}`,
+          textShadow: `0 0 20px ${isAmber ? COLORS.amberGlow : COLORS.goldGlow}`,
           pointerEvents: 'none',
         }}
       >

@@ -16,7 +16,7 @@ export default function HashnodeBlogCard({ post }: HashnodeBlogCardProps) {
   }
 
   return (
-    <article className='bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800 hover:border-blue-500 transition-all duration-300 hover:transform hover:scale-105'>
+    <article className='bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-300 hover:transform hover:scale-105'>
       {post.coverImage && (
         <div className='aspect-video overflow-hidden'>
           <img
@@ -32,7 +32,7 @@ export default function HashnodeBlogCard({ post }: HashnodeBlogCardProps) {
           {post.tags.slice(0, 3).map((tag) => (
             <span
               key={tag.slug}
-              className='bg-blue-600/20 text-blue-300 px-2 py-1 rounded text-xs'
+              className='bg-white/10 text-gray-300 px-2 py-1 rounded text-xs'
             >
               {tag.name}
             </span>
@@ -56,7 +56,7 @@ export default function HashnodeBlogCard({ post }: HashnodeBlogCardProps) {
         
         <Link
           to={`/blog/${post.slug}`}
-          className='inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium'
+          className='inline-flex items-center text-gray-300 hover:text-white transition-colors duration-200 font-medium'
         >
           Read Article →
         </Link>

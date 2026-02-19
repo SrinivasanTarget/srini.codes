@@ -16,8 +16,8 @@ export default function ConferenceCard({ conference }: { conference: conference 
 
   const titleClasses = "font-semibold text-xl mb-1 font-lora text-custom-highlight";
   const descriptionClasses = "leading-tight text-justify text-custom-gray-light hover:text-custom-highlight transition-colors duration-300";
-  const timelineBarClasses = "h-full w-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 pointer-events-none";
-  const timelineDotClasses = "w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-md";
+  const timelineBarClasses = "h-full w-1 bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 pointer-events-none";
+  const timelineDotClasses = "w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 shadow-md";
 
   return conference.reverse ? (
     <div className='flex flex-row-reverse md:contents'>
