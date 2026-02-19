@@ -8,6 +8,7 @@ import SimpleProjectCard from './project/SimpleProjectCard'
 import heroImage from '../assets/images/ProfilePic.webp'
 import TiltProfileImage from './TiltProfileImage'
 import testmuLogo from '../assets/images/TestMu AI White Logo 512px.svg'
+import bookCover from '../assets/images/MCP Book.png'
 
 // Lazy load Remotion background for performance
 const HeroVideoBackground = lazy(() => import('../remotion/HeroVideoBackground'))
@@ -272,7 +273,7 @@ const ModernPortfolio = () => {
         {/* Mobile menu panel */}
         <div
           className={`md:hidden mobile-menu-panel overflow-hidden transition-all duration-300 ${
-            mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+            mobileMenuOpen ? 'max-h-[32rem] opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
           <div className='px-4 py-4 space-y-1'>
@@ -635,6 +636,30 @@ export class DeviceFarmPlugin {
               </div>
             </>
           )}
+        </div>
+      </section>
+
+      {/* Book Section */}
+      <section className='py-12 sm:py-16 lg:py-20 bg-gray-900/50'>
+        <div className='max-w-4xl mx-auto px-4 sm:px-6'>
+          <Link
+            to='/book'
+            className='flex flex-col sm:flex-row items-center gap-6 sm:gap-8 glass-card p-6 sm:p-8 rounded-2xl border border-white/[0.06] hover:border-white/10 transition-all duration-300 group section-animate'
+          >
+            <img
+              src={bookCover}
+              alt='The MCP Standard'
+              className='w-28 sm:w-32 rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300'
+            />
+            <div className='text-center sm:text-left'>
+              <p className='text-xs uppercase tracking-widest text-gray-500 mb-2'>New Book</p>
+              <h3 className='text-xl sm:text-2xl font-heading font-bold text-white mb-2'>The MCP Standard</h3>
+              <p className='text-gray-400 text-sm sm:text-base mb-3'>A Developer&apos;s Guide to Building Universal AI Tools with the Model Context Protocol</p>
+              <span className='inline-flex items-center text-sm text-gray-300 group-hover:text-white transition-colors duration-200'>
+                Learn more <span className='ml-1 group-hover:translate-x-1 transition-transform duration-200'>→</span>
+              </span>
+            </div>
+          </Link>
         </div>
       </section>
 
