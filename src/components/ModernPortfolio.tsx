@@ -72,7 +72,7 @@ const ModernPortfolio = () => {
   const loadRecentBlogs = async () => {
     try {
       setBlogsLoading(true)
-      const blogs = await UnifiedBlogService.getRecentBlogs(6)
+      const blogs = await UnifiedBlogService.getRecentBlogs(3)
       setRecentBlogs(blogs)
     } catch (error) {
       console.error('Failed to load recent blogs:', error)
@@ -455,27 +455,27 @@ export class DeviceFarmPlugin {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Book Section */}
       <section className='py-12 sm:py-16 bg-gray-900/30'>
-        <div className='max-w-6xl mx-auto px-4 sm:px-6'>
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 text-center stagger-animate'>
-            <div className='glass-card-hover p-4 sm:p-6 rounded-xl'>
-              <div className='text-2xl sm:text-3xl font-bold text-white mb-2'>25+</div>
-              <div className='text-gray-300 text-sm sm:text-base'>Conference Talks</div>
+        <div className='max-w-4xl mx-auto px-4 sm:px-6'>
+          <Link
+            to='/book'
+            className='flex flex-col sm:flex-row items-center gap-6 sm:gap-8 glass-card p-6 sm:p-8 rounded-2xl border border-white/[0.06] hover:border-white/10 transition-all duration-300 group section-animate'
+          >
+            <img
+              src={bookCover}
+              alt='The MCP Standard'
+              className='w-28 sm:w-32 rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300'
+            />
+            <div className='text-center sm:text-left'>
+              <p className='text-xs uppercase tracking-widest text-gray-500 mb-2'>New Book</p>
+              <h3 className='text-xl sm:text-2xl font-heading font-bold text-white mb-2'>The MCP Standard</h3>
+              <p className='text-gray-400 text-sm sm:text-base mb-3'>A Developer&apos;s Guide to Building Universal AI Tools with the Model Context Protocol</p>
+              <span className='inline-flex items-center text-sm text-gray-300 group-hover:text-white transition-colors duration-200'>
+                Learn more <span className='ml-1 group-hover:translate-x-1 transition-transform duration-200'>→</span>
+              </span>
             </div>
-            <div className='glass-card-hover p-4 sm:p-6 rounded-xl'>
-              <div className='text-2xl sm:text-3xl font-bold text-white mb-2'>10+</div>
-              <div className='text-gray-300 text-sm sm:text-base'>Technical Articles</div>
-            </div>
-            <div className='glass-card-hover p-4 sm:p-6 rounded-xl'>
-              <div className='text-2xl sm:text-3xl font-bold text-white mb-2'>∞</div>
-              <div className='text-gray-300 text-sm sm:text-base'>Open Source Projects</div>
-            </div>
-            <div className='glass-card-hover p-4 sm:p-6 rounded-xl'>
-              <div className='text-2xl sm:text-3xl font-bold text-white mb-2'>13+</div>
-              <div className='text-gray-300 text-sm sm:text-base'>Years in Testing</div>
-            </div>
-          </div>
+          </Link>
         </div>
       </section>
 
@@ -571,7 +571,7 @@ export class DeviceFarmPlugin {
             Conference Talks & Presentations
           </h2>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 stagger-animate'>
-            {conferences.slice(0, 8).map((conference, index) => (
+            {conferences.slice(0, 4).map((conference, index) => (
               <div key={index} className='glass-card-hover p-5 sm:p-6 rounded-xl'>
                 <div className='flex flex-wrap gap-2 mb-3'>
                   {conference.tags.map((tag, tagIndex) => (
@@ -599,6 +599,15 @@ export class DeviceFarmPlugin {
                 )}
               </div>
             ))}
+          </div>
+          <div className='text-center mt-8 sm:mt-12'>
+            <Link
+              to='/conferences'
+              className='glass-button bg-amber-600/80 hover:bg-amber-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-200 inline-flex items-center space-x-2 touch-target'
+            >
+              <span>View All Talks</span>
+              <span>→</span>
+            </Link>
           </div>
         </div>
       </section>
@@ -636,30 +645,6 @@ export class DeviceFarmPlugin {
               </div>
             </>
           )}
-        </div>
-      </section>
-
-      {/* Book Section */}
-      <section className='py-12 sm:py-16 lg:py-20 bg-gray-900/50'>
-        <div className='max-w-4xl mx-auto px-4 sm:px-6'>
-          <Link
-            to='/book'
-            className='flex flex-col sm:flex-row items-center gap-6 sm:gap-8 glass-card p-6 sm:p-8 rounded-2xl border border-white/[0.06] hover:border-white/10 transition-all duration-300 group section-animate'
-          >
-            <img
-              src={bookCover}
-              alt='The MCP Standard'
-              className='w-28 sm:w-32 rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300'
-            />
-            <div className='text-center sm:text-left'>
-              <p className='text-xs uppercase tracking-widest text-gray-500 mb-2'>New Book</p>
-              <h3 className='text-xl sm:text-2xl font-heading font-bold text-white mb-2'>The MCP Standard</h3>
-              <p className='text-gray-400 text-sm sm:text-base mb-3'>A Developer&apos;s Guide to Building Universal AI Tools with the Model Context Protocol</p>
-              <span className='inline-flex items-center text-sm text-gray-300 group-hover:text-white transition-colors duration-200'>
-                Learn more <span className='ml-1 group-hover:translate-x-1 transition-transform duration-200'>→</span>
-              </span>
-            </div>
-          </Link>
         </div>
       </section>
 

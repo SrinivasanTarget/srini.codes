@@ -40,6 +40,7 @@ const Book = () => {
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     const timer = setTimeout(() => setIsLoaded(true), 50)
     return () => clearTimeout(timer)
   }, [])
