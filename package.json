@@ -30,6 +30,11 @@
     "remotion": "^4.0.409",
     "three": "^0.183.2"
   },
+  "overrides": {
+    "react-twitter-widgets": {
+      "react": "$react"
+    }
+  },
   "devDependencies": {
     "@remotion/bundler": "^4.0.409",
     "@remotion/cli": "^4.0.409",
