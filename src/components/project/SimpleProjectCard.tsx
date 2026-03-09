@@ -20,11 +20,11 @@ export default function SimpleProjectCard({ project }: SimpleProjectCardProps) {
       href={project.source}
       target='_blank'
       rel='noopener noreferrer'
-      className='group block bg-gray-900/30 rounded-xl p-6 border border-gray-800 hover:border-gray-600 transition-all duration-300 hover:transform hover:scale-105 hover:bg-gray-900/50'
+      className='group block glass-card-hover rounded-xl p-6'
     >
       {/* Project Logo/Image */}
       <div className='flex justify-center mb-4'>
-        <div className='relative w-16 h-16 rounded-lg overflow-hidden bg-gray-800 flex items-center justify-center'>
+        <div className='relative w-16 h-16 rounded-lg overflow-hidden bg-white/[0.06] flex items-center justify-center'>
           <img
             src={`/assets/images/${project.imgSource}`}
             alt={project.title}

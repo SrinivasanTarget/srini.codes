@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { conferences } from '../portfolio/conferences'
 import { UnifiedBlogService, UnifiedBlogPost } from '../services/unifiedBlog'
@@ -9,9 +9,7 @@ import heroImage from '../assets/images/ProfilePic.webp'
 import TiltProfileImage from './TiltProfileImage'
 import testmuLogo from '../assets/images/TestMu AI White Logo 512px.svg'
 import bookCover from '../assets/images/MCP Book.png'
-
-// Lazy load Remotion background for performance
-const HeroVideoBackground = lazy(() => import('../remotion/HeroVideoBackground'))
+import ThreeHeroBackground from './ThreeHeroBackground'
 
 // Custom hook for intersection observer animations
 const useIntersectionAnimation = (dependencies: unknown[] = []) => {
@@ -200,7 +198,7 @@ const ModernPortfolio = () => {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center'>
-              <div className='text-xl sm:text-2xl font-signature text-amber-400 tracking-wide font-semibold' style={{ textShadow: 'none', WebkitFontSmoothing: 'antialiased' }}>
+              <div className='text-xl sm:text-2xl font-signature text-accent-light tracking-wide font-semibold' style={{ textShadow: 'none', WebkitFontSmoothing: 'antialiased' }}>
                 Srinivasan Sekar
               </div>
             </div>
@@ -322,56 +320,11 @@ const ModernPortfolio = () => {
         id='hero'
         className='min-h-screen flex items-center justify-center relative overflow-hidden pt-16 sm:pt-0'
       >
-        {/* Remotion Video Background */}
-        <Suspense
-          fallback={
-            <div className='absolute inset-0 bg-gradient-to-br from-amber-900/25 via-gray-900/40 to-black' />
-          }
-        >
-          <HeroVideoBackground className='absolute inset-0 z-0' />
-        </Suspense>
+        {/* Three.js Particle Background */}
+        <ThreeHeroBackground className='absolute inset-0 z-0' />
 
         {/* Overlay gradient for better text readability */}
-        <div className='absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-black/50 z-[1]'></div>
-
-        {/* Code background text - hidden on mobile for performance */}
-        <div className='absolute inset-0 opacity-10 font-mono text-xs text-gray-400 overflow-hidden hidden sm:block'>
-          <div className='absolute top-20 left-10 transform rotate-12'>
-            <pre>{`const appium = require('appium');
-const driver = await appium.remote({
-  platformName: 'Android',
-  deviceName: 'emulator',
-  app: '/path/to/app.apk'
-});
-
-await driver.findElement('id', 'login-btn').click();
-const result = await driver.getPageSource();
-console.log('Test completed successfully!');`}</pre>
-          </div>
-
-          <div className='absolute top-40 right-10 transform -rotate-6'>
-            <pre>{`describe('Mobile Testing', () => {
-  it('should login successfully', async () => {
-    await driver.setValue('#username', 'testuser');
-    await driver.setValue('#password', 'password');
-    await driver.click('#login');
-
-    const welcomeText = await driver.getText('.welcome');
-    expect(welcomeText).toBe('Welcome!');
-  });
-});`}</pre>
-          </div>
-
-          <div className='absolute bottom-20 left-20 transform rotate-3'>
-            <pre>{`// Appium 2.0 Plugin Development
-export class DeviceFarmPlugin {
-  async createSession(next, driver, jwpCaps) {
-    const device = await this.allocateDevice();
-    return await next(driver, jwpCaps);
-  }
-}`}</pre>
-          </div>
-        </div>
+        <div className='absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/40 z-[1]'></div>
 
         <div className='relative z-20 flex items-center justify-center w-full max-w-7xl mx-auto px-4 sm:px-6'>
           <div className='grid lg:grid-cols-2 gap-8 sm:gap-12 items-center w-full'>
@@ -390,7 +343,7 @@ export class DeviceFarmPlugin {
               <h1 className='text-4xl sm:text-5xl lg:text-7xl font-heading font-bold mb-4 text-white leading-tight'>
                 Srinivasan
                 <br />
-                <span className='text-amber-400'>Sekar</span>
+                <span className='text-accent-light'>Sekar</span>
               </h1>
 
               <div className='mb-6'>
@@ -401,13 +354,13 @@ export class DeviceFarmPlugin {
 
               <div className='mb-6 space-y-2'>
                 <div className='flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-4 text-xs sm:text-sm'>
-                  <span className='glass-card px-3 py-1.5 rounded-full text-white/90 border border-white/10'>
+                  <span className='glass-pill px-3 py-1.5 rounded-full text-white/90'>
                     Open Source Advocate
                   </span>
-                  <span className='glass-card px-3 py-1.5 rounded-full text-white/90 border border-white/10'>
+                  <span className='glass-pill px-3 py-1.5 rounded-full text-white/90'>
                     International Speaker
                   </span>
-                  <span className='glass-card px-3 py-1.5 rounded-full text-white/90 border border-white/10'>
+                  <span className='glass-pill px-3 py-1.5 rounded-full text-white/90'>
                     Technical Author
                   </span>
                 </div>
@@ -450,37 +403,15 @@ export class DeviceFarmPlugin {
                   </svg>
                 </a>
               </div>
+
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Book Section */}
-      <section className='py-12 sm:py-16 bg-gray-900/30'>
-        <div className='max-w-4xl mx-auto px-4 sm:px-6'>
-          <Link
-            to='/book'
-            className='flex flex-col sm:flex-row items-center gap-6 sm:gap-8 glass-card p-6 sm:p-8 rounded-2xl border border-white/[0.06] hover:border-white/10 transition-all duration-300 group section-animate'
-          >
-            <img
-              src={bookCover}
-              alt='The MCP Standard'
-              className='w-28 sm:w-32 rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300'
-            />
-            <div className='text-center sm:text-left'>
-              <p className='text-xs uppercase tracking-widest text-gray-500 mb-2'>New Book</p>
-              <h3 className='text-xl sm:text-2xl font-heading font-bold text-white mb-2'>The MCP Standard</h3>
-              <p className='text-gray-400 text-sm sm:text-base mb-3'>A Developer&apos;s Guide to Building Universal AI Tools with the Model Context Protocol</p>
-              <span className='inline-flex items-center text-sm text-gray-300 group-hover:text-white transition-colors duration-200'>
-                Learn more <span className='ml-1 group-hover:translate-x-1 transition-transform duration-200'>→</span>
-              </span>
-            </div>
-          </Link>
-        </div>
       </section>
 
       {/* About Section */}
-      <section id='about' className='py-12 sm:py-16 lg:py-20 bg-gray-900/50'>
+      <section id='about' className='py-12 sm:py-16 lg:py-20 glass-section'>
         <div className='max-w-6xl mx-auto px-4 sm:px-6'>
           <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
             About Me
@@ -530,7 +461,7 @@ export class DeviceFarmPlugin {
                   {achievement.title}
                 </h3>
                 <p className='text-gray-400 mb-4 text-sm sm:text-base'>{achievement.description}</p>
-                <span className='inline-block bg-white/10 backdrop-blur-sm text-gray-300 px-3 py-1 rounded-full text-xs sm:text-sm'>
+                <span className='inline-block glass-pill text-gray-300 px-3 py-1 rounded-full text-xs sm:text-sm'>
                   {achievement.highlight}
                 </span>
               </div>
@@ -540,7 +471,7 @@ export class DeviceFarmPlugin {
       </section>
 
       {/* Projects Section */}
-      <section id='projects' className='py-12 sm:py-16 lg:py-20 bg-gray-900/50'>
+      <section id='projects' className='py-12 sm:py-16 lg:py-20 glass-section'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6'>
           <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-6 sm:mb-8 text-white title-animate'>
             Open Source Contributions
@@ -577,7 +508,7 @@ export class DeviceFarmPlugin {
                   {conference.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className='bg-white/10 text-gray-300 px-2 py-1 rounded text-xs'
+                      className='glass-pill text-gray-300 px-2.5 py-1 rounded-md text-xs'
                     >
                       {tag}
                     </span>
@@ -603,7 +534,7 @@ export class DeviceFarmPlugin {
           <div className='text-center mt-8 sm:mt-12'>
             <Link
               to='/conferences'
-              className='glass-button bg-amber-600/80 hover:bg-amber-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-200 inline-flex items-center space-x-2 touch-target'
+              className='glass-button bg-accent-hover/80 hover:bg-accent-hover px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-200 inline-flex items-center space-x-2 touch-target'
             >
               <span>View All Talks</span>
               <span>→</span>
@@ -613,7 +544,7 @@ export class DeviceFarmPlugin {
       </section>
 
       {/* Blogs Section */}
-      <section id='blogs' className='py-12 sm:py-16 lg:py-20 bg-gray-900/50'>
+      <section id='blogs' className='py-12 sm:py-16 lg:py-20 glass-section'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6'>
           <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
             Latest Writings
@@ -637,7 +568,7 @@ export class DeviceFarmPlugin {
               <div className='text-center'>
                 <Link
                   to='/blog'
-                  className='glass-button bg-amber-600/80 hover:bg-amber-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-200 inline-flex items-center space-x-2 touch-target'
+                  className='glass-button bg-accent-hover/80 hover:bg-accent-hover px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-200 inline-flex items-center space-x-2 touch-target'
                 >
                   <span>View All Articles</span>
                   <span>→</span>
@@ -649,19 +580,20 @@ export class DeviceFarmPlugin {
       </section>
 
       {/* Contact Section */}
-      <section id='contact' className='py-12 sm:py-16 lg:py-20'>
+      <section id='contact' className='py-12 sm:py-16 lg:py-20 glass-section'>
         <div className='max-w-4xl mx-auto px-4 sm:px-6 text-center'>
           <h2 className='text-3xl sm:text-4xl font-heading font-bold mb-6 sm:mb-8 text-white title-animate'>
             Let&apos;s Connect
           </h2>
-          <p className='text-base sm:text-lg lg:text-xl text-gray-300 mb-8 sm:mb-12 section-animate'>
-            Interested in collaboration, speaking opportunities, or just want to chat about testing
-            and automation?
-          </p>
-          <div className='flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 scale-up'>
+          <div className='glass-card rounded-2xl p-8 sm:p-12 max-w-2xl mx-auto'>
+            <p className='text-base sm:text-lg lg:text-xl text-gray-300 mb-8 sm:mb-10 section-animate'>
+              Interested in collaboration, speaking opportunities, or just want to chat about testing
+              and automation?
+            </p>
+            <div className='flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 scale-up'>
             <a
               href='mailto:srinivasan.sekar1990@gmail.com'
-              className='glass-button bg-amber-600/80 hover:bg-amber-600 p-3 sm:p-4 rounded-full transition-all duration-200 touch-target'
+              className='glass-button bg-accent-hover/80 hover:bg-accent-hover p-3 sm:p-4 rounded-full transition-all duration-200 touch-target'
               aria-label='Email Me'
             >
               <svg className='w-6 h-6' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
@@ -692,14 +624,15 @@ export class DeviceFarmPlugin {
               </svg>
             </a>
           </div>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className='py-6 sm:py-8 border-t border-white/10'>
+      <footer className='py-6 sm:py-8 glass-section'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 text-center'>
-          <p className='text-gray-400 text-sm sm:text-base'>
-            © 2026 Srinivasan Sekar. Built with React & Tailwind CSS.
+          <p className='text-gray-500 text-sm sm:text-base'>
+            © 2026 Srinivasan Sekar
           </p>
         </div>
       </footer>

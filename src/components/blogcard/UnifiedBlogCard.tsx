@@ -35,7 +35,7 @@ export default function UnifiedBlogCard({ post }: UnifiedBlogCardProps) {
   const isExternal = post.source === 'external'
 
   return (
-    <article className='bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-300 hover:transform hover:scale-105'>
+    <article className='glass-card-hover rounded-xl overflow-hidden'>
       {post.coverImage && (
         <div className='aspect-video overflow-hidden'>
           <img
@@ -60,7 +60,7 @@ export default function UnifiedBlogCard({ post }: UnifiedBlogCardProps) {
           {post.tags.slice(0, 2).map((tag, index) => (
             <span
               key={index}
-              className='bg-white/10 text-gray-300 px-2 py-1 rounded text-xs'
+              className='glass-pill text-gray-300 px-2.5 py-1 rounded-md text-xs'
             >
               {tag}
             </span>
