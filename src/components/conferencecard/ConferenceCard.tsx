@@ -32,7 +32,7 @@ export default function ConferenceCard({ conference }: { conference: conference 
           {conference.description}
         </a>
       </div>
-      <div className='col-start-5 col-end-6 md:mx-auto relative mr-10'>
+      <div className='col-start-5 col-end-6 md:mx-auto relative mr-4 md:mr-10'>
         <div className='h-full w-6 flex items-center justify-center'>
           <div className={timelineBarClasses}></div>
         </div>
@@ -41,7 +41,7 @@ export default function ConferenceCard({ conference }: { conference: conference 
     </div>
   ) : (
     <div className='flex md:contents'>
-      <div className='col-start-5 col-end-6 mr-10 md:mx-auto relative'>
+      <div className='col-start-5 col-end-6 mr-4 md:mr-10 md:mx-auto relative'>
         <div className='h-full w-6 flex items-center justify-center'>
           <div className={timelineBarClasses}></div>
         </div>

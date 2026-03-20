@@ -311,7 +311,7 @@ const Conferences = () => {
       {/* Selected Conference Card */}
       {selectedConf && (
         <div
-          className='fixed top-24 right-6 z-20 w-72 p-4 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10'
+          className='fixed top-20 right-3 left-3 sm:left-auto sm:right-6 sm:top-24 z-20 w-auto sm:w-72 p-4 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10'
           style={{ animation: 'fade-in-up 0.3s ease-out forwards' }}
         >
           <div className='flex items-start justify-between mb-3'>
@@ -367,7 +367,7 @@ const Conferences = () => {
       {/* Virtual Conferences Panel */}
       {showVirtual && (
         <div
-          className='fixed top-24 right-6 z-20 w-80 max-h-[70vh] rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 overflow-hidden flex flex-col'
+          className='fixed top-20 right-3 left-3 sm:left-auto sm:right-6 sm:top-24 z-20 w-auto sm:w-80 max-h-[70vh] rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 overflow-hidden flex flex-col'
           style={{ animation: 'fade-in-up 0.3s ease-out forwards' }}
         >
           <div className='flex items-center justify-between p-4 border-b border-white/5'>

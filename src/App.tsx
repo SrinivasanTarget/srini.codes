@@ -6,14 +6,11 @@ import BlogPost from './screens/BlogPost'
 import Contact from './screens/Contact'
 import Conferences from './screens/Conferences'
 import Book from './screens/Book'
-import CustomCursor from './components/CustomCursor'
-import BookBanner from './components/BookBanner'
 import { Analytics } from '@vercel/analytics/react'
 
 function App() {
   return (
     <div className='bg-black min-h-screen'>
-      <CustomCursor />
       <Router>
         <Routes>
           <Route path="/" element={<ModernPortfolio />} />
@@ -23,7 +20,6 @@ function App() {
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>
-        <BookBanner />
       </Router>
       <Analytics mode={'production'} />
     </div>

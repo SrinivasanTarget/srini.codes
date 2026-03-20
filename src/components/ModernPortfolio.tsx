@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { conferences } from '../portfolio/conferences'
 import { UnifiedBlogService, UnifiedBlogPost } from '../services/unifiedBlog'
@@ -8,8 +8,54 @@ import SimpleProjectCard from './project/SimpleProjectCard'
 import heroImage from '../assets/images/ProfilePic.webp'
 import TiltProfileImage from './TiltProfileImage'
 import testmuLogo from '../assets/images/TestMu AI White Logo 512px.svg'
-import bookCover from '../assets/images/MCP Book.png'
 import ThreeHeroBackground from './ThreeHeroBackground'
+import BookBanner from './BookBanner'
+
+// Animated role cycling component
+const ROLES = [
+  { label: 'Open Source Advocate', icon: '⌘' },
+  { label: 'International Speaker', icon: '◉' },
+  { label: 'Technical Author', icon: '✦' },
+]
+
+const RoleCycler: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+
+  const cycleRole = useCallback(() => {
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev + 1) % ROLES.length)
+      setIsTransitioning(false)
+    }, 400)
+  }, [])
+
+  useEffect(() => {
+    const interval = setInterval(cycleRole, 3000)
+    return () => clearInterval(interval)
+  }, [cycleRole])
+
+  const role = ROLES[currentIndex]
+
+  return (
+    <div className='h-8 sm:h-9 overflow-hidden relative flex items-center justify-center lg:justify-start'>
+      <div
+        className={`flex items-center gap-2.5 transition-all duration-400 ease-out ${
+          isTransitioning
+            ? 'opacity-0 -translate-y-3'
+            : 'opacity-100 translate-y-0'
+        }`}
+        style={{ transitionDuration: '400ms', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
+      >
+        <span className='text-accent-light/50 text-sm'>{role.icon}</span>
+        <span className='text-sm sm:text-base text-white/70 font-medium tracking-wide'>
+          {role.label}
+        </span>
+        <span className='w-1.5 h-1.5 rounded-full bg-accent-light/40 animate-pulse' />
+      </div>
+    </div>
+  )
+}
 
 // Custom hook for intersection observer animations
 const useIntersectionAnimation = (dependencies: unknown[] = []) => {
@@ -31,7 +77,7 @@ const useIntersectionAnimation = (dependencies: unknown[] = []) => {
     // Small delay to ensure DOM is updated after data loads
     const timeoutId = setTimeout(() => {
       const animatedElements = document.querySelectorAll(
-        '.section-animate, .stagger-animate, .slide-left, .slide-right, .scale-up, .blur-reveal, .title-animate'
+        '.section-animate, .stagger-animate, .title-animate'
       )
       animatedElements.forEach((el) => observer.observe(el))
     }, 100)
@@ -91,94 +137,6 @@ const ModernPortfolio = () => {
     }
   }
 
-  const achievements = [
-    {
-      icon: '🏆',
-      title: 'Open Source Maintainer',
-      description:
-        'Core maintainer of Appium - the leading mobile automation framework used by millions',
-      highlight: 'Appium Core Team',
-    },
-    {
-      icon: '🎤',
-      title: 'International Speaker',
-      description:
-        '25+ conference talks across SeleniumConf, AppiumConf, QuestForQuality, SLASSCOM, Belgrade Test Conference, AutomationGuild, FOSDEM, TestμConf, Nordic Testing Days, Agile India',
-      highlight: '25+ Global Talks',
-    },
-    {
-      icon: '📝',
-      title: 'Technical Author',
-      description: 'Published 10+ technical articles on Applitools, TestProject blogs',
-      highlight: '10+ Publications',
-    },
-    {
-      icon: '🚀',
-      title: 'Director of Engineering',
-      description: 'Leading engineering teams at TestMu AI - AI-powered testing platform',
-      highlight: 'TestMu AI Leadership',
-    },
-    {
-      icon: '🔧',
-      title: 'Plugin Architect',
-      description: 'Created Appium Device Farm, Wait Plugin, Gestures Plugin for Appium 2.0',
-      highlight: 'Appium 2.0 Pioneer',
-    },
-    {
-      icon: '🌟',
-      title: 'Community Impact',
-      description: 'Contributor to Selenium, WebDriverIO, Taiko, Angular Testing Library projects',
-      highlight: 'Multi-Project Contributor',
-    },
-    {
-      icon: '🎯',
-      title: 'Testing Innovation',
-      description:
-        'Pioneered container-based testing and Kubernetes manifest testing in the testing community',
-      highlight: 'DevOps Testing Leader',
-    },
-    {
-      icon: '🏅',
-      title: 'Conference Recognition',
-      description:
-        'Featured speaker at XConf Singapore, SeleniumConf, AppiumConf, AgileIndia, TestμConf, etc',
-      highlight: 'Industry Recognition',
-    },
-    {
-      icon: '💡',
-      title: 'Thought Leadership',
-      description:
-        'Advocate for ethical testing, bias reduction, and inclusive practices in the testing community',
-      highlight: 'Ethics Champion',
-    },
-    {
-      icon: '🧠',
-      title: 'MCP Pioneer',
-      description:
-        'Created Model Context Protocol servers for WebDriverAgent and Appium Gestures - enabling AI integration with mobile automation',
-      highlight: 'AI + Testing Innovation',
-    },
-  ]
-
-  const skills = [
-    'Mobile Test Automation',
-    'Model Context Protocol (MCP)',
-    'AI Integration',
-    'Appium',
-    'Selenium',
-    'WebDriverIO',
-    'JavaScript/TypeScript',
-    'Java',
-    'Python',
-    'Docker',
-    'Kubernetes',
-    'CI/CD',
-    'DevOps',
-    'API Testing',
-    'Performance Testing',
-    'Cloud Testing',
-  ]
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
@@ -189,21 +147,24 @@ const ModernPortfolio = () => {
 
   return (
     <div className='bg-black text-white'>
+      {/* Book Announcement */}
+      <BookBanner />
+
       {/* Navigation */}
       <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        className={`sticky top-0 w-full z-50 transition-all duration-300 ${
           isScrolled ? 'glass-nav' : 'bg-transparent'
         }`}
       >
         <div className='max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center'>
-              <div className='text-xl sm:text-2xl font-signature text-accent-light tracking-wide font-semibold' style={{ textShadow: 'none', WebkitFontSmoothing: 'antialiased' }}>
+              <div className='text-2xl sm:text-3xl font-signature text-accent-light' style={{ WebkitFontSmoothing: 'antialiased' }}>
                 Srinivasan Sekar
               </div>
             </div>
             <div className='hidden md:flex space-x-6 lg:space-x-8'>
-              {['About', 'Achievements', 'Projects', 'Talks'].map((item) => (
+              {['About', 'Projects', 'Talks'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -275,7 +236,7 @@ const ModernPortfolio = () => {
           }`}
         >
           <div className='px-4 py-4 space-y-1'>
-            {['About', 'Achievements', 'Projects', 'Talks'].map((item) => (
+            {['About', 'Projects', 'Talks'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -318,7 +279,7 @@ const ModernPortfolio = () => {
       {/* Hero Section */}
       <section
         id='hero'
-        className='min-h-screen flex items-center justify-center relative overflow-hidden pt-16 sm:pt-0'
+        className='min-h-[calc(100vh-6rem)] flex items-center justify-center relative overflow-hidden'
       >
         {/* Three.js Particle Background */}
         <ThreeHeroBackground className='absolute inset-0 z-0' />
@@ -352,29 +313,19 @@ const ModernPortfolio = () => {
                 </span>
               </div>
 
-              <div className='mb-6 space-y-2'>
-                <div className='flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-4 text-xs sm:text-sm'>
-                  <span className='glass-pill px-3 py-1.5 rounded-full text-white/90'>
-                    Open Source Advocate
-                  </span>
-                  <span className='glass-pill px-3 py-1.5 rounded-full text-white/90'>
-                    International Speaker
-                  </span>
-                  <span className='glass-pill px-3 py-1.5 rounded-full text-white/90'>
-                    Technical Author
-                  </span>
-                </div>
+              <div className='mb-6'>
+                <RoleCycler />
               </div>
 
-              <div className='flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4'>
+              <div className='flex flex-wrap justify-center lg:justify-start gap-3'>
                 <a
                   href='https://github.com/srinivasanTarget'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-gray-400 hover:text-white transition-colors duration-200'
+                  className='group flex items-center justify-center w-10 h-10 rounded-xl border border-white/[0.08] bg-white/[0.03] hover:border-accent/30 hover:bg-accent/[0.06] transition-all duration-300'
                   aria-label='GitHub'
                 >
-                  <svg className='w-6 h-6' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+                  <svg className='w-[18px] h-[18px] text-gray-400 group-hover:text-white transition-colors duration-300' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
                     <path d='M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22' />
                   </svg>
                 </a>
@@ -382,10 +333,10 @@ const ModernPortfolio = () => {
                   href='https://twitter.com/srinivasanskr'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-gray-400 hover:text-white transition-colors duration-200'
+                  className='group flex items-center justify-center w-10 h-10 rounded-xl border border-white/[0.08] bg-white/[0.03] hover:border-accent/30 hover:bg-accent/[0.06] transition-all duration-300'
                   aria-label='Twitter'
                 >
-                  <svg className='w-6 h-6' viewBox='0 0 24 24' fill='currentColor'>
+                  <svg className='w-[18px] h-[18px] text-gray-400 group-hover:text-white transition-colors duration-300' viewBox='0 0 24 24' fill='currentColor'>
                     <path d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z' />
                   </svg>
                 </a>
@@ -393,10 +344,10 @@ const ModernPortfolio = () => {
                   href='https://www.linkedin.com/in/srinivasan-sekar/'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-gray-400 hover:text-white transition-colors duration-200'
+                  className='group flex items-center justify-center w-10 h-10 rounded-xl border border-white/[0.08] bg-white/[0.03] hover:border-accent/30 hover:bg-accent/[0.06] transition-all duration-300'
                   aria-label='LinkedIn'
                 >
-                  <svg className='w-6 h-6' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+                  <svg className='w-[18px] h-[18px] text-gray-400 group-hover:text-white transition-colors duration-300' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
                     <path d='M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z' />
                     <rect x='2' y='9' width='4' height='12' />
                     <circle cx='4' cy='4' r='2' />
@@ -411,12 +362,12 @@ const ModernPortfolio = () => {
       </section>
 
       {/* About Section */}
-      <section id='about' className='py-12 sm:py-16 lg:py-20 glass-section'>
+      <section id='about' className='py-20 sm:py-28 lg:py-36 glass-section'>
         <div className='max-w-6xl mx-auto px-4 sm:px-6'>
           <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
             About Me
           </h2>
-          <div className='max-w-4xl mx-auto glass-card p-6 sm:p-8 lg:p-10 rounded-2xl blur-reveal glow-on-enter'>
+          <div className='max-w-4xl mx-auto glass-card p-6 sm:p-8 lg:p-10 rounded-2xl section-animate'>
             <p className='text-base sm:text-lg lg:text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
               I&apos;m a passionate technologist and leader in software testing and automation. As{' '}
               <span className='modern-highlight inline-flex items-center gap-1.5'>Director of Engineering at <img src={testmuLogo} alt='TestMu AI' className='inline h-4' /></span>, I
@@ -444,39 +395,13 @@ const ModernPortfolio = () => {
         </div>
       </section>
 
-      {/* Achievements Section */}
-      <section id='achievements' className='py-12 sm:py-16 lg:py-20'>
-        <div className='max-w-7xl mx-auto px-4 sm:px-6'>
-          <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
-            Key Achievements
-          </h2>
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 stagger-animate'>
-            {achievements.map((achievement, index) => (
-              <div
-                key={index}
-                className='glass-card-hover glass-border-gradient p-6 sm:p-8 rounded-xl'
-              >
-                <div className='text-3xl sm:text-4xl mb-4'>{achievement.icon}</div>
-                <h3 className='text-lg sm:text-xl font-heading font-bold mb-3 text-white'>
-                  {achievement.title}
-                </h3>
-                <p className='text-gray-400 mb-4 text-sm sm:text-base'>{achievement.description}</p>
-                <span className='inline-block glass-pill text-gray-300 px-3 py-1 rounded-full text-xs sm:text-sm'>
-                  {achievement.highlight}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Projects Section */}
-      <section id='projects' className='py-12 sm:py-16 lg:py-20 glass-section'>
+      <section id='projects' className='py-20 sm:py-28 lg:py-36 glass-section'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6'>
           <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-6 sm:mb-8 text-white title-animate'>
             Open Source Contributions
           </h2>
-          <p className='text-base sm:text-lg lg:text-xl text-gray-300 text-center mb-10 sm:mb-16 max-w-3xl mx-auto section-animate'>
+          <p className='text-base sm:text-lg lg:text-xl text-gray-300 text-center mb-12 sm:mb-16 max-w-3xl mx-auto section-animate'>
             Key contributions to testing and automation ecosystem
           </p>
 
@@ -486,7 +411,7 @@ const ModernPortfolio = () => {
               <p className='text-gray-400'>Loading projects...</p>
             </div>
           ) : (
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 stagger-animate'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 stagger-animate'>
               {enhancedProjects.map((project, index) => (
                 <SimpleProjectCard key={index} project={project} />
               ))}
@@ -496,12 +421,12 @@ const ModernPortfolio = () => {
       </section>
 
       {/* Talks Section */}
-      <section id='talks' className='py-12 sm:py-16 lg:py-20'>
+      <section id='talks' className='py-20 sm:py-28 lg:py-36'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6'>
           <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
             Conference Talks & Presentations
           </h2>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 stagger-animate'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 stagger-animate'>
             {conferences.slice(0, 4).map((conference, index) => (
               <div key={index} className='glass-card-hover p-5 sm:p-6 rounded-xl'>
                 <div className='flex flex-wrap gap-2 mb-3'>
@@ -544,7 +469,7 @@ const ModernPortfolio = () => {
       </section>
 
       {/* Blogs Section */}
-      <section id='blogs' className='py-12 sm:py-16 lg:py-20 glass-section'>
+      <section id='blogs' className='py-20 sm:py-28 lg:py-36 glass-section'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6'>
           <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
             Latest Writings
@@ -560,7 +485,7 @@ const ModernPortfolio = () => {
             </div>
           ) : (
             <>
-              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 stagger-animate'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 mb-8 sm:mb-12 stagger-animate'>
                 {recentBlogs.map((blog) => (
                   <UnifiedBlogCard key={blog.id} post={blog} />
                 ))}
@@ -580,7 +505,7 @@ const ModernPortfolio = () => {
       </section>
 
       {/* Contact Section */}
-      <section id='contact' className='py-12 sm:py-16 lg:py-20 glass-section'>
+      <section id='contact' className='py-20 sm:py-28 lg:py-36 glass-section'>
         <div className='max-w-4xl mx-auto px-4 sm:px-6 text-center'>
           <h2 className='text-3xl sm:text-4xl font-heading font-bold mb-6 sm:mb-8 text-white title-animate'>
             Let&apos;s Connect
@@ -590,7 +515,7 @@ const ModernPortfolio = () => {
               Interested in collaboration, speaking opportunities, or just want to chat about testing
               and automation?
             </p>
-            <div className='flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 scale-up'>
+            <div className='flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 section-animate'>
             <a
               href='mailto:srinivasan.sekar1990@gmail.com'
               className='glass-button bg-accent-hover/80 hover:bg-accent-hover p-3 sm:p-4 rounded-full transition-all duration-200 touch-target'

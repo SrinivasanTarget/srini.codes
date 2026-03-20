@@ -6,7 +6,7 @@ export default {
   theme: {
     fontFamily: {
       sans: [
-        'DM Sans',
+        'Switzer',
         'system-ui',
         '-apple-system',
         'BlinkMacSystemFont',
@@ -14,9 +14,9 @@ export default {
         'Roboto',
         'sans-serif',
       ],
-      heading: ['Outfit', 'DM Sans', 'system-ui', 'sans-serif'],
+      heading: ['Cabinet Grotesk', 'Switzer', 'system-ui', 'sans-serif'],
       mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
-      signature: ['Dancing Script', 'cursive'],
+      signature: ['Caveat', 'cursive'],
     },
     fontWeight: {
       hairline: 100,

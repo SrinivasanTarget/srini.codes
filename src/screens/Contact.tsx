@@ -160,7 +160,7 @@ END:VCARD`
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className={`
-          relative w-full max-w-[360px] cursor-default
+          relative w-full max-w-[92vw] sm:max-w-[360px] cursor-default
           ${isLoaded ? '' : 'opacity-0'}
         `}
         style={{

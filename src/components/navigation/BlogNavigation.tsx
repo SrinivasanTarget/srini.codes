@@ -7,7 +7,7 @@ export default function BlogNavigation() {
       <div className='max-w-7xl mx-auto px-6 py-4'>
         <div className='flex justify-between items-center'>
           <Link to='/' className='flex items-center'>
-            <div className='text-2xl font-signature text-amber-400 tracking-wide'>
+            <div className='text-2xl sm:text-3xl font-signature text-amber-400'>
               Srinivasan Sekar
             </div>
           </Link>
