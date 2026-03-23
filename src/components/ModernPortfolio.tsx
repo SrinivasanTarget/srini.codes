@@ -9,6 +9,7 @@ import heroImage from '../assets/images/ProfilePic.webp'
 import TiltProfileImage from './TiltProfileImage'
 import testmuLogo from '../assets/images/TestMu AI White Logo 512px.svg'
 import ThreeHeroBackground from './ThreeHeroBackground'
+import micImage from '../assets/images/mic.webp'
 import BookBanner from './BookBanner'
 
 // Animated role cycling component
@@ -164,7 +165,7 @@ const ModernPortfolio = () => {
               </div>
             </div>
             <div className='hidden md:flex space-x-6 lg:space-x-8'>
-              {['About', 'Projects', 'Talks'].map((item) => (
+              {['About', 'Projects', 'Talks', 'Podcast'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -236,7 +237,7 @@ const ModernPortfolio = () => {
           }`}
         >
           <div className='px-4 py-4 space-y-1'>
-            {['About', 'Projects', 'Talks'].map((item) => (
+            {['About', 'Projects', 'Talks', 'Podcast'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -464,6 +465,100 @@ const ModernPortfolio = () => {
               <span>View All Talks</span>
               <span>→</span>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Podcast Section */}
+      <section id='podcast' className='py-20 sm:py-28 lg:py-36 glass-section'>
+        <div className='max-w-5xl mx-auto px-4 sm:px-6'>
+          <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
+            Featured Podcast
+          </h2>
+          <div className='glass-card-hover rounded-2xl overflow-hidden section-animate'>
+            <div className='p-6 sm:p-8 lg:p-10'>
+              <div className='flex flex-col lg:flex-row gap-6 lg:gap-10 items-center'>
+                {/* Mic image */}
+                <div className='flex-shrink-0'>
+                  <img
+                    src={micImage}
+                    alt='Podcast microphone'
+                    className='w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain drop-shadow-[0_0_25px_rgba(212,149,106,0.3)]'
+                  />
+                </div>
+
+                {/* Content */}
+                <div className='flex-1 text-center lg:text-left'>
+                  <div className='flex flex-wrap justify-center lg:justify-start gap-2 mb-3'>
+                    <span className='glass-pill text-accent-light px-2.5 py-1 rounded-md text-xs font-medium'>
+                      Thoughtworks Technology Podcast
+                    </span>
+                    <span className='glass-pill text-gray-300 px-2.5 py-1 rounded-md text-xs'>
+                      November 2023
+                    </span>
+                  </div>
+
+                  <h3 className='text-xl sm:text-2xl font-heading font-bold mb-3 text-white leading-snug'>
+                    What&apos;s it like to maintain an award-winning open source tool?
+                  </h3>
+
+                  <p className='text-gray-300 text-sm sm:text-base mb-4 leading-relaxed'>
+                    Joined <span className='text-white font-medium'>Rebecca Parsons</span> (CTO Emerita, Thoughtworks) and{' '}
+                    <span className='text-white font-medium'>Scott Shaw</span> to discuss the journey of building and
+                    maintaining <span className='modern-highlight'>AppiumTestDistribution</span> — from its origins solving
+                    parallel mobile test execution to winning the{' '}
+                    <span className='modern-highlight'>LambdaTest Delta Award</span>. We explored open source sustainability,
+                    architectural evolution across platforms, and what it takes to keep a community-driven project thriving
+                    over eight years.
+                  </p>
+
+                  <div className='flex flex-wrap justify-center lg:justify-start gap-2 mb-6'>
+                    {['Open Source', 'Appium', 'Mobile Testing', 'Community'].map((tag) => (
+                      <span key={tag} className='glass-pill text-white px-2.5 py-1 rounded-md text-xs'>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Platform buttons */}
+                  <div className='flex flex-wrap justify-center lg:justify-start gap-3'>
+                    <a
+                      href='https://www.thoughtworks.com/insights/podcasts/technology-podcasts/whats-like-maintain-award-winning-open-source-tool'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='group inline-flex items-center gap-2.5 glass-button bg-accent-hover/80 hover:bg-accent-hover px-5 py-2.5 rounded-full transition-all duration-200 text-sm font-medium touch-target'
+                    >
+                      <svg className='w-4 h-4' viewBox='0 0 24 24' fill='currentColor'>
+                        <polygon points='5 3 19 12 5 21 5 3' />
+                      </svg>
+                      Listen Now
+                    </a>
+                    <a
+                      href='https://open.spotify.com/episode/2BW0anDAIp98ukoDzvMjBl'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='group inline-flex items-center gap-2.5 glass-button px-5 py-2.5 rounded-full transition-all duration-200 text-sm text-gray-300 hover:text-[#1DB954] hover:border-[#1DB954]/30 touch-target'
+                    >
+                      <svg className='w-4 h-4' viewBox='0 0 24 24' fill='currentColor'>
+                        <path d='M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z' />
+                      </svg>
+                      Spotify
+                    </a>
+                    <a
+                      href='https://podcasts.apple.com/gb/podcast/whats-it-like-to-maintain-an-award-winning-open-source-tool/id881136697?i=1000633439939'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='group inline-flex items-center gap-2.5 glass-button px-5 py-2.5 rounded-full transition-all duration-200 text-sm text-gray-300 hover:text-[#D56DFB] hover:border-[#D56DFB]/30 touch-target'
+                    >
+                      <svg className='w-4 h-4' viewBox='0 0 24 24' fill='currentColor'>
+                        <path d='M5.34 0A5.328 5.328 0 0 0 0 5.34v13.32A5.328 5.328 0 0 0 5.34 24h13.32A5.328 5.328 0 0 0 24 18.66V5.34A5.328 5.328 0 0 0 18.66 0H5.34zm6.525 2.568c2.336 0 4.448.902 6.056 2.587 1.224 1.272 1.912 2.619 2.264 4.392.12.604-.336 1.14-.952 1.14h-.12c-.5 0-.9-.36-.992-.852-.264-1.392-.804-2.496-1.728-3.42-1.296-1.308-2.872-1.968-4.68-1.968-1.648 0-3.12.588-4.404 1.764-1.308 1.2-2.028 2.748-2.148 4.632-.036.468-.396.852-.864.852h-.156c-.648 0-1.14-.552-1.104-1.2.132-2.34 1.044-4.308 2.748-5.856C7.236 3.396 9.18 2.568 11.865 2.568zM12 7.128c1.416 0 2.7.528 3.756 1.464 1.02.912 1.608 2.1 1.752 3.492.06.5-.348.948-.852.984h-.096c-.468 0-.864-.348-.924-.816-.096-.9-.504-1.668-1.212-2.292-.72-.636-1.536-.972-2.472-.972-.888 0-1.716.312-2.424.912-.756.648-1.2 1.476-1.332 2.412-.072.48-.48.828-.96.828h-.06c-.576 0-1.008-.504-.936-1.08.204-1.44.84-2.664 1.932-3.54 1.02-.828 2.184-1.248 3.528-1.392h.3zM12 11.7a2.4 2.4 0 0 1 2.4 2.4c0 .528-.18 1.044-.504 1.464l.024.024-1.08 3.54c-.108.372-.456.612-.84.612-.384 0-.732-.24-.84-.612l-1.08-3.54.024-.024A2.371 2.371 0 0 1 9.6 14.1a2.4 2.4 0 0 1 2.4-2.4z' />
+                      </svg>
+                      Apple Podcasts
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
