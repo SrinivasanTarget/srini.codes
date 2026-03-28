@@ -165,7 +165,7 @@ const ModernPortfolio = () => {
               </div>
             </div>
             <div className='hidden md:flex space-x-6 lg:space-x-8'>
-              {['About', 'Projects', 'Talks', 'Podcast'].map((item) => (
+              {['About', 'Projects', 'Talks', 'Podcast', 'Citations'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -237,7 +237,7 @@ const ModernPortfolio = () => {
           }`}
         >
           <div className='px-4 py-4 space-y-1'>
-            {['About', 'Projects', 'Talks', 'Podcast'].map((item) => (
+            {['About', 'Projects', 'Talks', 'Podcast', 'Citations'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -559,6 +559,102 @@ const ModernPortfolio = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Citations Section */}
+      <section id='citations' className='py-20 sm:py-28 lg:py-36 glass-section'>
+        <div className='max-w-5xl mx-auto px-4 sm:px-6'>
+          <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
+            Citations &amp; Press
+          </h2>
+          <div className='grid gap-4 sm:gap-6 section-animate'>
+            {[
+              {
+                title: 'Better Context Will Always Beat a Better Model',
+                source: 'The New Stack',
+                url: 'https://thenewstack.io/better-context-will-always-beat-a-better-model/',
+                color: '#1d9bf0',
+              },
+              {
+                title: 'Ready or Not, AI Is Rewriting the Rules for Software Testing',
+                source: 'DevOps.com',
+                url: 'https://devops.com/ready-or-not-ai-is-rewriting-the-rules-for-software-testing/',
+                color: '#f97316',
+              },
+              {
+                title: "The CISO's Guide to Model Context Protocol (MCP)",
+                source: 'Security Boulevard',
+                url: 'https://securityboulevard.com/2025/10/the-cisos-guide-to-model-context-protocol-mcp/',
+                color: '#ef4444',
+              },
+              {
+                title: "It's Time to Build APIs for AI, Not Just for Developers",
+                source: 'The New Stack',
+                url: 'https://thenewstack.io/its-time-to-build-apis-for-ai-not-just-for-developers/',
+                color: '#1d9bf0',
+              },
+              {
+                title: 'Architecting for Agent-to-Agent Communication and AI Protocols',
+                source: 'Techstrong AI',
+                url: 'https://techstrong.ai/features/architecting-for-agent-to-agent-communication-and-ai-protocols/',
+                color: '#a855f7',
+              },
+            ].map((citation) => (
+              <a
+                key={citation.url}
+                href={citation.url}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='glass-card-hover rounded-xl p-5 sm:p-6 flex items-start gap-4 group transition-all duration-200 hover:scale-[1.01]'
+              >
+                <div
+                  className='flex-shrink-0 w-1 h-full min-h-[3rem] rounded-full opacity-60 group-hover:opacity-100 transition-opacity'
+                  style={{ backgroundColor: citation.color }}
+                />
+                <div className='flex-1 min-w-0'>
+                  <h3 className='text-base sm:text-lg font-heading font-semibold text-white group-hover:text-accent-light transition-colors leading-snug mb-1.5'>
+                    {citation.title}
+                  </h3>
+                  <span className='text-sm text-gray-400'>{citation.source}</span>
+                </div>
+                <svg
+                  className='w-5 h-5 text-gray-500 group-hover:text-accent-light flex-shrink-0 mt-1 transition-all duration-200 group-hover:translate-x-0.5'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' />
+                </svg>
+              </a>
+            ))}
+
+            {/* Indian Express Interview */}
+            <a
+              href='/assets/indian_express_28th_march.pdf'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='glass-card-hover rounded-xl p-5 sm:p-6 flex items-start gap-4 group transition-all duration-200 hover:scale-[1.01]'
+            >
+              <div
+                className='flex-shrink-0 w-1 h-full min-h-[3rem] rounded-full opacity-60 group-hover:opacity-100 transition-opacity bg-[#ff6b00]'
+              />
+              <div className='flex-1 min-w-0'>
+                <h3 className='text-base sm:text-lg font-heading font-semibold text-white group-hover:text-accent-light transition-colors leading-snug mb-1.5'>
+                  Interview with Indian Express
+                </h3>
+                <span className='text-sm text-gray-400'>The Indian Express · March 28, 2026</span>
+              </div>
+              <svg
+                className='w-5 h-5 text-gray-500 group-hover:text-accent-light flex-shrink-0 mt-1 transition-all duration-200 group-hover:translate-x-0.5'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' />
+              </svg>
+            </a>
           </div>
         </div>
       </section>
