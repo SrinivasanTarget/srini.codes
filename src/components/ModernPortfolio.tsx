@@ -90,6 +90,162 @@ const useIntersectionAnimation = (dependencies: unknown[] = []) => {
   }, dependencies)
 }
 
+const CITATIONS = [
+  {
+    title: 'Better Context Will Always Beat a Better Model',
+    source: 'The New Stack',
+    url: 'https://thenewstack.io/better-context-will-always-beat-a-better-model/',
+    color: '#1d9bf0',
+    thumbnail: 'https://cdn.thenewstack.io/media/2026/01/5d7625ac-blendingin.jpg',
+  },
+  {
+    title: 'Ready or Not, AI Is Rewriting the Rules for Software Testing',
+    source: 'DevOps.com',
+    url: 'https://devops.com/ready-or-not-ai-is-rewriting-the-rules-for-software-testing/',
+    color: '#f97316',
+    thumbnail: '',
+  },
+  {
+    title: "The CISO's Guide to Model Context Protocol (MCP)",
+    source: 'Security Boulevard',
+    url: 'https://securityboulevard.com/2025/10/the-cisos-guide-to-model-context-protocol-mcp/',
+    color: '#ef4444',
+    thumbnail: 'https://securityboulevard.com/wp-content/uploads/2025/10/770-330-2025-10-23T132954.417.png',
+  },
+  {
+    title: "It's Time to Build APIs for AI, Not Just for Developers",
+    source: 'The New Stack',
+    url: 'https://thenewstack.io/its-time-to-build-apis-for-ai-not-just-for-developers/',
+    color: '#1d9bf0',
+    thumbnail: 'https://cdn.thenewstack.io/media/2025/10/35c6b952-agent.jpg',
+  },
+  {
+    title: 'Architecting for Agent-to-Agent Communication and AI Protocols',
+    source: 'Techstrong AI',
+    url: 'https://techstrong.ai/features/architecting-for-agent-to-agent-communication-and-ai-protocols/',
+    color: '#a855f7',
+    thumbnail: 'https://techstrong.ai/wp-content/uploads/2024/10/AIOps.jpg',
+  },
+  {
+    title: 'Interview with Indian Express',
+    source: 'The Indian Express · March 28, 2026',
+    url: '/assets/indian_express_28th_march.pdf',
+    color: '#ff6b00',
+    thumbnail: 'https://images.indianexpress.com/2026/03/AI-detection-human-and-AI-writing.jpg',
+  },
+]
+
+const CitationCarousel: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
+
+  useEffect(() => {
+    if (isPaused) return
+    const interval = setInterval(() => {
+      setIsTransitioning(true)
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % CITATIONS.length)
+        setIsTransitioning(false)
+      }, 500)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [isPaused])
+
+  const goTo = (index: number) => {
+    if (index === currentIndex) return
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setCurrentIndex(index)
+      setIsTransitioning(false)
+    }, 300)
+  }
+
+  const citation = CITATIONS[currentIndex]
+
+  return (
+    <div
+      className='glass-card-hover rounded-2xl overflow-hidden section-animate h-[calc(100%-3.5rem)] sm:h-[calc(100%-4rem)] flex flex-col'
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <div className='p-6 sm:p-8 flex-1 flex flex-col'>
+        {/* Current citation card */}
+        <div className='flex-1 flex flex-col'>
+          <a
+            href={citation.url}
+            target='_blank'
+            rel='noopener noreferrer'
+            className={`flex-1 flex flex-col group transition-all duration-500 ease-out ${
+              isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
+            }`}
+          >
+            {/* Thumbnail image */}
+            <div className='w-full h-36 sm:h-44 rounded-xl overflow-hidden mb-5 relative'>
+              {citation.thumbnail ? (
+                <img
+                  src={citation.thumbnail}
+                  alt={citation.title}
+                  className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500'
+                />
+              ) : (
+                <div
+                  className='w-full h-full flex items-center justify-center'
+                  style={{ backgroundColor: citation.color + '22' }}
+                >
+                  <span className='text-3xl font-heading font-bold' style={{ color: citation.color }}>
+                    {citation.source.split(/[·]/)[0].trim().split(' ').map(w => w[0]).join('')}
+                  </span>
+                </div>
+              )}
+              <div className='absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/40 to-transparent' />
+            </div>
+
+            {/* Source */}
+            <div className='flex items-center justify-between mb-3'>
+              <span className='text-sm text-gray-400'>{citation.source}</span>
+              <svg
+                className='w-5 h-5 text-gray-500 group-hover:text-accent-light flex-shrink-0 transition-all duration-200 group-hover:translate-x-0.5'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' />
+              </svg>
+            </div>
+
+            {/* Title */}
+            <h3 className='text-lg sm:text-xl font-heading font-bold text-white group-hover:text-accent-light transition-colors leading-snug'>
+              {citation.title}
+            </h3>
+          </a>
+        </div>
+
+        {/* Navigation dots and counter */}
+        <div className='flex items-center justify-between mt-6 pt-5 border-t border-white/5'>
+          <div className='flex gap-2'>
+            {CITATIONS.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goTo(index)}
+                className={`transition-all duration-300 rounded-full ${
+                  index === currentIndex
+                    ? 'w-6 h-2 bg-accent'
+                    : 'w-2 h-2 bg-white/20 hover:bg-white/40'
+                }`}
+                aria-label={`Go to citation ${index + 1}`}
+              />
+            ))}
+          </div>
+          <span className='text-xs text-gray-500 font-mono'>
+            {String(currentIndex + 1).padStart(2, '0')} / {String(CITATIONS.length).padStart(2, '0')}
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const ModernPortfolio = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -469,192 +625,102 @@ const ModernPortfolio = () => {
         </div>
       </section>
 
-      {/* Featured Podcast Section */}
+      {/* Podcast & Citations Section - Side by Side */}
       <section id='podcast' className='py-20 sm:py-28 lg:py-36 glass-section'>
-        <div className='max-w-5xl mx-auto px-4 sm:px-6'>
-          <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
-            Featured Podcast
-          </h2>
-          <div className='glass-card-hover rounded-2xl overflow-hidden section-animate'>
-            <div className='p-6 sm:p-8 lg:p-10'>
-              <div className='flex flex-col lg:flex-row gap-6 lg:gap-10 items-center'>
-                {/* Mic image */}
-                <div className='flex-shrink-0'>
-                  <img
-                    src={micImage}
-                    alt='Podcast microphone'
-                    className='w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain drop-shadow-[0_0_25px_rgba(212,149,106,0.3)]'
-                  />
-                </div>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+          <div className='flex flex-col lg:flex-row gap-8 lg:gap-10 items-stretch'>
+            {/* Left - Featured Podcast */}
+            <div className='flex-1 lg:w-1/2'>
+              <h2 className='text-2xl sm:text-3xl font-heading font-bold mb-6 sm:mb-8 text-white title-animate'>
+                Featured Podcast
+              </h2>
+              <div className='glass-card-hover rounded-2xl overflow-hidden section-animate h-[calc(100%-3.5rem)] sm:h-[calc(100%-4rem)]'>
+                <div className='p-6 sm:p-8'>
+                  <div className='flex flex-col items-center text-center'>
+                    <div className='flex-shrink-0 mb-5'>
+                      <img
+                        src={micImage}
+                        alt='Podcast microphone'
+                        className='w-24 h-24 sm:w-32 sm:h-32 object-contain drop-shadow-[0_0_25px_rgba(212,149,106,0.3)]'
+                      />
+                    </div>
 
-                {/* Content */}
-                <div className='flex-1 text-center lg:text-left'>
-                  <div className='flex flex-wrap justify-center lg:justify-start gap-2 mb-3'>
-                    <span className='glass-pill text-accent-light px-2.5 py-1 rounded-md text-xs font-medium'>
-                      Thoughtworks Technology Podcast
-                    </span>
-                    <span className='glass-pill text-gray-300 px-2.5 py-1 rounded-md text-xs'>
-                      November 2023
-                    </span>
-                  </div>
-
-                  <h3 className='text-xl sm:text-2xl font-heading font-bold mb-3 text-white leading-snug'>
-                    What&apos;s it like to maintain an award-winning open source tool?
-                  </h3>
-
-                  <p className='text-gray-300 text-sm sm:text-base mb-4 leading-relaxed'>
-                    Joined <span className='text-white font-medium'>Rebecca Parsons</span> (CTO Emerita, Thoughtworks) and{' '}
-                    <span className='text-white font-medium'>Scott Shaw</span> to discuss the journey of building and
-                    maintaining <span className='modern-highlight'>AppiumTestDistribution</span> — from its origins solving
-                    parallel mobile test execution to winning the{' '}
-                    <span className='modern-highlight'>LambdaTest Delta Award</span>. We explored open source sustainability,
-                    architectural evolution across platforms, and what it takes to keep a community-driven project thriving
-                    over eight years.
-                  </p>
-
-                  <div className='flex flex-wrap justify-center lg:justify-start gap-2 mb-6'>
-                    {['Open Source', 'Appium', 'Mobile Testing', 'Community'].map((tag) => (
-                      <span key={tag} className='glass-pill text-white px-2.5 py-1 rounded-md text-xs'>
-                        {tag}
+                    <div className='flex flex-wrap justify-center gap-2 mb-3'>
+                      <span className='glass-pill text-accent-light px-2.5 py-1 rounded-md text-xs font-medium'>
+                        Thoughtworks Technology Podcast
                       </span>
-                    ))}
-                  </div>
+                      <span className='glass-pill text-gray-300 px-2.5 py-1 rounded-md text-xs'>
+                        November 2023
+                      </span>
+                    </div>
 
-                  {/* Platform buttons */}
-                  <div className='flex flex-wrap justify-center lg:justify-start gap-3'>
-                    <a
-                      href='https://www.thoughtworks.com/insights/podcasts/technology-podcasts/whats-like-maintain-award-winning-open-source-tool'
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      className='group inline-flex items-center gap-2.5 glass-button bg-accent-hover/80 hover:bg-accent-hover px-5 py-2.5 rounded-full transition-all duration-200 text-sm font-medium touch-target'
-                    >
-                      <svg className='w-4 h-4' viewBox='0 0 24 24' fill='currentColor'>
-                        <polygon points='5 3 19 12 5 21 5 3' />
-                      </svg>
-                      Listen Now
-                    </a>
-                    <a
-                      href='https://open.spotify.com/episode/2BW0anDAIp98ukoDzvMjBl'
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      className='group inline-flex items-center gap-2.5 glass-button px-5 py-2.5 rounded-full transition-all duration-200 text-sm text-gray-300 hover:text-[#1DB954] hover:border-[#1DB954]/30 touch-target'
-                    >
-                      <svg className='w-4 h-4' viewBox='0 0 24 24' fill='currentColor'>
-                        <path d='M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z' />
-                      </svg>
-                      Spotify
-                    </a>
-                    <a
-                      href='https://podcasts.apple.com/gb/podcast/whats-it-like-to-maintain-an-award-winning-open-source-tool/id881136697?i=1000633439939'
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      className='group inline-flex items-center gap-2.5 glass-button px-5 py-2.5 rounded-full transition-all duration-200 text-sm text-gray-300 hover:text-[#D56DFB] hover:border-[#D56DFB]/30 touch-target'
-                    >
-                      <svg className='w-4 h-4' viewBox='0 0 24 24' fill='currentColor'>
-                        <path d='M5.34 0A5.328 5.328 0 0 0 0 5.34v13.32A5.328 5.328 0 0 0 5.34 24h13.32A5.328 5.328 0 0 0 24 18.66V5.34A5.328 5.328 0 0 0 18.66 0H5.34zm6.525 2.568c2.336 0 4.448.902 6.056 2.587 1.224 1.272 1.912 2.619 2.264 4.392.12.604-.336 1.14-.952 1.14h-.12c-.5 0-.9-.36-.992-.852-.264-1.392-.804-2.496-1.728-3.42-1.296-1.308-2.872-1.968-4.68-1.968-1.648 0-3.12.588-4.404 1.764-1.308 1.2-2.028 2.748-2.148 4.632-.036.468-.396.852-.864.852h-.156c-.648 0-1.14-.552-1.104-1.2.132-2.34 1.044-4.308 2.748-5.856C7.236 3.396 9.18 2.568 11.865 2.568zM12 7.128c1.416 0 2.7.528 3.756 1.464 1.02.912 1.608 2.1 1.752 3.492.06.5-.348.948-.852.984h-.096c-.468 0-.864-.348-.924-.816-.096-.9-.504-1.668-1.212-2.292-.72-.636-1.536-.972-2.472-.972-.888 0-1.716.312-2.424.912-.756.648-1.2 1.476-1.332 2.412-.072.48-.48.828-.96.828h-.06c-.576 0-1.008-.504-.936-1.08.204-1.44.84-2.664 1.932-3.54 1.02-.828 2.184-1.248 3.528-1.392h.3zM12 11.7a2.4 2.4 0 0 1 2.4 2.4c0 .528-.18 1.044-.504 1.464l.024.024-1.08 3.54c-.108.372-.456.612-.84.612-.384 0-.732-.24-.84-.612l-1.08-3.54.024-.024A2.371 2.371 0 0 1 9.6 14.1a2.4 2.4 0 0 1 2.4-2.4z' />
-                      </svg>
-                      Apple Podcasts
-                    </a>
+                    <h3 className='text-lg sm:text-xl font-heading font-bold mb-3 text-white leading-snug'>
+                      What&apos;s it like to maintain an award-winning open source tool?
+                    </h3>
+
+                    <p className='text-gray-300 text-sm mb-4 leading-relaxed'>
+                      Joined <span className='text-white font-medium'>Rebecca Parsons</span> and{' '}
+                      <span className='text-white font-medium'>Scott Shaw</span> to discuss building and
+                      maintaining <span className='modern-highlight'>AppiumTestDistribution</span> — from parallel
+                      mobile test execution to winning the{' '}
+                      <span className='modern-highlight'>LambdaTest Delta Award</span>.
+                    </p>
+
+                    <div className='flex flex-wrap justify-center gap-2 mb-5'>
+                      {['Open Source', 'Appium', 'Mobile Testing', 'Community'].map((tag) => (
+                        <span key={tag} className='glass-pill text-white px-2.5 py-1 rounded-md text-xs'>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className='flex flex-wrap justify-center gap-3'>
+                      <a
+                        href='https://www.thoughtworks.com/insights/podcasts/technology-podcasts/whats-like-maintain-award-winning-open-source-tool'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='group inline-flex items-center gap-2 glass-button bg-accent-hover/80 hover:bg-accent-hover px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium touch-target'
+                      >
+                        <svg className='w-4 h-4' viewBox='0 0 24 24' fill='currentColor'>
+                          <polygon points='5 3 19 12 5 21 5 3' />
+                        </svg>
+                        Listen
+                      </a>
+                      <a
+                        href='https://open.spotify.com/episode/2BW0anDAIp98ukoDzvMjBl'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='group inline-flex items-center gap-2 glass-button px-4 py-2 rounded-full transition-all duration-200 text-sm text-gray-300 hover:text-[#1DB954] hover:border-[#1DB954]/30 touch-target'
+                      >
+                        <svg className='w-4 h-4' viewBox='0 0 24 24' fill='currentColor'>
+                          <path d='M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z' />
+                        </svg>
+                        Spotify
+                      </a>
+                      <a
+                        href='https://podcasts.apple.com/gb/podcast/whats-it-like-to-maintain-an-award-winning-open-source-tool/id881136697?i=1000633439939'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='group inline-flex items-center gap-2 glass-button px-4 py-2 rounded-full transition-all duration-200 text-sm text-gray-300 hover:text-[#D56DFB] hover:border-[#D56DFB]/30 touch-target'
+                      >
+                        <svg className='w-4 h-4' viewBox='0 0 24 24' fill='currentColor'>
+                          <path d='M5.34 0A5.328 5.328 0 0 0 0 5.34v13.32A5.328 5.328 0 0 0 5.34 24h13.32A5.328 5.328 0 0 0 24 18.66V5.34A5.328 5.328 0 0 0 18.66 0H5.34zm6.525 2.568c2.336 0 4.448.902 6.056 2.587 1.224 1.272 1.912 2.619 2.264 4.392.12.604-.336 1.14-.952 1.14h-.12c-.5 0-.9-.36-.992-.852-.264-1.392-.804-2.496-1.728-3.42-1.296-1.308-2.872-1.968-4.68-1.968-1.648 0-3.12.588-4.404 1.764-1.308 1.2-2.028 2.748-2.148 4.632-.036.468-.396.852-.864.852h-.156c-.648 0-1.14-.552-1.104-1.2.132-2.34 1.044-4.308 2.748-5.856C7.236 3.396 9.18 2.568 11.865 2.568zM12 7.128c1.416 0 2.7.528 3.756 1.464 1.02.912 1.608 2.1 1.752 3.492.06.5-.348.948-.852.984h-.096c-.468 0-.864-.348-.924-.816-.096-.9-.504-1.668-1.212-2.292-.72-.636-1.536-.972-2.472-.972-.888 0-1.716.312-2.424.912-.756.648-1.2 1.476-1.332 2.412-.072.48-.48.828-.96.828h-.06c-.576 0-1.008-.504-.936-1.08.204-1.44.84-2.664 1.932-3.54 1.02-.828 2.184-1.248 3.528-1.392h.3zM12 11.7a2.4 2.4 0 0 1 2.4 2.4c0 .528-.18 1.044-.504 1.464l.024.024-1.08 3.54c-.108.372-.456.612-.84.612-.384 0-.732-.24-.84-.612l-1.08-3.54.024-.024A2.371 2.371 0 0 1 9.6 14.1a2.4 2.4 0 0 1 2.4-2.4z' />
+                        </svg>
+                        Apple
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Citations Section */}
-      <section id='citations' className='py-20 sm:py-28 lg:py-36 glass-section'>
-        <div className='max-w-5xl mx-auto px-4 sm:px-6'>
-          <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
-            Citations &amp; Press
-          </h2>
-          <div className='grid gap-4 sm:gap-6 section-animate'>
-            {[
-              {
-                title: 'Better Context Will Always Beat a Better Model',
-                source: 'The New Stack',
-                url: 'https://thenewstack.io/better-context-will-always-beat-a-better-model/',
-                color: '#1d9bf0',
-              },
-              {
-                title: 'Ready or Not, AI Is Rewriting the Rules for Software Testing',
-                source: 'DevOps.com',
-                url: 'https://devops.com/ready-or-not-ai-is-rewriting-the-rules-for-software-testing/',
-                color: '#f97316',
-              },
-              {
-                title: "The CISO's Guide to Model Context Protocol (MCP)",
-                source: 'Security Boulevard',
-                url: 'https://securityboulevard.com/2025/10/the-cisos-guide-to-model-context-protocol-mcp/',
-                color: '#ef4444',
-              },
-              {
-                title: "It's Time to Build APIs for AI, Not Just for Developers",
-                source: 'The New Stack',
-                url: 'https://thenewstack.io/its-time-to-build-apis-for-ai-not-just-for-developers/',
-                color: '#1d9bf0',
-              },
-              {
-                title: 'Architecting for Agent-to-Agent Communication and AI Protocols',
-                source: 'Techstrong AI',
-                url: 'https://techstrong.ai/features/architecting-for-agent-to-agent-communication-and-ai-protocols/',
-                color: '#a855f7',
-              },
-            ].map((citation) => (
-              <a
-                key={citation.url}
-                href={citation.url}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='glass-card-hover rounded-xl p-5 sm:p-6 flex items-start gap-4 group transition-all duration-200 hover:scale-[1.01]'
-              >
-                <div
-                  className='flex-shrink-0 w-1 h-full min-h-[3rem] rounded-full opacity-60 group-hover:opacity-100 transition-opacity'
-                  style={{ backgroundColor: citation.color }}
-                />
-                <div className='flex-1 min-w-0'>
-                  <h3 className='text-base sm:text-lg font-heading font-semibold text-white group-hover:text-accent-light transition-colors leading-snug mb-1.5'>
-                    {citation.title}
-                  </h3>
-                  <span className='text-sm text-gray-400'>{citation.source}</span>
-                </div>
-                <svg
-                  className='w-5 h-5 text-gray-500 group-hover:text-accent-light flex-shrink-0 mt-1 transition-all duration-200 group-hover:translate-x-0.5'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                >
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' />
-                </svg>
-              </a>
-            ))}
-
-            {/* Indian Express Interview */}
-            <a
-              href='/assets/indian_express_28th_march.pdf'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='glass-card-hover rounded-xl p-5 sm:p-6 flex items-start gap-4 group transition-all duration-200 hover:scale-[1.01]'
-            >
-              <div
-                className='flex-shrink-0 w-1 h-full min-h-[3rem] rounded-full opacity-60 group-hover:opacity-100 transition-opacity bg-[#ff6b00]'
-              />
-              <div className='flex-1 min-w-0'>
-                <h3 className='text-base sm:text-lg font-heading font-semibold text-white group-hover:text-accent-light transition-colors leading-snug mb-1.5'>
-                  Interview with Indian Express
-                </h3>
-                <span className='text-sm text-gray-400'>The Indian Express · March 28, 2026</span>
-              </div>
-              <svg
-                className='w-5 h-5 text-gray-500 group-hover:text-accent-light flex-shrink-0 mt-1 transition-all duration-200 group-hover:translate-x-0.5'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-              >
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' />
-              </svg>
-            </a>
+            {/* Right - Citations & Press Auto-Scroll Carousel */}
+            <div id='citations' className='flex-1 lg:w-1/2'>
+              <h2 className='text-2xl sm:text-3xl font-heading font-bold mb-6 sm:mb-8 text-white title-animate'>
+                Citations &amp; Press
+              </h2>
+              <CitationCarousel />
+            </div>
           </div>
         </div>
       </section>

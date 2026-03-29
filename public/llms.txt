@@ -1,0 +1,44 @@
+# Srinivasan Sekar
+
+> Open Source Advocate, International Speaker, and Technical Author
+
+Srinivasan Sekar is a software engineer, open source advocate, and technical author specializing in AI tooling, mobile test automation, and the Model Context Protocol (MCP). He is the creator and maintainer of AppiumTestDistribution (ATD), an award-winning open source tool for parallel mobile test execution.
+
+## About
+
+- Author of "The MCP Standard" (Apress, February 2026) — a developer's guide to building universal AI tools with the Model Context Protocol
+- Creator of AppiumTestDistribution, winner of the LambdaTest Delta Award
+- International conference speaker at 20+ events across 10+ countries
+- Featured in The New Stack, DevOps.com, Security Boulevard, Techstrong AI, and The Indian Express
+
+## Pages
+
+- [Home](https://srini.codes/): Portfolio homepage with projects, talks, podcast, and citations
+- [Book](https://srini.codes/book): "The MCP Standard" — building universal AI tools with MCP (Apress, ISBN 979-8-8688-2364-0)
+- [Blog](https://srini.codes/blog): Technical articles on AI, MCP, testing, and open source
+- [Conferences](https://srini.codes/conferences): Speaking history with interactive globe visualization
+- [Contact](https://srini.codes/contact): Get in touch
+
+## Key Topics
+
+- Model Context Protocol (MCP)
+- AI Agents and Autonomous Testing
+- Mobile Test Automation (Appium)
+- Open Source Software
+- Developer Tooling
+- Security Testing with AI
+
+## Citations & Press
+
+- "Better Context Will Always Beat a Better Model" — The New Stack
+- "Ready or Not, AI Is Rewriting the Rules for Software Testing" — DevOps.com
+- "The CISO's Guide to Model Context Protocol (MCP)" — Security Boulevard
+- "It's Time to Build APIs for AI, Not Just for Developers" — The New Stack
+- "Architecting for Agent-to-Agent Communication and AI Protocols" — Techstrong AI
+- Interview with The Indian Express (March 2026)
+
+## Open Source Projects
+
+- AppiumTestDistribution (ATD): Parallel mobile test execution framework
+- appium-device-farm: Device management for Appium
+- mcp-appium-gestures: MCP server for Appium mobile gestures
