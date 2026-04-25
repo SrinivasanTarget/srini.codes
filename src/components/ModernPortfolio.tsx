@@ -127,6 +127,13 @@ const CITATIONS = [
     thumbnail: 'https://techstrong.ai/wp-content/uploads/2024/10/AIOps.jpg',
   },
   {
+    title: 'AI Agents Inherit the API Sprawl Problem',
+    source: 'InfoSec Relations',
+    url: 'https://infosecrelations.com/ai-agents-inherit-the-api-sprawl-problem/',
+    color: '#22c55e',
+    thumbnail: '',
+  },
+  {
     title: 'Interview with Indian Express',
     source: 'The Indian Express · March 28, 2026',
     url: '/assets/indian_express_28th_march.pdf',
