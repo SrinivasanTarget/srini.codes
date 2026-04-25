@@ -8,6 +8,7 @@ export interface Workshop {
   techStack: string[]
   source: string
   location: string
+  imageURL: string
 }
 
 const workshops: Workshop[] = [
@@ -22,6 +23,7 @@ const workshops: Workshop[] = [
     techStack: ['TypeScript', 'MCP', 'Claude', 'Appium'],
     source: '',
     location: 'InPerson & Online',
+    imageURL: 'rocket.webp',
   },
   {
     title: 'Advanced Appium 2.0: Architecture, Plugins & Beyond',
@@ -34,6 +36,7 @@ const workshops: Workshop[] = [
     techStack: ['Java', 'TypeScript', 'Appium 2.0', 'WebDriver'],
     source: 'https://seleniumconf.com/#advanced-appium-20',
     location: 'InPerson',
+    imageURL: 'trophy.webp',
   },
   {
     title: 'Build Your Own Appium Drivers and Plugins',
@@ -46,6 +49,7 @@ const workshops: Workshop[] = [
     techStack: ['TypeScript', 'Appium 2.0', 'Node.js'],
     source: 'https://confengine.com/conferences/appium-conf-2021/proposal/15762/build-your-own-appium-drivers-and-plugins',
     location: 'Online',
+    imageURL: 'puzzle.webp',
   },
   {
     title: 'Testing Autonomous AI Agents: Evaluation & Guardrails',
@@ -58,6 +62,7 @@ const workshops: Workshop[] = [
     techStack: ['Python', 'TypeScript', 'LLM APIs', 'Evals'],
     source: '',
     location: 'InPerson & Online',
+    imageURL: 'smilie.webp',
   },
   {
     title: 'Device Farm Setup: Open-Source Mobile Testing Infrastructure',
@@ -70,6 +75,7 @@ const workshops: Workshop[] = [
     techStack: ['TypeScript', 'Docker', 'Appium', 'Device Farm'],
     source: '',
     location: 'InPerson & Online',
+    imageURL: 'thumbsup.webp',
   },
   {
     title: 'Mobile Gestures Automation with W3C Actions',
@@ -82,6 +88,7 @@ const workshops: Workshop[] = [
     techStack: ['Java', 'Appium', 'W3C Actions', 'iOS', 'Android'],
     source: '',
     location: 'InPerson & Online',
+    imageURL: 'fitness.webp',
   },
 ]
 
