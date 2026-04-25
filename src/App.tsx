@@ -6,6 +6,7 @@ import BlogPost from './screens/BlogPost'
 import Contact from './screens/Contact'
 import Conferences from './screens/Conferences'
 import Book from './screens/Book'
+import Videos from './screens/Videos'
 import { Analytics } from '@vercel/analytics/react'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/book" element={<Book />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/videos" element={<Videos />} />
         </Routes>
       </Router>
       <Analytics mode={'production'} />
