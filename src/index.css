@@ -431,3 +431,56 @@ a:focus-visible {
   left: 20%;
 }
 
+/* ==========================================
+   SCROLL PROGRESS BAR
+   ========================================== */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #d4956a, #e8b898);
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* ==========================================
+   TYPEWRITER CURSOR
+   ========================================== */
+
+@keyframes blink-caret {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter-cursor {
+  animation: blink-caret 0.75s step-end infinite;
+}
+
+/* ==========================================
+   SECTION NUMBER STYLING
+   ========================================== */
+
+.section-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(212, 149, 106, 0.5);
+}
+
+/* ==========================================
+   VIDEO CARD STYLING
+   ========================================== */
+
+.video-card img {
+  filter: grayscale(0.2) brightness(0.82);
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.video-card:hover img {
+  filter: grayscale(0) brightness(1);
+  transform: scale(1.03);
+}
+

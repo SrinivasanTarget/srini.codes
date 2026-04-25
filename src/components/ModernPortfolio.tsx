@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { conferences } from '../portfolio/conferences'
+import { workshops, Workshop } from '../portfolio/workshops'
 import { UnifiedBlogService, UnifiedBlogPost } from '../services/unifiedBlog'
 import { EnhancedProjectsService, EnhancedProjectData } from '../services/enhancedProjects'
 import UnifiedBlogCard from './blogcard/UnifiedBlogCard'
@@ -12,48 +13,62 @@ import ThreeHeroBackground from './ThreeHeroBackground'
 import micImage from '../assets/images/mic.webp'
 import BookBanner from './BookBanner'
 
-// Animated role cycling component
-const ROLES = [
-  { label: 'Open Source Advocate', icon: '⌘' },
-  { label: 'International Speaker', icon: '◉' },
-  { label: 'Technical Author', icon: '✦' },
-]
-
-const RoleCycler: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isTransitioning, setIsTransitioning] = useState(false)
-
-  const cycleRole = useCallback(() => {
-    setIsTransitioning(true)
-    setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % ROLES.length)
-      setIsTransitioning(false)
-    }, 400)
-  }, [])
+// Scroll progress bar
+const ScrollProgressBar: React.FC = () => {
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    const interval = setInterval(cycleRole, 3000)
-    return () => clearInterval(interval)
-  }, [cycleRole])
+    const handleScroll = () => {
+      const scrollTop = window.scrollY
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      setProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
-  const role = ROLES[currentIndex]
+  return <div className='scroll-progress' style={{ width: `${progress}%` }} />
+}
+
+// Typewriter role cycling component
+const ROLES = [
+  'Open Source Advocate',
+  'International Speaker',
+  'Technical Author',
+  'Appium Core Maintainer',
+  'MCP Pioneer',
+]
+
+const TypewriterCycler: React.FC = () => {
+  const [text, setText] = useState('')
+  const [roleIndex, setRoleIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    const current = ROLES[roleIndex]
+
+    if (!isDeleting && text === current) {
+      timeoutRef.current = setTimeout(() => setIsDeleting(true), 2000)
+    } else if (isDeleting && text === '') {
+      setIsDeleting(false)
+      setRoleIndex((prev) => (prev + 1) % ROLES.length)
+    } else {
+      const delta = isDeleting ? 40 : 80 + Math.random() * 50
+      timeoutRef.current = setTimeout(() => {
+        setText(isDeleting ? current.slice(0, text.length - 1) : current.slice(0, text.length + 1))
+      }, delta)
+    }
+
+    return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current) }
+  }, [text, isDeleting, roleIndex])
 
   return (
-    <div className='h-8 sm:h-9 overflow-hidden relative flex items-center justify-center lg:justify-start'>
-      <div
-        className={`flex items-center gap-2.5 transition-all duration-400 ease-out ${
-          isTransitioning
-            ? 'opacity-0 -translate-y-3'
-            : 'opacity-100 translate-y-0'
-        }`}
-        style={{ transitionDuration: '400ms', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
-      >
-        <span className='text-accent-light/50 text-sm'>{role.icon}</span>
-        <span className='text-sm sm:text-base text-white/70 font-medium tracking-wide'>
-          {role.label}
-        </span>
-        <span className='w-1.5 h-1.5 rounded-full bg-accent-light/40 animate-pulse' />
-      </div>
+    <div className='h-8 sm:h-9 flex items-center justify-center lg:justify-start'>
+      <span className='text-sm sm:text-base text-white/70 font-medium tracking-wide font-mono'>
+        {text}
+      </span>
+      <span className='typewriter-cursor text-accent-light ml-0.5'>|</span>
     </div>
   )
 }
@@ -311,6 +326,8 @@ const ModernPortfolio = () => {
 
   return (
     <div className='bg-black text-white'>
+      <ScrollProgressBar />
+
       {/* Book Announcement */}
       <BookBanner />
 
@@ -328,7 +345,7 @@ const ModernPortfolio = () => {
               </div>
             </div>
             <div className='hidden md:flex space-x-6 lg:space-x-8'>
-              {['About', 'Projects', 'Talks', 'Podcast', 'Citations'].map((item) => (
+              {['About', 'Projects', 'Talks', 'Workshops', 'Podcast'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -343,6 +360,12 @@ const ModernPortfolio = () => {
               >
                 Blogs
               </button>
+              <Link
+                to='/videos'
+                className='nav-link font-medium'
+              >
+                Videos
+              </Link>
               <Link
                 to='/contact'
                 className='nav-link font-medium'
@@ -400,7 +423,7 @@ const ModernPortfolio = () => {
           }`}
         >
           <div className='px-4 py-4 space-y-1'>
-            {['About', 'Projects', 'Talks', 'Podcast', 'Citations'].map((item) => (
+            {['About', 'Projects', 'Talks', 'Workshops', 'Podcast'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -415,6 +438,13 @@ const ModernPortfolio = () => {
             >
               Latest Blogs
             </button>
+            <Link
+              to='/videos'
+              onClick={() => setMobileMenuOpen(false)}
+              className='mobile-nav-link block w-full text-left py-3 px-4 text-white rounded-lg transition-all duration-200 touch-target'
+            >
+              Videos
+            </Link>
             <Link
               to='/contact'
               onClick={() => setMobileMenuOpen(false)}
@@ -478,7 +508,7 @@ const ModernPortfolio = () => {
               </div>
 
               <div className='mb-6'>
-                <RoleCycler />
+                <TypewriterCycler />
               </div>
 
               <div className='flex flex-wrap justify-center lg:justify-start gap-3'>
@@ -528,9 +558,13 @@ const ModernPortfolio = () => {
       {/* About Section */}
       <section id='about' className='py-20 sm:py-28 lg:py-36 glass-section'>
         <div className='max-w-6xl mx-auto px-4 sm:px-6'>
-          <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
+          <span className='section-number block text-center mb-4 section-animate'>01 / About</span>
+          <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-4 sm:mb-6 text-white title-animate'>
             About Me
           </h2>
+          <p className='text-lg sm:text-xl lg:text-2xl text-center text-gray-300 font-heading mb-10 sm:mb-16 max-w-3xl mx-auto section-animate leading-relaxed'>
+            I build AI agents that test software — and the infrastructure that lets teams ship with confidence.
+          </p>
           <div className='max-w-4xl mx-auto glass-card p-6 sm:p-8 lg:p-10 rounded-2xl section-animate'>
             <p className='text-base sm:text-lg lg:text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
               I&apos;m a passionate technologist and leader in software testing and automation. As{' '}
@@ -556,12 +590,32 @@ const ModernPortfolio = () => {
               automation and testing innovation.
             </p>
           </div>
+
+          {/* Stats Tally */}
+          <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-10 sm:mt-14 max-w-4xl mx-auto stagger-animate'>
+            {[
+              { value: '25+', label: 'Conference Talks' },
+              { value: '10+', label: 'Years in Automation' },
+              { value: '12', label: 'Open Source Projects' },
+              { value: '1', label: 'Published Book' },
+            ].map((stat) => (
+              <div key={stat.label} className='glass-card p-4 sm:p-6 rounded-xl text-center'>
+                <div className='text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-accent-light mb-1'>
+                  {stat.value}
+                </div>
+                <div className='text-xs sm:text-sm text-gray-400 font-mono uppercase tracking-wider'>
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Projects Section */}
       <section id='projects' className='py-20 sm:py-28 lg:py-36 glass-section'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+          <span className='section-number block text-center mb-4 section-animate'>02 / Work</span>
           <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-6 sm:mb-8 text-white title-animate'>
             Open Source Contributions
           </h2>
@@ -587,8 +641,9 @@ const ModernPortfolio = () => {
       {/* Talks Section */}
       <section id='talks' className='py-20 sm:py-28 lg:py-36'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+          <span className='section-number block text-center mb-4 section-animate'>03 / Talks</span>
           <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
-            Conference Talks & Presentations
+            Conference Talks &amp; Presentations
           </h2>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 stagger-animate'>
             {conferences.slice(0, 4).map((conference, index) => (
@@ -632,9 +687,78 @@ const ModernPortfolio = () => {
         </div>
       </section>
 
+      {/* Workshops Section */}
+      <section id='workshops' className='py-20 sm:py-28 lg:py-36 glass-section'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+          <span className='section-number block text-center mb-4 section-animate'>04 / Workshops</span>
+          <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-4 sm:mb-6 text-white title-animate'>
+            Workshops &amp; Training
+          </h2>
+          <p className='text-base sm:text-lg lg:text-xl text-gray-300 text-center mb-10 sm:mb-14 max-w-3xl mx-auto section-animate'>
+            Hands-on sessions covering AI agents, test automation, and Appium platform
+          </p>
+
+          {/* Track overview */}
+          <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 sm:mb-14 stagger-animate'>
+            {([
+              { key: 'ai', label: 'AI & Agents', color: '#d4956a', desc: 'MCP servers, AI testing agents, evaluation harnesses' },
+              { key: 'automation', label: 'Test Automation', color: '#3b82f6', desc: 'Device farms, gestures, parallel execution' },
+              { key: 'platform', label: 'Appium Platform', color: '#a855f7', desc: 'Appium 2.0 internals, custom drivers & plugins' },
+            ] as const).map((track) => (
+              <div key={track.key} className='glass-card p-4 sm:p-5 rounded-xl text-center'>
+                <div className='text-sm font-mono font-semibold mb-2' style={{ color: track.color }}>
+                  {track.label}
+                </div>
+                <p className='text-xs sm:text-sm text-gray-400'>{track.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Workshop cards */}
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 stagger-animate'>
+            {workshops.slice(0, 4).map((workshop, index) => {
+              const trackColor = workshop.track === 'ai' ? '#d4956a' : workshop.track === 'automation' ? '#3b82f6' : '#a855f7'
+              const trackLabel = workshop.track === 'ai' ? 'AI & Agents' : workshop.track === 'automation' ? 'Test Automation' : 'Appium Platform'
+              return (
+                <div key={index} className='glass-card-hover p-5 sm:p-6 rounded-xl'>
+                  <div className='flex items-center gap-3 mb-3'>
+                    <span className='text-xs font-mono text-gray-500'>Workshop {String(index + 1).padStart(2, '0')}</span>
+                    <span
+                      className='glass-pill px-2.5 py-1 rounded-md text-xs font-medium'
+                      style={{ color: trackColor, borderColor: trackColor + '40' }}
+                    >
+                      {trackLabel}
+                    </span>
+                    <span className='glass-pill text-gray-400 px-2.5 py-1 rounded-md text-xs'>{workshop.duration}</span>
+                  </div>
+                  <h3 className='text-base sm:text-lg font-heading font-bold mb-2 text-white'>{workshop.title}</h3>
+                  <p className='text-gray-400 text-sm mb-3 leading-relaxed'>{workshop.description}</p>
+                  <div className='flex flex-wrap gap-1.5'>
+                    {workshop.techStack.map((tech) => (
+                      <span key={tech} className='glass-pill text-gray-300 px-2 py-0.5 rounded text-xs'>{tech}</span>
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          <div className='text-center mt-8 sm:mt-12'>
+            <Link
+              to='/contact'
+              className='glass-button bg-accent-hover/80 hover:bg-accent-hover px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-200 inline-flex items-center space-x-2 touch-target'
+            >
+              <span>Request a Workshop</span>
+              <span>→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Podcast & Citations Section - Side by Side */}
       <section id='podcast' className='py-20 sm:py-28 lg:py-36 glass-section'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+          <span className='section-number block text-center mb-4 section-animate'>05 / Media</span>
           <div className='flex flex-col lg:flex-row gap-8 lg:gap-10 items-stretch'>
             {/* Left - Featured Podcast */}
             <div className='flex-1 lg:w-1/2'>
@@ -735,6 +859,7 @@ const ModernPortfolio = () => {
       {/* Blogs Section */}
       <section id='blogs' className='py-20 sm:py-28 lg:py-36 glass-section'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+          <span className='section-number block text-center mb-4 section-animate'>06 / Writing</span>
           <h2 className='text-3xl sm:text-4xl font-heading font-bold text-center mb-10 sm:mb-16 text-white title-animate'>
             Latest Writings
           </h2>
@@ -771,6 +896,7 @@ const ModernPortfolio = () => {
       {/* Contact Section */}
       <section id='contact' className='py-20 sm:py-28 lg:py-36 glass-section'>
         <div className='max-w-4xl mx-auto px-4 sm:px-6 text-center'>
+          <span className='section-number block mb-4 section-animate'>07 / Contact</span>
           <h2 className='text-3xl sm:text-4xl font-heading font-bold mb-6 sm:mb-8 text-white title-animate'>
             Let&apos;s Connect
           </h2>
@@ -818,11 +944,35 @@ const ModernPortfolio = () => {
       </section>
 
       {/* Footer */}
-      <footer className='py-6 sm:py-8 glass-section'>
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 text-center'>
-          <p className='text-gray-500 text-sm sm:text-base'>
-            © 2026 Srinivasan Sekar
-          </p>
+      <footer className='py-10 sm:py-14 glass-section'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+          <div className='flex flex-col sm:flex-row items-center justify-between gap-6 mb-8'>
+            <div className='text-center sm:text-left'>
+              <div className='text-xl sm:text-2xl font-signature text-accent-light mb-1'>Srinivasan Sekar</div>
+              <div className='text-xs sm:text-sm text-gray-500 font-mono'>
+                Director of Engineering · TestMu AI · Bengaluru
+              </div>
+            </div>
+            <div className='flex gap-4'>
+              <a href='https://github.com/srinivasanTarget' target='_blank' rel='noopener noreferrer' className='text-gray-500 hover:text-accent-light transition-colors' aria-label='GitHub'>
+                <svg className='w-5 h-5' viewBox='0 0 24 24' fill='currentColor'><path d='M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z'/></svg>
+              </a>
+              <a href='https://twitter.com/srinivasanskr' target='_blank' rel='noopener noreferrer' className='text-gray-500 hover:text-accent-light transition-colors' aria-label='Twitter'>
+                <svg className='w-5 h-5' viewBox='0 0 24 24' fill='currentColor'><path d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/></svg>
+              </a>
+              <a href='https://www.linkedin.com/in/srinivasan-sekar/' target='_blank' rel='noopener noreferrer' className='text-gray-500 hover:text-accent-light transition-colors' aria-label='LinkedIn'>
+                <svg className='w-5 h-5' viewBox='0 0 24 24' fill='currentColor'><path d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'/></svg>
+              </a>
+            </div>
+          </div>
+          <div className='border-t border-white/[0.06] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3'>
+            <p className='text-gray-600 text-xs font-mono'>
+              © {new Date().getFullYear()} Srinivasan Sekar
+            </p>
+            <p className='text-gray-600 text-xs font-mono'>
+              srini.codes · Bengaluru, India
+            </p>
+          </div>
         </div>
       </footer>
     </div>
