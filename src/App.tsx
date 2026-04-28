@@ -6,6 +6,7 @@ import BlogPost from './screens/BlogPost'
 import Contact from './screens/Contact'
 import Conferences from './screens/Conferences'
 import Book from './screens/Book'
+import Presentations from './screens/Presentations'
 import { Analytics } from '@vercel/analytics/react'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/conferences" element={<Conferences />} />
           <Route path="/book" element={<Book />} />
+          <Route path="/presentations" element={<Presentations />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>

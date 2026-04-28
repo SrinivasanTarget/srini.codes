@@ -356,6 +356,12 @@ const ModernPortfolio = () => {
                 Speaker Map
               </Link>
               <Link
+                to='/presentations'
+                className='nav-link font-medium'
+              >
+                Presentations
+              </Link>
+              <Link
                 to='/book'
                 className='nav-link font-medium'
               >
@@ -428,6 +434,13 @@ const ModernPortfolio = () => {
               className='mobile-nav-link block w-full text-left py-3 px-4 text-white rounded-lg transition-all duration-200 touch-target'
             >
               Speaker Map
+            </Link>
+            <Link
+              to='/presentations'
+              onClick={() => setMobileMenuOpen(false)}
+              className='mobile-nav-link block w-full text-left py-3 px-4 text-white rounded-lg transition-all duration-200 touch-target'
+            >
+              Presentations
             </Link>
             <Link
               to='/book'
