@@ -2,6 +2,12 @@ import { Link } from 'react-router-dom'
 
 const presentations = [
   {
+    title: 'AI Agent Frameworks - The Landscape',
+    event: 'Hands-on Workshop',
+    url: '/presentations/ai-agent-frameworks.html',
+    tags: ['AI Agents', 'LangChain', 'MCP'],
+  },
+  {
     title: 'Advanced Appium Workshop with MCP-Powered Development Tools',
     event: 'Selenium Conf 2026',
     url: '/presentations/advanced-appium-workshop.html',
