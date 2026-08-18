@@ -2,6 +2,12 @@ import { Link } from 'react-router-dom'
 
 const presentations = [
   {
+    title: 'Testing the Agents That Look You in the Eye',
+    event: 'TestMu Conference 2026',
+    url: '/presentations/testing-video-agents.html',
+    tags: ['Video Agents', 'AI Testing', 'Real-time'],
+  },
+  {
     title: 'AI Agent Frameworks - The Landscape',
     event: 'Hands-on Workshop',
     url: '/presentations/ai-agent-frameworks.html',
