@@ -15,6 +15,13 @@ const styles = `
     0%, 100% { filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6)); }
     50% { filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.9)); }
   }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 // Conference data with coordinates
@@ -202,66 +209,66 @@ const Conferences = () => {
       {/* Stats Panel */}
       <div
         className={`
-          fixed bottom-0 left-0 right-0 p-6 z-10
+          fixed bottom-0 left-0 right-0 p-4 sm:p-6 z-10
           transition-all duration-700 delay-500
           ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
         `}
       >
         <div className='max-w-4xl mx-auto'>
           {/* Title */}
-          <div className='mb-6'>
-            <h1 className='text-3xl md:text-4xl font-heading font-bold mb-2'>
+          <div className='mb-4 sm:mb-6'>
+            <h1 className='text-2xl sm:text-3xl md:text-4xl font-heading font-bold mb-1 sm:mb-2'>
               <span className='bg-gradient-to-r from-accent-light to-accent bg-clip-text text-transparent'>
                 Conference Speaking
               </span>
             </h1>
-            <p className='text-white/50 text-sm md:text-base'>
+            <p className='text-white/50 text-xs sm:text-sm md:text-base'>
               Sharing knowledge on test automation, Appium & Selenium across the globe
             </p>
           </div>
 
           {/* Stats */}
-          <div className='flex flex-wrap gap-6 mb-6'>
+          <div className='flex flex-wrap gap-4 sm:gap-6 mb-4 sm:mb-6'>
             <div className='flex items-center gap-3'>
-              <div className='w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center'>
+              <div className='hidden sm:flex w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/[0.08] items-center justify-center'>
                 <svg className='w-6 h-6 text-accent-light' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z' />
                 </svg>
               </div>
               <div>
-                <p className='text-2xl font-bold text-white'>{uniqueCountries}</p>
+                <p className='text-xl sm:text-2xl font-bold text-white'>{uniqueCountries}</p>
                 <p className='text-xs text-white/40 uppercase tracking-wider'>Countries</p>
               </div>
             </div>
 
             <div className='flex items-center gap-3'>
-              <div className='w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center'>
+              <div className='hidden sm:flex w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/[0.08] items-center justify-center'>
                 <svg className='w-6 h-6 text-accent-light' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z' />
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M15 11a3 3 0 11-6 0 3 3 0 016 0z' />
                 </svg>
               </div>
               <div>
-                <p className='text-2xl font-bold text-white'>{uniqueCities}</p>
+                <p className='text-xl sm:text-2xl font-bold text-white'>{uniqueCities}</p>
                 <p className='text-xs text-white/40 uppercase tracking-wider'>Cities</p>
               </div>
             </div>
 
             <div className='flex items-center gap-3'>
-              <div className='w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center'>
+              <div className='hidden sm:flex w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/[0.08] items-center justify-center'>
                 <svg className='w-6 h-6 text-accent-light' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z' />
                 </svg>
               </div>
               <div>
-                <p className='text-2xl font-bold text-white'>{CONFERENCES.length + VIRTUAL_CONFERENCES.length}+</p>
+                <p className='text-xl sm:text-2xl font-bold text-white'>{CONFERENCES.length + VIRTUAL_CONFERENCES.length}+</p>
                 <p className='text-xs text-white/40 uppercase tracking-wider'>Talks</p>
               </div>
             </div>
           </div>
 
           {/* Conference List */}
-          <div className='flex flex-wrap gap-2'>
+          <div className='flex flex-nowrap sm:flex-wrap gap-2 overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0'>
             {CONFERENCES.map((conf, i) => (
               <button
                 key={i}
@@ -273,7 +280,7 @@ const Conferences = () => {
                   }
                 }}
                 className={`
-                  px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200
+                  shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200
                   ${selectedConf?.city === conf.city && !showVirtual
                     ? 'bg-accent-hover text-white shadow-glow-amber'
                     : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
@@ -292,7 +299,7 @@ const Conferences = () => {
                 }
               }}
               className={`
-                px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 inline-flex items-center gap-1.5
+                shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 inline-flex items-center gap-1.5
                 ${showVirtual
                   ? 'bg-emerald-500 text-white'
                   : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
@@ -420,7 +427,7 @@ const Conferences = () => {
       )}
 
       {/* Legend */}
-      <div className='fixed top-24 left-6 z-10 space-y-2'>
+      <div className='hidden sm:block fixed top-24 left-6 z-10 space-y-2'>
         <div className='flex items-center gap-2 text-xs text-white/40'>
           <div className='w-2 h-2 rounded-full bg-emerald-400' />
           <span>Home Base</span>
