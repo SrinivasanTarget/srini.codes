@@ -188,9 +188,9 @@ const Conferences = () => {
             ref={globeRef}
             width={dimensions.width}
             height={dimensions.height}
-            globeImageUrl='//unpkg.com/three-globe/example/img/earth-night.jpg'
-            bumpImageUrl='//unpkg.com/three-globe/example/img/earth-topology.png'
-            backgroundImageUrl='//unpkg.com/three-globe/example/img/night-sky.png'
+            globeImageUrl='/globe/earth-night.jpg'
+            bumpImageUrl='/globe/earth-topology.png'
+            backgroundImageUrl='/globe/night-sky.png'
             arcsData={arcsData}
             arcColor='color'
             arcDashLength={0.5}
