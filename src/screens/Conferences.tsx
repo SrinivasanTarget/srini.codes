@@ -71,6 +71,15 @@ const VIRTUAL_CONFERENCES = [
 // Home base (India - Bangalore)
 const HOME = { city: 'Bangalore', country: 'India', lat: 12.9716, lng: 77.5946 }
 
+// Chips and card navigation walk the talks in chronological order
+const TIMELINE = [...CONFERENCES].sort(
+  (a, b) => Number(a.year) - Number(b.year) || a.city.localeCompare(b.city)
+)
+
+const VIRTUAL_YEARS = [...new Set(VIRTUAL_CONFERENCES.map(vc => vc.year))].sort(
+  (a, b) => Number(b) - Number(a)
+)
+
 // Generate arcs from home to each conference
 const arcsData = CONFERENCES.map((conf, i) => ({
   startLat: HOME.lat,
@@ -89,6 +98,34 @@ const pointsData = [
   ...CONFERENCES.map(c => ({ ...c, size: 0.5, color: '#f59e0b', label: c.conf }))
 ]
 
+const CountUp = ({ value, suffix = '' }: { value: number; suffix?: string }) => {
+  const [display, setDisplay] = useState(0)
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setDisplay(value)
+      return
+    }
+    let raf: number
+    const start = performance.now()
+    const duration = 1200
+    const tick = (t: number) => {
+      const progress = Math.min((t - start) / duration, 1)
+      setDisplay(Math.round(value * (1 - Math.pow(1 - progress, 3))))
+      if (progress < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [value])
+
+  return (
+    <>
+      {display}
+      {suffix}
+    </>
+  )
+}
+
 const Conferences = () => {
   useSEO({
     title: 'Conference Talks & Speaker Map \u2014 Srinivasan Sekar',
@@ -102,8 +139,37 @@ const Conferences = () => {
   const [selectedConf, setSelectedConf] = useState<typeof CONFERENCES[0] | null>(null)
   const [showVirtual, setShowVirtual] = useState(false)
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+  const [showHint, setShowHint] = useState(false)
   const globeRef = useRef<any>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+
+  const flyTo = useCallback((lat: number, lng: number, altitude = 1.8) => {
+    if (globeRef.current) {
+      globeRef.current.pointOfView({ lat, lng, altitude }, 1000)
+    }
+  }, [])
+
+  const selectConf = useCallback(
+    (conf: typeof CONFERENCES[0]) => {
+      setSelectedConf(conf)
+      setShowVirtual(false)
+      flyTo(conf.lat, conf.lng, 1.5)
+    },
+    [flyTo]
+  )
+
+  const navigateConf = useCallback(
+    (direction: 1 | -1) => {
+      setSelectedConf(current => {
+        if (!current) return current
+        const index = TIMELINE.findIndex(c => c.city === current.city)
+        const next = TIMELINE[(index + direction + TIMELINE.length) % TIMELINE.length]
+        flyTo(next.lat, next.lng, 1.5)
+        return next
+      })
+    },
+    [flyTo]
+  )
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
@@ -135,6 +201,13 @@ const Conferences = () => {
     }
   }, [globeReady])
 
+  useEffect(() => {
+    if (!globeReady) return
+    setShowHint(true)
+    const timer = setTimeout(() => setShowHint(false), 6000)
+    return () => clearTimeout(timer)
+  }, [globeReady])
+
   const handlePointClick = useCallback((point: any) => {
     if (point.label === 'Home Base') {
       setShowVirtual(true)
@@ -146,14 +219,9 @@ const Conferences = () => {
     }
     if (point.conf) {
       const conf = CONFERENCES.find(c => c.city === point.city)
-      setSelectedConf(conf || null)
-      setShowVirtual(false)
-
-      if (globeRef.current) {
-        globeRef.current.pointOfView({ lat: point.lat, lng: point.lng, altitude: 1.8 }, 1000)
-      }
+      if (conf) selectConf(conf)
     }
-  }, [])
+  }, [selectConf])
 
   const uniqueCountries = new Set(CONFERENCES.map(c => c.country)).size
   const uniqueCities = CONFERENCES.length
@@ -181,6 +249,7 @@ const Conferences = () => {
       {/* Globe Container */}
       <div
         ref={containerRef}
+        onPointerDown={() => setShowHint(false)}
         className={`fixed inset-0 ${isLoaded ? 'fade-in-up-slow' : ''}`}
       >
         {dimensions.width > 0 && (
@@ -203,6 +272,11 @@ const Conferences = () => {
             pointColor='color'
             pointRadius='size'
             pointsMerge={false}
+            pointLabel={(p: any) =>
+              p.label === 'Home Base'
+                ? 'Home Base &middot; Bangalore'
+                : `${p.conf} &middot; ${p.city} &middot; ${p.year}`
+            }
             onPointClick={handlePointClick}
             atmosphereColor='#f59e0b'
             atmosphereAltitude={0.2}
@@ -213,6 +287,25 @@ const Conferences = () => {
 
       {/* Overlay Gradient */}
       <div className='fixed inset-0 pointer-events-none bg-gradient-to-t from-black via-transparent to-black/50' />
+
+      {/* Globe Loading State */}
+      {!globeReady && (
+        <div className='fixed inset-0 z-10 flex items-center justify-center pointer-events-none'>
+          <div className='flex items-center gap-3 px-4 py-2 rounded-full bg-glass-white backdrop-blur-xl border border-glass-border'>
+            <div className='w-4 h-4 rounded-full border-2 border-accent-light/30 border-t-accent-light animate-spin motion-reduce:animate-none' />
+            <span className='text-xs text-white/60'>Loading globe&hellip;</span>
+          </div>
+        </div>
+      )}
+
+      {/* Interaction Hint */}
+      {showHint && (
+        <div className='fade-in-up fixed top-[42%] left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
+          <div className='px-4 py-2 rounded-full bg-glass-white backdrop-blur-xl border border-glass-border text-xs text-white/70 whitespace-nowrap'>
+            Drag to explore &middot; Click a marker
+          </div>
+        </div>
+      )}
 
       {/* Stats Panel */}
       <div
@@ -244,7 +337,7 @@ const Conferences = () => {
                 </svg>
               </div>
               <div>
-                <p className='text-xl sm:text-2xl font-bold text-white'>{uniqueCountries}</p>
+                <p className='text-xl sm:text-2xl font-bold text-white'><CountUp value={uniqueCountries} /></p>
                 <p className='text-xs text-white/40 uppercase tracking-wider'>Countries</p>
               </div>
             </div>
@@ -257,7 +350,7 @@ const Conferences = () => {
                 </svg>
               </div>
               <div>
-                <p className='text-xl sm:text-2xl font-bold text-white'>{uniqueCities}</p>
+                <p className='text-xl sm:text-2xl font-bold text-white'><CountUp value={uniqueCities} /></p>
                 <p className='text-xs text-white/40 uppercase tracking-wider'>Cities</p>
               </div>
             </div>
@@ -269,7 +362,7 @@ const Conferences = () => {
                 </svg>
               </div>
               <div>
-                <p className='text-xl sm:text-2xl font-bold text-white'>{CONFERENCES.length + VIRTUAL_CONFERENCES.length}+</p>
+                <p className='text-xl sm:text-2xl font-bold text-white'><CountUp value={CONFERENCES.length + VIRTUAL_CONFERENCES.length} suffix='+' /></p>
                 <p className='text-xs text-white/40 uppercase tracking-wider'>Talks</p>
               </div>
             </div>
@@ -277,16 +370,10 @@ const Conferences = () => {
 
           {/* Conference List */}
           <div role='group' aria-label='Conference locations' className='flex flex-nowrap sm:flex-wrap gap-2 overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0'>
-            {CONFERENCES.map((conf, i) => (
+            {TIMELINE.map(conf => (
               <button
-                key={i}
-                onClick={() => {
-                  setSelectedConf(conf)
-                  setShowVirtual(false)
-                  if (globeRef.current) {
-                    globeRef.current.pointOfView({ lat: conf.lat, lng: conf.lng, altitude: 1.5 }, 1000)
-                  }
-                }}
+                key={conf.city}
+                onClick={() => selectConf(conf)}
                 aria-pressed={selectedConf?.city === conf.city && !showVirtual}
                 className={`
                   shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200
@@ -296,16 +383,17 @@ const Conferences = () => {
                   }
                 `}
               >
-                {conf.city}
+                {conf.city}{' '}
+                <span className={selectedConf?.city === conf.city && !showVirtual ? 'text-white/70' : 'text-white/30'}>
+                  &rsquo;{conf.year.slice(2)}
+                </span>
               </button>
             ))}
             <button
               onClick={() => {
                 setShowVirtual(!showVirtual)
                 setSelectedConf(null)
-                if (globeRef.current) {
-                  globeRef.current.pointOfView({ lat: HOME.lat, lng: HOME.lng, altitude: 2.0 }, 1000)
-                }
+                flyTo(HOME.lat, HOME.lng, 2.0)
               }}
               aria-pressed={showVirtual}
               className={`
@@ -334,18 +422,43 @@ const Conferences = () => {
         >
           <div className='flex items-start justify-between mb-3'>
             <div>
-              <h2 className='font-semibold text-white'>{selectedConf.city}</h2>
+              <div className='flex items-center gap-2'>
+                <h2 className='font-semibold text-white'>{selectedConf.city}</h2>
+                <span className='px-1.5 py-0.5 rounded-md bg-accent-muted text-accent-light text-[10px] font-mono'>
+                  {selectedConf.year}
+                </span>
+              </div>
               <p className='text-sm text-white/50'>{selectedConf.country}</p>
             </div>
-            <button
-              onClick={() => setSelectedConf(null)}
-              aria-label='Close conference details'
-              className='p-1 rounded-lg hover:bg-white/10 transition-colors'
-            >
-              <svg aria-hidden='true' className='w-4 h-4 text-white/40' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
-              </svg>
-            </button>
+            <div className='flex items-center gap-1'>
+              <button
+                onClick={() => navigateConf(-1)}
+                aria-label='Previous conference'
+                className='p-1 rounded-lg hover:bg-white/10 transition-colors'
+              >
+                <svg aria-hidden='true' className='w-4 h-4 text-white/40' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 19l-7-7 7-7' />
+                </svg>
+              </button>
+              <button
+                onClick={() => navigateConf(1)}
+                aria-label='Next conference'
+                className='p-1 rounded-lg hover:bg-white/10 transition-colors'
+              >
+                <svg aria-hidden='true' className='w-4 h-4 text-white/40' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
+                </svg>
+              </button>
+              <button
+                onClick={() => setSelectedConf(null)}
+                aria-label='Close conference details'
+                className='p-1 rounded-lg hover:bg-white/10 transition-colors'
+              >
+                <svg aria-hidden='true' className='w-4 h-4 text-white/40' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
+                </svg>
+              </button>
+            </div>
           </div>
           <div className='space-y-2'>
             <div className='flex items-center gap-2 text-sm'>
@@ -354,7 +467,7 @@ const Conferences = () => {
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' />
                 </svg>
               </div>
-              <span className='text-white/70'>{selectedConf.conf} &middot; {selectedConf.year}</span>
+              <span className='text-white/70'>{selectedConf.conf}</span>
             </div>
             <div className='flex items-start gap-2 text-sm'>
               <div className='w-6 h-6 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5'>
@@ -369,13 +482,11 @@ const Conferences = () => {
                 href={selectedConf.video}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='flex items-center gap-2 text-xs text-accent-light/90 hover:text-accent-light transition-colors mt-1'
+                className='inline-flex items-center gap-1.5 mt-2 px-3 py-1.5 rounded-full bg-accent-hover/80 hover:bg-accent-hover text-white text-xs font-medium transition-colors'
               >
-                <div className='w-6 h-6 rounded-lg bg-accent-muted flex items-center justify-center shrink-0'>
-                  <svg aria-hidden='true' className='w-3 h-3' fill='currentColor' viewBox='0 0 24 24'>
-                    <path d='M8 5v14l11-7z' />
-                  </svg>
-                </div>
+                <svg aria-hidden='true' className='w-3 h-3' fill='currentColor' viewBox='0 0 24 24'>
+                  <path d='M8 5v14l11-7z' />
+                </svg>
                 <span>Watch Talk</span>
               </a>
             )}
@@ -409,32 +520,38 @@ const Conferences = () => {
             </button>
           </div>
           <div className='overflow-y-auto p-3 space-y-1.5'>
-            {VIRTUAL_CONFERENCES.map((vc, i) => (
-              <div
-                key={i}
-                className='p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] transition-colors'
-              >
-                <div className='flex items-center justify-between mb-1'>
-                  <span className='text-xs font-semibold text-emerald-400/80'>{vc.conf}</span>
-                  <div className='flex items-center gap-2'>
-                    {vc.video && (
-                      <a
-                        href={vc.video}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className='text-accent-light/70 hover:text-accent-light transition-colors'
-                        title='Watch Talk'
-                        aria-label={`Watch ${vc.talk} (opens in new tab)`}
-                      >
-                        <svg aria-hidden='true' className='w-3.5 h-3.5' fill='currentColor' viewBox='0 0 24 24'>
-                          <path d='M8 5v14l11-7z' />
-                        </svg>
-                      </a>
-                    )}
-                    <span className='text-xs text-white/30 font-mono'>{vc.year}</span>
-                  </div>
+            {VIRTUAL_YEARS.map(year => (
+              <div key={year}>
+                <p className='px-1 pt-2 pb-1 text-[10px] font-mono text-white/30 uppercase tracking-wider'>
+                  {year}
+                </p>
+                <div className='space-y-1.5'>
+                  {VIRTUAL_CONFERENCES.filter(vc => vc.year === year).map((vc, i) => (
+                    <div
+                      key={i}
+                      className='p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] transition-colors'
+                    >
+                      <div className='flex items-center justify-between mb-1'>
+                        <span className='text-xs font-semibold text-emerald-400/80'>{vc.conf}</span>
+                        {vc.video && (
+                          <a
+                            href={vc.video}
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            className='text-accent-light/70 hover:text-accent-light transition-colors'
+                            title='Watch Talk'
+                            aria-label={`Watch ${vc.talk} (opens in new tab)`}
+                          >
+                            <svg aria-hidden='true' className='w-3.5 h-3.5' fill='currentColor' viewBox='0 0 24 24'>
+                              <path d='M8 5v14l11-7z' />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                      <p className='text-xs text-white/60 leading-relaxed'>{vc.talk}</p>
+                    </div>
+                  ))}
                 </div>
-                <p className='text-xs text-white/60 leading-relaxed'>{vc.talk}</p>
               </div>
             ))}
           </div>
