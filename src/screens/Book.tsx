@@ -44,6 +44,9 @@ const Book = () => {
       'The MCP Standard: A Developer\u2019s Guide to Building Universal AI Tools with the Model Context Protocol. By Srinivasan Sekar, foreword by Angie Jones. Apress, February 2026, 285 pages, ISBN 979-8-8688-2364-0.',
     path: '/book',
     type: 'book',
+    image: 'https://srini.codes/og-book.png',
+    imageWidth: 659,
+    imageHeight: 997,
   })
 
   const [isLoaded, setIsLoaded] = useState(false)

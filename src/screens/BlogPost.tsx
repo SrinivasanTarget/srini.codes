@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { HashnodeService, BlogPost as BlogPostType } from '../services/hashnode'
 import BlogNavigation from '../components/navigation/BlogNavigation'
-import { useSEO } from '../hooks/useSEO'
+import { useSEO, useArticleJsonLd } from '../hooks/useSEO'
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>()
@@ -19,6 +19,18 @@ export default function BlogPost() {
     type: 'article',
     image: post?.coverImage?.url,
   })
+
+  useArticleJsonLd(
+    post && slug
+      ? {
+          title: post.title,
+          description: post.brief,
+          slug,
+          publishedAt: post.publishedAt,
+          image: post.coverImage?.url,
+        }
+      : null
+  )
 
   useEffect(() => {
     if (slug) {
