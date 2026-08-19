@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import Globe from 'react-globe.gl'
+import { useSEO } from '../hooks/useSEO'
 
 const styles = `
   @keyframes fade-in-up {
@@ -89,6 +90,13 @@ const pointsData = [
 ]
 
 const Conferences = () => {
+  useSEO({
+    title: 'Conference Talks & Speaker Map \u2014 Srinivasan Sekar',
+    description:
+      '34+ conference talks across 12 countries and 16 cities, plus 18 virtual events \u2014 an interactive speaker map of talks on Appium, Selenium, MCP, AI agents, and test automation by Srinivasan Sekar.',
+    path: '/conferences',
+  })
+
   const [isLoaded, setIsLoaded] = useState(false)
   const [globeReady, setGlobeReady] = useState(false)
   const [selectedConf, setSelectedConf] = useState<typeof CONFERENCES[0] | null>(null)

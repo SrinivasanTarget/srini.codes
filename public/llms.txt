@@ -8,7 +8,7 @@ Srinivasan Sekar is a software engineer, open source advocate, and technical aut
 
 - Author of "The MCP Standard" (Apress, February 2026) — a developer's guide to building universal AI tools with the Model Context Protocol
 - Creator of AppiumTestDistribution, winner of the LambdaTest Delta Award
-- International conference speaker at 20+ events across 10+ countries
+- International conference speaker: 34+ talks across 12 countries and 16 cities, plus 18 virtual conferences
 - Featured in The New Stack, DevOps.com, Security Boulevard, Techstrong AI, and The Indian Express
 
 ## Pages
@@ -17,6 +17,7 @@ Srinivasan Sekar is a software engineer, open source advocate, and technical aut
 - [Book](https://srini.codes/book): "The MCP Standard" — building universal AI tools with MCP (Apress, ISBN 979-8-8688-2364-0)
 - [Blog](https://srini.codes/blog): Technical articles on AI, MCP, testing, and open source
 - [Conferences](https://srini.codes/conferences): Speaking history with interactive globe visualization
+- [Presentations](https://srini.codes/presentations): Workshop slides and presentation decks from conferences
 - [Contact](https://srini.codes/contact): Get in touch
 
 ## Key Topics
@@ -27,6 +28,25 @@ Srinivasan Sekar is a software engineer, open source advocate, and technical aut
 - Open Source Software
 - Developer Tooling
 - Security Testing with AI
+
+## Selected Conference Talks
+
+- SeleniumConf 2017, Austin (USA): Dockerize Appium Tests — Test Inside Containers
+- FOSDEM 2017, Brussels (Belgium): Future of Mobile Automation Testing — Appium Steals It
+- SeleniumConf 2018, Barcelona (Spain): Next Level Front-end Testing with DevTools & WebDriver
+- SeleniumConf & AppiumConf 2018, Bangalore (India): Code Once Test Anywhere — Appium Device Cloud using ATD
+- Quest for Quality 2018, Dublin (Ireland): On Demand Private Appium Device Cloud using ATD
+- Belgrade Test Conference 2018, Belgrade (Serbia): On Demand Private Appium Device Cloud
+- AppiumConf 2019, London (UK): Life Cycle of an Appium Command
+- SLASSCOM 2019, Colombo (Sri Lanka): Shift Left for Better End-User Experience
+- SeleniumConf 2023, Chicago (USA): Clean Code Practices for Test Automation
+- XConf 2023, Singapore: Addressing Unconscious Bias & Ethics in Testing
+- HUSTEF 2024, Budapest (Hungary): Mobile App Crashes in Production — Lessons Learned
+- Nordic Testing Days 2025, Tallinn (Estonia): Advanced Appium Workshop
+- TestCon Europe 2025, Vilnius (Lithuania): Testing Agentic AI Applications — Beyond Traditional QA
+- SeleniumConf & AppiumConf 2025, Valencia (Spain): Advanced Appium 2.0 Workshop
+- TechXpresso 2026, Chennai (India): Testing Autonomous AI Agents — Beyond Traditional QA
+- NullCon 2026, Goa (India): Hacking with AI — MCP for Security Testing
 
 ## Citations & Press
 

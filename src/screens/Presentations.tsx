@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useSEO } from '../hooks/useSEO'
 
 const presentations = [
   {
@@ -22,6 +23,13 @@ const presentations = [
 ]
 
 export default function Presentations() {
+  useSEO({
+    title: 'Presentations & Workshop Decks \u2014 Srinivasan Sekar',
+    description:
+      'Workshop slides and presentation decks from conferences and events \u2014 AI agent testing, Appium with MCP-powered tooling, and AI agent frameworks.',
+    path: '/presentations',
+  })
+
   return (
     <div className='bg-black text-white min-h-screen'>
       {/* Navigation */}

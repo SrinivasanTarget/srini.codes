@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && npm run partytown && vite build",
+    "build": "tsc && npm run partytown && vite build && cp build/index.html build/404.html",
     "preview": "vite preview",
     "partytown": "partytown copylib build/~partytown",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,json}'",

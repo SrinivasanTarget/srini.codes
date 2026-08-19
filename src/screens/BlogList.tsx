@@ -2,9 +2,17 @@ import React, { useState, useEffect } from 'react'
 import { UnifiedBlogService, UnifiedBlogPost } from '../services/unifiedBlog'
 import UnifiedBlogCard from '../components/blogcard/UnifiedBlogCard'
 import BlogNavigation from '../components/navigation/BlogNavigation'
+import { useSEO } from '../hooks/useSEO'
 import testmuLogo from '../assets/images/TestMu AI White Logo 512px.svg'
 
 export default function BlogList() {
+  useSEO({
+    title: 'Blog \u2014 Srinivasan Sekar',
+    description:
+      'Technical articles by Srinivasan Sekar on the Model Context Protocol, AI agents, Appium, mobile test automation, and open source.',
+    path: '/blog',
+  })
+
   const [posts, setPosts] = useState<UnifiedBlogPost[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)

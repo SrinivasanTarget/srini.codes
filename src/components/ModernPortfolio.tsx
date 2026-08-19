@@ -11,6 +11,7 @@ import testmuLogo from '../assets/images/TestMu AI White Logo 512px.svg'
 import ThreeHeroBackground from './ThreeHeroBackground'
 import micImage from '../assets/images/mic.webp'
 import BookBanner from './BookBanner'
+import { useSEO } from '../hooks/useSEO'
 
 // Animated role cycling component
 const ROLES = [
@@ -254,6 +255,13 @@ const CitationCarousel: React.FC = () => {
 }
 
 const ModernPortfolio = () => {
+  useSEO({
+    title: 'Srinivasan Sekar \u2014 Open Source Advocate, Speaker & Author of The MCP Standard',
+    description:
+      'Srinivasan Sekar is a software engineer, open source advocate, and author of The MCP Standard (Apress). Creator of AppiumTestDistribution, international speaker, and expert in AI tooling, MCP, and mobile test automation.',
+    path: '/',
+  })
+
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [recentBlogs, setRecentBlogs] = useState<UnifiedBlogPost[]>([])

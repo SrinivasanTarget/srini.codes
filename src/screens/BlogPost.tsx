@@ -2,12 +2,23 @@ import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { HashnodeService, BlogPost as BlogPostType } from '../services/hashnode'
 import BlogNavigation from '../components/navigation/BlogNavigation'
+import { useSEO } from '../hooks/useSEO'
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>()
   const [post, setPost] = useState<BlogPostType | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
+  useSEO({
+    title: post ? `${post.title} \u2014 Srinivasan Sekar` : 'Blog \u2014 Srinivasan Sekar',
+    description:
+      post?.brief ||
+      'Technical articles by Srinivasan Sekar on the Model Context Protocol, AI agents, Appium, mobile test automation, and open source.',
+    path: slug ? `/blog/${slug}` : '/blog',
+    type: 'article',
+    image: post?.coverImage?.url,
+  })
 
   useEffect(() => {
     if (slug) {

@@ -20,15 +20,22 @@
     <meta property="og:url" content="https://srini.codes/" />
     <meta property="og:title" content="Srinivasan Sekar — Open Source Advocate, Speaker & Author" />
     <meta property="og:description" content="Software engineer, open source advocate, and author of The MCP Standard (Apress). Creator of AppiumTestDistribution, international speaker, and expert in AI tooling and MCP." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/SrinivasanTarget/srini.codes/main/src/assets/images/ProfilePic.webp" />
+    <meta property="og:image" content="https://srini.codes/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="1085" />
+    <meta property="og:image:alt" content="Portrait of Srinivasan Sekar" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Srinivasan Sekar" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://srini.codes/" />
-    <meta property="twitter:title" content="Srinivasan Sekar — Open Source Advocate, Speaker & Author" />
-    <meta property="twitter:description" content="Software engineer, open source advocate, and author of The MCP Standard (Apress). Creator of AppiumTestDistribution, international speaker, and expert in AI tooling and MCP." />
-    <meta property="twitter:image" content="https://raw.githubusercontent.com/SrinivasanTarget/srini.codes/main/src/assets/images/ProfilePic.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://srini.codes/" />
+    <meta name="twitter:title" content="Srinivasan Sekar — Open Source Advocate, Speaker & Author" />
+    <meta name="twitter:description" content="Software engineer, open source advocate, and author of The MCP Standard (Apress). Creator of AppiumTestDistribution, international speaker, and expert in AI tooling and MCP." />
+    <meta name="twitter:image" content="https://srini.codes/og-image.png" />
+    <meta name="twitter:image:alt" content="Portrait of Srinivasan Sekar" />
+    <meta name="twitter:site" content="@srinivasanskr" />
+    <meta name="twitter:creator" content="@srinivasanskr" />
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -37,15 +44,19 @@
       "@graph": [
         {
           "@type": "WebSite",
+          "@id": "https://srini.codes/#website",
           "name": "Srinivasan Sekar",
           "url": "https://srini.codes",
-          "description": "Portfolio of Srinivasan Sekar — open source advocate, international speaker, and author of The MCP Standard."
+          "description": "Portfolio of Srinivasan Sekar — open source advocate, international speaker, and author of The MCP Standard.",
+          "publisher": { "@id": "https://srini.codes/#person" },
+          "inLanguage": "en"
         },
         {
           "@type": "Person",
+          "@id": "https://srini.codes/#person",
           "name": "Srinivasan Sekar",
           "url": "https://srini.codes",
-          "image": "https://raw.githubusercontent.com/SrinivasanTarget/srini.codes/main/src/assets/images/ProfilePic.webp",
+          "image": "https://srini.codes/og-image.png",
           "jobTitle": "Software Engineer",
           "description": "Open source advocate, international conference speaker, and technical author specializing in AI tooling, Model Context Protocol, and mobile test automation.",
           "knowsAbout": [
@@ -67,10 +78,7 @@
           "@type": "Book",
           "name": "The MCP Standard",
           "alternateName": "A Developer's Guide to Building Universal AI Tools with the Model Context Protocol",
-          "author": {
-            "@type": "Person",
-            "name": "Srinivasan Sekar"
-          },
+          "author": { "@id": "https://srini.codes/#person" },
           "publisher": {
             "@type": "Organization",
             "name": "Apress"
