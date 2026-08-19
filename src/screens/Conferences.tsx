@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import Globe from 'react-globe.gl'
 import { useSEO } from '../hooks/useSEO'
@@ -81,7 +81,7 @@ const VIRTUAL_YEARS = [...new Set(VIRTUAL_CONFERENCES.map(vc => vc.year))].sort(
 )
 
 // Generate arcs from home to each conference
-const arcsData = CONFERENCES.map((conf, i) => ({
+const ROUTE_ARCS = CONFERENCES.map((conf, i) => ({
   startLat: HOME.lat,
   startLng: HOME.lng,
   endLat: conf.lat,
@@ -91,6 +91,18 @@ const arcsData = CONFERENCES.map((conf, i) => ({
   city: conf.city,
   index: i,
 }))
+
+// Flight animation: a one-shot comet travels the great circle between stops,
+// paced so the dash head lands exactly when the camera arrives. The dash
+// geometry (0.4 dash / 2 gap / 1 initial gap over one FLIGHT_TIME cycle)
+// makes a single pulse traverse the arc in FLIGHT_TIME and fully exit by 2x.
+const FLIGHT_TIME = 1500
+const FLIGHT_ARC_REL_LEN = 0.4
+const FLIGHT_COLOR = ['rgba(232, 184, 152, 0)', 'rgba(255, 221, 191, 0.8)', '#ffffff']
+const RING_COLOR = (t: number) => `rgba(232, 184, 152, ${Math.sqrt(Math.max(0, 1 - t))})`
+
+const prefersReducedMotion = () =>
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 // Points for all locations
 const pointsData = [
@@ -140,36 +152,92 @@ const Conferences = () => {
   const [showVirtual, setShowVirtual] = useState(false)
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
   const [showHint, setShowHint] = useState(false)
+  const [flightArcs, setFlightArcs] = useState<any[]>([])
+  const [rings, setRings] = useState<any[]>([])
   const globeRef = useRef<any>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const lastLocationRef = useRef<{ lat: number; lng: number }>(HOME)
+  const flightIdRef = useRef(0)
+  const timeoutsRef = useRef<Set<ReturnType<typeof setTimeout>>>(new Set())
 
-  const flyTo = useCallback((lat: number, lng: number, altitude = 1.8) => {
-    if (globeRef.current) {
-      globeRef.current.pointOfView({ lat, lng, altitude }, 1000)
-    }
+  const schedule = useCallback((fn: () => void, ms: number) => {
+    const id = setTimeout(() => {
+      timeoutsRef.current.delete(id)
+      fn()
+    }, ms)
+    timeoutsRef.current.add(id)
   }, [])
+
+  useEffect(() => {
+    const timeouts = timeoutsRef.current
+    return () => timeouts.forEach(clearTimeout)
+  }, [])
+
+  const emitRing = useCallback(
+    (lat: number, lng: number, key: string) => {
+      const ring = { lat, lng, key }
+      setRings(prev => [...prev, ring])
+      schedule(() => setRings(prev => prev.filter(r => r !== ring)), FLIGHT_TIME * FLIGHT_ARC_REL_LEN)
+    },
+    [schedule]
+  )
+
+  const launchFlight = useCallback(
+    (from: { lat: number; lng: number }, to: { lat: number; lng: number }) => {
+      if (prefersReducedMotion()) return false
+      if (from.lat === to.lat && from.lng === to.lng) return false
+      const id = ++flightIdRef.current
+      const arc = {
+        id,
+        isFlight: true,
+        startLat: from.lat,
+        startLng: from.lng,
+        endLat: to.lat,
+        endLng: to.lng,
+        color: FLIGHT_COLOR,
+      }
+      setFlightArcs(prev => [...prev, arc])
+      schedule(() => setFlightArcs(prev => prev.filter(a => a.id !== id)), FLIGHT_TIME * 2)
+      emitRing(from.lat, from.lng, `takeoff-${id}`)
+      schedule(() => emitRing(to.lat, to.lng, `landing-${id}`), FLIGHT_TIME)
+      return true
+    },
+    [schedule, emitRing]
+  )
+
+  const travelTo = useCallback(
+    (dest: { lat: number; lng: number }, altitude = 1.5) => {
+      const from = lastLocationRef.current
+      const flew = launchFlight(from, dest)
+      lastLocationRef.current = dest
+      if (globeRef.current) {
+        const duration = prefersReducedMotion() ? 0 : flew ? FLIGHT_TIME : 1000
+        globeRef.current.pointOfView({ lat: dest.lat, lng: dest.lng, altitude }, duration)
+      }
+    },
+    [launchFlight]
+  )
 
   const selectConf = useCallback(
     (conf: typeof CONFERENCES[0]) => {
       setSelectedConf(conf)
       setShowVirtual(false)
-      flyTo(conf.lat, conf.lng, 1.5)
+      travelTo(conf, 1.5)
     },
-    [flyTo]
+    [travelTo]
   )
 
   const navigateConf = useCallback(
     (direction: 1 | -1) => {
-      setSelectedConf(current => {
-        if (!current) return current
-        const index = TIMELINE.findIndex(c => c.city === current.city)
-        const next = TIMELINE[(index + direction + TIMELINE.length) % TIMELINE.length]
-        flyTo(next.lat, next.lng, 1.5)
-        return next
-      })
+      if (!selectedConf) return
+      const index = TIMELINE.findIndex(c => c.city === selectedConf.city)
+      const next = TIMELINE[(index + direction + TIMELINE.length) % TIMELINE.length]
+      selectConf(next)
     },
-    [flyTo]
+    [selectedConf, selectConf]
   )
+
+  const allArcs = useMemo(() => [...ROUTE_ARCS, ...flightArcs], [flightArcs])
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
@@ -212,16 +280,14 @@ const Conferences = () => {
     if (point.label === 'Home Base') {
       setShowVirtual(true)
       setSelectedConf(null)
-      if (globeRef.current) {
-        globeRef.current.pointOfView({ lat: point.lat, lng: point.lng, altitude: 1.8 }, 1000)
-      }
+      travelTo(HOME, 1.8)
       return
     }
     if (point.conf) {
       const conf = CONFERENCES.find(c => c.city === point.city)
       if (conf) selectConf(conf)
     }
-  }, [selectConf])
+  }, [selectConf, travelTo])
 
   const uniqueCountries = new Set(CONFERENCES.map(c => c.country)).size
   const uniqueCities = CONFERENCES.length
@@ -260,13 +326,20 @@ const Conferences = () => {
             globeImageUrl='/globe/earth-night.jpg'
             bumpImageUrl='/globe/earth-topology.png'
             backgroundImageUrl='/globe/night-sky.png'
-            arcsData={arcsData}
+            arcsData={allArcs}
             arcColor='color'
-            arcDashLength={0.5}
-            arcDashGap={0.2}
-            arcDashAnimateTime={2000}
-            arcStroke={0.5}
-            arcsTransitionDuration={1000}
+            arcDashLength={(d: any) => (d.isFlight ? FLIGHT_ARC_REL_LEN : 0.5)}
+            arcDashGap={(d: any) => (d.isFlight ? 2 : 0.2)}
+            arcDashInitialGap={(d: any) => (d.isFlight ? 1 : 0)}
+            arcDashAnimateTime={(d: any) => (d.isFlight ? FLIGHT_TIME : 2000)}
+            arcStroke={(d: any) => (d.isFlight ? 0.85 : 0.5)}
+            arcAltitudeAutoScale={(d: any) => (d.isFlight ? 0.6 : 0.5)}
+            arcsTransitionDuration={0}
+            ringsData={rings}
+            ringColor={() => RING_COLOR}
+            ringMaxRadius={4}
+            ringPropagationSpeed={3}
+            ringRepeatPeriod={(FLIGHT_TIME * FLIGHT_ARC_REL_LEN) / 3}
             pointsData={pointsData}
             pointAltitude={0.01}
             pointColor='color'
@@ -393,7 +466,7 @@ const Conferences = () => {
               onClick={() => {
                 setShowVirtual(!showVirtual)
                 setSelectedConf(null)
-                flyTo(HOME.lat, HOME.lng, 2.0)
+                travelTo(HOME, 2.0)
               }}
               aria-pressed={showVirtual}
               className={`
