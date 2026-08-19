@@ -16,7 +16,7 @@ export default function Projects() {
       <div className='text-center mb-12 md:mb-16'>
         <h2 className='text-3xl md:text-4xl font-bold text-custom-highlight'>Open Source Contributions</h2>
         <p className='text-lg md:text-xl text-custom-gray-medium mt-2'>
-          I love contributing to Open Source Projects. Here are a few I'm passionate about:
+          I love contributing to Open Source Projects. Here are a few I&apos;m passionate about:
         </p>
       </div>
       {/* Grid for project cards */}

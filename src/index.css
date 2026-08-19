@@ -75,7 +75,6 @@ button:focus-visible,
 a:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px rgba(212, 149, 106, 0.5);
-  border-radius: 4px;
 }
 
 /* Navigation link styles */

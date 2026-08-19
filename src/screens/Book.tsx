@@ -171,7 +171,7 @@ const Book = () => {
                 <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' />
                 </svg>
-                Read on O'Reilly
+                Read on O&apos;Reilly
               </a>
             </div>
           </div>
@@ -183,7 +183,7 @@ const Book = () => {
           style={{ animation: isLoaded ? 'fade-in-up 0.8s ease-out 0.3s both' : 'none' }}
         >
           <h2 className='text-2xl font-heading font-bold text-white mb-6'>
-            What You'll Learn
+            What You&apos;ll Learn
           </h2>
           <div className='bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 sm:p-8'>
             <ul className='space-y-4'>
