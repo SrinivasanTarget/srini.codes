@@ -3,24 +3,25 @@ import { Link } from 'react-router-dom'
 import Globe from 'react-globe.gl'
 
 const styles = `
-  @keyframes pulse-dot {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.5); opacity: 0.5; }
-  }
   @keyframes fade-in-up {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  @keyframes glow-pulse {
-    0%, 100% { filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6)); }
-    50% { filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.9)); }
-  }
+  .fade-in-up { animation: fade-in-up 0.3s ease-out forwards; }
+  .fade-in-up-slow { animation: fade-in-up 1s ease-out forwards; }
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in-up, .fade-in-up-slow { animation: none; }
+    .speaker-map *, .speaker-map *::before, .speaker-map *::after {
+      transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
+    }
   }
 `
 
@@ -150,7 +151,7 @@ const Conferences = () => {
   const uniqueCities = CONFERENCES.length
 
   return (
-    <div className='min-h-screen bg-black text-white overflow-hidden'>
+    <div className='speaker-map min-h-screen bg-black text-white overflow-hidden'>
       <style>{styles}</style>
 
       {/* Navigation */}
@@ -160,7 +161,7 @@ const Conferences = () => {
             to='/'
             className='flex items-center gap-2 text-white/60 hover:text-white transition-colors'
           >
-            <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <svg aria-hidden='true' className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
               <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M10 19l-7-7m0 0l7-7m-7 7h18' />
             </svg>
             <span className='text-sm font-medium'>Back</span>
@@ -172,8 +173,7 @@ const Conferences = () => {
       {/* Globe Container */}
       <div
         ref={containerRef}
-        className='fixed inset-0'
-        style={{ animation: isLoaded ? 'fade-in-up 1s ease-out forwards' : 'none' }}
+        className={`fixed inset-0 ${isLoaded ? 'fade-in-up-slow' : ''}`}
       >
         {dimensions.width > 0 && (
           <Globe
@@ -231,7 +231,7 @@ const Conferences = () => {
           <div className='flex flex-wrap gap-4 sm:gap-6 mb-4 sm:mb-6'>
             <div className='flex items-center gap-3'>
               <div className='hidden sm:flex w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/[0.08] items-center justify-center'>
-                <svg className='w-6 h-6 text-accent-light' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <svg aria-hidden='true' className='w-6 h-6 text-accent-light' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z' />
                 </svg>
               </div>
@@ -243,7 +243,7 @@ const Conferences = () => {
 
             <div className='flex items-center gap-3'>
               <div className='hidden sm:flex w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/[0.08] items-center justify-center'>
-                <svg className='w-6 h-6 text-accent-light' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <svg aria-hidden='true' className='w-6 h-6 text-accent-light' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z' />
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M15 11a3 3 0 11-6 0 3 3 0 016 0z' />
                 </svg>
@@ -256,7 +256,7 @@ const Conferences = () => {
 
             <div className='flex items-center gap-3'>
               <div className='hidden sm:flex w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/[0.08] items-center justify-center'>
-                <svg className='w-6 h-6 text-accent-light' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <svg aria-hidden='true' className='w-6 h-6 text-accent-light' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z' />
                 </svg>
               </div>
@@ -268,7 +268,7 @@ const Conferences = () => {
           </div>
 
           {/* Conference List */}
-          <div className='flex flex-nowrap sm:flex-wrap gap-2 overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0'>
+          <div role='group' aria-label='Conference locations' className='flex flex-nowrap sm:flex-wrap gap-2 overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0'>
             {CONFERENCES.map((conf, i) => (
               <button
                 key={i}
@@ -279,6 +279,7 @@ const Conferences = () => {
                     globeRef.current.pointOfView({ lat: conf.lat, lng: conf.lng, altitude: 1.5 }, 1000)
                   }
                 }}
+                aria-pressed={selectedConf?.city === conf.city && !showVirtual}
                 className={`
                   shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200
                   ${selectedConf?.city === conf.city && !showVirtual
@@ -298,6 +299,7 @@ const Conferences = () => {
                   globeRef.current.pointOfView({ lat: HOME.lat, lng: HOME.lng, altitude: 2.0 }, 1000)
                 }
               }}
+              aria-pressed={showVirtual}
               className={`
                 shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 inline-flex items-center gap-1.5
                 ${showVirtual
@@ -306,7 +308,7 @@ const Conferences = () => {
                 }
               `}
             >
-              <svg className='w-3 h-3' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <svg aria-hidden='true' className='w-3 h-3' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z' />
               </svg>
               Virtual ({VIRTUAL_CONFERENCES.length})
@@ -318,19 +320,21 @@ const Conferences = () => {
       {/* Selected Conference Card */}
       {selectedConf && (
         <div
-          className='fixed top-20 right-3 left-3 sm:left-auto sm:right-6 sm:top-24 z-20 w-auto sm:w-72 p-4 rounded-2xl bg-glass-white backdrop-blur-xl border border-glass-border shadow-glass'
-          style={{ animation: 'fade-in-up 0.3s ease-out forwards' }}
+          role='region'
+          aria-label={`${selectedConf.city} conference details`}
+          className='fade-in-up fixed top-20 right-3 left-3 sm:left-auto sm:right-6 sm:top-24 z-20 w-auto sm:w-72 p-4 rounded-2xl bg-glass-white backdrop-blur-xl border border-glass-border shadow-glass'
         >
           <div className='flex items-start justify-between mb-3'>
             <div>
-              <h3 className='font-semibold text-white'>{selectedConf.city}</h3>
+              <h2 className='font-semibold text-white'>{selectedConf.city}</h2>
               <p className='text-sm text-white/50'>{selectedConf.country}</p>
             </div>
             <button
               onClick={() => setSelectedConf(null)}
+              aria-label='Close conference details'
               className='p-1 rounded-lg hover:bg-white/10 transition-colors'
             >
-              <svg className='w-4 h-4 text-white/40' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <svg aria-hidden='true' className='w-4 h-4 text-white/40' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
               </svg>
             </button>
@@ -338,7 +342,7 @@ const Conferences = () => {
           <div className='space-y-2'>
             <div className='flex items-center gap-2 text-sm'>
               <div className='w-6 h-6 rounded-lg bg-white/10 flex items-center justify-center shrink-0'>
-                <svg className='w-3 h-3 text-accent-light/80' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <svg aria-hidden='true' className='w-3 h-3 text-accent-light/80' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' />
                 </svg>
               </div>
@@ -346,7 +350,7 @@ const Conferences = () => {
             </div>
             <div className='flex items-start gap-2 text-sm'>
               <div className='w-6 h-6 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5'>
-                <svg className='w-3 h-3 text-accent-light/80' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <svg aria-hidden='true' className='w-3 h-3 text-accent-light/80' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z' />
                 </svg>
               </div>
@@ -360,7 +364,7 @@ const Conferences = () => {
                 className='flex items-center gap-2 text-xs text-accent-light/90 hover:text-accent-light transition-colors mt-1'
               >
                 <div className='w-6 h-6 rounded-lg bg-accent-muted flex items-center justify-center shrink-0'>
-                  <svg className='w-3 h-3' fill='currentColor' viewBox='0 0 24 24'>
+                  <svg aria-hidden='true' className='w-3 h-3' fill='currentColor' viewBox='0 0 24 24'>
                     <path d='M8 5v14l11-7z' />
                   </svg>
                 </div>
@@ -374,22 +378,24 @@ const Conferences = () => {
       {/* Virtual Conferences Panel */}
       {showVirtual && (
         <div
-          className='fixed top-20 right-3 left-3 sm:left-auto sm:right-6 sm:top-24 z-20 w-auto sm:w-80 max-h-[70vh] rounded-2xl bg-glass-white backdrop-blur-xl border border-glass-border shadow-glass overflow-hidden flex flex-col'
-          style={{ animation: 'fade-in-up 0.3s ease-out forwards' }}
+          role='region'
+          aria-label='Virtual conferences'
+          className='fade-in-up fixed top-20 right-3 left-3 sm:left-auto sm:right-6 sm:top-24 z-20 w-auto sm:w-80 max-h-[70vh] rounded-2xl bg-glass-white backdrop-blur-xl border border-glass-border shadow-glass overflow-hidden flex flex-col'
         >
           <div className='flex items-center justify-between p-4 border-b border-white/5'>
             <div className='flex items-center gap-2'>
-              <svg className='w-4 h-4 text-emerald-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <svg aria-hidden='true' className='w-4 h-4 text-emerald-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z' />
               </svg>
-              <h3 className='font-semibold text-white text-sm'>Virtual Conferences</h3>
+              <h2 className='font-semibold text-white text-sm'>Virtual Conferences</h2>
               <span className='text-xs text-white/40'>{VIRTUAL_CONFERENCES.length}</span>
             </div>
             <button
               onClick={() => setShowVirtual(false)}
+              aria-label='Close virtual conferences'
               className='p-1 rounded-lg hover:bg-white/10 transition-colors'
             >
-              <svg className='w-4 h-4 text-white/40' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <svg aria-hidden='true' className='w-4 h-4 text-white/40' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
               </svg>
             </button>
@@ -410,8 +416,9 @@ const Conferences = () => {
                         rel='noopener noreferrer'
                         className='text-accent-light/70 hover:text-accent-light transition-colors'
                         title='Watch Talk'
+                        aria-label={`Watch ${vc.talk} (opens in new tab)`}
                       >
-                        <svg className='w-3.5 h-3.5' fill='currentColor' viewBox='0 0 24 24'>
+                        <svg aria-hidden='true' className='w-3.5 h-3.5' fill='currentColor' viewBox='0 0 24 24'>
                           <path d='M8 5v14l11-7z' />
                         </svg>
                       </a>
@@ -437,7 +444,7 @@ const Conferences = () => {
           <span>In-Person ({CONFERENCES.length})</span>
         </div>
         <div className='flex items-center gap-2 text-xs text-white/40'>
-          <svg className='w-2 h-2 text-emerald-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+          <svg aria-hidden='true' className='w-2 h-2 text-emerald-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
             <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={3} d='M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z' />
           </svg>
           <span>Virtual ({VIRTUAL_CONFERENCES.length})</span>
