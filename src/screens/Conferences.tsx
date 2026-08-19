@@ -183,7 +183,11 @@ const Conferences = () => {
   )
 
   const launchFlight = useCallback(
-    (from: { lat: number; lng: number }, to: { lat: number; lng: number }) => {
+    (
+      from: { lat: number; lng: number },
+      to: { lat: number; lng: number },
+      { takeoffRing = true } = {}
+    ) => {
       if (prefersReducedMotion()) return false
       if (from.lat === to.lat && from.lng === to.lng) return false
       const id = ++flightIdRef.current
@@ -198,7 +202,7 @@ const Conferences = () => {
       }
       setFlightArcs(prev => [...prev, arc])
       schedule(() => setFlightArcs(prev => prev.filter(a => a.id !== id)), FLIGHT_TIME * 2)
-      emitRing(from.lat, from.lng, `takeoff-${id}`)
+      if (takeoffRing) emitRing(from.lat, from.lng, `takeoff-${id}`)
       schedule(() => emitRing(to.lat, to.lng, `landing-${id}`), FLIGHT_TIME)
       return true
     },
@@ -226,6 +230,23 @@ const Conferences = () => {
     },
     [travelTo]
   )
+
+  const showOverview = useCallback(() => {
+    setSelectedConf(null)
+    setShowVirtual(false)
+    if (globeRef.current) {
+      globeRef.current.pointOfView(
+        { lat: 20, lng: 77, altitude: 2.5 },
+        prefersReducedMotion() ? 0 : 1000
+      )
+    }
+  }, [])
+
+  const openVirtual = useCallback(() => {
+    setShowVirtual(true)
+    setSelectedConf(null)
+    travelTo(HOME, 2.0)
+  }, [travelTo])
 
   const navigateConf = useCallback(
     (direction: 1 | -1) => {
@@ -276,18 +297,35 @@ const Conferences = () => {
     return () => clearTimeout(timer)
   }, [globeReady])
 
+  // Entrance: once the camera settles, a wave of comets fans out from home
+  // along every route, each landing with a ripple at its city.
+  const introPlayedRef = useRef(false)
+  useEffect(() => {
+    if (!globeReady || introPlayedRef.current) return
+    introPlayedRef.current = true
+    if (prefersReducedMotion()) return
+    schedule(() => {
+      emitRing(HOME.lat, HOME.lng, 'intro-takeoff')
+      ROUTE_ARCS.forEach((arc, i) => {
+        schedule(
+          () => launchFlight(HOME, { lat: arc.endLat, lng: arc.endLng }, { takeoffRing: false }),
+          i * 120
+        )
+      })
+    }, 1200)
+  }, [globeReady, schedule, emitRing, launchFlight])
+
   const handlePointClick = useCallback((point: any) => {
     if (point.label === 'Home Base') {
-      setShowVirtual(true)
-      setSelectedConf(null)
-      travelTo(HOME, 1.8)
+      const homeConf = CONFERENCES.find(c => c.city === HOME.city)
+      if (homeConf) selectConf(homeConf)
       return
     }
     if (point.conf) {
       const conf = CONFERENCES.find(c => c.city === point.city)
       if (conf) selectConf(conf)
     }
-  }, [selectConf, travelTo])
+  }, [selectConf])
 
   const uniqueCountries = new Set(CONFERENCES.map(c => c.country)).size
   const uniqueCities = CONFERENCES.length
@@ -464,9 +502,11 @@ const Conferences = () => {
             ))}
             <button
               onClick={() => {
-                setShowVirtual(!showVirtual)
-                setSelectedConf(null)
-                travelTo(HOME, 2.0)
+                if (showVirtual) {
+                  setShowVirtual(false)
+                } else {
+                  openVirtual()
+                }
               }}
               aria-pressed={showVirtual}
               className={`
@@ -550,19 +590,32 @@ const Conferences = () => {
               </div>
               <span className='text-white/50 text-xs leading-relaxed'>{selectedConf.talk}</span>
             </div>
-            {selectedConf.video && (
-              <a
-                href={selectedConf.video}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='inline-flex items-center gap-1.5 mt-2 px-3 py-1.5 rounded-full bg-accent-hover/80 hover:bg-accent-hover text-white text-xs font-medium transition-colors'
-              >
-                <svg aria-hidden='true' className='w-3 h-3' fill='currentColor' viewBox='0 0 24 24'>
-                  <path d='M8 5v14l11-7z' />
-                </svg>
-                <span>Watch Talk</span>
-              </a>
-            )}
+            <div className='flex flex-wrap gap-2'>
+              {selectedConf.video && (
+                <a
+                  href={selectedConf.video}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='inline-flex items-center gap-1.5 mt-2 px-3 py-1.5 rounded-full bg-accent-hover/80 hover:bg-accent-hover text-white text-xs font-medium transition-colors'
+                >
+                  <svg aria-hidden='true' className='w-3 h-3' fill='currentColor' viewBox='0 0 24 24'>
+                    <path d='M8 5v14l11-7z' />
+                  </svg>
+                  <span>Watch Talk</span>
+                </a>
+              )}
+              {selectedConf.city === HOME.city && (
+                <button
+                  onClick={openVirtual}
+                  className='inline-flex items-center gap-1.5 mt-2 px-3 py-1.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 text-xs font-medium transition-colors'
+                >
+                  <svg aria-hidden='true' className='w-3 h-3' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z' />
+                  </svg>
+                  <span>Virtual Talks ({VIRTUAL_CONFERENCES.length})</span>
+                </button>
+              )}
+            </div>
           </div>
         </div>
       )}
@@ -631,22 +684,34 @@ const Conferences = () => {
         </div>
       )}
 
-      {/* Legend */}
-      <div className='hidden sm:block fixed top-24 left-6 z-10 space-y-2'>
-        <div className='flex items-center gap-2 text-xs text-white/40'>
+      {/* Legend (interactive) */}
+      <div className='hidden sm:flex flex-col items-start gap-1.5 fixed top-24 left-6 z-10'>
+        <button
+          onClick={() => travelTo(HOME, 1.8)}
+          aria-label='Fly to home base'
+          className='flex items-center gap-2 text-xs text-white/40 hover:text-white/80 transition-colors'
+        >
           <div className='w-2 h-2 rounded-full bg-emerald-400' />
           <span>Home Base</span>
-        </div>
-        <div className='flex items-center gap-2 text-xs text-white/40'>
+        </button>
+        <button
+          onClick={showOverview}
+          aria-label='Show all in-person conferences'
+          className='flex items-center gap-2 text-xs text-white/40 hover:text-white/80 transition-colors'
+        >
           <div className='w-2 h-2 rounded-full bg-amber-400' />
           <span>In-Person ({CONFERENCES.length})</span>
-        </div>
-        <div className='flex items-center gap-2 text-xs text-white/40'>
+        </button>
+        <button
+          onClick={openVirtual}
+          aria-label='Show virtual conferences'
+          className='flex items-center gap-2 text-xs text-white/40 hover:text-white/80 transition-colors'
+        >
           <svg aria-hidden='true' className='w-2 h-2 text-emerald-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
             <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={3} d='M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z' />
           </svg>
           <span>Virtual ({VIRTUAL_CONFERENCES.length})</span>
-        </div>
+        </button>
       </div>
     </div>
   )
