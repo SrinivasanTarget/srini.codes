@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import Globe from 'react-globe.gl'
+import * as THREE from 'three'
 import { useSEO } from '../hooks/useSEO'
 
 const styles = `
@@ -104,6 +105,60 @@ const RING_COLOR = (t: number) => `rgba(232, 184, 152, ${Math.sqrt(Math.max(0, 1
 const prefersReducedMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+// A tiny stylized airplane that rides each flight arc, nose along the path.
+// Geometry points down +Z so Object3D.lookAt can steer it.
+let planeTemplate: THREE.Group | null = null
+const getPlaneTemplate = () => {
+  if (planeTemplate) return planeTemplate
+  const hull = new THREE.MeshLambertMaterial({
+    color: 0xffffff,
+    emissive: 0xd4956a,
+    emissiveIntensity: 0.7,
+  })
+  const trim = new THREE.MeshLambertMaterial({
+    color: 0xe8b898,
+    emissive: 0xd4956a,
+    emissiveIntensity: 0.6,
+  })
+  const g = new THREE.Group()
+  const body = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.18, 2.2, 8).rotateX(Math.PI / 2), hull)
+  const nose = new THREE.Mesh(new THREE.ConeGeometry(0.32, 0.8, 8).rotateX(Math.PI / 2), hull)
+  nose.position.z = 1.5
+  const wings = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.08, 0.8), trim)
+  wings.position.z = 0.15
+  const tailplane = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.06, 0.45), trim)
+  tailplane.position.z = -1.0
+  const fin = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.6, 0.5), trim)
+  fin.position.set(0, 0.3, -1.0)
+  g.add(body, nose, wings, tailplane, fin)
+  planeTemplate = g
+  return planeTemplate
+}
+
+const latLngToUnit = (lat: number, lng: number) => {
+  const phi = (lat * Math.PI) / 180
+  const theta = (lng * Math.PI) / 180
+  return new THREE.Vector3(Math.cos(phi) * Math.cos(theta), Math.cos(phi) * Math.sin(theta), Math.sin(phi))
+}
+
+const angularDistance = (a: { lat: number; lng: number }, b: { lat: number; lng: number }) =>
+  latLngToUnit(a.lat, a.lng).angleTo(latLngToUnit(b.lat, b.lng))
+
+const slerpLatLng = (a: { lat: number; lng: number }, b: { lat: number; lng: number }, t: number) => {
+  const u = latLngToUnit(a.lat, a.lng)
+  const v = latLngToUnit(b.lat, b.lng)
+  const angle = u.angleTo(v)
+  if (angle === 0) return { lat: a.lat, lng: a.lng }
+  const w = u
+    .multiplyScalar(Math.sin((1 - t) * angle))
+    .add(v.multiplyScalar(Math.sin(t * angle)))
+    .divideScalar(Math.sin(angle))
+  return {
+    lat: (Math.asin(w.z) * 180) / Math.PI,
+    lng: (Math.atan2(w.y, w.x) * 180) / Math.PI,
+  }
+}
+
 // Points for all locations
 const pointsData = [
   { ...HOME, size: 0.8, color: '#10b981', label: 'Home Base' },
@@ -173,6 +228,69 @@ const Conferences = () => {
     return () => timeouts.forEach(clearTimeout)
   }, [])
 
+  const planesRef = useRef<Map<number, { obj: THREE.Object3D; curve: THREE.CubicBezierCurve3; start: number }>>(
+    new Map()
+  )
+  const planeRafRef = useRef(0)
+
+  const stepPlanes = useCallback(() => {
+    const planes = planesRef.current
+    const now = performance.now()
+    planes.forEach((flight, id) => {
+      const t = (now - flight.start) / FLIGHT_TIME
+      if (t >= 1) {
+        flight.obj.parent?.remove(flight.obj)
+        planes.delete(id)
+        return
+      }
+      const pos = flight.curve.getPointAt(Math.max(0, t))
+      const tangent = flight.curve.getTangentAt(Math.max(0, t))
+      flight.obj.position.copy(pos)
+      flight.obj.up.copy(pos.clone().normalize())
+      flight.obj.lookAt(pos.clone().add(tangent))
+    })
+    planeRafRef.current = planes.size ? requestAnimationFrame(stepPlanes) : 0
+  }, [])
+
+  useEffect(() => {
+    const planes = planesRef.current
+    return () => {
+      if (planeRafRef.current) cancelAnimationFrame(planeRafRef.current)
+      planes.forEach(f => f.obj.parent?.remove(f.obj))
+      planes.clear()
+    }
+  }, [])
+
+  // Rebuild the exact cubic bezier three-globe uses for the flight arc, so
+  // the plane rides precisely on the drawn line (control points at 25%/75%
+  // of the great circle, lifted to 1.5x the arc's peak altitude).
+  const addPlane = useCallback(
+    (from: { lat: number; lng: number }, to: { lat: number; lng: number }, id: number) => {
+      const globe = globeRef.current
+      if (!globe) return
+      const peakAlt = (angularDistance(from, to) / 2) * 0.6
+      const cpAlt = peakAlt * 1.5
+      const point = (lat: number, lng: number, alt: number) => {
+        const { x, y, z } = globe.getCoords(lat, lng, alt)
+        return new THREE.Vector3(x, y, z)
+      }
+      const m1 = slerpLatLng(from, to, 0.25)
+      const m2 = slerpLatLng(from, to, 0.75)
+      const curve = new THREE.CubicBezierCurve3(
+        point(from.lat, from.lng, 0),
+        point(m1.lat, m1.lng, cpAlt),
+        point(m2.lat, m2.lng, cpAlt),
+        point(to.lat, to.lng, 0)
+      )
+      const obj = getPlaneTemplate().clone()
+      obj.scale.setScalar(2.6)
+      globe.scene().add(obj)
+      planesRef.current.set(id, { obj, curve, start: performance.now() })
+      if (!planeRafRef.current) planeRafRef.current = requestAnimationFrame(stepPlanes)
+    },
+    [stepPlanes]
+  )
+
   const emitRing = useCallback(
     (lat: number, lng: number, key: string) => {
       const ring = { lat, lng, key }
@@ -202,11 +320,12 @@ const Conferences = () => {
       }
       setFlightArcs(prev => [...prev, arc])
       schedule(() => setFlightArcs(prev => prev.filter(a => a.id !== id)), FLIGHT_TIME * 2)
+      addPlane(from, to, id)
       if (takeoffRing) emitRing(from.lat, from.lng, `takeoff-${id}`)
       schedule(() => emitRing(to.lat, to.lng, `landing-${id}`), FLIGHT_TIME)
       return true
     },
-    [schedule, emitRing]
+    [schedule, emitRing, addPlane]
   )
 
   const travelTo = useCallback(
