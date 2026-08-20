@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import heroImage from '../assets/images/ProfilePic.webp'
-import { useSEO } from '../hooks/useSEO'
+import { useSEO, routeSEO } from '../hooks/useSEO'
 
 const styles = `
   @keyframes float {
@@ -55,12 +55,7 @@ const openDeepLink = (appUrl: string, webUrl: string) => {
 }
 
 const Contact = () => {
-  useSEO({
-    title: 'Contact \u2014 Srinivasan Sekar',
-    description:
-      'Get in touch with Srinivasan Sekar for conference speaking, workshops, open source collaboration, or consulting on MCP, AI agents, and test automation.',
-    path: '/contact',
-  })
+  useSEO(routeSEO('/contact'))
 
   const [isLoaded, setIsLoaded] = useState(false)
   const [saveSuccess, setSaveSuccess] = useState(false)

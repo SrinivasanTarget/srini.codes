@@ -1,0 +1,42 @@
+{
+  "/": {
+    "path": "/",
+    "title": "Srinivasan Sekar — Open Source Advocate, Speaker & Author of The MCP Standard",
+    "description": "Srinivasan Sekar is a software engineer, open source advocate, and author of The MCP Standard (Apress). Creator of AppiumTestDistribution, international speaker, and expert in AI tooling, MCP, and mobile test automation.",
+    "type": "website"
+  },
+  "/conferences": {
+    "path": "/conferences",
+    "title": "Conference Talks & Speaker Map — Srinivasan Sekar",
+    "description": "34+ conference talks across 12 countries and 16 cities, plus 18 virtual events — an interactive speaker map of talks on Appium, Selenium, MCP, AI agents, and test automation by Srinivasan Sekar.",
+    "type": "website"
+  },
+  "/book": {
+    "path": "/book",
+    "title": "The MCP Standard — Book by Srinivasan Sekar (Apress)",
+    "description": "The MCP Standard: A Developer’s Guide to Building Universal AI Tools with the Model Context Protocol. By Srinivasan Sekar, foreword by Angie Jones. Apress, February 2026, 285 pages, ISBN 979-8-8688-2364-0.",
+    "type": "book",
+    "image": "https://srini.codes/og-book.png",
+    "imageWidth": 659,
+    "imageHeight": 997,
+    "imageAlt": "Cover of The MCP Standard"
+  },
+  "/presentations": {
+    "path": "/presentations",
+    "title": "Presentations & Workshop Decks — Srinivasan Sekar",
+    "description": "Workshop slides and presentation decks from conferences and events — AI agent testing, Appium with MCP-powered tooling, and AI agent frameworks.",
+    "type": "website"
+  },
+  "/blog": {
+    "path": "/blog",
+    "title": "Blog — Srinivasan Sekar",
+    "description": "Technical articles by Srinivasan Sekar on the Model Context Protocol, AI agents, Appium, mobile test automation, and open source.",
+    "type": "website"
+  },
+  "/contact": {
+    "path": "/contact",
+    "title": "Contact — Srinivasan Sekar",
+    "description": "Get in touch with Srinivasan Sekar for conference speaking, workshops, open source collaboration, or consulting on MCP, AI agents, and test automation.",
+    "type": "website"
+  }
+}

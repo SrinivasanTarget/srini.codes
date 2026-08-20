@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import routes from '../seo/routes.json'
 
 const SITE_URL = 'https://srini.codes'
 const SITE_NAME = 'Srinivasan Sekar'
@@ -16,7 +17,11 @@ interface SEOOptions {
   /** Pixel size of the share image; defaults to the site-wide og-image */
   imageWidth?: number
   imageHeight?: number
+  imageAlt?: string
 }
+
+/** Static per-route metadata, shared with scripts/prerender-heads.mjs */
+export const routeSEO = (path: keyof typeof routes) => routes[path] as SEOOptions
 
 const setMeta = (attr: 'name' | 'property', key: string, content: string) => {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`)
@@ -51,6 +56,7 @@ export const useSEO = ({
   image,
   imageWidth = 1200,
   imageHeight = 1085,
+  imageAlt = 'Portrait of Srinivasan Sekar',
 }: SEOOptions) => {
   useEffect(() => {
     const url = `${SITE_URL}${path}`
@@ -68,13 +74,15 @@ export const useSEO = ({
     setMeta('property', 'og:image', img)
     setMeta('property', 'og:image:width', String(imageWidth))
     setMeta('property', 'og:image:height', String(imageHeight))
+    setMeta('property', 'og:image:alt', imageAlt)
     setMeta('property', 'og:site_name', SITE_NAME)
 
     setMeta('name', 'twitter:title', title)
     setMeta('name', 'twitter:description', description)
     setMeta('name', 'twitter:url', url)
     setMeta('name', 'twitter:image', img)
-  }, [title, description, path, type, image, imageWidth, imageHeight])
+    setMeta('name', 'twitter:image:alt', imageAlt)
+  }, [title, description, path, type, image, imageWidth, imageHeight, imageAlt])
 }
 
 interface ArticleJsonLd {

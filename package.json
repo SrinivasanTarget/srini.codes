@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && cp build/index.html build/404.html && node scripts/generate-sitemap.mjs",
+    "build": "tsc && vite build && cp build/index.html build/404.html && node scripts/prerender-heads.mjs && node scripts/generate-sitemap.mjs",
     "preview": "vite preview",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,json}'",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
