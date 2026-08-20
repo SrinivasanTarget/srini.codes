@@ -105,32 +105,98 @@ const RING_COLOR = (t: number) => `rgba(232, 184, 152, ${Math.sqrt(Math.max(0, 1
 const prefersReducedMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-// A tiny stylized airplane that rides each flight arc, nose along the path.
-// Geometry points down +Z so Object3D.lookAt can steer it.
+// A sleek little jet that rides each flight arc, nose along +Z so
+// Object3D.lookAt can steer it. Smooth lathed fuselage, swept tapered
+// wings with winglets, swept tail with a copper livery fin, and twin
+// underwing nacelles; cloned per flight from this shared template.
 let planeTemplate: THREE.Group | null = null
 const getPlaneTemplate = () => {
   if (planeTemplate) return planeTemplate
-  const hull = new THREE.MeshLambertMaterial({
-    color: 0xffffff,
+
+  const hull = new THREE.MeshStandardMaterial({
+    color: 0xf8f5f0,
+    metalness: 0.4,
+    roughness: 0.35,
     emissive: 0xd4956a,
-    emissiveIntensity: 0.7,
+    emissiveIntensity: 0.25,
+    side: THREE.DoubleSide,
   })
-  const trim = new THREE.MeshLambertMaterial({
+  const copper = new THREE.MeshStandardMaterial({
     color: 0xe8b898,
+    metalness: 0.6,
+    roughness: 0.3,
     emissive: 0xd4956a,
-    emissiveIntensity: 0.6,
+    emissiveIntensity: 0.5,
+    side: THREE.DoubleSide,
   })
+
   const g = new THREE.Group()
-  const body = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.18, 2.2, 8).rotateX(Math.PI / 2), hull)
-  const nose = new THREE.Mesh(new THREE.ConeGeometry(0.32, 0.8, 8).rotateX(Math.PI / 2), hull)
-  nose.position.z = 1.5
-  const wings = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.08, 0.8), trim)
-  wings.position.z = 0.15
-  const tailplane = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.06, 0.45), trim)
-  tailplane.position.z = -1.0
-  const fin = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.6, 0.5), trim)
-  fin.position.set(0, 0.3, -1.0)
-  g.add(body, nose, wings, tailplane, fin)
+
+  // Fuselage: smooth teardrop profile lathed around the length axis
+  const profile = [
+    [0.0, 1.9],
+    [0.13, 1.62],
+    [0.24, 1.15],
+    [0.31, 0.45],
+    [0.31, -0.35],
+    [0.24, -1.05],
+    [0.12, -1.6],
+    [0.05, -1.85],
+    [0.0, -1.9],
+  ].map(([r, z]) => new THREE.Vector2(r, z))
+  const fuselage = new THREE.Mesh(new THREE.LatheGeometry(profile, 24).rotateX(Math.PI / 2), hull)
+
+  // Swept tapered lifting surface, drawn in plan (span +X, forward +Y),
+  // then laid flat so forward maps to +Z
+  const surfaceGeo = (span: number, rootChord: number, tipChord: number, sweep: number) => {
+    const shape = new THREE.Shape()
+    shape.moveTo(0, rootChord * 0.55)
+    shape.lineTo(span, rootChord * 0.55 - sweep)
+    shape.lineTo(span, rootChord * 0.55 - sweep - tipChord)
+    shape.lineTo(0, -rootChord * 0.45)
+    shape.closePath()
+    return new THREE.ExtrudeGeometry(shape, { depth: 0.06, bevelEnabled: false }).rotateX(Math.PI / 2)
+  }
+
+  const wingR = new THREE.Mesh(surfaceGeo(1.9, 1.0, 0.28, 1.05), hull)
+  wingR.position.set(0.04, -0.06, 0.35)
+  const wingL = wingR.clone()
+  wingL.scale.x = -1
+
+  const wingletGeo = new THREE.BoxGeometry(0.05, 0.4, 0.26)
+  const wingletR = new THREE.Mesh(wingletGeo, copper)
+  wingletR.position.set(1.92, 0.12, -0.35)
+  wingletR.rotation.z = -0.35
+  const wingletL = wingletR.clone()
+  wingletL.position.x = -1.92
+  wingletL.rotation.z = 0.35
+
+  const stabR = new THREE.Mesh(surfaceGeo(0.75, 0.5, 0.18, 0.45), hull)
+  stabR.position.set(0.03, 0.02, -1.45)
+  const stabL = stabR.clone()
+  stabL.scale.x = -1
+
+  // Copper tail fin: same plan shape stood upright (span up, chord along Z)
+  const finGeo = surfaceGeo(0.85, 0.75, 0.3, 0.55)
+  finGeo.rotateX(-Math.PI / 2) // undo the flat lay: back to plan (span +X, forward +Y)
+  finGeo.applyMatrix4(
+    new THREE.Matrix4().makeBasis(
+      new THREE.Vector3(0, 1, 0),
+      new THREE.Vector3(0, 0, 1),
+      new THREE.Vector3(1, 0, 0)
+    )
+  )
+  const fin = new THREE.Mesh(finGeo, copper)
+  fin.position.set(0, 0.1, -1.5)
+
+  // Twin underwing engine nacelles
+  const nacelleGeo = new THREE.CylinderGeometry(0.11, 0.13, 0.55, 12).rotateX(Math.PI / 2)
+  const nacelleR = new THREE.Mesh(nacelleGeo, copper)
+  nacelleR.position.set(0.65, -0.22, 0.45)
+  const nacelleL = nacelleR.clone()
+  nacelleL.position.x = -0.65
+
+  g.add(fuselage, wingR, wingL, wingletR, wingletL, stabR, stabL, fin, nacelleR, nacelleL)
 
   // Soft additive halo so the plane reads clearly over any part of the globe
   const canvas = document.createElement('canvas')
