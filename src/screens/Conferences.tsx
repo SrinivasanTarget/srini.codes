@@ -472,6 +472,37 @@ const Conferences = () => {
 
   const allArcs = useMemo(() => [...ROUTE_ARCS, ...flightArcs], [flightArcs])
 
+  const isActiveRoute = useCallback(
+    (d: any) => !d.isFlight && !showVirtual && selectedConf?.city === d.city,
+    [selectedConf, showVirtual]
+  )
+
+  const arcColor = useCallback(
+    (d: any) => {
+      if (d.isFlight) return d.color
+      return isActiveRoute(d)
+        ? ['rgba(245, 158, 11, 0.9)', 'rgba(234, 179, 8, 0.55)']
+        : ['rgba(245, 158, 11, 0.16)', 'rgba(234, 179, 8, 0.1)']
+    },
+    [isActiveRoute]
+  )
+  const arcStroke = useCallback(
+    (d: any) => (d.isFlight ? 0.85 : isActiveRoute(d) ? 0.5 : 0.2),
+    [isActiveRoute]
+  )
+  const arcDashLength = useCallback(
+    (d: any) => (d.isFlight ? FLIGHT_ARC_REL_LEN : isActiveRoute(d) ? 0.5 : 1),
+    [isActiveRoute]
+  )
+  const arcDashGap = useCallback(
+    (d: any) => (d.isFlight ? 2 : isActiveRoute(d) ? 0.2 : 0),
+    [isActiveRoute]
+  )
+  const arcDashAnimateTime = useCallback(
+    (d: any) => (d.isFlight ? FLIGHT_TIME : isActiveRoute(d) ? 2000 : 0),
+    [isActiveRoute]
+  )
+
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
     return () => clearTimeout(timer)
@@ -577,12 +608,12 @@ const Conferences = () => {
             bumpImageUrl='/globe/earth-topology.png'
             backgroundImageUrl='/globe/night-sky.png'
             arcsData={allArcs}
-            arcColor='color'
-            arcDashLength={(d: any) => (d.isFlight ? FLIGHT_ARC_REL_LEN : 0.5)}
-            arcDashGap={(d: any) => (d.isFlight ? 2 : 0.2)}
+            arcColor={arcColor}
+            arcDashLength={arcDashLength}
+            arcDashGap={arcDashGap}
             arcDashInitialGap={(d: any) => (d.isFlight ? 1 : 0)}
-            arcDashAnimateTime={(d: any) => (d.isFlight ? FLIGHT_TIME : 2000)}
-            arcStroke={(d: any) => (d.isFlight ? 0.85 : 0.5)}
+            arcDashAnimateTime={arcDashAnimateTime}
+            arcStroke={arcStroke}
             arcAltitudeAutoScale={(d: any) => (d.isFlight ? 0.6 : 0.5)}
             arcsTransitionDuration={0}
             ringsData={rings}
