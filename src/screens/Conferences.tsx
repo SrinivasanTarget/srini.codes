@@ -131,6 +131,30 @@ const getPlaneTemplate = () => {
   const fin = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.6, 0.5), trim)
   fin.position.set(0, 0.3, -1.0)
   g.add(body, nose, wings, tailplane, fin)
+
+  // Soft additive halo so the plane reads clearly over any part of the globe
+  const canvas = document.createElement('canvas')
+  canvas.width = canvas.height = 64
+  const ctx = canvas.getContext('2d')
+  if (ctx) {
+    const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32)
+    grad.addColorStop(0, 'rgba(255, 242, 230, 0.9)')
+    grad.addColorStop(0.4, 'rgba(232, 184, 152, 0.35)')
+    grad.addColorStop(1, 'rgba(232, 184, 152, 0)')
+    ctx.fillStyle = grad
+    ctx.fillRect(0, 0, 64, 64)
+    const halo = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: new THREE.CanvasTexture(canvas),
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        transparent: true,
+      })
+    )
+    halo.scale.setScalar(4.5)
+    g.add(halo)
+  }
+
   planeTemplate = g
   return planeTemplate
 }
@@ -248,6 +272,9 @@ const Conferences = () => {
       flight.obj.position.copy(pos)
       flight.obj.up.copy(pos.clone().normalize())
       flight.obj.lookAt(pos.clone().add(tangent))
+      // Grow through climb-out, shrink into the landing ripple
+      const phase = t < 0.12 ? 0.5 + (0.5 * t) / 0.12 : t > 0.88 ? 0.5 + (0.5 * (1 - t)) / 0.12 : 1
+      flight.obj.scale.setScalar(3 * phase)
     })
     planeRafRef.current = planes.size ? requestAnimationFrame(stepPlanes) : 0
   }, [])
@@ -283,7 +310,7 @@ const Conferences = () => {
         point(to.lat, to.lng, 0)
       )
       const obj = getPlaneTemplate().clone()
-      obj.scale.setScalar(2.6)
+      obj.scale.setScalar(3)
       globe.scene().add(obj)
       planesRef.current.set(id, { obj, curve, start: performance.now() })
       if (!planeRafRef.current) planeRafRef.current = requestAnimationFrame(stepPlanes)
