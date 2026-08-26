@@ -1,3 +1,4 @@
+import breakingMcpCover from '../assets/images/breaking-mcp-book.webp'
 import mcpStandardCover from '../assets/images/MCP Book.png'
 
 export interface BookLink {
@@ -24,21 +25,12 @@ export interface Book {
   isbn: string
   printIsbn?: string
   cover: string
-  /**
-   * Springer serves covers straight from its CDN, so a book whose artwork
-   * isn't vendored yet still renders. BookCover falls back to a typographic
-   * cover if the request fails.
-   */
-  coverIsRemote?: boolean
   /** Short lead paragraphs shown under the hero */
   blurb: string[]
   learnings: string[]
   audience?: string
   links: BookLink[]
 }
-
-const SPRINGER_COVER = (isbn: string) =>
-  `https://media.springernature.com/full/springer-static/cover-hires/book/${isbn}?as=webp`
 
 /** Newest first: the first entry is what the site-wide banner promotes. */
 export const books: Book[] = [
@@ -47,13 +39,16 @@ export const books: Book[] = [
     title: 'Breaking the Model Context Protocol',
     subtitle:
       'Agentic Attacks and Defenses for MCP-Powered AI Systems',
-    authors: ['Satheesh Kumar', 'Thejes Sree', 'Srinivasan Sekar'],
+    authors: ['Thejes Sree Satheesh Kumar', 'Srinivasan Sekar'],
+    foreword: {
+      name: 'Angie Jones',
+      title: 'VP of Engineering, AI Tools & Enablement, Block',
+    },
     publisher: 'Apress',
     date: 'August 2026',
     isbn: '979-8-8688-2968-0',
     printIsbn: '979-8-8688-2967-3',
-    cover: SPRINGER_COVER('979-8-8688-2968-0'),
-    coverIsRemote: true,
+    cover: breakingMcpCover,
     blurb: [
       'As AI agents plug into more tools and internal systems, the Model Context Protocol is becoming a core part of how modern platforms work, and with it comes a fast-growing attack surface where probabilistic models touch real APIs, data, and networks.',
       'The book maps today’s MCP trust boundaries, explains why traditional security assumptions stop holding when the “client” is an LLM, and works through real attack stories and hands-on labs before turning to the defenses that hold up in production.',

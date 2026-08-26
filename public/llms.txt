@@ -7,7 +7,7 @@ Srinivasan Sekar is a software engineer, open source advocate, and technical aut
 ## About
 
 - Author of "The MCP Standard" (Apress, February 2026): a developer's guide to building universal AI tools with the Model Context Protocol
-- Co-author of "Breaking the Model Context Protocol: Agentic Attacks and Defenses for MCP-Powered AI Systems" (Apress, August 2026), written with Satheesh Kumar and Thejes Sree, covering MCP trust boundaries, tool poisoning, confused-deputy chains, and the defenses that hold up in production
+- Co-author of "Breaking the Model Context Protocol: Agentic Attacks and Defenses for MCP-Powered AI Systems" (Apress, August 2026), written with Thejes Sree Satheesh Kumar, covering MCP trust boundaries, tool poisoning, confused-deputy chains, and the defenses that hold up in production
 - Creator of AppiumTestDistribution, winner of the LambdaTest Delta Award
 - International conference speaker: 34+ talks across 12 countries and 16 cities, plus 18 virtual conferences
 - Featured in The New Stack, DevOps.com, Security Boulevard, Techstrong AI, and The Indian Express
