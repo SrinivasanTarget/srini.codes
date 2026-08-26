@@ -1,6 +1,6 @@
 // Post-build step: append blog post URLs (fetched from Hashnode) to the
 // sitemap that Vite copied into build/. Network failures must never break
-// the build — the static sitemap is a complete fallback on its own.
+// the build; the static sitemap is a complete fallback on its own.
 import { readFileSync, writeFileSync, existsSync } from 'fs'
 
 const SITE_URL = 'https://srini.codes'

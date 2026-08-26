@@ -368,7 +368,7 @@ const ModernPortfolio = () => {
                 to='/book'
                 className='nav-link font-medium'
               >
-                Book
+                Books
               </Link>
             </div>
             {/* Mobile menu button */}
@@ -450,7 +450,7 @@ const ModernPortfolio = () => {
               onClick={() => setMobileMenuOpen(false)}
               className='mobile-nav-link block w-full text-left py-3 px-4 text-white rounded-lg transition-all duration-200 touch-target'
             >
-              Book
+              Books
             </Link>
           </div>
         </div>
@@ -564,6 +564,14 @@ const ModernPortfolio = () => {
               used by millions globally. Recently, I pioneered{' '}
               <span className='modern-highlight'>Model Context Protocol (MCP) servers</span> for
               mobile automation, bridging AI and testing workflows.
+            </p>
+            <p className='text-base sm:text-lg lg:text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
+              I&apos;ve written two <span className='modern-highlight'>Apress</span> books on that
+              protocol: <Link to='/book#the-mcp-standard' className='modern-highlight underline decoration-white/20 underline-offset-4 hover:decoration-white/60 transition-colors'>The MCP Standard</Link>{' '}
+              on building universal AI tools with MCP, and{' '}
+              <Link to='/book#breaking-the-model-context-protocol' className='modern-highlight underline decoration-white/20 underline-offset-4 hover:decoration-white/60 transition-colors'>Breaking the Model Context Protocol</Link>{' '}
+              on the attacks and defenses that decide whether MCP-powered systems hold up in
+              production.
             </p>
             <p className='text-base sm:text-lg lg:text-xl text-gray-200 leading-relaxed font-medium'>
               As an <span className='modern-highlight'>international speaker</span>, I&apos;ve
@@ -684,7 +692,7 @@ const ModernPortfolio = () => {
                     <p className='text-gray-300 text-sm mb-4 leading-relaxed'>
                       Joined <span className='text-white font-medium'>Rebecca Parsons</span> and{' '}
                       <span className='text-white font-medium'>Scott Shaw</span> to discuss building and
-                      maintaining <span className='modern-highlight'>AppiumTestDistribution</span> — from parallel
+                      maintaining <span className='modern-highlight'>AppiumTestDistribution</span>, from parallel
                       mobile test execution to winning the{' '}
                       <span className='modern-highlight'>LambdaTest Delta Award</span>.
                     </p>
