@@ -6,7 +6,8 @@ Srinivasan Sekar is a software engineer, open source advocate, and technical aut
 
 ## About
 
-- Author of "The MCP Standard" (Apress, February 2026) — a developer's guide to building universal AI tools with the Model Context Protocol
+- Author of "The MCP Standard" (Apress, February 2026): a developer's guide to building universal AI tools with the Model Context Protocol
+- Co-author of "Breaking the Model Context Protocol: Agentic Attacks and Defenses for MCP-Powered AI Systems" (Apress, August 2026), written with Thejes Sree Satheesh Kumar, covering MCP trust boundaries, tool poisoning, confused-deputy chains, and the defenses that hold up in production
 - Creator of AppiumTestDistribution, winner of the LambdaTest Delta Award
 - International conference speaker: 34+ talks across 12 countries and 16 cities, plus 18 virtual conferences
 - Featured in The New Stack, DevOps.com, Security Boulevard, Techstrong AI, and The Indian Express
@@ -14,7 +15,7 @@ Srinivasan Sekar is a software engineer, open source advocate, and technical aut
 ## Pages
 
 - [Home](https://srini.codes/): Portfolio homepage with projects, talks, podcast, and citations
-- [Book](https://srini.codes/book): "The MCP Standard" — building universal AI tools with MCP (Apress, ISBN 979-8-8688-2364-0)
+- [Books](https://srini.codes/book): "The MCP Standard", building universal AI tools with MCP (Apress, ISBN 979-8-8688-2364-0); "Breaking the Model Context Protocol", agentic attacks and defenses for MCP-powered AI systems (Apress, ISBN 979-8-8688-2968-0)
 - [Blog](https://srini.codes/blog): Technical articles on AI, MCP, testing, and open source
 - [Conferences](https://srini.codes/conferences): Speaking history with interactive globe visualization
 - [Presentations](https://srini.codes/presentations): Workshop slides and presentation decks from conferences
@@ -23,6 +24,7 @@ Srinivasan Sekar is a software engineer, open source advocate, and technical aut
 ## Key Topics
 
 - Model Context Protocol (MCP)
+- MCP Security and Agentic AI Red Teaming
 - AI Agents and Autonomous Testing
 - Mobile Test Automation (Appium)
 - Open Source Software
@@ -31,30 +33,30 @@ Srinivasan Sekar is a software engineer, open source advocate, and technical aut
 
 ## Selected Conference Talks
 
-- SeleniumConf 2017, Austin (USA): Dockerize Appium Tests — Test Inside Containers
-- FOSDEM 2017, Brussels (Belgium): Future of Mobile Automation Testing — Appium Steals It
+- SeleniumConf 2017, Austin (USA): Dockerize Appium Tests (Test Inside Containers)
+- FOSDEM 2017, Brussels (Belgium): Future of Mobile Automation Testing (Appium Steals It)
 - SeleniumConf 2018, Barcelona (Spain): Next Level Front-end Testing with DevTools & WebDriver
-- SeleniumConf & AppiumConf 2018, Bangalore (India): Code Once Test Anywhere — Appium Device Cloud using ATD
+- SeleniumConf & AppiumConf 2018, Bangalore (India): Code Once Test Anywhere (Appium Device Cloud using ATD)
 - Quest for Quality 2018, Dublin (Ireland): On Demand Private Appium Device Cloud using ATD
 - Belgrade Test Conference 2018, Belgrade (Serbia): On Demand Private Appium Device Cloud
 - AppiumConf 2019, London (UK): Life Cycle of an Appium Command
 - SLASSCOM 2019, Colombo (Sri Lanka): Shift Left for Better End-User Experience
 - SeleniumConf 2023, Chicago (USA): Clean Code Practices for Test Automation
 - XConf 2023, Singapore: Addressing Unconscious Bias & Ethics in Testing
-- HUSTEF 2024, Budapest (Hungary): Mobile App Crashes in Production — Lessons Learned
+- HUSTEF 2024, Budapest (Hungary): Mobile App Crashes in Production (Lessons Learned)
 - Nordic Testing Days 2025, Tallinn (Estonia): Advanced Appium Workshop
-- TestCon Europe 2025, Vilnius (Lithuania): Testing Agentic AI Applications — Beyond Traditional QA
+- TestCon Europe 2025, Vilnius (Lithuania): Testing Agentic AI Applications (Beyond Traditional QA)
 - SeleniumConf & AppiumConf 2025, Valencia (Spain): Advanced Appium 2.0 Workshop
-- TechXpresso 2026, Chennai (India): Testing Autonomous AI Agents — Beyond Traditional QA
-- NullCon 2026, Goa (India): Hacking with AI — MCP for Security Testing
+- TechXpresso 2026, Chennai (India): Testing Autonomous AI Agents (Beyond Traditional QA)
+- NullCon 2026, Goa (India): Hacking with AI (MCP for Security Testing)
 
 ## Citations & Press
 
-- "Better Context Will Always Beat a Better Model" — The New Stack
-- "Ready or Not, AI Is Rewriting the Rules for Software Testing" — DevOps.com
-- "The CISO's Guide to Model Context Protocol (MCP)" — Security Boulevard
-- "It's Time to Build APIs for AI, Not Just for Developers" — The New Stack
-- "Architecting for Agent-to-Agent Communication and AI Protocols" — Techstrong AI
+- "Better Context Will Always Beat a Better Model" (The New Stack)
+- "Ready or Not, AI Is Rewriting the Rules for Software Testing" (DevOps.com)
+- "The CISO's Guide to Model Context Protocol (MCP)" (Security Boulevard)
+- "It's Time to Build APIs for AI, Not Just for Developers" (The New Stack)
+- "Architecting for Agent-to-Agent Communication and AI Protocols" (Techstrong AI)
 - Interview with The Indian Express (March 2026)
 
 ## Open Source Projects

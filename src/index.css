@@ -182,7 +182,7 @@ a:focus-visible {
   transform: translateY(-4px) scale(1.02);
 }
 
-/* Frosted glass section background — Apple style */
+/* Frosted glass section background : Apple style */
 .glass-section {
   background: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(60px) saturate(150%);
@@ -191,7 +191,7 @@ a:focus-visible {
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-/* Glass pill/badge — Apple tag style */
+/* Glass pill/badge : Apple tag style */
 .glass-pill {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px) saturate(180%);
@@ -206,7 +206,7 @@ a:focus-visible {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Navigation glass effect — Apple menu bar */
+/* Navigation glass effect : Apple menu bar */
 .glass-nav {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(40px) saturate(200%);

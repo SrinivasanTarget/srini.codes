@@ -3,7 +3,7 @@
 // Graph, Twitter) baked in, so crawlers that don't execute JavaScript see
 // the right tags. Static hosts serve build/<route>/index.html for /<route>
 // before any SPA fallback applies. Route metadata comes from
-// src/seo/routes.json — the same source the useSEO hook uses at runtime.
+// src/seo/routes.json, the same source the useSEO hook uses at runtime.
 import { readFileSync, writeFileSync, mkdirSync } from 'fs'
 import { join } from 'path'
 
