@@ -194,6 +194,8 @@ const CitationCarousel: React.FC = () => {
                 <img
                   src={citation.thumbnail}
                   alt={citation.title}
+                  loading='lazy'
+                  decoding='async'
                   className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500'
                 />
               ) : (
@@ -489,7 +491,7 @@ const ModernPortfolio = () => {
 
               <div className='mb-6'>
                 <span className='text-white font-mono text-base sm:text-lg inline-flex items-center gap-2'>
-                  Director of Engineering at <img src={testmuLogo} alt='TestMu AI' className='inline h-4 sm:h-5' />
+                  Director of Engineering at <img src={testmuLogo} alt='TestMu AI' width={104} height={20} className='inline h-4 sm:h-5' />
                 </span>
               </div>
 
@@ -550,7 +552,7 @@ const ModernPortfolio = () => {
           <div className='max-w-4xl mx-auto glass-card p-6 sm:p-8 lg:p-10 rounded-2xl section-animate'>
             <p className='text-base sm:text-lg lg:text-xl text-gray-200 mb-6 leading-relaxed font-medium'>
               I&apos;m a passionate technologist and leader in software testing and automation. As{' '}
-              <span className='modern-highlight inline-flex items-center gap-1.5'>Director of Engineering at <img src={testmuLogo} alt='TestMu AI' className='inline h-4' /></span>, I
+              <span className='modern-highlight inline-flex items-center gap-1.5'>Director of Engineering at <img src={testmuLogo} alt='TestMu AI' width={83} height={16} className='inline h-4' /></span>, I
               drive innovation in cloud-based testing platforms serving millions of developers
               worldwide.
             </p>
@@ -672,6 +674,10 @@ const ModernPortfolio = () => {
                       <img
                         src={micImage}
                         alt='Podcast microphone'
+                        width={256}
+                        height={256}
+                        loading='lazy'
+                        decoding='async'
                         className='w-24 h-24 sm:w-32 sm:h-32 object-contain drop-shadow-[0_0_25px_rgba(212,149,106,0.3)]'
                       />
                     </div>
