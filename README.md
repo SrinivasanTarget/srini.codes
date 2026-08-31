@@ -26,7 +26,7 @@ This is my personal portfolio website, built with modern web technologies to sho
 - **Modern Portfolio Interface**: Clean, responsive design with custom animations and glassmorphism effects
 - **Blog Integration**: Automatically fetches and displays blog posts from Hashnode
 - **Interactive Elements**: Custom cursor, tilt effects, and smooth animations
-- **Video Backgrounds**: Dynamic hero section powered by Remotion
+- **Animated Starfield**: CSS-driven hero background, no JavaScript at runtime
 - **Contact Page**: Easy way to get in touch
 - **Analytics**: Integrated with Vercel Analytics and Plausible Analytics for privacy-friendly tracking
 - **Performance Optimized**: Uses Partytown for off-main-thread script execution
@@ -49,7 +49,7 @@ This is my personal portfolio website, built with modern web technologies to sho
 
 ### Special Features
 
-- **Remotion 4.0** - Programmatic video generation for animated backgrounds
+- **three.js / react-globe.gl** - WebGL globe on the speaker map, loaded on demand
 - **Partytown 0.8** - Web worker for third-party scripts
 - **React Twitter Widgets** - Embedded Twitter content
 
@@ -132,10 +132,8 @@ srini.codes/
 ├── src/
 │   ├── components/       # Reusable UI components
 │   ├── screens/          # Page-level components
-│   ├── containers/       # Layout components
 │   ├── portfolio/        # Data files (projects, blogs, conferences)
 │   ├── services/         # API integration services
-│   ├── remotion/         # Video animation components
 │   ├── assets/           # Images and static assets
 │   ├── App.tsx           # Main application component
 │   └── main.tsx          # Application entry point
