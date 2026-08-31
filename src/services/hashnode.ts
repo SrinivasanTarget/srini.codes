@@ -1,4 +1,5 @@
-export interface BlogPost {
+/** A post as it appears in list views: no body, just card metadata. */
+export interface BlogPostSummary {
   id: string
   title: string
   brief: string
@@ -13,6 +14,10 @@ export interface BlogPost {
   }>
   readTimeInMinutes: number
   url: string
+}
+
+/** A single post with its body, fetched only when a post is opened. */
+export interface BlogPost extends BlogPostSummary {
   content: {
     html: string
     markdown: string
@@ -24,7 +29,7 @@ export interface HashnodeResponse {
     publication: {
       posts: {
         edges: Array<{
-          node: BlogPost
+          node: BlogPostSummary
         }>
         pageInfo: {
           hasNextPage: boolean
@@ -40,7 +45,10 @@ const HASHNODE_API_URL = 'https://gql.hashnode.com/'
 // Replace with your actual Hashnode publication host
 const PUBLICATION_HOST = 'blog.srini.codes'
 
-const POSTS_QUERY = `
+// List views render title, brief, cover and tags only. Asking for
+// `content` here pulls every post's full body as both HTML and markdown,
+// which is orders of magnitude larger than everything actually rendered.
+const POSTS_LIST_QUERY = `
   query GetPosts($host: String!, $first: Int!, $after: String) {
     publication(host: $host) {
       posts(first: $first, after: $after) {
@@ -60,10 +68,6 @@ const POSTS_QUERY = `
             }
             readTimeInMinutes
             url
-            content {
-              html
-              markdown
-            }
           }
         }
         pageInfo {
@@ -134,11 +138,11 @@ export class HashnodeService {
   }
 
   static async getPosts(first = 10, after?: string): Promise<{
-    posts: BlogPost[]
+    posts: BlogPostSummary[]
     hasNextPage: boolean
     endCursor: string
   }> {
-    const data: HashnodeResponse = await this.makeRequest(POSTS_QUERY, {
+    const data: HashnodeResponse = await this.makeRequest(POSTS_LIST_QUERY, {
       host: PUBLICATION_HOST,
       first,
       after,
@@ -163,18 +167,26 @@ export class HashnodeService {
     return data.data.publication.post
   }
 
-  static async getAllPosts(): Promise<BlogPost[]> {
-    let allPosts: BlogPost[] = []
+  /**
+   * Walks the publication's pages. Pagination is inherently serial (each page
+   * needs the previous cursor), so `limit` lets callers that only need the
+   * first few posts stop after a single request instead of fetching the
+   * entire archive.
+   */
+  static async getAllPosts(limit?: number): Promise<BlogPostSummary[]> {
+    const allPosts: BlogPostSummary[] = []
+    const pageSize = limit ? Math.min(limit, 20) : 20
     let hasNextPage = true
     let after: string | undefined
 
     while (hasNextPage) {
-      const result = await this.getPosts(20, after)
-      allPosts = [...allPosts, ...result.posts]
+      const result = await this.getPosts(pageSize, after)
+      allPosts.push(...result.posts)
+      if (limit && allPosts.length >= limit) break
       hasNextPage = result.hasNextPage
       after = result.endCursor
     }
 
-    return allPosts
+    return limit ? allPosts.slice(0, limit) : allPosts
   }
 }
