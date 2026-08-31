@@ -1,5 +1,5 @@
 import breakingMcpCover from '../assets/images/breaking-mcp-book.webp'
-import mcpStandardCover from '../assets/images/MCP Book.png'
+import mcpStandardCover from '../assets/images/MCP-Book.webp'
 
 export interface BookLink {
   label: string
