@@ -27,6 +27,19 @@ export default defineConfig({
   plugins: [react(), preloadHero()],
   build: {
     outDir: 'build',
+    rollupOptions: {
+      output: {
+        // React and the router change only on dependency upgrades, while app
+        // code changes on every content edit. Splitting them keeps the larger,
+        // stabler half cached across deploys. Matched by path rather than by
+        // package name so deep entries like react-dom/client are included.
+        manualChunks(id: string) {
+          if (/node_modules\/(react|react-dom|scheduler|react-router|react-router-dom)\//.test(id)) {
+            return 'react-vendor'
+          }
+        },
+      },
+    },
   },
   css: { postcss },
 })
