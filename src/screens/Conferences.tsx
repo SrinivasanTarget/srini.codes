@@ -1,8 +1,21 @@
-import { useEffect, useState, useRef, useCallback, useMemo } from 'react'
+import { useEffect, useState, useRef, useCallback, lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
-import Globe from 'react-globe.gl'
-import * as THREE from 'three'
 import { useSEO, routeSEO } from '../hooks/useSEO'
+import {
+  CONFERENCES,
+  Conference,
+  HOME,
+  TIMELINE,
+  VIRTUAL_CONFERENCES,
+  VIRTUAL_YEARS,
+  prefersReducedMotion,
+} from './conferences/data'
+import type { SpeakerGlobeHandle } from './conferences/SpeakerGlobe'
+
+// three.js and react-globe.gl are ~1.2MB of the route's JavaScript. Loading
+// them lazily lets the heading, stats, timeline and talk cards paint straight
+// away instead of sitting behind a blank screen until WebGL is ready.
+const SpeakerGlobe = lazy(() => import('./conferences/SpeakerGlobe'))
 
 const styles = `
   @keyframes fade-in-up {
@@ -26,234 +39,6 @@ const styles = `
     }
   }
 `
-
-// Conference data with coordinates
-const CONFERENCES = [
-  { city: 'London', country: 'UK', lat: 51.5074, lng: -0.1278, conf: 'AppiumConf', year: '2019', talk: 'Life Cycle of an Appium Command' },
-  { city: 'Austin', country: 'USA', lat: 30.2672, lng: -97.7431, conf: 'SeleniumConf', year: '2017', talk: 'Dockerize Appium Tests: Test Inside Containers', video: 'https://youtu.be/jGW6ycW_tTQ' },
-  { city: 'Chicago', country: 'USA', lat: 41.8781, lng: -87.6298, conf: 'SeleniumConf', year: '2023', talk: 'Clean Code Practices for Test Automation' },
-  { city: 'Colombo', country: 'Sri Lanka', lat: 6.9271, lng: 79.8612, conf: 'SLASSCOM', year: '2019', talk: 'Shift Left for Better End-User Experience' },
-  { city: 'Dublin', country: 'Ireland', lat: 53.3498, lng: -6.2603, conf: 'Quest for Quality', year: '2018', talk: 'On Demand Private Appium Device Cloud using ATD' },
-  { city: 'Tallinn', country: 'Estonia', lat: 59.4370, lng: 24.7536, conf: 'Nordic Testing Days', year: '2025', talk: 'Advanced Appium Workshop' },
-  { city: 'Barcelona', country: 'Spain', lat: 41.3851, lng: 2.1734, conf: 'SeleniumConf', year: '2018', talk: 'Next Level Front-end Testing with DevTools & WebDriver' },
-  { city: 'Belgrade', country: 'Serbia', lat: 44.7866, lng: 20.4489, conf: 'Belgrade Test Conference', year: '2018', talk: 'On Demand Private Appium Device Cloud' },
-  { city: 'Vilnius', country: 'Lithuania', lat: 54.6872, lng: 25.2797, conf: 'TestCon Europe', year: '2025', talk: 'Testing Agentic AI Applications: Beyond Traditional QA' },
-  { city: 'Budapest', country: 'Hungary', lat: 47.4979, lng: 19.0402, conf: 'HUSTEF', year: '2024', talk: 'Mobile App Crashes in Production: Lessons Learned' },
-  { city: 'Singapore', country: 'Singapore', lat: 1.3521, lng: 103.8198, conf: 'XConf', year: '2023', talk: 'Addressing Unconscious Bias & Ethics in Testing', video: 'https://youtu.be/QMr30Za_-vM' },
-  { city: 'Brussels', country: 'Belgium', lat: 50.8503, lng: 4.3517, conf: 'FOSDEM', year: '2017', talk: 'Future of Mobile Automation Testing, Appium Steals It', video: 'https://video.fosdem.org/2017/H.2213/mobile_testing_with_appium.mp4' },
-  { city: 'Bangalore', country: 'India', lat: 12.9716, lng: 77.5946, conf: 'SeleniumConf & AppiumConf', year: '2018', talk: 'Code Once Test Anywhere: Appium Device Cloud using ATD' },
-  { city: 'Chennai', country: 'India', lat: 13.0827, lng: 80.2707, conf: 'TechXpresso - IDFC First Bank', year: '2026', talk: 'Testing Autonomous AI Agents: Beyond Traditional QA' },
-  { city: 'Goa', country: 'India', lat: 15.2993, lng: 74.1240, conf: 'NullCon', year: '2026', talk: 'Hacking with AI: MCP for Security Testing' },
-  { city: 'Valencia', country: 'Spain', lat: 39.4699, lng: -0.3763, conf: 'SeleniumConf & AppiumConf', year: '2025', talk: 'Advanced Appium 2.0 Workshop', video: 'https://youtu.be/lugEm6j1Nl8' },
-]
-
-// Online/virtual conferences
-const VIRTUAL_CONFERENCES = [
-  { conf: 'Automation Guild', year: '2026', talk: 'Testing Autonomous AI Agents' },
-  { conf: 'TestMu Conf', year: '2025', talk: 'Mastering Appium 3 & QA for AI Agents' },
-  { conf: 'Spartans Summit', year: '2025', talk: 'Building & Testing AI-Agent Powered LLM Apps', video: 'https://www.youtube.com/watch?v=9mHfvGN7FwU' },
-  { conf: 'SeleniumConf', year: '2024', talk: 'Harnessing Open-Source: Building a Device Farm' },
-  { conf: 'AppiumConf', year: '2024', talk: 'The Performance Paradox: Mobile App Optimisation' },
-  { conf: 'Spartans Summit', year: '2024', talk: 'Web Performance Metrics for Testers', video: 'https://www.youtube.com/watch?v=uo_lX1pUv9o' },
-  { conf: 'TestMu Conf', year: '2023', talk: 'Building Appium 2.0 Plugin Live', video: 'https://www.youtube.com/watch?v=b6yWXfLpazc' },
-  { conf: 'SeleniumConf', year: '2022', talk: 'Build Your Own Appium 2.0 Driver' },
-  { conf: 'TestMu Conf', year: '2022', talk: 'Appium: Endgame & What\'s Next?' },
-  { conf: 'Automation Guild', year: '2022', talk: 'Testing Containers & k8s Manifests' },
-  { conf: 'Worqference', year: '2022', talk: 'Automate Mobile Gestures Using Appium' },
-  { conf: 'Agile India', year: '2022', talk: 'Speed Matters: Client Side Performance' },
-  { conf: 'VodQA', year: '2022', talk: 'Build Appium 2.0 Plugins Workshop' },
-  { conf: 'AppiumConf', year: '2021', talk: 'Build Your Own Appium Plugin' },
-  { conf: 'Agile India', year: '2021', talk: 'Testing Service Mesh & k8s Manifests' },
-  { conf: 'Automation Guild', year: '2021', talk: 'Consumer Driven Contracts' },
-  { conf: 'Future of Testing: Mobile', year: '2021', talk: 'Appium 2.0: What\'s Next' },
-  { conf: 'SeleniumConf', year: '2020', talk: 'Advanced Appium Workshop' },
-]
-
-// Home base (India - Bangalore)
-const HOME = { city: 'Bangalore', country: 'India', lat: 12.9716, lng: 77.5946 }
-
-// Chips and card navigation walk the talks in chronological order
-const TIMELINE = [...CONFERENCES].sort(
-  (a, b) => Number(a.year) - Number(b.year) || a.city.localeCompare(b.city)
-)
-
-const VIRTUAL_YEARS = [...new Set(VIRTUAL_CONFERENCES.map(vc => vc.year))].sort(
-  (a, b) => Number(b) - Number(a)
-)
-
-// Generate arcs from home to each conference
-const ROUTE_ARCS = CONFERENCES.map((conf, i) => ({
-  startLat: HOME.lat,
-  startLng: HOME.lng,
-  endLat: conf.lat,
-  endLng: conf.lng,
-  color: [`rgba(245, 158, 11, 0.8)`, `rgba(234, 179, 8, 0.4)`],
-  conf: conf.conf,
-  city: conf.city,
-  index: i,
-}))
-
-// Flight animation: a one-shot comet travels the great circle between stops,
-// paced so the dash head lands exactly when the camera arrives. The dash
-// geometry (0.4 dash / 2 gap / 1 initial gap over one FLIGHT_TIME cycle)
-// makes a single pulse traverse the arc in FLIGHT_TIME and fully exit by 2x.
-const FLIGHT_TIME = 1500
-const FLIGHT_ARC_REL_LEN = 0.4
-const FLIGHT_COLOR = ['rgba(232, 184, 152, 0)', 'rgba(255, 221, 191, 0.8)', '#ffffff']
-const RING_COLOR = (t: number) => `rgba(232, 184, 152, ${Math.sqrt(Math.max(0, 1 - t))})`
-
-const prefersReducedMotion = () =>
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-// A sleek little jet that rides each flight arc, nose along +Z so
-// Object3D.lookAt can steer it. Smooth lathed fuselage, swept tapered
-// wings with winglets, swept tail with a copper livery fin, and twin
-// underwing nacelles; cloned per flight from this shared template.
-let planeTemplate: THREE.Group | null = null
-const getPlaneTemplate = () => {
-  if (planeTemplate) return planeTemplate
-
-  const hull = new THREE.MeshStandardMaterial({
-    color: 0xf8f5f0,
-    metalness: 0.4,
-    roughness: 0.35,
-    emissive: 0xd4956a,
-    emissiveIntensity: 0.25,
-    side: THREE.DoubleSide,
-  })
-  const copper = new THREE.MeshStandardMaterial({
-    color: 0xe8b898,
-    metalness: 0.6,
-    roughness: 0.3,
-    emissive: 0xd4956a,
-    emissiveIntensity: 0.5,
-    side: THREE.DoubleSide,
-  })
-
-  const g = new THREE.Group()
-
-  // Fuselage: smooth teardrop profile lathed around the length axis
-  const profile = [
-    [0.0, 1.9],
-    [0.13, 1.62],
-    [0.24, 1.15],
-    [0.31, 0.45],
-    [0.31, -0.35],
-    [0.24, -1.05],
-    [0.12, -1.6],
-    [0.05, -1.85],
-    [0.0, -1.9],
-  ].map(([r, z]) => new THREE.Vector2(r, z))
-  const fuselage = new THREE.Mesh(new THREE.LatheGeometry(profile, 24).rotateX(Math.PI / 2), hull)
-
-  // Swept tapered lifting surface, drawn in plan (span +X, forward +Y),
-  // then laid flat so forward maps to +Z
-  const surfaceGeo = (span: number, rootChord: number, tipChord: number, sweep: number) => {
-    const shape = new THREE.Shape()
-    shape.moveTo(0, rootChord * 0.55)
-    shape.lineTo(span, rootChord * 0.55 - sweep)
-    shape.lineTo(span, rootChord * 0.55 - sweep - tipChord)
-    shape.lineTo(0, -rootChord * 0.45)
-    shape.closePath()
-    return new THREE.ExtrudeGeometry(shape, { depth: 0.06, bevelEnabled: false }).rotateX(Math.PI / 2)
-  }
-
-  const wingR = new THREE.Mesh(surfaceGeo(1.9, 1.0, 0.28, 1.05), hull)
-  wingR.position.set(0.04, -0.06, 0.35)
-  const wingL = wingR.clone()
-  wingL.scale.x = -1
-
-  const wingletGeo = new THREE.BoxGeometry(0.05, 0.4, 0.26)
-  const wingletR = new THREE.Mesh(wingletGeo, copper)
-  wingletR.position.set(1.92, 0.12, -0.35)
-  wingletR.rotation.z = -0.35
-  const wingletL = wingletR.clone()
-  wingletL.position.x = -1.92
-  wingletL.rotation.z = 0.35
-
-  const stabR = new THREE.Mesh(surfaceGeo(0.75, 0.5, 0.18, 0.45), hull)
-  stabR.position.set(0.03, 0.02, -1.45)
-  const stabL = stabR.clone()
-  stabL.scale.x = -1
-
-  // Copper tail fin: same plan shape stood upright (span up, chord along Z)
-  const finGeo = surfaceGeo(0.85, 0.75, 0.3, 0.55)
-  finGeo.rotateX(-Math.PI / 2) // undo the flat lay: back to plan (span +X, forward +Y)
-  finGeo.applyMatrix4(
-    new THREE.Matrix4().makeBasis(
-      new THREE.Vector3(0, 1, 0),
-      new THREE.Vector3(0, 0, 1),
-      new THREE.Vector3(1, 0, 0)
-    )
-  )
-  const fin = new THREE.Mesh(finGeo, copper)
-  fin.position.set(0, 0.1, -1.5)
-
-  // Twin underwing engine nacelles
-  const nacelleGeo = new THREE.CylinderGeometry(0.11, 0.13, 0.55, 12).rotateX(Math.PI / 2)
-  const nacelleR = new THREE.Mesh(nacelleGeo, copper)
-  nacelleR.position.set(0.65, -0.22, 0.45)
-  const nacelleL = nacelleR.clone()
-  nacelleL.position.x = -0.65
-
-  g.add(fuselage, wingR, wingL, wingletR, wingletL, stabR, stabL, fin, nacelleR, nacelleL)
-
-  // Soft additive halo so the plane reads clearly over any part of the globe
-  const canvas = document.createElement('canvas')
-  canvas.width = canvas.height = 64
-  const ctx = canvas.getContext('2d')
-  if (ctx) {
-    const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32)
-    grad.addColorStop(0, 'rgba(255, 242, 230, 0.9)')
-    grad.addColorStop(0.4, 'rgba(232, 184, 152, 0.35)')
-    grad.addColorStop(1, 'rgba(232, 184, 152, 0)')
-    ctx.fillStyle = grad
-    ctx.fillRect(0, 0, 64, 64)
-    const halo = new THREE.Sprite(
-      new THREE.SpriteMaterial({
-        map: new THREE.CanvasTexture(canvas),
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-        transparent: true,
-      })
-    )
-    halo.scale.setScalar(4.5)
-    g.add(halo)
-  }
-
-  planeTemplate = g
-  return planeTemplate
-}
-
-const latLngToUnit = (lat: number, lng: number) => {
-  const phi = (lat * Math.PI) / 180
-  const theta = (lng * Math.PI) / 180
-  return new THREE.Vector3(Math.cos(phi) * Math.cos(theta), Math.cos(phi) * Math.sin(theta), Math.sin(phi))
-}
-
-const angularDistance = (a: { lat: number; lng: number }, b: { lat: number; lng: number }) =>
-  latLngToUnit(a.lat, a.lng).angleTo(latLngToUnit(b.lat, b.lng))
-
-const slerpLatLng = (a: { lat: number; lng: number }, b: { lat: number; lng: number }, t: number) => {
-  const u = latLngToUnit(a.lat, a.lng)
-  const v = latLngToUnit(b.lat, b.lng)
-  const angle = u.angleTo(v)
-  if (angle === 0) return { lat: a.lat, lng: a.lng }
-  const w = u
-    .multiplyScalar(Math.sin((1 - t) * angle))
-    .add(v.multiplyScalar(Math.sin(t * angle)))
-    .divideScalar(Math.sin(angle))
-  return {
-    lat: (Math.asin(w.z) * 180) / Math.PI,
-    lng: (Math.atan2(w.y, w.x) * 180) / Math.PI,
-  }
-}
-
-// Points for all locations
-const pointsData = [
-  { ...HOME, size: 0.8, color: '#10b981', label: 'Home Base' },
-  ...CONFERENCES.map(c => ({ ...c, size: 0.5, color: '#f59e0b', label: c.conf }))
-]
 
 const CountUp = ({ value, suffix = '' }: { value: number; suffix?: string }) => {
   const [display, setDisplay] = useState(0)
@@ -288,149 +73,19 @@ const Conferences = () => {
 
   const [isLoaded, setIsLoaded] = useState(false)
   const [globeReady, setGlobeReady] = useState(false)
-  const [selectedConf, setSelectedConf] = useState<typeof CONFERENCES[0] | null>(null)
+  const [selectedConf, setSelectedConf] = useState<Conference | null>(null)
   const [showVirtual, setShowVirtual] = useState(false)
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
   const [showHint, setShowHint] = useState(false)
-  const [flightArcs, setFlightArcs] = useState<any[]>([])
-  const [rings, setRings] = useState<any[]>([])
-  const globeRef = useRef<any>(null)
+  const globeRef = useRef<SpeakerGlobeHandle>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  const lastLocationRef = useRef<{ lat: number; lng: number }>(HOME)
-  const flightIdRef = useRef(0)
-  const timeoutsRef = useRef<Set<ReturnType<typeof setTimeout>>>(new Set())
 
-  const schedule = useCallback((fn: () => void, ms: number) => {
-    const id = setTimeout(() => {
-      timeoutsRef.current.delete(id)
-      fn()
-    }, ms)
-    timeoutsRef.current.add(id)
+  const travelTo = useCallback((dest: { lat: number; lng: number }, altitude = 1.5) => {
+    globeRef.current?.travelTo(dest, altitude)
   }, [])
-
-  useEffect(() => {
-    const timeouts = timeoutsRef.current
-    return () => timeouts.forEach(clearTimeout)
-  }, [])
-
-  const planesRef = useRef<Map<number, { obj: THREE.Object3D; curve: THREE.CubicBezierCurve3; start: number }>>(
-    new Map()
-  )
-  const planeRafRef = useRef(0)
-
-  const stepPlanes = useCallback(() => {
-    const planes = planesRef.current
-    const now = performance.now()
-    planes.forEach((flight, id) => {
-      const t = (now - flight.start) / FLIGHT_TIME
-      if (t >= 1) {
-        flight.obj.parent?.remove(flight.obj)
-        planes.delete(id)
-        return
-      }
-      const pos = flight.curve.getPointAt(Math.max(0, t))
-      const tangent = flight.curve.getTangentAt(Math.max(0, t))
-      flight.obj.position.copy(pos)
-      flight.obj.up.copy(pos.clone().normalize())
-      flight.obj.lookAt(pos.clone().add(tangent))
-      // Grow through climb-out, shrink into the landing ripple
-      const phase = t < 0.12 ? 0.5 + (0.5 * t) / 0.12 : t > 0.88 ? 0.5 + (0.5 * (1 - t)) / 0.12 : 1
-      flight.obj.scale.setScalar(3 * phase)
-    })
-    planeRafRef.current = planes.size ? requestAnimationFrame(stepPlanes) : 0
-  }, [])
-
-  useEffect(() => {
-    const planes = planesRef.current
-    return () => {
-      if (planeRafRef.current) cancelAnimationFrame(planeRafRef.current)
-      planes.forEach(f => f.obj.parent?.remove(f.obj))
-      planes.clear()
-    }
-  }, [])
-
-  // Rebuild the exact cubic bezier three-globe uses for the flight arc, so
-  // the plane rides precisely on the drawn line (control points at 25%/75%
-  // of the great circle, lifted to 1.5x the arc's peak altitude).
-  const addPlane = useCallback(
-    (from: { lat: number; lng: number }, to: { lat: number; lng: number }, id: number) => {
-      const globe = globeRef.current
-      if (!globe) return
-      const peakAlt = (angularDistance(from, to) / 2) * 0.6
-      const cpAlt = peakAlt * 1.5
-      const point = (lat: number, lng: number, alt: number) => {
-        const { x, y, z } = globe.getCoords(lat, lng, alt)
-        return new THREE.Vector3(x, y, z)
-      }
-      const m1 = slerpLatLng(from, to, 0.25)
-      const m2 = slerpLatLng(from, to, 0.75)
-      const curve = new THREE.CubicBezierCurve3(
-        point(from.lat, from.lng, 0),
-        point(m1.lat, m1.lng, cpAlt),
-        point(m2.lat, m2.lng, cpAlt),
-        point(to.lat, to.lng, 0)
-      )
-      const obj = getPlaneTemplate().clone()
-      obj.scale.setScalar(3)
-      globe.scene().add(obj)
-      planesRef.current.set(id, { obj, curve, start: performance.now() })
-      if (!planeRafRef.current) planeRafRef.current = requestAnimationFrame(stepPlanes)
-    },
-    [stepPlanes]
-  )
-
-  const emitRing = useCallback(
-    (lat: number, lng: number, key: string) => {
-      const ring = { lat, lng, key }
-      setRings(prev => [...prev, ring])
-      schedule(() => setRings(prev => prev.filter(r => r !== ring)), FLIGHT_TIME * FLIGHT_ARC_REL_LEN)
-    },
-    [schedule]
-  )
-
-  const launchFlight = useCallback(
-    (
-      from: { lat: number; lng: number },
-      to: { lat: number; lng: number },
-      { takeoffRing = true } = {}
-    ) => {
-      if (prefersReducedMotion()) return false
-      if (from.lat === to.lat && from.lng === to.lng) return false
-      const id = ++flightIdRef.current
-      const arc = {
-        id,
-        isFlight: true,
-        startLat: from.lat,
-        startLng: from.lng,
-        endLat: to.lat,
-        endLng: to.lng,
-        color: FLIGHT_COLOR,
-      }
-      setFlightArcs(prev => [...prev, arc])
-      schedule(() => setFlightArcs(prev => prev.filter(a => a.id !== id)), FLIGHT_TIME * 2)
-      addPlane(from, to, id)
-      if (takeoffRing) emitRing(from.lat, from.lng, `takeoff-${id}`)
-      schedule(() => emitRing(to.lat, to.lng, `landing-${id}`), FLIGHT_TIME)
-      return true
-    },
-    [schedule, emitRing, addPlane]
-  )
-
-  const travelTo = useCallback(
-    (dest: { lat: number; lng: number }, altitude = 1.5) => {
-      const from = lastLocationRef.current
-      const flew = launchFlight(from, dest)
-      lastLocationRef.current = dest
-      if (globeRef.current) {
-        const duration = prefersReducedMotion() ? 0 : flew ? FLIGHT_TIME : 1000
-        globeRef.current.pointOfView({ lat: dest.lat, lng: dest.lng, altitude }, duration)
-      }
-    },
-    [launchFlight]
-  )
 
   const selectConf = useCallback(
-    (conf: typeof CONFERENCES[0]) => {
+    (conf: Conference) => {
       setSelectedConf(conf)
       setShowVirtual(false)
       travelTo(conf, 1.5)
@@ -441,12 +96,10 @@ const Conferences = () => {
   const showOverview = useCallback(() => {
     setSelectedConf(null)
     setShowVirtual(false)
-    if (globeRef.current) {
-      globeRef.current.pointOfView(
-        { lat: 20, lng: 77, altitude: 2.5 },
-        prefersReducedMotion() ? 0 : 1000
-      )
-    }
+    globeRef.current?.pointOfView(
+      { lat: 20, lng: 77, altitude: 2.5 },
+      prefersReducedMotion() ? 0 : 1000
+    )
   }, [])
 
   const openVirtual = useCallback(() => {
@@ -463,39 +116,6 @@ const Conferences = () => {
       selectConf(next)
     },
     [selectedConf, selectConf]
-  )
-
-  const allArcs = useMemo(() => [...ROUTE_ARCS, ...flightArcs], [flightArcs])
-
-  const isActiveRoute = useCallback(
-    (d: any) => !d.isFlight && !showVirtual && selectedConf?.city === d.city,
-    [selectedConf, showVirtual]
-  )
-
-  const arcColor = useCallback(
-    (d: any) => {
-      if (d.isFlight) return d.color
-      return isActiveRoute(d)
-        ? ['rgba(245, 158, 11, 0.9)', 'rgba(234, 179, 8, 0.55)']
-        : ['rgba(245, 158, 11, 0.16)', 'rgba(234, 179, 8, 0.1)']
-    },
-    [isActiveRoute]
-  )
-  const arcStroke = useCallback(
-    (d: any) => (d.isFlight ? 0.85 : isActiveRoute(d) ? 0.5 : 0.2),
-    [isActiveRoute]
-  )
-  const arcDashLength = useCallback(
-    (d: any) => (d.isFlight ? FLIGHT_ARC_REL_LEN : isActiveRoute(d) ? 0.5 : 1),
-    [isActiveRoute]
-  )
-  const arcDashGap = useCallback(
-    (d: any) => (d.isFlight ? 2 : isActiveRoute(d) ? 0.2 : 0),
-    [isActiveRoute]
-  )
-  const arcDashAnimateTime = useCallback(
-    (d: any) => (d.isFlight ? FLIGHT_TIME : isActiveRoute(d) ? 2000 : 0),
-    [isActiveRoute]
   )
 
   useEffect(() => {
@@ -517,53 +137,11 @@ const Conferences = () => {
   }, [])
 
   useEffect(() => {
-    if (globeRef.current && globeReady) {
-      // Auto-rotate
-      globeRef.current.controls().autoRotate = true
-      globeRef.current.controls().autoRotateSpeed = 0.5
-      globeRef.current.controls().enableZoom = true
-
-      // Set initial view to show India
-      globeRef.current.pointOfView({ lat: 20, lng: 77, altitude: 2.5 }, 1000)
-    }
-  }, [globeReady])
-
-  useEffect(() => {
     if (!globeReady) return
     setShowHint(true)
     const timer = setTimeout(() => setShowHint(false), 6000)
     return () => clearTimeout(timer)
   }, [globeReady])
-
-  // Entrance: once the camera settles, a wave of comets fans out from home
-  // along every route, each landing with a ripple at its city.
-  const introPlayedRef = useRef(false)
-  useEffect(() => {
-    if (!globeReady || introPlayedRef.current) return
-    introPlayedRef.current = true
-    if (prefersReducedMotion()) return
-    schedule(() => {
-      emitRing(HOME.lat, HOME.lng, 'intro-takeoff')
-      ROUTE_ARCS.forEach((arc, i) => {
-        schedule(
-          () => launchFlight(HOME, { lat: arc.endLat, lng: arc.endLng }, { takeoffRing: false }),
-          i * 120
-        )
-      })
-    }, 1200)
-  }, [globeReady, schedule, emitRing, launchFlight])
-
-  const handlePointClick = useCallback((point: any) => {
-    if (point.label === 'Home Base') {
-      const homeConf = CONFERENCES.find(c => c.city === HOME.city)
-      if (homeConf) selectConf(homeConf)
-      return
-    }
-    if (point.conf) {
-      const conf = CONFERENCES.find(c => c.city === point.city)
-      if (conf) selectConf(conf)
-    }
-  }, [selectConf])
 
   const uniqueCountries = new Set(CONFERENCES.map(c => c.country)).size
   const uniqueCities = CONFERENCES.length
@@ -595,42 +173,17 @@ const Conferences = () => {
         className={`fixed inset-0 ${isLoaded ? 'fade-in-up-slow' : ''}`}
       >
         {dimensions.width > 0 && (
-          <Globe
-            ref={globeRef}
-            width={dimensions.width}
-            height={dimensions.height}
-            globeImageUrl='/globe/earth-night.jpg'
-            bumpImageUrl='/globe/earth-topology.png'
-            backgroundImageUrl='/globe/night-sky.png'
-            arcsData={allArcs}
-            arcColor={arcColor}
-            arcDashLength={arcDashLength}
-            arcDashGap={arcDashGap}
-            arcDashInitialGap={(d: any) => (d.isFlight ? 1 : 0)}
-            arcDashAnimateTime={arcDashAnimateTime}
-            arcStroke={arcStroke}
-            arcAltitudeAutoScale={(d: any) => (d.isFlight ? 0.6 : 0.5)}
-            arcsTransitionDuration={0}
-            ringsData={rings}
-            ringColor={() => RING_COLOR}
-            ringMaxRadius={4}
-            ringPropagationSpeed={3}
-            ringRepeatPeriod={(FLIGHT_TIME * FLIGHT_ARC_REL_LEN) / 3}
-            pointsData={pointsData}
-            pointAltitude={0.01}
-            pointColor='color'
-            pointRadius='size'
-            pointsMerge={false}
-            pointLabel={(p: any) =>
-              p.label === 'Home Base'
-                ? 'Home Base &middot; Bangalore'
-                : `${p.conf} &middot; ${p.city} &middot; ${p.year}`
-            }
-            onPointClick={handlePointClick}
-            atmosphereColor='#f59e0b'
-            atmosphereAltitude={0.2}
-            onGlobeReady={() => setGlobeReady(true)}
-          />
+          <Suspense fallback={null}>
+            <SpeakerGlobe
+              ref={globeRef}
+              width={dimensions.width}
+              height={dimensions.height}
+              selectedConf={selectedConf}
+              showVirtual={showVirtual}
+              onReady={() => setGlobeReady(true)}
+              onSelectConf={selectConf}
+            />
+          </Suspense>
         )}
       </div>
 

@@ -67,6 +67,10 @@ const TiltProfileImage: React.FC<TiltProfileImageProps> = ({ src, alt, className
         <img
           src={src}
           alt={alt}
+          width={800}
+          height={723}
+          fetchPriority='high'
+          decoding='async'
           className='w-full h-full object-cover'
           style={{
             objectPosition: '50% 30%',

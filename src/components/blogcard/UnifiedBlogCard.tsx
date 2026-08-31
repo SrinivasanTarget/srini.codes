@@ -41,6 +41,8 @@ export default function UnifiedBlogCard({ post }: UnifiedBlogCardProps) {
           <img
             src={post.coverImage.url}
             alt={post.title}
+            loading='lazy'
+            decoding='async'
             className='w-full h-full object-cover hover:scale-110 transition-transform duration-500'
           />
         </div>
@@ -51,7 +53,7 @@ export default function UnifiedBlogCard({ post }: UnifiedBlogCardProps) {
           {post.platform && (
             <span className={`px-2 py-1 rounded text-xs font-medium inline-flex items-center ${getPlatformColor(post.platform)}`}>
               {post.platform === 'TestMu AI' ? (
-                <img src={testmuLogo} alt='TestMu AI' className='h-3' />
+                <img src={testmuLogo} alt='TestMu AI' width={62} height={12} className='h-3' />
               ) : (
                 post.platform
               )}

@@ -97,41 +97,41 @@ export class EnhancedProjectsService {
   }
 
   static async getEnhancedProjects(): Promise<EnhancedProjectData[]> {
-    const enhancedProjects: EnhancedProjectData[] = []
+    // The repo lookups are independent, so issue them together: awaiting
+    // inside a loop turned twelve calls into twelve serialised round trips.
+    return Promise.all(
+      projects.map(async (project) => {
+        const repoInfo = this.extractRepoInfo(project.source)
+        let githubData = undefined
 
-    for (const project of projects) {
-      const repoInfo = this.extractRepoInfo(project.source)
-      let githubData = undefined
-
-      if (repoInfo) {
-        try {
-          const repo: GitHubRepository = await this.getRepository(repoInfo.owner, repoInfo.repo)
-          githubData = {
-            stars: repo.stargazers_count,
-            forks: repo.forks_count,
-            language: repo.language,
-            topics: repo.topics || [],
-            lastUpdated: repo.updated_at,
-            openIssues: repo.open_issues_count
+        if (repoInfo) {
+          try {
+            const repo: GitHubRepository = await this.getRepository(repoInfo.owner, repoInfo.repo)
+            githubData = {
+              stars: repo.stargazers_count,
+              forks: repo.forks_count,
+              language: repo.language,
+              topics: repo.topics || [],
+              lastUpdated: repo.updated_at,
+              openIssues: repo.open_issues_count
+            }
+          } catch (error) {
+            console.warn(`Could not fetch GitHub data for ${project.title}:`, error)
           }
-        } catch (error) {
-          console.warn(`Could not fetch GitHub data for ${project.title}:`, error)
         }
-      }
 
-      enhancedProjects.push({
-        title: project.title,
-        description: project.description,
-        source: project.source,
-        imgSource: project.imgSource,
-        githubData,
-        category: this.categorizeProject(project.title),
-        isContributor: this.isContributor(project.source),
-        logo: this.getProjectLogo(project.title)
+        return {
+          title: project.title,
+          description: project.description,
+          source: project.source,
+          imgSource: project.imgSource,
+          githubData,
+          category: this.categorizeProject(project.title),
+          isContributor: this.isContributor(project.source),
+          logo: this.getProjectLogo(project.title)
+        }
       })
-    }
-
-    return enhancedProjects
+    )
   }
 
   static formatNumber(num: number): string {

@@ -28,6 +28,10 @@ export default function SimpleProjectCard({ project }: SimpleProjectCardProps) {
           <img
             src={`/assets/images/${project.imgSource}`}
             alt={project.title}
+            width={128}
+            height={128}
+            loading='lazy'
+            decoding='async'
             className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-300'
             onError={(e) => {
               // Fallback to emoji logo if image fails

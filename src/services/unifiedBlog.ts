@@ -1,4 +1,4 @@
-import { HashnodeService, BlogPost as HashnodeBlogPost } from './hashnode'
+import { HashnodeService } from './hashnode'
 import { blogs as externalBlogs } from '../portfolio/blogs'
 
 export interface UnifiedBlogPost {
@@ -13,19 +13,19 @@ export interface UnifiedBlogPost {
   tags: string[]
   readTimeInMinutes?: number
   url: string
-  content?: {
-    html: string
-    markdown: string
-  }
   source: 'hashnode' | 'external'
   platform?: string
 }
 
 export class UnifiedBlogService {
-  static async getAllBlogs(): Promise<UnifiedBlogPost[]> {
+  /**
+   * `limit` is a hint, not a slice: it lets the Hashnode fetch stop after one
+   * page instead of walking the whole archive. Callers still slice the result.
+   */
+  static async getAllBlogs(limit?: number): Promise<UnifiedBlogPost[]> {
     try {
       // Fetch Hashnode posts
-      const hashnodePosts = await HashnodeService.getAllPosts()
+      const hashnodePosts = await HashnodeService.getAllPosts(limit)
       
       // Convert Hashnode posts to unified format
       const unifiedHashnodePosts: UnifiedBlogPost[] = hashnodePosts.map(post => ({
@@ -38,7 +38,6 @@ export class UnifiedBlogService {
         tags: post.tags.map(tag => tag.name),
         readTimeInMinutes: post.readTimeInMinutes,
         url: `/blog/${post.slug}`, // Internal route for Hashnode posts
-        content: post.content,
         source: 'hashnode' as const,
         platform: 'Personal Blog'
       }))
@@ -103,7 +102,7 @@ export class UnifiedBlogService {
   }
 
   static async getRecentBlogs(limit = 6): Promise<UnifiedBlogPost[]> {
-    const allBlogs = await this.getAllBlogs()
+    const allBlogs = await this.getAllBlogs(limit)
     return allBlogs.slice(0, limit)
   }
 }
