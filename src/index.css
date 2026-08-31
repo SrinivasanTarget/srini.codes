@@ -111,7 +111,8 @@ a:focus-visible {
 .mobile-nav-link {
   position: relative;
   border-left: 3px solid transparent;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .mobile-nav-link:hover,
@@ -169,7 +170,10 @@ a:focus-visible {
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card-hover:hover {
@@ -184,21 +188,23 @@ a:focus-visible {
 
 /* Frosted glass section background : Apple style */
 .glass-section {
+  /* No backdrop-filter here on purpose. At 0.02 alpha over a black page the
+     blur is not visible, but it forced a full-viewport backdrop snapshot for
+     every section and became the root of a three-deep filter nest
+     (section > card > pill). The wash and borders carry the effect. */
   background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(60px) saturate(150%);
-  -webkit-backdrop-filter: blur(60px) saturate(150%);
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 /* Glass pill/badge : Apple tag style */
 .glass-pill {
+  /* Tags render 25+ per screen and are ~24px tall; a backdrop blur on each
+     one buys no visible frosting and costs a compositor layer apiece. */
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .glass-pill:hover {
@@ -221,7 +227,9 @@ a:focus-visible {
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-button:hover {
@@ -296,7 +304,8 @@ a:focus-visible {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .glass-input:focus {
