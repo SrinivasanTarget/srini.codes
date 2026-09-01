@@ -2,6 +2,8 @@ import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import ModernPortfolio from './components/ModernPortfolio'
 import { Analytics } from '@vercel/analytics/react'
+import SiteTools from './webmcp/SiteTools'
+import VoiceLauncher from './voice/VoiceLauncher'
 
 // Route-level code splitting keeps heavy dependencies (three.js, the globe,
 // syntax highlighting) out of the initial homepage bundle.
@@ -27,6 +29,11 @@ function App() {
             <Route path="/blog/:slug" element={<BlogPost />} />
           </Routes>
         </Suspense>
+        {/* WebMCP tools describing this site, and the voice assistant that
+            answers through them. Both live inside the Router so tools can
+            navigate the SPA. */}
+        <SiteTools />
+        <VoiceLauncher />
       </Router>
       <Analytics mode={'production'} />
     </div>

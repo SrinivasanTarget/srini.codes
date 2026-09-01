@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import heroImage from '../assets/images/ProfilePic.webp'
 import { useSEO, routeSEO } from '../hooks/useSEO'
+import { contact as CONTACT_INFO } from '../portfolio/contact'
 
 const styles = `
   @keyframes float {
@@ -30,19 +31,6 @@ const styles = `
     100% { transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1); opacity: 1; }
   }
 `
-
-const CONTACT_INFO = {
-  name: 'Srinivasan Sekar',
-  title: 'Director of Engineering',
-  subtitle: 'Open Source Contributor',
-  company: 'TestMu AI',
-  email: 'srinivasan.sekar1990@gmail.com',
-  phone: '+919025582170',
-  website: 'https://srini.codes',
-  linkedin: 'srinivasan-sekar',
-  twitter: 'srinivasanskr',
-  github: 'srinivasanTarget',
-}
 
 const openDeepLink = (appUrl: string, webUrl: string) => {
   const start = Date.now()

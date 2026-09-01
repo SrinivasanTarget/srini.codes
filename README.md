@@ -31,6 +31,7 @@ This is my personal portfolio website, built with modern web technologies to sho
 - **Analytics**: Integrated with Vercel Analytics and Plausible Analytics for privacy-friendly tracking
 - **Performance Optimized**: Uses Partytown for off-main-thread script execution
 - **Fully Responsive**: Works seamlessly across all device sizes
+- **WebMCP Voice Assistant**: Ask about Srini by voice. The site registers its content as WebMCP tools on `document.modelContext`, and a Gemini-powered assistant (speech-to-text, function calling, text-to-speech) answers only through those tools
 
 ## 🛠️ Tech Stack
 
@@ -52,6 +53,14 @@ This is my personal portfolio website, built with modern web technologies to sho
 - **three.js / react-globe.gl** - WebGL globe on the speaker map, loaded on demand
 - **Partytown 0.8** - Web worker for third-party scripts
 - **React Twitter Widgets** - Embedded Twitter content
+
+### Voice Assistant
+
+- **WebMCP** - W3C draft API (`document.modelContext`) exposing the site's content as agent tools, with a spec-shaped polyfill for browsers without native support
+- **Gemini API** (`@google/genai`) - Gemini 3.5 Transcribe for speech-to-text, Gemini 3.7 Flash for function calling, Gemini 3.1 Flash TTS for speech
+- **Vercel Functions** - `api/voice/*` hold the API key; the model loop itself runs in the browser through WebMCP
+
+See [docs/webmcp-voice-assistant.md](docs/webmcp-voice-assistant.md) for the full write-up.
 
 ### Analytics & Monitoring
 
@@ -95,12 +104,15 @@ npm run dev
 
 The site will be available at `http://localhost:5173`
 
+4. (Optional) Enable the voice assistant locally by copying `.env.example` to `.env` and adding a `GEMINI_API_KEY`. The dev server serves the `api/voice/*` functions itself.
+
 ## 📜 Available Scripts
 
 - **`npm run dev`** - Start development server
 - **`npm run build`** - Build for production (TypeScript compilation + Partytown + Vite build)
 - **`npm run preview`** - Preview production build locally
 - **`npm run lint`** - Run ESLint
+- **`npm run typecheck:api`** - Type-check the Vercel functions under `api/`
 - **`npm run lint:fix`** - Fix ESLint errors automatically
 - **`npm run format`** - Format code with Prettier
 - **`npm run partytown`** - Copy Partytown library files
@@ -125,6 +137,8 @@ The output is generated in the `/build` directory.
 
 The site is deployed to GitHub Pages and is accessible at [srini.codes](https://srini.codes).
 
+The voice assistant needs the `api/voice/*` functions, which run on Vercel. Set `GEMINI_API_KEY` in the Vercel project's environment variables (see `.env.example` for optional model overrides). Without it the assistant button still appears, and explains that voice is not configured.
+
 ## 📁 Project Structure
 
 ```
@@ -134,9 +148,13 @@ srini.codes/
 │   ├── screens/          # Page-level components
 │   ├── portfolio/        # Data files (projects, blogs, conferences)
 │   ├── services/         # API integration services
+│   ├── webmcp/           # WebMCP types, polyfill and the site's tools
+│   ├── voice/            # Voice assistant UI, audio and the Gemini bridge
 │   ├── assets/           # Images and static assets
 │   ├── App.tsx           # Main application component
 │   └── main.tsx          # Application entry point
+├── api/                  # Vercel functions proxying the Gemini API
+├── docs/                 # Design notes (WebMCP voice assistant)
 ├── public/               # Static public assets
 ├── build/                # Production build output
 └── package.json          # Dependencies and scripts

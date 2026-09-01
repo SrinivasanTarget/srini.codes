@@ -21,6 +21,10 @@ Srinivasan Sekar is a software engineer, open source advocate, and technical aut
 - [Presentations](https://srini.codes/presentations): Workshop slides and presentation decks from conferences
 - [Contact](https://srini.codes/contact): Get in touch
 
+## Agent Access (WebMCP)
+
+Every page registers tools on `document.modelContext` (WebMCP) that expose this site's content to AI agents: get_profile, list_books, list_projects, search_talks, list_blog_posts, list_presentations, get_press_and_podcast, get_contact_info, get_site_map, navigate_to_page. The on-site voice assistant answers questions about Srinivasan exclusively through these tools.
+
 ## Key Topics
 
 - Model Context Protocol (MCP)
