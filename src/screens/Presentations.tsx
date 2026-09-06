@@ -3,6 +3,12 @@ import { useSEO, routeSEO } from '../hooks/useSEO'
 
 const presentations = [
   {
+    title: 'MCP 2026-07-28 Under the Microscope: Security for Stateless Agents',
+    event: 'agntcon + MCP Con Japan 2026',
+    url: '/presentations/mcp-under-the-microscope.html',
+    tags: ['MCP', 'Security', 'Live Demo'],
+  },
+  {
     title: 'Testing the Agents That Look You in the Eye',
     event: 'TestMu Conference 2026',
     url: '/presentations/testing-video-agents.html',
