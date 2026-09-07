@@ -216,7 +216,8 @@
   #notes-panel.open{display:block}
   #notes-panel .nt{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
   #notes-panel strong{color:var(--text)}
-  .navbtn{position:fixed;top:0;bottom:0;width:14%;z-index:30;cursor:pointer;border:0;background:transparent}
+  .navbtn{position:fixed;top:0;bottom:0;width:14%;z-index:30;cursor:pointer;border:0;background:transparent;outline:none;-webkit-tap-highlight-color:transparent}
+  .navbtn:focus,.navbtn:focus-visible{outline:none}
   #prev{left:0}#next{right:0}
 
   /* ---- live demo slides ---- */
@@ -791,8 +792,8 @@
 
 </div></div>
 
-<button class="navbtn" id="prev" aria-label="Previous slide"></button>
-<button class="navbtn" id="next" aria-label="Next slide"></button>
+<button class="navbtn" id="prev" aria-label="Previous slide" tabindex="-1"></button>
+<button class="navbtn" id="next" aria-label="Next slide" tabindex="-1"></button>
 
 <div id="hud">
   <div id="bar"><div id="fill"></div></div>
@@ -829,8 +830,8 @@
     else if(e.key==='n'||e.key==='N'){panel.classList.toggle('open')}
     else if(e.key==='Escape'){panel.classList.remove('open')}
   });
-  document.getElementById('next').addEventListener('click',function(){show(i+1)});
-  document.getElementById('prev').addEventListener('click',function(){show(i-1)});
+  document.getElementById('next').addEventListener('click',function(){show(i+1);this.blur()});
+  document.getElementById('prev').addEventListener('click',function(){show(i-1);this.blur()});
   var m=location.hash.match(/^#\/(\d+)/);
   fit(); show(m?parseInt(m[1],10)-1:0);
 })();
