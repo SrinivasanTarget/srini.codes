@@ -604,7 +604,7 @@
 
 <!-- DEMO 1 · The Confused Handle · vulnerable -->
 <section class="slide threat" id="demo1">
-  <div class="demohd"><span class="rec" aria-hidden="true"></span><div class="eyebrow" style="margin-bottom:0">Live demo · failure modes 1, 3, 4</div></div>
+  <div class="demohd"><span class="rec" aria-hidden="true"></span><div class="eyebrow" style="margin-bottom:0">Live demo · failure modes 1, 4, 5</div></div>
   <h2>The Confused Handle: one forged string, three breaches</h2>
   <div class="grow">
     <div class="demo-grid">
@@ -621,7 +621,7 @@
           <span class="tag">Three attacks, one script</span>
           <ul class="attacks" style="--sec:var(--red)">
             <li data-n="1"><b>Guess</b> Bob's handle → read his secret</li>
-            <li data-n="3"><b>Reuse</b> a read handle on the deploy tool</li>
+            <li data-n="5"><b>Reuse</b> a read handle on the deploy tool</li>
             <li data-n="4"><b>Replay</b> the IDE's handle from a web agent</li>
           </ul>
           <div class="dctl"><button class="dbtn" id="d1run">▶ run attack.py 8181</button><button class="dbtn plain" id="d1reset" disabled>↺</button></div>
@@ -884,7 +884,7 @@
       {html:'<span class="c-key">[1]</span> BROKEN STATE ASSUMPTION -- guess Bob\'s handle, read his secret.',delay:420},
       {html:'    guess handle-2042  -> <span class="leaked">LEAKED: bob\'s prod DB password:  s3cr3t-bob-!!</span>',delay:440},
       RULE,
-      {html:'<span class="c-key">[2]</span> CAPABILITY CONFUSION -- feed a READ handle to the DEPLOY tool.',delay:420},
+      {html:'<span class="c-key">[2]</span> SCOPE ESCALATION -- feed a READ handle to the DEPLOY tool.',delay:420},
       {html:'    deploy accepted a read handle -> <span class="leaked">{status: LIVE IN PRODUCTION, deployed: payments-prod}</span>',delay:440},
       RULE,
       {html:'<span class="c-key">[3]</span> CROSS-CLIENT REPLAY -- handle minted for the IDE, replayed by web agent.',delay:420},
@@ -918,7 +918,7 @@
       {html:'    guess handle-2043  -> <span class="denied">denied: malformed handle</span>',delay:240},
       {html:'    <span class="c-ok">could not read anyone else\'s secret. IDOR blocked.</span>',delay:360},
       RULE,
-      {html:'<span class="c-key">[2]</span> CAPABILITY CONFUSION -- read handle to the DEPLOY tool.',delay:400},
+      {html:'<span class="c-key">[2]</span> SCOPE ESCALATION -- read handle to the DEPLOY tool.',delay:400},
       {html:'    deploy rejected the read handle -> <span class="denied">denied: missing scope \'deploy:prod\'</span>',delay:420},
       RULE,
       {html:'<span class="c-key">[3]</span> CROSS-CLIENT REPLAY -- IDE handle replayed by web agent.',delay:400},
