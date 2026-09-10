@@ -539,13 +539,13 @@
   <h2>Any request, any instance… any tenant?</h2>
   <div class="grow">
     <div class="cards" style="grid-template-columns:1fr 1fr;gap:13px">
-      <div class="card"><span class="tag"><svg viewBox="0 0 16 16"><path d="M8 2l5 2v4c0 3-2 5-5 6-3-1-5-3-5-6V4z"/></svg>Isolation</span><p style="font-size:16px">Every request must <strong>re-prove whose it is</strong>. Asana showed one missed check reaches ~1,000 orgs.</p></div>
+      <div class="card"><span class="tag"><svg viewBox="0 0 16 16"><path d="M8 2l5 2v4c0 3-2 5-5 6-3-1-5-3-5-6V4z"/></svg>Isolation</span><p style="font-size:16px">Every request must <strong>re-prove whose it is</strong>. One missed tenant check can reach every org on the server.</p></div>
       <div class="card"><span class="tag"><svg viewBox="0 0 16 16"><path d="M8 2l6 3-6 3-6-3z"/><path d="M2 9l6 3 6-3M2 12l6 3 6-3"/></svg>Caches</span><p style="font-size:16px">One tool marks private data <span class="m">cacheScope:"public"</span> and the CDN <strong>serves it to everyone</strong>.</p></div>
       <div class="card"><span class="tag"><svg viewBox="0 0 16 16"><circle cx="5" cy="8" r="3"/><path d="M8 8h6M11.5 8v3M14 8v2"/></svg>Guessable IDs</span><p style="font-size:16px">Predictable handles let attackers <strong>steer someone else's workflow</strong>.</p></div>
       <div class="card"><span class="tag"><svg viewBox="0 0 16 16"><path d="M2 6c2-2.5 4 2.5 6 0s4 2.5 6 0M2 11c2-2.5 4 2.5 6 0s4 2.5 6 0"/></svg>Streams</span><p style="font-size:16px">One notification stream per client: <strong>wires can cross</strong> between principals.</p></div>
     </div>
   </div>
-  <aside class="notes"><b>[18:00-19:00]</b> Anchor on Asana: one tenant-isolation bug in one stateful server, ~1,000 orgs. Now every request on every stateless instance is a fresh isolation decision. cacheScope: web cache poisoning is a mature attack field and MCP just opted agents into it. Guessable IDs: Akamai's three cross-tenant scenarios.</aside>
+  <aside class="notes"><b>[18:00-19:00]</b> Anchor on isolation: one tenant-isolation bug in a stateful server exposes every org it hosts. Now every request on every stateless instance is a fresh isolation decision. cacheScope: web cache poisoning is a mature attack field and MCP just opted agents into it. Guessable IDs: Akamai's three cross-tenant scenarios.</aside>
 </section>
 
 <!-- 16 · FM5 -->
