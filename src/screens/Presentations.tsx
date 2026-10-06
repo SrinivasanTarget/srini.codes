@@ -3,6 +3,12 @@ import { useSEO, routeSEO } from '../hooks/useSEO'
 
 const presentations = [
   {
+    title: 'Wormable AI: A Cross-Protocol Attack Chain & Defense Model for MCP and A2A',
+    event: 'c0c0n 2026 · Kerala',
+    url: '/presentations/wormable-ai.html',
+    tags: ['MCP', 'A2A', 'Security'],
+  },
+  {
     title: 'MCP 2026-07-28 Under the Microscope: Security for Stateless Agents',
     event: 'agntcon + MCP Con Japan 2026',
     url: '/presentations/mcp-under-the-microscope.html',
