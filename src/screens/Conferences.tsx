@@ -111,7 +111,7 @@ const Conferences = () => {
   const navigateConf = useCallback(
     (direction: 1 | -1) => {
       if (!selectedConf) return
-      const index = TIMELINE.findIndex(c => c.city === selectedConf.city)
+      const index = TIMELINE.indexOf(selectedConf)
       const next = TIMELINE[(index + direction + TIMELINE.length) % TIMELINE.length]
       selectConf(next)
     },
@@ -144,7 +144,7 @@ const Conferences = () => {
   }, [globeReady])
 
   const uniqueCountries = new Set(CONFERENCES.map(c => c.country)).size
-  const uniqueCities = CONFERENCES.length
+  const uniqueCities = new Set(CONFERENCES.map(c => c.city)).size
 
   return (
     <div className='speaker-map min-h-screen bg-black text-white overflow-hidden'>
@@ -274,19 +274,19 @@ const Conferences = () => {
           <div role='group' aria-label='Conference locations' className='flex flex-nowrap sm:flex-wrap gap-2 overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0'>
             {TIMELINE.map(conf => (
               <button
-                key={conf.city}
+                key={`${conf.city}-${conf.conf}-${conf.year}`}
                 onClick={() => selectConf(conf)}
-                aria-pressed={selectedConf?.city === conf.city && !showVirtual}
+                aria-pressed={selectedConf === conf && !showVirtual}
                 className={`
                   shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200
-                  ${selectedConf?.city === conf.city && !showVirtual
+                  ${selectedConf === conf && !showVirtual
                     ? 'bg-accent-hover text-white shadow-glow-amber'
                     : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
                   }
                 `}
               >
                 {conf.city}{' '}
-                <span className={selectedConf?.city === conf.city && !showVirtual ? 'text-white/70' : 'text-white/30'}>
+                <span className={selectedConf === conf && !showVirtual ? 'text-white/70' : 'text-white/30'}>
                   &rsquo;{conf.year.slice(2)}
                 </span>
               </button>

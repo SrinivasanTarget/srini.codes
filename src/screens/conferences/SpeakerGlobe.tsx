@@ -409,7 +409,7 @@ const SpeakerGlobe = forwardRef<SpeakerGlobeHandle, SpeakerGlobeProps>(function 
         return
       }
       if (point.conf) {
-        const conf = CONFERENCES.find(c => c.city === point.city)
+        const conf = CONFERENCES.find(c => c.city === point.city && c.conf === point.conf && c.year === point.year)
         if (conf) onSelectConf(conf)
       }
     },

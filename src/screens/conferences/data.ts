@@ -17,13 +17,21 @@ export const CONFERENCES = [
   { city: 'Brussels', country: 'Belgium', lat: 50.8503, lng: 4.3517, conf: 'FOSDEM', year: '2017', talk: 'Future of Mobile Automation Testing, Appium Steals It', video: 'https://video.fosdem.org/2017/H.2213/mobile_testing_with_appium.mp4' },
   { city: 'Bangalore', country: 'India', lat: 12.9716, lng: 77.5946, conf: 'SeleniumConf & AppiumConf', year: '2018', talk: 'Code Once Test Anywhere: Appium Device Cloud using ATD' },
   { city: 'Chennai', country: 'India', lat: 13.0827, lng: 80.2707, conf: 'TechXpresso - IDFC First Bank', year: '2026', talk: 'Testing Autonomous AI Agents: Beyond Traditional QA' },
-  { city: 'Goa', country: 'India', lat: 15.2993, lng: 74.1240, conf: 'NullCon', year: '2026', talk: 'Hacking with AI: MCP for Security Testing' },
+  { city: 'Goa', country: 'India', lat: 15.2993, lng: 74.1240, conf: 'NullCon', year: '2026', talk: 'Securing the Model Context Protocol: Defense Strategies for AI Tool Ecosystems' },
   { city: 'Valencia', country: 'Spain', lat: 39.4699, lng: -0.3763, conf: 'SeleniumConf & AppiumConf', year: '2025', talk: 'Advanced Appium 2.0 Workshop', video: 'https://youtu.be/lugEm6j1Nl8' },
+  { city: 'Singapore', country: 'Singapore', lat: 1.3521, lng: 103.8198, conf: 'taqelah', year: '2026', talk: 'Supercharging Appium with MCP: Context-Aware Mobile Test Automation' },
+  { city: 'Valencia', country: 'Spain', lat: 39.4699, lng: -0.3763, conf: 'SeleniumConf', year: '2026', talk: 'Advanced Appium Workshop with MCP-Powered Development Tools' },
+  { city: 'Tallinn', country: 'Estonia', lat: 59.4370, lng: 24.7536, conf: 'Nordic Testing Days', year: '2026', talk: 'MCP Playwright & Playwright Agents Workshop · Testing Agentic AI Applications: Beyond Traditional QA' },
+  { city: 'Tokyo', country: 'Japan', lat: 35.6762, lng: 139.6503, conf: 'AGNTCon + MCPCon Japan', year: '2026', talk: 'MCP 2026-07-28 Under the Microscope: Security Implications for Stateless Agents' },
+  { city: 'Kerala', country: 'India', lat: 9.9312, lng: 76.2673, conf: 'c0c0n', year: '2026', talk: 'Wormable AI: A Cross-Protocol Attack Chain and Defense Model for MCP and A2A' },
+  { city: 'Tokyo', country: 'Japan', lat: 35.6762, lng: 139.6503, conf: 'Tokyo Test Fest', year: '2026', talk: 'MCP Playwright & Playwright Agents: Half-Day Workshop' },
 ]
 
 // Online/virtual conferences
 export const VIRTUAL_CONFERENCES = [
-  { conf: 'Automation Guild', year: '2026', talk: 'Testing Autonomous AI Agents' },
+  { conf: 'TestMu Conf', year: '2026', talk: 'Testing the Agents That Look You in the Eye' },
+  { conf: 'TestMu Conf', year: '2026', talk: 'Debug with Appium MCP', video: 'https://www.youtube.com/watch?v=jhAbgIvw7go' },
+  { conf: 'Automation Guild', year: '2026', talk: "Testing Autonomous AI Agents: A QA Practitioner's Guide", video: 'https://www.youtube.com/shorts/SDRNwKQ2csw' },
   { conf: 'TestMu Conf', year: '2025', talk: 'Mastering Appium 3 & QA for AI Agents' },
   { conf: 'Spartans Summit', year: '2025', talk: 'Building & Testing AI-Agent Powered LLM Apps', video: 'https://www.youtube.com/watch?v=9mHfvGN7FwU' },
   { conf: 'SeleniumConf', year: '2024', talk: 'Harnessing Open-Source: Building a Device Farm' },
