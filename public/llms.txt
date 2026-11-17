@@ -9,7 +9,7 @@ Srinivasan Sekar is a software engineer, open source advocate, and technical aut
 - Author of "The MCP Standard" (Apress, February 2026): a developer's guide to building universal AI tools with the Model Context Protocol
 - Co-author of "Breaking the Model Context Protocol: Agentic Attacks and Defenses for MCP-Powered AI Systems" (Apress, August 2026), written with Thejes Sree Satheesh Kumar, covering MCP trust boundaries, tool poisoning, confused-deputy chains, and the defenses that hold up in production
 - Creator of AppiumTestDistribution, winner of the LambdaTest Delta Award
-- International conference speaker: 34+ talks across 12 countries and 16 cities, plus 18 virtual conferences
+- International conference speaker: 42+ talks across 13 countries and 18 cities, plus 20 virtual conferences
 - Featured in The New Stack, DevOps.com, Security Boulevard, Techstrong AI, and The Indian Express
 
 ## Pages
@@ -47,8 +47,15 @@ Srinivasan Sekar is a software engineer, open source advocate, and technical aut
 - Nordic Testing Days 2025, Tallinn (Estonia): Advanced Appium Workshop
 - TestCon Europe 2025, Vilnius (Lithuania): Testing Agentic AI Applications (Beyond Traditional QA)
 - SeleniumConf & AppiumConf 2025, Valencia (Spain): Advanced Appium 2.0 Workshop
+- taqelah 2026, Singapore: Supercharging Appium with MCP (Context-Aware Mobile Test Automation)
+- NullCon 2026, Goa (India): Securing the Model Context Protocol (Defense Strategies for AI Tool Ecosystems)
+- SeleniumConf 2026, Valencia (Spain): Advanced Appium Workshop with MCP-Powered Development Tools
+- Nordic Testing Days 2026, Tallinn (Estonia): MCP Playwright & Playwright Agents Workshop
+- Nordic Testing Days 2026, Tallinn (Estonia): Testing Agentic AI Applications (Beyond Traditional QA)
 - TechXpresso 2026, Chennai (India): Testing Autonomous AI Agents (Beyond Traditional QA)
-- NullCon 2026, Goa (India): Hacking with AI (MCP for Security Testing)
+- AGNTCon + MCPCon Japan 2026, Tokyo (Japan): MCP 2026-07-28 Under the Microscope (Security Implications for Stateless Agents)
+- c0c0n 2026, Kerala (India): Wormable AI (A Cross-Protocol Attack Chain and Defense Model for MCP and A2A)
+- Tokyo Test Fest 2026, Tokyo (Japan): MCP Playwright & Playwright Agents (Half-Day Workshop)
 
 ## Citations & Press
 
